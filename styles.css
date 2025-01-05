@@ -308,11 +308,19 @@ html.sepia-theme .detailed-explanation {
  transform: scale(100,100);
  transition: 0s;
 }
-/* Main Heading */
-.main-heading {
+/* Device Warning */
+.device-warning {
     text-align: center;
+    padding: 10px;
     margin-bottom: 20px;
-    font-size: 2rem;
-    font-weight: 500;
-    color: #3f51b5; /* Material Design primary color */
+    background-color: #ffcdd2; /* Light red background */
+    color: #b71c1c; /* Dark red text */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.device-warning i.material-icons {
+    margin-right: 8px;
 }

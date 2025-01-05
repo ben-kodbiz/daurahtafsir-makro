@@ -84,7 +84,7 @@ function createSurahGrid() {
                     </span>
                 `;
                  document.body.appendChild(tooltip);
-                 surahDiv.addEventListener("mouseover", (event) => {
+                surahDiv.addEventListener("mouseover", (event) => {
                         tooltip.style.display = "block";
                         const surahDivRect = surahDiv.getBoundingClientRect();
                          tooltip.style.top = `${surahDivRect.top - tooltip.offsetHeight - 5 + window.scrollY}px`;
@@ -94,8 +94,21 @@ function createSurahGrid() {
                  surahDiv.addEventListener("mouseout", () => {
                       tooltip.style.display = "none";
                     });
+                fetch(`html/surah_${surah.number}.html`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                         tooltip.innerHTML += html;
+                    })
+                     .catch(error => {
+                        console.error("Error loading surah HTML:", error);
+                    });
                  surahDiv.addEventListener("click", () => {
-                     window.location.href = `surah_${surah.number}.html`;
+                     //window.location.href = `surah_${surah.number}.html`;
                 });
 
 
@@ -112,6 +125,7 @@ function createSurahGrid() {
         });
 
 }
+
 
 // Load translations on page load
 loadTranslations();

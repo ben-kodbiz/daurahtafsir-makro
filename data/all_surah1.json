@@ -1,0 +1,39 @@
+{
+    "children": [
+      {
+        "surah_number": 1,
+        "surah_name_arabic": "الفاتحة",
+        "surah_name_english": "Al-Fatiha",
+        "ayah_count": 7,
+        "place_of_revelation": "Meccan",
+         "related_surahs": []
+  
+      },
+      {
+          "surah_number": 2,
+          "surah_name_arabic": "البقرة",
+          "surah_name_english": "Al-Baqarah",
+          "ayah_count": 286,
+          "place_of_revelation": "Medinan",
+          "related_surahs": []
+      },
+       {
+          "surah_number": 3,
+          "surah_name_arabic": "آل عمران",
+          "surah_name_english": "Aali Imran",
+          "ayah_count": 200,
+          "place_of_revelation": "Medinan",
+           "related_surahs": []
+        },
+       
+    {
+          "surah_number": 114,
+          "surah_name_arabic": "الناس",
+          "surah_name_english": "An-Nas",
+          "ayah_count": 6,
+          "place_of_revelation": "Meccan",
+           "related_surahs": []
+      }
+  
+    ]
+  }

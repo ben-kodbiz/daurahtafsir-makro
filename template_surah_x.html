@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surah {{surahName}} - Quran App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div class="surah-container">
+        <div class="app-bar">
+            <a href="index.html" class="back-button">
+               <i class="material-icons">arrow_back</i>
+                Back
+            </a>
+             <h1 class="surah-title">Surah {{surahName}}</h1>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="material-icons theme-icon">brightness_4</i>
+            </button>
+        </div>
+        <div class="content-area">
+            <div class="image-container">
+                 <img src="{{imageSrc}}" alt="Surah {{surahName}} Image" class="surah-image">
+            </div>
+            <div class="text-content">
+                 <h2 class="surah-subtitle">{{englishNameTranslation}}</h2>
+                <p class="surah-description">
+                    {{summarizedTheme}}
+                </p>
+                               <h3 class="section-heading">Struktur Makro Surah Al-Fatihah</h3>
+                <ol class="paragraf-list">
+                    <li>Paragraf tempat memohon doa' adab doa</li>
+                    <li>Paragraf kedua tentang kelayakan Allah sebagai tempat memohon doa</li>
+                    <li>Paragraf ketiga tentang lafaz doa yang sebenarnya</li>
+                    <li>Paragtaf keempat ialah tentang keterangan dan perincian doa</li>
+                 </ol>
+                <h3 class="section-heading">Detailed Explanation</h3>
+                 <ul class="detailed-explanation">
+                     {{#detailedExplanation}}
+                         <li><strong>{{key}}:</strong>{{value}}</li>
+                    {{/detailedExplanation}}
+                </ul>
+                 <h3 class="section-heading">YouTube Videos</h3>
+                 <div class="youtube-videos">
+                     {{#youtubeLinks}}
+                      <iframe width="560" height="315" src="{{replaceWatch}}" frameborder="0" allowfullscreen></iframe>
+                      <div class="download-links">
+                        <a href="{{this}}" target="_blank" class="download-button">Download Video</a>
+                        </div>
+                      {{/youtubeLinks}}
+                 </div>
+                <h3 class="section-heading">Other Materials</h3>
+                 <div class="other-materials">
+                     <a href="pdfs/al_fatiha_explanation.pdf" target="_blank" class="download-button">PDF Explanation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    function toggleTheme() {
+        document.documentElement.classList.toggle('dark-theme');
+        document.documentElement.classList.toggle('light-theme');
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+     transition: background-color 0.3s ease, color 0.3s ease;
+}
+html.dark-theme body{
+    background-color: #333;
+    color: #f0f0f0;
+}
+html.sepia-theme body{
+   background-color: #f4ecd8;
+    color: #5b4636;
+}
+
+/* App Bar */
+.app-bar {
+    display: flex;
+    align-items: center;
+    background-color: #3f51b5; /* Material Design primary color */
+    color: white;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+html.dark-theme .app-bar{
+    background-color: #212121;
+}
+html.sepia-theme .app-bar {
+    background-color: #b1906d;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+    margin-right: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.back-button .material-icons {
+    margin-right: 8px;
+}
+
+.surah-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Content Area */
+.content-area {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     transition: background-color 0.3s ease, color 0.3s ease;
+}
+html.dark-theme .content-area{
+    background-color: #424242;
+    color: #f0f0f0;
+}
+html.sepia-theme .content-area {
+    background-color: #fbf5ea;
+    color: #5b4636;
+}
+/* Image */
+.image-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.surah-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Text Content */
+.surah-subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 10px;
+     transition: color 0.3s ease;
+}
+html.dark-theme .surah-subtitle{
+  color: #f0f0f0;
+}
+html.sepia-theme .surah-subtitle {
+    color: #5b4636;
+}
+
+.surah-description {
+    line-height: 1.6;
+    margin-bottom: 16px;
+     transition: color 0.3s ease;
+}
+html.dark-theme .surah-description{
+    color: #f0f0f0;
+}
+html.sepia-theme .surah-description {
+    color: #5b4636;
+}
+.section-heading{
+     font-size: 1.1rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 10px;
+    margin-top: 20px;
+      transition: color 0.3s ease;
+}
+html.dark-theme .section-heading{
+    color: #f0f0f0;
+}
+html.sepia-theme .section-heading {
+    color: #5b4636;
+}
+.key-themes {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
+     transition: color 0.3s ease;
+}
+html.dark-theme .key-themes{
+    color: #f0f0f0;
+}
+html.sepia-theme .key-themes {
+    color: #5b4636;
+}
+.detailed-explanation{
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+     transition: color 0.3s ease;
+}
+html.dark-theme .detailed-explanation{
+     color: #f0f0f0;
+}
+html.sepia-theme .detailed-explanation {
+    color: #5b4636;
+}
+.detailed-explanation li{
+    line-height: 1.6;
+    margin-bottom: 10px;
+     transition: color 0.3s ease;
+}
+.paragraf-list {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+/* Youtube Section */
+.youtube-videos {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.youtube-videos iframe {
+    max-width: 100%;
+}
+
+.download-links{
+    margin-top: 10px;
+}
+/* Download button styles */
+.download-button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.download-button:hover {
+    background-color: #43a047;
+}
+/*Theme Toggle */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-left: auto;
+    padding: 8px;
+    transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: #ccc;
+}
+
+/* Surah Grid */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+  gap: 16px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.surah-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative; /* For the tooltip */
+}
+
+.surah-item:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+
+}
+.surah-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #3f51b5;
+}
+
+.surah-name {
+     font-size: 1rem;
+    margin-top: 8px;
+    color: #555;
+}
+.surah-arabic-name {
+     font-size: 1rem;
+    margin-top: 8px;
+    color: #555;
+        direction: rtl;
+}
+ /* Tooltip */
+ .tooltip {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    z-index: 100;
+    white-space: nowrap;
+    display: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.tooltip-name{
+     display: block;
+    font-weight: 500;
+}
+.tooltip-number{
+     display: block;
+    font-size: 0.8rem;
+}
+.tooltip-type{
+    display: block;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+.tooltip-translation{
+    display: block;
+    font-size: 0.8rem;
+}
+.tooltip-ayahs{
+    display: block;
+    font-size: 0.8rem;
+}
+/* Ripple effect */
+.surah-item {
+ position: relative;
+ overflow: hidden;
+}
+.surah-item:after {
+ content: "";
+ display: block;
+ position: absolute;
+ top: 0;
+ left: 50%;
+ width: 5px;
+ padding-top: 5px;
+ border-radius: 50%;
+ background: rgba(0, 0, 0, 0.15);
+ opacity: 0;
+ transition: all 0.5s ease;
+}
+.surah-item:active:after {
+ opacity: 1;
+ transform: scale(100,100);
+ transition: 0s;
+}

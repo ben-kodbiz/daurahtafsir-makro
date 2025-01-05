@@ -19,7 +19,7 @@ function loadTranslations() {
              document.querySelectorAll(".section-heading").forEach(el => {
                 const text = el.textContent;
                 if(text == "Key Themes"){
-                  el.textContent = translations.keyThemes;
+                    el.textContent = translations.keyThemes;
                 }
                 else if(text == "Detailed Explanation"){
                     el.textContent = translations.detailedExplanation;
@@ -79,13 +79,15 @@ function createSurahGrid() {
                      <span class="tooltip-name">${surah.englishName}</span>
                     <span class="tooltip-number">(${surah.number})</span>
                      <span class="tooltip-type">(${surah.revelationType})</span>
+                      <span class="tooltip-translation">${surah.englishNameTranslation}</span>
+                     <span class="tooltip-ayahs">(${surah.numberOfAyahs} Ayahs)</span>
                     </span>
                 `;
                  document.body.appendChild(tooltip);
                  surahDiv.addEventListener("mouseover", (event) => {
                         tooltip.style.display = "block";
                         const surahDivRect = surahDiv.getBoundingClientRect();
-                         tooltip.style.top = `${surahDivRect.top - tooltip.offsetHeight - 5}px`;
+                         tooltip.style.top = `${surahDivRect.top - tooltip.offsetHeight - 5 + window.scrollY}px`;
                          tooltip.style.left = `${surahDivRect.left + surahDivRect.width / 2}px`;
                          tooltip.style.transform = "translateX(-50%)";
                     });
@@ -99,7 +101,7 @@ function createSurahGrid() {
 
                 surahDiv.appendChild(surahNumber);
                 surahDiv.appendChild(surahName);
-                surahDiv.appendChild(surahArabicName);
+                 surahDiv.appendChild(surahArabicName);
 
                 surahGrid.appendChild(surahDiv);
             });

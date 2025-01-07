@@ -11,11 +11,11 @@ function createSessionGrid() {
             const sessions = data.sessions;
             sessions.forEach(session => {
                 const sessionDiv = document.createElement("div");
-                sessionDiv.classList.add("session-item");
-
-                // Update the click event to point to the correct location:
-                sessionDiv.addEventListener("click", () => {
-                    window.location.href = `../qawaid_tafsir/session_${session.session_number}.html`;
+                 sessionDiv.classList.add("session-item");
+                 sessionDiv.addEventListener("click", () => {
+                     // Replace this with your desired action
+                    console.log("clicked session number " + session.session_number);
+                     window.location.href = `session_${session.session_number}.html`;
                 });
 
                 const sessionNumber = document.createElement("span");
@@ -30,10 +30,10 @@ function createSessionGrid() {
                 sessionDiv.appendChild(sessionTitle);
                 sessionGrid.appendChild(sessionDiv);
             });
+
         })
         .catch(error => {
-            console.error("Error loading or processing data:", error);
+             console.error("Error loading or processing data:", error);
         });
 }
-
 createSessionGrid();

@@ -308,19 +308,63 @@ html.sepia-theme .detailed-explanation {
  transform: scale(100,100);
  transition: 0s;
 }
-/* Device Warning */
-.device-warning {
+.main-heading {
     text-align: center;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #ffcdd2; /* Light red background */
-    color: #b71c1c; /* Dark red text */
-    border-radius: 4px;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #3f51b5;
+    margin-top: 20px;
+}
+
+.device-warning {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #fff3e0;
+    color: #ef6c00;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
 }
 
-.device-warning i.material-icons {
+.device-warning .material-icons {
     margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* Widget Container */
+.widget-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.widget {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #555;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.widget:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+.widget-icon {
+    font-size: 2rem;
+    margin-right: 10px;
+    color: #3f51b5;
+}
+
+.widget-label {
+    font-size: 1.2rem;
+    font-weight: 500;
 }

@@ -1,0 +1,102 @@
+.tutorial-container{
+    margin: 20px;
+}
+.app-bar {
+    display: flex;
+    align-items: center;
+    background-color: #3f51b5; /* Material Design primary color */
+    color: white;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+    margin-right: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.back-button .material-icons {
+    margin-right: 8px;
+}
+
+.tutorial-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+}
+/* Session Grid */
+.session-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+  gap: 16px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.session-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative; /* For the tooltip */
+    overflow: hidden; /* to make sure the ripple effect is within div*/
+}
+
+.session-item:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+
+}
+.session-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #3f51b5;
+}
+
+.session-title {
+     font-size: 1rem;
+    margin-top: 8px;
+    color: #555;
+}
+/* Ripple effect */
+.session-item {
+ position: relative;
+ overflow: hidden;
+}
+.session-item:after {
+ content: "";
+ display: block;
+ position: absolute;
+ top: 0;
+ left: 50%;
+ width: 5px;
+ padding-top: 5px;
+ border-radius: 50%;
+ background: rgba(0, 0, 0, 0.15);
+ opacity: 0;
+ transition: all 0.5s ease;
+}
+.session-item:active:after {
+ opacity: 1;
+ transform: scale(100,100);
+ transition: 0s;
+}

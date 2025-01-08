@@ -7,10 +7,10 @@ for i in $(seq 1 115); do
   # Check if the file exists
   if [ -f "$filename" ]; then
     # Update the iframe src attribute
-    sed -i -E 's#(<iframe[^>]*src=")(\.\./pdfs/)([^"]+)#\1https://kodbiz.github.io/daurahtafsir-makro/pdfs/\3#' "$filename"
+    sed -i -E 's#(<iframe[^>]*src=")(\.\./pdfs/)([^"]+)#\1https://ben-kodbiz.github.io/daurahtafsir-makro/pdfs/\3#' "$filename"
 
     # Update the anchor href attribute
-    sed -i -E 's#(<a[^>]*href=")(\.\./pdfs/)([^"]+)#\1https://kodbiz.github.io/daurahtafsir-makro/pdfs/\3#' "$filename"
+    sed -i -E 's#(<a[^>]*href=")(\.\./pdfs/)([^"]+)#\1https://ben-kodbiz.github.io/daurahtafsir-makro/pdfs/\3#' "$filename"
 
     echo "Updated file: $filename"
   else

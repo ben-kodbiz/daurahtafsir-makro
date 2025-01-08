@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quran App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Quran Reading Tutorial</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="tutorial_styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <select id="language-selector" onchange="setLanguage(this.value)">
-        <option value="en">English</option>
-        <option value="ms">Malay</option>
-    </select>
-     <h1 class="main-heading">Daurah Tafsir Quran Struktur Makro</h1>
-    <div class="device-warning">
-         <i class="material-icons">warning</i>
-        <span>Only works with desktop/laptop/tablet. Not optimal for smartphone use.</span>
+    <div class="tutorial-container">
+        <div class="app-bar">
+            <a href="../index.html" class="back-button">
+               <i class="material-icons">arrow_back</i>
+                Back to Main App
+            </a>
+            <h1 class="tutorial-title">Usul Tafsir</h1>
+        </div>
+        <div class="session-grid" id="session-grid">
+        </div>
     </div>
-    <div class="surah-grid" id="surah-grid">
-    </div>
-
-    <script src="script.js"></script>
+    <script src="tutorial_script.js"></script>
 </body>
 </html>

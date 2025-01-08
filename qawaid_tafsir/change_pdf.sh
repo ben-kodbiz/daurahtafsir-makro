@@ -6,12 +6,12 @@ for i in $(seq 1 115); do
 
   # Check if the file exists
   if [ -f "$filename" ]; then
-    # Ensure existing http paths are converted to https
-    sed -i -E 's#http://kodbiz.github.io/daurahtafsir-makro/pdfs/#https://kodbiz.github.io/daurahtafsir-makro/pdfs/#g' "$filename"
+    # Ensure existing http or https paths are replaced with the new base URL
+    sed -i -E 's#https?://[^"]+/daurahtafsir-makro/#https://ben-kodbiz.github.io/daurahtafsir-makro/#g' "$filename"
 
-    # Append https:// URL to relative paths
-    sed -i -E 's#(<iframe[^>]*src=")(\.\./pdfs/)([^"]+)#\1https://kodbiz.github.io/daurahtafsir-makro/pdfs/\3#' "$filename"
-    sed -i -E 's#(<a[^>]*href=")(\.\./pdfs/)([^"]+)#\1https://kodbiz.github.io/daurahtafsir-makro/pdfs/\3#' "$filename"
+    # Append the new base URL to relative paths
+    sed -i -E 's#(<iframe[^>]*src=")(\.\./pdfs/)([^"]+)#\1https://ben-kodbiz.github.io/daurahtafsir-makro/pdfs/\3#' "$filename"
+    sed -i -E 's#(<a[^>]*href=")(\.\./pdfs/)([^"]+)#\1https://ben-kodbiz.github.io/daurahtafsir-makro/pdfs/\3#' "$filename"
 
     echo "Updated file: $filename"
   else

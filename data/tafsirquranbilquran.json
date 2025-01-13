@@ -1,0 +1,325 @@
+{
+    "app_name": "Tafsir Quran dengan Quran",
+    "sessions": [
+      {
+        "session_number": 1,
+        "title": "Sesi 1 – Muqaddimah & Kaedah-kaedah Tafsir Al-Quran Dengan Al-Quran"
+      },
+      {
+        "session_number": 2,
+        "title": "Sesi 2 – Kaedah-kaedah Tafsir Al-Quran Dengan Al-Quran"
+      },
+      {
+        "session_number": 3,
+        "title": "Sesi 3 – (Sambungan) Kaedah-kaedah Tafsir Al-Quran Dengan Al-Quran"
+      },
+      {
+        "session_number": 4,
+        "title": "Sesi 4 – Tafsir Surah al- Fatihah (Ayat 1 hingga 5)"
+      },
+      {
+        "session_number": 5,
+        "title": "Sesi 5 – Tafsir Surah al- Fatihah (Ayat 5 -7) & Permulaan Surah Al-Baqarah"
+      },
+      {
+        "session_number": 6,
+        "title": "Sesi 6 – Surah al-Baqarah (ayat ke 3 hingga 7)"
+      },
+      {
+        "session_number": 7,
+        "title": "Sesi 7 – Surah al-Baqarah (ayat 7 hingga 16)"
+      },
+      {
+        "session_number": 8,
+        "title": "Sesi 8 – Surah al-Baqarah (ayat 17 hingga 22)"
+      },
+      {
+        "session_number": 9,
+        "title": "Sesi 9 – Surah al-Baqarah (ayat 23 hingga 26)"
+      },
+      {
+        "session_number": 10,
+        "title": "Sesi 10 – Surah al-Baqarah (ayat 27 hingga 29)"
+      },
+      {
+        "session_number": 11,
+        "title": "Sesi 11 – Surah al-Baqarah (ayat 30 hingga 33)"
+      },
+      {
+        "session_number": 12,
+        "title": "Sesi 12 – Surah al-Baqarah (ayat 34 hingga 36)"
+      },
+      {
+        "session_number": 13,
+        "title": "Sesi 13 – Surah al-Baqarah (ayat 37 hingga 40)"
+      },
+      {
+        "session_number": 14,
+        "title": "Sesi 14 – Surah al-Baqarah (ayat 40 hingga 42)"
+      },
+      {
+        "session_number": 15,
+        "title": "Sesi 15 – Surah al-Baqarah (ayat 42 hingga 46)"
+      },
+      {
+        "session_number": 16,
+        "title": "Sesi 16 – Surah al-Baqarah (Ayat 46 – 52)"
+      },
+      {
+        "session_number": 17,
+        "title": "Sesi 17 – Surah al-Baqarah (ayat 53 hingga 56)"
+      },
+      {
+        "session_number": 18,
+        "title": "Sesi 18 – Surah al-Baqarah (ayat 57 hingga 59)"
+      },
+      {
+        "session_number": 19,
+        "title": "Sesi 19 – Surah al-Baqarah (ayat 60 dan 61)"
+      },
+      {
+        "session_number": 20,
+        "title": "Sesi 20 – Surah al-Baqarah (ayat 61 dan 64)"
+      },
+      {
+        "session_number": 21,
+        "title": "Sesi 21 – Surah al-Baqarah (ayat 65 dan 74)"
+      },
+      {
+        "session_number": 22,
+        "title": "Sesi 22 – Surah al-Baqarah (ayat 75 dan 98)"
+      },
+      {
+        "session_number": 23,
+        "title": "Sesi 23 – Surah al-Baqarah (ayat 99 dan 102)"
+      },
+      {
+        "session_number": 24,
+        "title": "Sesi 24 – Surah al-Baqarah (ayat 103 dan 106)"
+      },
+      {
+        "session_number": 25,
+        "title": "Sesi 25 – Surah al-Baqarah (ayat 107 dan 112)"
+      },
+      {
+        "session_number": 26,
+        "title": "Sesi 26 – Surah al-Baqarah (ayat 113 dan 115)"
+      },
+      {
+        "session_number": 27,
+        "title": "Sesi 27 – Surah al-Baqarah (ayat 116 dan 125)"
+      },
+      {
+        "session_number": 28,
+        "title": "Sesi 28 – Surah al-Baqarah (ayat 126 dan 134)"
+      },
+      {
+        "session_number": 29,
+        "title": "Sesi 29 – Surah al-Baqarah (ayat 135 dan 141)"
+      },
+      {
+        "session_number": 30,
+        "title": "Sesi 30 – Surah al-Baqarah (ayat 142 dan 144)"
+      },
+      {
+        "session_number": 31,
+        "title": "Sesi 31 – Surah al-Baqarah (ayat 145 dan 152)"
+      },
+      {
+        "session_number": 32,
+        "title": "Sesi 32 – Surah al-Baqarah (ayat 153 dan 158)"
+      },
+      {
+        "session_number": 33,
+        "title": "Sesi 33 – Surah al-Baqarah (ayat 159 dan 164)"
+      },
+      {
+        "session_number": 34,
+        "title": "Sesi 34 – Surah al-Baqarah (ayat 165 dan 171)"
+      },
+      {
+        "session_number": 35,
+        "title": "Sesi 35 – Surah al-Baqarah (ayat 172 dan 173)"
+      },
+      {
+        "session_number": 36,
+        "title": "Sesi 36 – Surah al-Baqarah (ayat 174 dan 179)"
+      },
+      {
+        "session_number": 37,
+        "title": "Sesi 37 – Surah al-Baqarah (ayat 180 dan 185)"
+      },
+      {
+        "session_number": 38,
+        "title": "Sesi 38 – Surah al-Baqarah (ayat 185 dan 189)"
+      },
+      {
+        "session_number": 39,
+        "title": "Sesi 39 – Surah al-Baqarah (ayat 189 dan 192)"
+      },
+      {
+        "session_number": 40,
+        "title": "Sesi 40 – Surah al-Baqarah (ayat 193 dan 196)"
+      },
+      {
+        "session_number": 41,
+        "title": "Sesi 41 – Surah al-Baqarah (ayat 197 dan 200)"
+      },
+      {
+        "session_number": 42,
+        "title": "Sesi 42 – Surah al-Baqarah (ayat 201)"
+      },
+      {
+        "session_number": 43,
+        "title": "Sesi 43 – Surah al-Baqarah (ayat 202 dan 210)"
+      },
+      {
+        "session_number": 44,
+        "title": "Sesi 44 – Surah al-Baqarah (ayat 211 dan 213)"
+      },
+      {
+        "session_number": 45,
+        "title": "Sesi 45 – Surah al-Baqarah (ayat 214 dan 218)"
+      },
+      {
+        "session_number": 46,
+        "title": "Sesi 46 – Surah al-Baqarah (ayat 217 dan 218)"
+      },
+      {
+        "session_number": 47,
+        "title": "Sesi 47 – Surah al-Baqarah (ayat 219 dan 221)"
+      },
+      {
+        "session_number": 48,
+        "title": "Sesi 48 – Surah al-Baqarah (ayat 222 dan 223)"
+      },
+      {
+        "session_number": 49,
+        "title": "Sesi 49 – Surah al-Baqarah (ayat 224 dan 226)"
+      },
+      {
+        "session_number": 50,
+        "title": "Sesi 50 – Surah al-Baqarah (ayat 228)"
+      },
+      {
+        "session_number": 51,
+        "title": "Sesi 51 – Surah al-Baqarah (ayat 228 dan 229)"
+      },
+      {
+        "session_number": 52,
+        "title": "Sesi 52 – Surah al-Baqarah (ayat 229 dan 230)"
+      },
+      {
+        "session_number": 53,
+        "title": "Sesi 53 – Surah al-Baqarah (ayat 231)"
+      },
+      {
+        "session_number": 54,
+        "title": "Sesi 54 – Surah al-Baqarah (ayat 232 dan 233)"
+      },
+      {
+        "session_number": 55,
+        "title": "Sesi 55 – Surah al-Baqarah (ayat 234 dan 235)"
+      },
+      {
+        "session_number": 56,
+        "title": "Sesi 56 – Surah al-Baqarah (ayat 236 dan 238)"
+      },
+      {
+        "session_number": 57,
+        "title": "Sesi 57 – Surah al-Baqarah (ayat 239 dan 241)"
+      },
+      {
+        "session_number": 58,
+        "title": "Sesi 58 – Surah al-Baqarah (ayat 243 dan 245)"
+      },
+      {
+        "session_number": 59,
+        "title": "Sesi 59 – Surah al-Baqarah (ayat 246 dan 249)"
+      },
+      {
+        "session_number": 60,
+        "title": "Sesi 60 – Surah al-Baqarah (ayat 250 dan 253)"
+      },
+       {
+        "session_number": 61,
+        "title": "Sesi 61 – Surah al-Baqarah (ayat 253 dan 255)"
+      },
+      {
+        "session_number": 62,
+        "title": "Sesi 62 – Surah al-Baqarah (ayat 255 – Ayat al-Kursi)"
+      },
+      {
+        "session_number": 63,
+        "title": "Sesi 63 – Surah al-Baqarah (ayat 256 dan 257)"
+      },
+      {
+        "session_number": 64,
+        "title": "Sesi 64 – Surah al-Baqarah (ayat 258 dan 260)"
+      },
+      {
+        "session_number": 65,
+         "title": "Sesi 65 – Surah al-Baqarah (ayat 261 dan 263)"
+      },
+      {
+        "session_number": 66,
+        "title": "Sesi 66 – Surah al-Baqarah (ayat 264 hingga 266)"
+      },
+      {
+        "session_number": 67,
+        "title": "Sesi 67 – Surah al-Baqarah (ayat 267 dan 258)"
+      },
+      {
+        "session_number": 68,
+        "title": "Sesi 68 – Surah al-Baqarah (ayat 269)"
+      },
+      {
+        "session_number": 69,
+        "title": "Sesi 69 – Surah al-Baqarah (ayat 270)"
+      },
+      {
+        "session_number": 70,
+        "title": "Sesi 70 – Surah al-Baqarah (ayat 270 hingga 272)"
+      },
+      {
+        "session_number": 71,
+        "title": "Sesi 71 – Surah al-Baqarah (ayat 272)"
+      },
+      {
+        "session_number": 72,
+        "title": "Sesi 72 – Surah al-Baqarah (ayat 273)"
+      },
+      {
+        "session_number": 73,
+        "title": "Sesi 73 – Surah al-Baqarah (ayat 274 dan 275)"
+      },
+      {
+        "session_number": 74,
+        "title": "Sesi 74 – Surah al-Baqarah (ayat 276 hingga 281)"
+      },
+      {
+        "session_number": 75,
+        "title": "Sesi 75 – Surah al-Baqarah (ayat 282 dan 283)"
+      },
+      {
+        "session_number": 76,
+        "title": "Sesi 76 – Surah al-Baqarah (Ayat 284 Hingga 286)"
+      },
+      {
+        "session_number": 77,
+        "title": "Sesi 77 – Surah Aali ‘Imran (Ayat 1 Dan 2)"
+      },
+       {
+        "session_number": 78,
+        "title": "Sesi 78 – Surah Aali ‘Imran (Ayat 3 Dan 4)"
+      },
+      {
+        "session_number": 79,
+        "title": "Sesi 79 – Surah Aali ‘Imran (Ayat 5 Hingga 7)"
+      },
+       {
+        "session_number": 80,
+        "title": "Sesi 80 – Surah Aali ‘Imran (Ayat 5 Hingga 7)"
+      }
+    ]
+  }

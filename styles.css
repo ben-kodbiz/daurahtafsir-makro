@@ -455,6 +455,127 @@ html.sepia-theme .device-warning {
     margin-bottom: 30px;
 }
 
+/* Search Container */
+.search-container {
+    max-width: 1000px;
+    margin: 0 auto 20px;
+    padding: 0 20px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+html.dark-theme .search-box {
+    background-color: #2d2d2d;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+html.sepia-theme .search-box {
+    background-color: #f8f0e0;
+}
+
+.search-icon {
+    color: #757575;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .search-icon {
+    color: #aaaaaa;
+}
+
+html.sepia-theme .search-icon {
+    color: #8d6e63;
+}
+
+#surah-search {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: transparent;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme #surah-search {
+    color: #e0e0e0;
+}
+
+html.sepia-theme #surah-search {
+    color: #5b4636;
+}
+
+#surah-search::placeholder {
+    color: #9e9e9e;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme #surah-search::placeholder {
+    color: #757575;
+}
+
+html.sepia-theme #surah-search::placeholder {
+    color: #a1887f;
+}
+
+.clear-search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #757575;
+    display: none;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .clear-search-btn {
+    color: #aaaaaa;
+}
+
+html.sepia-theme .clear-search-btn {
+    color: #8d6e63;
+}
+
+.clear-search-btn:hover {
+    color: #f44336;
+}
+
+/* No Results Message */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: #757575;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .no-results {
+    color: #aaaaaa;
+}
+
+html.sepia-theme .no-results {
+    color: #8d6e63;
+}
+
+.no-results i {
+    font-size: 48px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.no-results p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
 .widget {
     display: flex;
     align-items: center;

@@ -49,6 +49,17 @@ html.sepia-theme .app-bar {
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
+  background-color: #e0e0e0; /* Light grey background for the grid */
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+html.dark-theme .session-grid {
+  background-color: #1e1e1e; /* Dark background for the grid */
+}
+
+html.sepia-theme .session-grid {
+  background-color: #e8dcc9; /* Sepia background for the grid */
 }
 
 .session-item {
@@ -61,26 +72,63 @@ html.sepia-theme .app-bar {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease, box-shadow 0.3s ease;
     position: relative; /* For the tooltip */
     overflow: hidden; /* to make sure the ripple effect is within div*/
+}
+
+html.dark-theme .session-item {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+html.sepia-theme .session-item {
+    background-color: #f8f0e0;
+    color: #5b4636;
 }
 
 .session-item:hover {
     background-color: #f0f0f0;
     transform: translateY(-2px);
-
 }
+
+html.dark-theme .session-item:hover {
+    background-color: #3d3d3d;
+}
+
+html.sepia-theme .session-item:hover {
+    background-color: #f0e6d2;
+}
+
 .session-number {
     font-size: 1.2rem;
     font-weight: 700;
     color: #3f51b5;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .session-number {
+    color: #7986cb; /* Lighter blue for dark mode */
+}
+
+html.sepia-theme .session-number {
+    color: #8d6e63; /* Brown for sepia mode */
 }
 
 .session-title {
-     font-size: 1rem;
+    font-size: 1rem;
     margin-top: 8px;
     color: #555;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .session-title {
+    color: #e0e0e0;
+}
+
+html.sepia-theme .session-title {
+    color: #5b4636;
 }
 /* Ripple effect */
 .session-item {

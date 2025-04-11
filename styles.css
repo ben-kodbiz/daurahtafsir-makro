@@ -240,7 +240,16 @@ html.sepia-theme .theme-toggle-container .theme-toggle {
   max-width: 1000px;
   margin: 0 auto;
   background-color: #e0e0e0; /* Light grey background for the grid */
-    border-radius: 8px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+html.dark-theme .surah-grid {
+  background-color: #1e1e1e; /* Dark background for the grid */
+}
+
+html.sepia-theme .surah-grid {
+  background-color: #e8dcc9; /* Sepia background for the grid */
 }
 
 .surah-item {
@@ -253,32 +262,78 @@ html.sepia-theme .theme-toggle-container .theme-toggle {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease, box-shadow 0.3s ease;
     position: relative; /* For the tooltip */
     overflow: hidden; /* to make sure the ripple effect is within div*/
+}
+
+html.dark-theme .surah-item {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+html.sepia-theme .surah-item {
+    background-color: #f8f0e0;
+    color: #5b4636;
 }
 
 .surah-item:hover {
     background-color: #f0f0f0;
     transform: translateY(-2px);
+}
 
+html.dark-theme .surah-item:hover {
+    background-color: #3d3d3d;
+}
+
+html.sepia-theme .surah-item:hover {
+    background-color: #f0e6d2;
 }
 .surah-number {
     font-size: 1.2rem;
     font-weight: 700;
     color: #3f51b5;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .surah-number {
+    color: #7986cb; /* Lighter blue for dark mode */
+}
+
+html.sepia-theme .surah-number {
+    color: #8d6e63; /* Brown for sepia mode */
 }
 
 .surah-name {
-     font-size: 1rem;
+    font-size: 1rem;
     margin-top: 8px;
     color: #555;
+    transition: color 0.3s ease;
 }
+
+html.dark-theme .surah-name {
+    color: #e0e0e0;
+}
+
+html.sepia-theme .surah-name {
+    color: #5b4636;
+}
+
 .surah-arabic-name {
-     font-size: 1rem;
+    font-size: 1rem;
     margin-top: 8px;
     color: #555;
-        direction: rtl;
+    direction: rtl;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .surah-arabic-name {
+    color: #e0e0e0;
+}
+
+html.sepia-theme .surah-arabic-name {
+    color: #5b4636;
 }
  /* Tooltip */
  .tooltip {
@@ -291,8 +346,17 @@ html.sepia-theme .theme-toggle-container .theme-toggle {
     z-index: 100;
     white-space: nowrap;
     display: none;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
+    transition: opacity 0.2s ease, visibility 0.2s ease, background-color 0.3s ease;
 }
+
+html.dark-theme .tooltip {
+    background-color: rgba(20, 20, 20, 0.9);
+}
+
+html.sepia-theme .tooltip {
+    background-color: rgba(139, 110, 99, 0.9);
+}
+
 .tooltip-name{
      display: block;
     font-weight: 500;
@@ -344,6 +408,15 @@ html.sepia-theme .theme-toggle-container .theme-toggle {
     font-size: 2rem;
     font-weight: 500;
     color: #3f51b5;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .main-heading {
+    color: #7986cb; /* Lighter blue for dark mode */
+}
+
+html.sepia-theme .main-heading {
+    color: #8d6e63; /* Brown for sepia mode */
 }
 
 .device-warning {
@@ -356,6 +429,17 @@ html.sepia-theme .theme-toggle-container .theme-toggle {
     margin-bottom: 20px;
     border-radius: 4px;
     font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark-theme .device-warning {
+    background-color: #3e2723;
+    color: #ffab91;
+}
+
+html.sepia-theme .device-warning {
+    background-color: #f5e9d7;
+    color: #a1887f;
 }
 
 .device-warning .material-icons {
@@ -380,7 +464,18 @@ html.sepia-theme .theme-toggle-container .theme-toggle {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-decoration: none;
     color: #555;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+html.dark-theme .widget {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+html.sepia-theme .widget {
+    background-color: #f8f0e0;
+    color: #5b4636;
 }
 
 .widget:hover {
@@ -388,13 +483,39 @@ html.sepia-theme .theme-toggle-container .theme-toggle {
     transform: translateY(-2px);
 }
 
+html.dark-theme .widget:hover {
+    background-color: #3d3d3d;
+}
+
+html.sepia-theme .widget:hover {
+    background-color: #f0e6d2;
+}
+
 .widget-icon {
     font-size: 2rem;
     margin-right: 10px;
     color: #3f51b5;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .widget-icon {
+    color: #7986cb; /* Lighter blue for dark mode */
+}
+
+html.sepia-theme .widget-icon {
+    color: #8d6e63; /* Brown for sepia mode */
 }
 
 .widget-label {
     font-size: 1.2rem;
     font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .widget-label {
+    color: #e0e0e0;
+}
+
+html.sepia-theme .widget-label {
+    color: #5b4636;
 }

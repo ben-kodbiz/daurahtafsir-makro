@@ -47,36 +47,47 @@ function loadTranslations() {
         });
 }
 
-function createSurahGrid(filteredSurahs = null) {
+function createSurahGrid() {
+    console.log("Creating surah grid");
     // Clear the existing grid
     const surahGrid = document.getElementById("surah-grid");
+    if (!surahGrid) {
+        console.error("Surah grid element not found");
+        return;
+    }
+
     surahGrid.innerHTML = "";
 
-    // If no filtered surahs are provided, fetch all surahs
-    if (!filteredSurahs) {
-        fetch("data/all_surahs.json")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                allSurahs = data.children; // Store all surahs for filtering later
-                displaySurahs(allSurahs);
-                setupSearchFunctionality();
-            })
-            .catch(error => {
-                console.error("Error loading or processing data:", error);
-            });
-    } else {
-        // Display the filtered surahs
-        displaySurahs(filteredSurahs);
-    }
+    // Fetch all surahs
+    fetch("data/all_surahs.json")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Surahs data loaded successfully");
+            allSurahs = data.children; // Store all surahs for filtering later
+            displaySurahs(allSurahs);
+            setupSearchFunctionality();
+        })
+        .catch(error => {
+            console.error("Error loading or processing data:", error);
+        });
 }
 
 function displaySurahs(surahs) {
+    console.log(`Displaying ${surahs.length} surahs`);
     const surahGrid = document.getElementById("surah-grid");
+
+    if (!surahGrid) {
+        console.error("Surah grid element not found in displaySurahs");
+        return;
+    }
+
+    // Clear the grid before displaying new results
+    surahGrid.innerHTML = "";
 
     // Display message if no surahs match the search
     if (surahs.length === 0) {
@@ -147,8 +158,16 @@ function setupSearchFunctionality() {
     const searchInput = document.getElementById("surah-search");
     const clearButton = document.getElementById("clear-search");
 
+    if (!searchInput || !clearButton) {
+        console.error("Search elements not found in the DOM");
+        return;
+    }
+
+    console.log("Setting up search functionality");
+
     // Show/hide clear button based on input content
     searchInput.addEventListener("input", function() {
+        console.log("Search input changed:", this.value);
         if (this.value.length > 0) {
             clearButton.style.display = "block";
         } else {
@@ -162,6 +181,7 @@ function setupSearchFunctionality() {
 
     // Clear search input when clear button is clicked
     clearButton.addEventListener("click", function() {
+        console.log("Clear button clicked");
         searchInput.value = "";
         clearButton.style.display = "none";
         filterSurahs(""); // Show all surahs
@@ -169,11 +189,16 @@ function setupSearchFunctionality() {
 }
 
 function filterSurahs(searchTerm) {
-    if (!allSurahs || allSurahs.length === 0) return;
+    console.log("Filtering surahs with term:", searchTerm);
+    if (!allSurahs || allSurahs.length === 0) {
+        console.error("No surahs available for filtering");
+        return;
+    }
 
     if (!searchTerm) {
         // If search term is empty, show all surahs
-        createSurahGrid(allSurahs);
+        console.log("Empty search term, showing all surahs");
+        displaySurahs(allSurahs);
         return;
     }
 
@@ -187,10 +212,15 @@ function filterSurahs(searchTerm) {
         return numberMatch || nameMatch || arabicMatch || translationMatch;
     });
 
+    console.log(`Found ${filteredSurahs.length} surahs matching "${searchTerm}"`);
+
     // Display filtered surahs
-    createSurahGrid(filteredSurahs);
+    displaySurahs(filteredSurahs);
 }
 
-// Load translations on page load
-loadTranslations();
-createSurahGrid();
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded");
+    loadTranslations();
+    createSurahGrid();
+});

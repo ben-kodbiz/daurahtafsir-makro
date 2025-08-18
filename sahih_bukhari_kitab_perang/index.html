@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="ms" class="light-theme">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sahih Bukhari - Kitab Perang</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
         * {
             margin: 0;
@@ -32,6 +33,29 @@
             color: white;
             padding: 30px;
             text-align: center;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
 
         .header h1 {
@@ -262,11 +286,113 @@
                 padding: 10px 15px;
             }
         }
+
+        /* Dark Theme Styles */
+        html.dark-theme body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        html.dark-theme .container {
+            background: rgba(30, 30, 30, 0.95);
+        }
+
+        html.dark-theme .header {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+        }
+
+        html.dark-theme .back-link {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+
+        html.dark-theme .back-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        html.dark-theme .search-container {
+            background: rgba(40, 40, 40, 0.9);
+        }
+
+        html.dark-theme .search-input {
+            background: rgba(60, 60, 60, 0.8);
+            color: #e0e0e0;
+            border-color: #555;
+        }
+
+        html.dark-theme .search-input::placeholder {
+            color: #aaa;
+        }
+
+        html.dark-theme .session-card {
+            background: rgba(40, 40, 40, 0.9);
+            color: #e0e0e0;
+        }
+
+        html.dark-theme .session-card:hover {
+            background: rgba(50, 50, 50, 0.9);
+        }
+
+        html.dark-theme .session-number {
+            color: #64b5f6;
+        }
+
+        /* Sepia Theme Styles */
+        html.sepia-theme body {
+            background: linear-gradient(135deg, #f4f1e8 0%, #e8dcc0 100%);
+        }
+
+        html.sepia-theme .container {
+            background: rgba(250, 245, 235, 0.95);
+        }
+
+        html.sepia-theme .header {
+            background: linear-gradient(135deg, #8b7355 0%, #a0896b 100%);
+            color: #f5f5dc;
+        }
+
+        html.sepia-theme .back-link {
+            background: rgba(139, 115, 85, 0.3);
+            color: #5d4e37;
+        }
+
+        html.sepia-theme .back-link:hover {
+            background: rgba(139, 115, 85, 0.5);
+        }
+
+        html.sepia-theme .search-container {
+            background: rgba(240, 235, 220, 0.9);
+        }
+
+        html.sepia-theme .search-input {
+            background: rgba(245, 240, 225, 0.8);
+            color: #5d4e37;
+            border-color: #d2b48c;
+        }
+
+        html.sepia-theme .search-input::placeholder {
+            color: #8b7355;
+        }
+
+        html.sepia-theme .session-card {
+            background: rgba(245, 240, 225, 0.9);
+            color: #5d4e37;
+        }
+
+        html.sepia-theme .session-card:hover {
+            background: rgba(240, 235, 220, 0.9);
+        }
+
+        html.sepia-theme .session-number {
+            color: #8b4513;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="material-icons theme-icon">brightness_4</i>
+            </button>
             <h1>Sahih Bukhari - Kitab Perang</h1>
             <p>Sahih al-Bukhari - Kitab Maghaazi (Peperangan)</p>
         </div>
@@ -365,6 +491,19 @@
 
         // Load sessions when page loads
         document.addEventListener('DOMContentLoaded', loadSessions);
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
     </script>
 </body>
 </html>

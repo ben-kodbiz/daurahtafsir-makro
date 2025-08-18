@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="ms" class="light-theme">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sahih Bukhari-Kitab Azan(edisi2) - Maulana Asri</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
         * {
             margin: 0;
@@ -27,6 +28,29 @@
             text-align: center;
             margin-bottom: 30px;
             color: white;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
 
         .header h1 {
@@ -274,6 +298,122 @@
                 padding: 10px 40px 10px 40px;
             }
         }
+
+        /* Dark Theme Styles */
+        html.dark-theme body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        html.dark-theme .header {
+            color: #e0e0e0;
+        }
+
+        html.dark-theme .back-link {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+
+        html.dark-theme .back-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        html.dark-theme .search-input {
+            background-color: #2d3748;
+            border-color: #4a5568;
+            color: #e2e8f0;
+        }
+
+        html.dark-theme .search-input:focus {
+            border-color: #63b3ed;
+            box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.1);
+        }
+
+        html.dark-theme .search-icon {
+            color: #a0aec0;
+        }
+
+        html.dark-theme .clear-search {
+            color: #a0aec0;
+        }
+
+        html.dark-theme .clear-search:hover {
+            color: #e2e8f0;
+        }
+
+        html.dark-theme .session-card {
+            background: rgba(40, 40, 40, 0.9);
+            color: #e0e0e0;
+        }
+
+        html.dark-theme .session-card:hover {
+            background: rgba(50, 50, 50, 0.9);
+        }
+
+        html.dark-theme .session-title {
+            color: #e0e0e0;
+        }
+
+        html.dark-theme .session-description {
+            color: #a0aec0;
+        }
+
+        /* Sepia Theme Styles */
+        html.sepia-theme body {
+            background: linear-gradient(135deg, #f4f1e8 0%, #e8dcc0 100%);
+        }
+
+        html.sepia-theme .header {
+            color: #5d4e37;
+        }
+
+        html.sepia-theme .back-link {
+            background: rgba(139, 115, 85, 0.3);
+            color: #5d4e37;
+        }
+
+        html.sepia-theme .back-link:hover {
+            background: rgba(139, 115, 85, 0.5);
+        }
+
+        html.sepia-theme .search-input {
+            background-color: #f7f3e9;
+            border-color: #d4c5a0;
+            color: #5d4e37;
+        }
+
+        html.sepia-theme .search-input:focus {
+            border-color: #8b7355;
+            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+        }
+
+        html.sepia-theme .search-icon {
+            color: #8b7355;
+        }
+
+        html.sepia-theme .clear-search {
+            color: #8b7355;
+        }
+
+        html.sepia-theme .clear-search:hover {
+            color: #5d4e37;
+        }
+
+        html.sepia-theme .session-card {
+            background: rgba(245, 240, 225, 0.9);
+            color: #5d4e37;
+        }
+
+        html.sepia-theme .session-card:hover {
+            background: rgba(240, 235, 220, 0.9);
+        }
+
+        html.sepia-theme .session-title {
+            color: #5d4e37;
+        }
+
+        html.sepia-theme .session-description {
+            color: #8b7355;
+        }
     </style>
 </head>
 <body>
@@ -281,6 +421,9 @@
         <a href="../index.html" class="back-link">← Kembali ke Halaman Utama</a>
         
         <div class="header">
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="material-icons theme-icon">brightness_4</i>
+            </button>
             <h1>Sahih Bukhari-Kitab Azan(edisi2)</h1>
             <p>Syarahan Kitab Hadith Sahih al-Bukhari - Kitab Azan (Edisi 2) oleh Maulana Muhd Asri Yusoff</p>
         </div>
@@ -380,6 +523,19 @@
 
         // Load sessions when page loads
         document.addEventListener('DOMContentLoaded', loadSessions);
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
     </script>
 </body>
 </html>

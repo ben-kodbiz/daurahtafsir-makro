@@ -94,7 +94,9 @@ function displaySurahs(surahs) {
         const noResults = document.createElement("div");
         noResults.classList.add("no-results");
         noResults.innerHTML = `<i class="material-icons">search_off</i><p>No surahs found matching your search.</p>`;
-        surahGrid.appendChild(noResults);
+        if (surahGrid) {
+            surahGrid.appendChild(noResults);
+        }
         return;
     }
 
@@ -128,7 +130,9 @@ function displaySurahs(surahs) {
                 <span class="tooltip-ayahs">(${surah.numberOfAyahs} Ayahs)</span>
             </span>
         `;
-        document.body.appendChild(tooltip);
+        if (document.body) {
+            document.body.appendChild(tooltip);
+        }
 
         surahDiv.addEventListener("mouseover", (event) => {
             tooltip.style.display = "block";
@@ -150,7 +154,9 @@ function displaySurahs(surahs) {
         surahDiv.appendChild(surahName);
         surahDiv.appendChild(surahArabicName);
 
-        surahGrid.appendChild(surahDiv);
+        if (surahGrid) {
+            surahGrid.appendChild(surahDiv);
+        }
     });
 }
 

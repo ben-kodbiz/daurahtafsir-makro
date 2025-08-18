@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahih Bukhari-Kitab Azan(edisi2) - Maulana Asri</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .session-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .session-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .session-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .watch-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .watch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .sessions-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .session-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Kembali ke Halaman Utama</a>
+        
+        <div class="header">
+            <h1>Sahih Bukhari-Kitab Azan(edisi2)</h1>
+            <p>Syarahan Kitab Hadith Sahih al-Bukhari - Kitab Azan (Edisi 2) oleh Maulana Muhd Asri Yusoff</p>
+        </div>
+
+        <div id="loading" class="loading">
+            Memuat sesi-sesi...
+        </div>
+
+        <div id="sessions-container" class="sessions-grid" style="display: none;">
+            <!-- Sessions will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        async function loadSessions() {
+            try {
+                const response = await fetch('sahih_bukhari_kitab_azan_edisi2.json');
+                const data = await response.json();
+                
+                const container = document.getElementById('sessions-container');
+                const loading = document.getElementById('loading');
+                
+                container.innerHTML = '';
+                
+                data.sessions.forEach(session => {
+                    const sessionCard = document.createElement('div');
+                    sessionCard.className = 'session-card';
+                    
+                    sessionCard.innerHTML = `
+                        <div class="session-number">Sesi ${session.id}</div>
+                        <div class="session-title">${session.title}</div>
+                        <div class="session-description">${session.description}</div>
+                        <a href="session${session.id}.html" class="watch-btn">Tonton Video</a>
+                    `;
+                    
+                    container.appendChild(sessionCard);
+                });
+                
+                loading.style.display = 'none';
+                container.style.display = 'grid';
+                
+            } catch (error) {
+                console.error('Error loading sessions:', error);
+                document.getElementById('loading').innerHTML = 'Ralat memuat data. Sila cuba lagi.';
+            }
+        }
+
+        // Load sessions when page loads
+        document.addEventListener('DOMContentLoaded', loadSessions);
+    </script>
+</body>
+</html>

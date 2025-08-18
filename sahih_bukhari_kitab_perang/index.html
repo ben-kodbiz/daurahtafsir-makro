@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahih Bukhari - Kitab Perang</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 20px 30px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .session-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+        }
+
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-color: #3498db;
+        }
+
+        .session-number {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .session-description {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .sessions-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .session-card {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .back-link {
+                margin: 15px 20px;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sahih Bukhari - Kitab Perang</h1>
+            <p>Sahih al-Bukhari - Kitab Maghaazi (Peperangan)</p>
+        </div>
+        
+        <a href="../index.html" class="back-link">← Kembali ke Halaman Utama</a>
+        
+        <div id="sessions-container">
+            <div class="loading">Memuat sesi...</div>
+        </div>
+    </div>
+
+    <script>
+        async function loadSessions() {
+            try {
+                const response = await fetch('./sahih_bukhari_kitab_perang.json');
+                if (!response.ok) {
+                    throw new Error('Gagal memuat data sesi');
+                }
+                
+                const data = await response.json();
+                displaySessions(data.sessions);
+            } catch (error) {
+                console.error('Error loading sessions:', error);
+                document.getElementById('sessions-container').innerHTML = 
+                    '<div class="error">Gagal memuat sesi. Sila cuba lagi.</div>';
+            }
+        }
+
+        function displaySessions(sessions) {
+            const container = document.getElementById('sessions-container');
+            
+            const sessionsHTML = sessions.map(session => `
+                <div class="session-card" onclick="openSession(${session.id})">
+                    <div class="session-number">Sesi ${session.id}</div>
+                    <div class="session-title">${session.title}</div>
+                    <div class="session-description">${session.description}</div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = `
+                <div class="sessions-grid">
+                    ${sessionsHTML}
+                </div>
+            `;
+        }
+
+        function openSession(sessionId) {
+            window.location.href = `./session${sessionId}.html`;
+        }
+
+        // Load sessions when page loads
+        document.addEventListener('DOMContentLoaded', loadSessions);
+    </script>
+</body>
+</html>

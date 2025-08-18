@@ -1,0 +1,727 @@
+{
+  "title": "Usul Dirayat Hadis",
+  "description": "Comprehensive course on the principles of hadith criticism and authentication",
+  "total_sessions": 120,
+  "sessions": [
+    {
+      "session_number": 1,
+      "title": "Sesi 1 – Pengenalan Usul Dirayat Hadis",
+      "video_id": "wHItw6bkNcI",
+      "youtube_url": "https://www.youtube.com/watch?v=wHItw6bkNcI"
+    },
+    {
+      "session_number": 2,
+      "title": "Sesi 2 – Sejarah dan Perkembangan Ilmu Hadis",
+      "video_id": "6juuU7dQiQI",
+      "youtube_url": "https://www.youtube.com/watch?v=6juuU7dQiQI"
+    },
+    {
+      "session_number": 3,
+      "title": "Sesi 3 – Klasifikasi Hadis Berdasarkan Sanad",
+      "video_id": "oAIN4Uazo6E",
+      "youtube_url": "https://www.youtube.com/watch?v=oAIN4Uazo6E"
+    },
+    {
+      "session_number": 4,
+      "title": "Sesi 4 – Klasifikasi Hadis Berdasarkan Matan",
+      "video_id": "XeaLYKFkFMk",
+      "youtube_url": "https://www.youtube.com/watch?v=XeaLYKFkFMk"
+    },
+    {
+      "session_number": 5,
+      "title": "Sesi 5 – Metodologi Kritik Hadis",
+      "video_id": "69LRZYRSugA",
+      "youtube_url": "https://www.youtube.com/watch?v=69LRZYRSugA"
+    },
+    {
+      "session_number": 6,
+      "title": "Sesi 6 – Usul Dirayat Hadis",
+      "video_id": "6KVg_yE-Gyk",
+      "youtube_url": "https://www.youtube.com/watch?v=6KVg_yE-Gyk"
+    },
+    {
+      "session_number": 7,
+      "title": "Sesi 7 – Usul Dirayat Hadis",
+      "video_id": "4sFidmBv3TI",
+      "youtube_url": "https://www.youtube.com/watch?v=4sFidmBv3TI"
+    },
+    {
+      "session_number": 8,
+      "title": "Sesi 8 – Usul Dirayat Hadis",
+      "video_id": "MDleK33dPYo",
+      "youtube_url": "https://www.youtube.com/watch?v=MDleK33dPYo"
+    },
+    {
+      "session_number": 9,
+      "title": "Sesi 9 – Usul Dirayat Hadis",
+      "video_id": "1toh4mjz29Q",
+      "youtube_url": "https://www.youtube.com/watch?v=1toh4mjz29Q"
+    },
+    {
+      "session_number": 10,
+      "title": "Sesi 10 – Usul Dirayat Hadis",
+      "video_id": "jEzIraQ8bzQ",
+      "youtube_url": "https://www.youtube.com/watch?v=jEzIraQ8bzQ"
+    },
+    {
+      "session_number": 11,
+      "title": "Sesi 11 – Usul Dirayat Hadis",
+      "video_id": "cTTTkywDPTk",
+      "youtube_url": "https://www.youtube.com/watch?v=cTTTkywDPTk"
+    },
+    {
+      "session_number": 12,
+      "title": "Sesi 12 – Usul Dirayat Hadis",
+      "video_id": "u61pOBGxW5A",
+      "youtube_url": "https://www.youtube.com/watch?v=u61pOBGxW5A"
+    },
+    {
+      "session_number": 13,
+      "title": "Sesi 13 – Usul Dirayat Hadis",
+      "video_id": "fyojDm7rruI",
+      "youtube_url": "https://www.youtube.com/watch?v=fyojDm7rruI"
+    },
+    {
+      "session_number": 14,
+      "title": "Sesi 14 – Usul Dirayat Hadis",
+      "video_id": "RL_WC2fl2nM",
+      "youtube_url": "https://www.youtube.com/watch?v=RL_WC2fl2nM"
+    },
+    {
+      "session_number": 15,
+      "title": "Sesi 15 – Usul Dirayat Hadis",
+      "video_id": "F6Bzhh1EKFY",
+      "youtube_url": "https://www.youtube.com/watch?v=F6Bzhh1EKFY"
+    },
+    {
+      "session_number": 16,
+      "title": "Sesi 16 – Usul Dirayat Hadis",
+      "video_id": "gl5BnzyOrPs",
+      "youtube_url": "https://www.youtube.com/watch?v=gl5BnzyOrPs"
+    },
+    {
+      "session_number": 17,
+      "title": "Sesi 17 – Usul Dirayat Hadis",
+      "video_id": "CkYtFWaJeH4",
+      "youtube_url": "https://www.youtube.com/watch?v=CkYtFWaJeH4"
+    },
+    {
+      "session_number": 18,
+      "title": "Sesi 18 – Usul Dirayat Hadis",
+      "video_id": "3hqN0ZzT6lY",
+      "youtube_url": "https://www.youtube.com/watch?v=3hqN0ZzT6lY"
+    },
+    {
+      "session_number": 19,
+      "title": "Sesi 19 – Usul Dirayat Hadis",
+      "video_id": "-E3ftvNqyLo",
+      "youtube_url": "https://www.youtube.com/watch?v=-E3ftvNqyLo"
+    },
+    {
+      "session_number": 20,
+      "title": "Sesi 20 – Usul Dirayat Hadis",
+      "video_id": "zjbSrrFMYaA",
+      "youtube_url": "https://www.youtube.com/watch?v=zjbSrrFMYaA"
+    },
+    {
+      "session_number": 21,
+      "title": "Sesi 21 – Usul Dirayat Hadis",
+      "video_id": "Ty-jToIa0pA",
+      "youtube_url": "https://www.youtube.com/watch?v=Ty-jToIa0pA"
+    },
+    {
+      "session_number": 22,
+      "title": "Sesi 22 – Usul Dirayat Hadis",
+      "video_id": "ZjV3p1BGXR4",
+      "youtube_url": "https://www.youtube.com/watch?v=ZjV3p1BGXR4"
+    },
+    {
+      "session_number": 23,
+      "title": "Sesi 23 – Usul Dirayat Hadis",
+      "video_id": "D16rc-3mFHA",
+      "youtube_url": "https://www.youtube.com/watch?v=D16rc-3mFHA"
+    },
+    {
+      "session_number": 24,
+      "title": "Sesi 24 – Usul Dirayat Hadis",
+      "video_id": "NMhU_sRalcM",
+      "youtube_url": "https://www.youtube.com/watch?v=NMhU_sRalcM"
+    },
+    {
+      "session_number": 25,
+      "title": "Sesi 25 – Usul Dirayat Hadis",
+      "video_id": "nYdiGDN3_e8",
+      "youtube_url": "https://www.youtube.com/watch?v=nYdiGDN3_e8"
+    },
+    {
+      "session_number": 26,
+      "title": "Sesi 26 – Usul Dirayat Hadis",
+      "video_id": "q6J7ab12JCQ",
+      "youtube_url": "https://www.youtube.com/watch?v=q6J7ab12JCQ"
+    },
+    {
+      "session_number": 27,
+      "title": "Sesi 27 – Usul Dirayat Hadis",
+      "video_id": "rCVC2-8i68E",
+      "youtube_url": "https://www.youtube.com/watch?v=rCVC2-8i68E"
+    },
+    {
+      "session_number": 28,
+      "title": "Sesi 28 – Usul Dirayat Hadis",
+      "video_id": "SystqkDSgII",
+      "youtube_url": "https://www.youtube.com/watch?v=SystqkDSgII"
+    },
+    {
+      "session_number": 29,
+      "title": "Sesi 29 – Usul Dirayat Hadis",
+      "video_id": "nfHgrDyAkgk",
+      "youtube_url": "https://www.youtube.com/watch?v=nfHgrDyAkgk"
+    },
+    {
+      "session_number": 30,
+      "title": "Sesi 30 – Usul Dirayat Hadis",
+      "video_id": "__JS4lMBFtQ",
+      "youtube_url": "https://www.youtube.com/watch?v=__JS4lMBFtQ"
+    },
+    {
+      "session_number": 31,
+      "title": "Sesi 31 – Usul Dirayat Hadis",
+      "video_id": "F_omlLyt1wY",
+      "youtube_url": "https://www.youtube.com/watch?v=F_omlLyt1wY"
+    },
+    {
+      "session_number": 32,
+      "title": "Sesi 32 – Usul Dirayat Hadis",
+      "video_id": "q58ovh_Tf5c",
+      "youtube_url": "https://www.youtube.com/watch?v=q58ovh_Tf5c"
+    },
+    {
+      "session_number": 33,
+      "title": "Sesi 33 – Usul Dirayat Hadis",
+      "video_id": "LWSwStreQ60",
+      "youtube_url": "https://www.youtube.com/watch?v=LWSwStreQ60"
+    },
+    {
+      "session_number": 34,
+      "title": "Sesi 34 – Usul Dirayat Hadis",
+      "video_id": "UdtRGy8Q-0g",
+      "youtube_url": "https://www.youtube.com/watch?v=UdtRGy8Q-0g"
+    },
+    {
+      "session_number": 35,
+      "title": "Sesi 35 – Usul Dirayat Hadis",
+      "video_id": "_4Qt_VnnAvI",
+      "youtube_url": "https://www.youtube.com/watch?v=_4Qt_VnnAvI"
+    },
+    {
+      "session_number": 36,
+      "title": "Sesi 36 – Usul Dirayat Hadis",
+      "video_id": "VeVaujYosQA",
+      "youtube_url": "https://www.youtube.com/watch?v=VeVaujYosQA"
+    },
+    {
+      "session_number": 37,
+      "title": "Sesi 37 – Usul Dirayat Hadis",
+      "video_id": "s8FYB5EBhUQ",
+      "youtube_url": "https://www.youtube.com/watch?v=s8FYB5EBhUQ"
+    },
+    {
+      "session_number": 38,
+      "title": "Sesi 38 – Usul Dirayat Hadis",
+      "video_id": "WYEKbigOUp4",
+      "youtube_url": "https://www.youtube.com/watch?v=WYEKbigOUp4"
+    },
+    {
+      "session_number": 39,
+      "title": "Sesi 39 – Usul Dirayat Hadis",
+      "video_id": "8rG3-P92knk",
+      "youtube_url": "https://www.youtube.com/watch?v=8rG3-P92knk"
+    },
+    {
+      "session_number": 40,
+      "title": "Sesi 40 – Usul Dirayat Hadis",
+      "video_id": "bgjTk04bX58",
+      "youtube_url": "https://www.youtube.com/watch?v=bgjTk04bX58"
+    },
+    {
+      "session_number": 41,
+      "title": "Sesi 41 – Usul Dirayat Hadis",
+      "video_id": "w1LAEiF_usQ",
+      "youtube_url": "https://www.youtube.com/watch?v=w1LAEiF_usQ"
+    },
+    {
+      "session_number": 42,
+      "title": "Sesi 42 – Usul Dirayat Hadis",
+      "video_id": "d0fOpgf0S24",
+      "youtube_url": "https://www.youtube.com/watch?v=d0fOpgf0S24"
+    },
+    {
+      "session_number": 43,
+      "title": "Sesi 43 – Usul Dirayat Hadis",
+      "video_id": "iSWyydSxS6Q",
+      "youtube_url": "https://www.youtube.com/watch?v=iSWyydSxS6Q"
+    },
+    {
+      "session_number": 44,
+      "title": "Sesi 44 – Usul Dirayat Hadis",
+      "video_id": "DedMjL-BzPA",
+      "youtube_url": "https://www.youtube.com/watch?v=DedMjL-BzPA"
+    },
+    {
+      "session_number": 45,
+      "title": "Sesi 45 – Usul Dirayat Hadis",
+      "video_id": "M_jS04WJXZ8",
+      "youtube_url": "https://www.youtube.com/watch?v=M_jS04WJXZ8"
+    },
+    {
+      "session_number": 46,
+      "title": "Sesi 46 – Usul Dirayat Hadis",
+      "video_id": "YF2JVanvuus",
+      "youtube_url": "https://www.youtube.com/watch?v=YF2JVanvuus"
+    },
+    {
+      "session_number": 47,
+      "title": "Sesi 47 – Usul Dirayat Hadis",
+      "video_id": "uc440w024pE",
+      "youtube_url": "https://www.youtube.com/watch?v=uc440w024pE"
+    },
+    {
+      "session_number": 48,
+      "title": "Sesi 48 – Usul Dirayat Hadis",
+      "video_id": "S0znyzZ1f5w",
+      "youtube_url": "https://www.youtube.com/watch?v=S0znyzZ1f5w"
+    },
+    {
+      "session_number": 49,
+      "title": "Sesi 49 – Usul Dirayat Hadis",
+      "video_id": "FlTtpe-ZFHc",
+      "youtube_url": "https://www.youtube.com/watch?v=FlTtpe-ZFHc"
+    },
+    {
+      "session_number": 50,
+      "title": "Sesi 50 – Usul Dirayat Hadis",
+      "video_id": "6woxBvkAze4",
+      "youtube_url": "https://www.youtube.com/watch?v=6woxBvkAze4"
+    },
+    {
+      "session_number": 51,
+      "title": "Sesi 51 – Usul Dirayat Hadis",
+      "video_id": "adVHmObN-yA",
+      "youtube_url": "https://www.youtube.com/watch?v=adVHmObN-yA"
+    },
+    {
+      "session_number": 52,
+      "title": "Sesi 52 – Usul Dirayat Hadis",
+      "video_id": "placeholder52",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder52"
+    },
+    {
+      "session_number": 53,
+      "title": "Sesi 53 – Usul Dirayat Hadis",
+      "video_id": "deXEoWn2fNU",
+      "youtube_url": "https://www.youtube.com/watch?v=deXEoWn2fNU"
+    },
+    {
+      "session_number": 54,
+      "title": "Sesi 54 – Usul Dirayat Hadis",
+      "video_id": "placeholder54",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder54"
+    },
+    {
+      "session_number": 55,
+      "title": "Sesi 55 – Usul Dirayat Hadis",
+      "video_id": "Tbn-T3UMiqY",
+      "youtube_url": "https://www.youtube.com/watch?v=Tbn-T3UMiqY"
+    },
+    {
+      "session_number": 56,
+      "title": "Sesi 56 – Usul Dirayat Hadis",
+      "video_id": "nMLCQADYM1o",
+      "youtube_url": "https://www.youtube.com/watch?v=nMLCQADYM1o"
+    },
+    {
+      "session_number": 57,
+      "title": "Sesi 57 – Usul Dirayat Hadis",
+      "video_id": "U8sU-V0EZxo",
+      "youtube_url": "https://www.youtube.com/watch?v=U8sU-V0EZxo"
+    },
+    {
+      "session_number": 58,
+      "title": "Sesi 58 – Usul Dirayat Hadis",
+      "video_id": "PA3GAsgVick",
+      "youtube_url": "https://www.youtube.com/watch?v=PA3GAsgVick"
+    },
+    {
+      "session_number": 59,
+      "title": "Sesi 59 – Usul Dirayat Hadis",
+      "video_id": "haX0DsRPd6U",
+      "youtube_url": "https://www.youtube.com/watch?v=haX0DsRPd6U"
+    },
+    {
+      "session_number": 60,
+      "title": "Sesi 60 – Usul Dirayat Hadis",
+      "video_id": "tL8G7L_rtdI",
+      "youtube_url": "https://www.youtube.com/watch?v=tL8G7L_rtdI"
+    },
+    {
+      "session_number": 61,
+      "title": "Sesi 61 – Usul Dirayat Hadis",
+      "video_id": "O1dJQvdqdnE",
+      "youtube_url": "https://www.youtube.com/watch?v=O1dJQvdqdnE"
+    },
+    {
+      "session_number": 62,
+      "title": "Sesi 62 – Usul Dirayat Hadis",
+      "video_id": "placeholder62",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder62"
+    },
+    {
+      "session_number": 63,
+      "title": "Sesi 63 – Usul Dirayat Hadis",
+      "video_id": "bQo7nbGgTiw",
+      "youtube_url": "https://www.youtube.com/watch?v=bQo7nbGgTiw"
+    },
+    {
+      "session_number": 64,
+      "title": "Sesi 64 – Usul Dirayat Hadis",
+      "video_id": "FnqjGvym2yk",
+      "youtube_url": "https://www.youtube.com/watch?v=FnqjGvym2yk"
+    },
+    {
+      "session_number": 65,
+      "title": "Sesi 65 – Usul Dirayat Hadis",
+      "video_id": "_RG1THTfjDY",
+      "youtube_url": "https://www.youtube.com/watch?v=_RG1THTfjDY"
+    },
+    {
+      "session_number": 66,
+      "title": "Sesi 66 – Usul Dirayat Hadis",
+      "video_id": "placeholder66",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder66"
+    },
+    {
+      "session_number": 67,
+      "title": "Sesi 67 – Usul Dirayat Hadis",
+      "video_id": "SPR2zgeTg-4",
+      "youtube_url": "https://www.youtube.com/watch?v=SPR2zgeTg-4"
+    },
+    {
+      "session_number": 68,
+      "title": "Sesi 68 – Usul Dirayat Hadis",
+      "video_id": "RP5FcbSMIiA",
+      "youtube_url": "https://www.youtube.com/watch?v=RP5FcbSMIiA"
+    },
+    {
+      "session_number": 69,
+      "title": "Sesi 69 – Usul Dirayat Hadis",
+      "video_id": "CD77hnJu48k",
+      "youtube_url": "https://www.youtube.com/watch?v=CD77hnJu48k"
+    },
+    {
+      "session_number": 70,
+      "title": "Sesi 70 – Usul Dirayat Hadis",
+      "video_id": "tYoPYOQ5Vzg",
+      "youtube_url": "https://www.youtube.com/watch?v=tYoPYOQ5Vzg"
+    },
+    {
+      "session_number": 71,
+      "title": "Sesi 71 – Usul Dirayat Hadis",
+      "video_id": "placeholder71",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder71"
+    },
+    {
+      "session_number": 72,
+      "title": "Sesi 72 – Usul Dirayat Hadis",
+      "video_id": "sKHNGp8uv64",
+      "youtube_url": "https://www.youtube.com/watch?v=sKHNGp8uv64"
+    },
+    {
+      "session_number": 73,
+      "title": "Sesi 73 – Usul Dirayat Hadis",
+      "video_id": "_m8X-AzJpFE",
+      "youtube_url": "https://www.youtube.com/watch?v=_m8X-AzJpFE"
+    },
+    {
+      "session_number": 74,
+      "title": "Sesi 74 – Usul Dirayat Hadis",
+      "video_id": "MmFJ3LovY6U",
+      "youtube_url": "https://www.youtube.com/watch?v=MmFJ3LovY6U"
+    },
+    {
+      "session_number": 75,
+      "title": "Sesi 75 – Usul Dirayat Hadis",
+      "video_id": "sx6ZawhUOe0",
+      "youtube_url": "https://www.youtube.com/watch?v=sx6ZawhUOe0"
+    },
+    {
+      "session_number": 76,
+      "title": "Sesi 76 – Usul Dirayat Hadis",
+      "video_id": "placeholder76",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder76"
+    },
+    {
+      "session_number": 77,
+      "title": "Sesi 77 – Usul Dirayat Hadis",
+      "video_id": "YTuEaDi-PXA",
+      "youtube_url": "https://www.youtube.com/watch?v=YTuEaDi-PXA"
+    },
+    {
+      "session_number": 78,
+      "title": "Sesi 78 – Usul Dirayat Hadis",
+      "video_id": "placeholder78",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder78"
+    },
+    {
+      "session_number": 79,
+      "title": "Sesi 79 – Usul Dirayat Hadis",
+      "video_id": "placeholder79",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder79"
+    },
+    {
+      "session_number": 80,
+      "title": "Sesi 80 – Usul Dirayat Hadis",
+      "video_id": "tG7fZGtZKAs",
+      "youtube_url": "https://www.youtube.com/watch?v=tG7fZGtZKAs"
+    },
+    {
+      "session_number": 81,
+      "title": "Sesi 81 – Usul Dirayat Hadis",
+      "video_id": "placeholder81",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder81"
+    },
+    {
+      "session_number": 82,
+      "title": "Sesi 82 – Usul Dirayat Hadis",
+      "video_id": "o0fGwSbfKU0",
+      "youtube_url": "https://www.youtube.com/watch?v=o0fGwSbfKU0"
+    },
+    {
+      "session_number": 83,
+      "title": "Sesi 83 – Usul Dirayat Hadis",
+      "video_id": "placeholder83",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder83"
+    },
+    {
+      "session_number": 84,
+      "title": "Sesi 84 – Usul Dirayat Hadis",
+      "video_id": "placeholder84",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder84"
+    },
+    {
+      "session_number": 85,
+      "title": "Sesi 85 – Usul Dirayat Hadis",
+      "video_id": "placeholder85",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder85"
+    },
+    {
+      "session_number": 86,
+      "title": "Sesi 86 – Usul Dirayat Hadis",
+      "video_id": "placeholder86",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder86"
+    },
+    {
+      "session_number": 87,
+      "title": "Sesi 87 – Usul Dirayat Hadis",
+      "video_id": "placeholder87",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder87"
+    },
+    {
+      "session_number": 88,
+      "title": "Sesi 88 – Usul Dirayat Hadis",
+      "video_id": "rCAnHlHbC3k",
+      "youtube_url": "https://www.youtube.com/watch?v=rCAnHlHbC3k"
+    },
+    {
+      "session_number": 89,
+      "title": "Sesi 89 – Usul Dirayat Hadis",
+      "video_id": "jV8VMdNVnhA",
+      "youtube_url": "https://www.youtube.com/watch?v=jV8VMdNVnhA"
+    },
+    {
+      "session_number": 90,
+      "title": "Sesi 90 – Usul Dirayat Hadis",
+      "video_id": "placeholder90",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder90"
+    },
+    {
+      "session_number": 91,
+      "title": "Sesi 91 – Usul Dirayat Hadis",
+      "video_id": "placeholder91",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder91"
+    },
+    {
+      "session_number": 92,
+      "title": "Sesi 92 – Usul Dirayat Hadis",
+      "video_id": "placeholder92",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder92"
+    },
+    {
+      "session_number": 93,
+      "title": "Sesi 93 – Usul Dirayat Hadis",
+      "video_id": "placeholder93",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder93"
+    },
+    {
+      "session_number": 94,
+      "title": "Sesi 94 – Usul Dirayat Hadis",
+      "video_id": "placeholder94",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder94"
+    },
+    {
+      "session_number": 95,
+      "title": "Sesi 95 – Usul Dirayat Hadis",
+      "video_id": "placeholder95",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder95"
+    },
+    {
+      "session_number": 96,
+      "title": "Sesi 96 – Usul Dirayat Hadis",
+      "video_id": "placeholder96",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder96"
+    },
+    {
+      "session_number": 97,
+      "title": "Sesi 97 – Usul Dirayat Hadis",
+      "video_id": "placeholder97",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder97"
+    },
+    {
+      "session_number": 98,
+      "title": "Sesi 98 – Usul Dirayat Hadis",
+      "video_id": "placeholder98",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder98"
+    },
+    {
+      "session_number": 99,
+      "title": "Sesi 99 – Usul Dirayat Hadis",
+      "video_id": "DnQyEcKJzAQ",
+      "youtube_url": "https://www.youtube.com/watch?v=DnQyEcKJzAQ"
+    },
+    {
+      "session_number": 100,
+      "title": "Sesi 100 – Usul Dirayat Hadis",
+      "video_id": "placeholder100",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder100"
+    },
+    {
+      "session_number": 101,
+      "title": "Sesi 101 – Usul Dirayat Hadis",
+      "video_id": "placeholder101",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder101"
+    },
+    {
+      "session_number": 102,
+      "title": "Sesi 102 – Usul Dirayat Hadis",
+      "video_id": "placeholder102",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder102"
+    },
+    {
+      "session_number": 103,
+      "title": "Sesi 103 – Usul Dirayat Hadis",
+      "video_id": "placeholder103",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder103"
+    },
+    {
+      "session_number": 104,
+      "title": "Sesi 104 – Usul Dirayat Hadis",
+      "video_id": "placeholder104",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder104"
+    },
+    {
+      "session_number": 105,
+      "title": "Sesi 105 – Usul Dirayat Hadis",
+      "video_id": "placeholder105",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder105"
+    },
+    {
+      "session_number": 106,
+      "title": "Sesi 106 – Usul Dirayat Hadis",
+      "video_id": "placeholder106",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder106"
+    },
+    {
+      "session_number": 107,
+      "title": "Sesi 107 – Usul Dirayat Hadis",
+      "video_id": "placeholder107",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder107"
+    },
+    {
+      "session_number": 108,
+      "title": "Sesi 108 – Usul Dirayat Hadis",
+      "video_id": "placeholder108",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder108"
+    },
+    {
+      "session_number": 109,
+      "title": "Sesi 109 – Usul Dirayat Hadis",
+      "video_id": "placeholder109",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder109"
+    },
+    {
+      "session_number": 110,
+      "title": "Sesi 110 – Usul Dirayat Hadis",
+      "video_id": "placeholder110",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder110"
+    },
+    {
+      "session_number": 111,
+      "title": "Sesi 111 – Usul Dirayat Hadis",
+      "video_id": "placeholder111",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder111"
+    },
+    {
+      "session_number": 112,
+      "title": "Sesi 112 – Usul Dirayat Hadis",
+      "video_id": "placeholder112",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder112"
+    },
+    {
+      "session_number": 113,
+      "title": "Sesi 113 – Usul Dirayat Hadis",
+      "video_id": "placeholder113",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder113"
+    },
+    {
+      "session_number": 114,
+      "title": "Sesi 114 – Usul Dirayat Hadis",
+      "video_id": "placeholder114",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder114"
+    },
+    {
+      "session_number": 115,
+      "title": "Sesi 115 – Usul Dirayat Hadis",
+      "video_id": "placeholder115",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder115"
+    },
+    {
+      "session_number": 116,
+      "title": "Sesi 116 – Usul Dirayat Hadis",
+      "video_id": "placeholder116",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder116"
+    },
+    {
+      "session_number": 117,
+      "title": "Sesi 117 – Usul Dirayat Hadis",
+      "video_id": "placeholder117",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder117"
+    },
+    {
+      "session_number": 118,
+      "title": "Sesi 118 – Usul Dirayat Hadis",
+      "video_id": "placeholder118",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder118"
+    },
+    {
+      "session_number": 119,
+      "title": "Sesi 119 – Usul Dirayat Hadis",
+      "video_id": "placeholder119",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder119"
+    },
+    {
+      "session_number": 120,
+      "title": "Sesi 120 – Usul Dirayat Hadis",
+      "video_id": "placeholder120",
+      "youtube_url": "https://www.youtube.com/watch?v=placeholder120"
+    }
+  ]
+}

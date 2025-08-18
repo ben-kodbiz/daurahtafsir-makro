@@ -1,0 +1,242 @@
+import json
+import os
+
+# Load the JSON data
+with open('sahih_bukhari_kitab_azan_edisi2/sahih_bukhari_kitab_azan_edisi2.json', 'r', encoding='utf-8') as f:
+    data = json.load(f)
+
+# Create the directory if it doesn't exist
+os.makedirs('sahih_bukhari_kitab_azan_edisi2', exist_ok=True)
+
+# Generate HTML files for each session
+for session in data['sessions']:
+    session_id = session['id']
+    title = session['title']
+    video_id = session['videoId']
+    description = session['description']
+    
+    # Determine navigation
+    prev_session = session_id - 1 if session_id > 1 else None
+    next_session = session_id + 1 if session_id < len(data['sessions']) else None
+    
+    # Create HTML content
+    html_content = f'''<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - Sahih Bukhari-Kitab Azan(edisi2)</title>
+    <style>
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+
+        body {{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }}
+
+        .container {{
+            max-width: 1000px;
+            margin: 0 auto;
+        }}
+
+        .header {{
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }}
+
+        .header h1 {{
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }}
+
+        .header p {{
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }}
+
+        .back-link {{
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }}
+
+        .back-link:hover {{
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }}
+
+        .video-container {{
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px;
+        }}
+
+        .video-wrapper {{
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin-bottom: 20px;
+        }}
+
+        .video-wrapper iframe {{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }}
+
+        .video-info {{
+            text-align: center;
+        }}
+
+        .video-title {{
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }}
+
+        .video-description {{
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.5;
+        }}
+
+        .navigation {{
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 20px;
+        }}
+
+        .nav-btn {{
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }}
+
+        .nav-btn.prev {{
+            background: rgba(255,255,255,0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }}
+
+        .nav-btn.next {{
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }}
+
+        .nav-btn:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }}
+
+        .nav-btn:disabled {{
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }}
+
+        @media (max-width: 768px) {{
+            .header h1 {{
+                font-size: 1.5rem;
+            }}
+            
+            .video-container {{
+                padding: 15px;
+            }}
+            
+            .navigation {{
+                flex-direction: column;
+                gap: 10px;
+            }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Kembali ke Senarai Sesi</a>
+        
+        <div class="header">
+            <h1>{title}</h1>
+            <p>Sahih Bukhari-Kitab Azan(edisi2) - Maulana Asri</p>
+        </div>
+
+        <div class="video-container">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/embed/{video_id}" 
+                    title="{title}"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div class="video-info">
+                <div class="video-title">{title}</div>
+                <div class="video-description">{description}</div>
+            </div>
+        </div>
+
+        <div class="navigation">'''
+    
+    # Add previous button
+    if prev_session:
+        html_content += f'''
+            <a href="session{prev_session}.html" class="nav-btn prev">← Sesi Sebelumnya</a>'''
+    else:
+        html_content += f'''
+            <a href="#" class="nav-btn prev" style="opacity: 0.5; cursor: not-allowed;">← Sesi Sebelumnya</a>'''
+    
+    # Add next button
+    if next_session:
+        html_content += f'''
+            <a href="session{next_session}.html" class="nav-btn next">Sesi Seterusnya →</a>'''
+    else:
+        html_content += f'''
+            <a href="#" class="nav-btn next" style="opacity: 0.5; cursor: not-allowed;">Sesi Seterusnya →</a>'''
+    
+    html_content += '''
+        </div>
+    </div>
+</body>
+</html>'''
+    
+    # Write the HTML file
+    filename = f'sahih_bukhari_kitab_azan_edisi2/session{session_id}.html'
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
+    print(f'Generated {filename}')
+
+print(f'Successfully generated {len(data["sessions"])} session HTML files!')

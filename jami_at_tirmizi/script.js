@@ -1,6 +1,7 @@
 // Jami at-Tirmizi - Kitab Thaharah Session Grid Script
 
 let sessionsData = [];
+let allSessions = [];
 
 // Load sessions data from JSON
 async function loadSessionsData() {
@@ -12,6 +13,7 @@ async function loadSessionsData() {
         }
         const data = await response.json();
         sessionsData = data.sessions;
+        allSessions = data.sessions;
         console.log(`Loaded ${sessionsData.length} sessions`);
         return true;
     } catch (error) {
@@ -21,7 +23,7 @@ async function loadSessionsData() {
 }
 
 // Create session grid
-function createSessionGrid() {
+function createSessionGrid(sessionsToShow = null) {
     const grid = document.getElementById('session-grid');
     if (!grid) {
         console.error('Session grid element not found');
@@ -29,8 +31,9 @@ function createSessionGrid() {
     }
 
     grid.innerHTML = '';
+    const sessions = sessionsToShow || sessionsData;
 
-    sessionsData.forEach(session => {
+    sessions.forEach(session => {
         const sessionItem = document.createElement('div');
         sessionItem.className = 'session-item';
         sessionItem.onclick = () => openSession(session.session_number);
@@ -43,13 +46,51 @@ function createSessionGrid() {
         grid.appendChild(sessionItem);
     });
 
-    console.log(`Created ${sessionsData.length} session items`);
+    console.log(`Created ${sessions.length} session items`);
 }
 
 // Open specific session
 function openSession(sessionNumber) {
     const filename = `sesi_${sessionNumber}.html`;
     window.location.href = filename;
+}
+
+function setupSearchFunctionality() {
+    const searchInput = document.getElementById('session-search');
+    const clearButton = document.getElementById('clear-search');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            filterSessions(searchTerm);
+            
+            clearButton.style.display = searchTerm ? 'flex' : 'none';
+        });
+    }
+    
+    if (clearButton) {
+        clearButton.addEventListener('click', function() {
+            searchInput.value = '';
+            filterSessions('');
+            this.style.display = 'none';
+            searchInput.focus();
+        });
+    }
+}
+
+function filterSessions(searchTerm) {
+    if (!searchTerm) {
+        createSessionGrid(allSessions);
+        return;
+    }
+    
+    const filteredSessions = allSessions.filter(session => {
+        const titleMatch = session.title.toLowerCase().includes(searchTerm);
+        const numberMatch = session.session_number.toString().includes(searchTerm);
+        return titleMatch || numberMatch;
+    });
+    
+    createSessionGrid(filteredSessions);
 }
 
 // Initialize the application
@@ -59,6 +100,7 @@ async function init() {
     const success = await loadSessionsData();
     if (success) {
         createSessionGrid();
+        setupSearchFunctionality();
         console.log('Application initialized successfully');
     } else {
         console.error('Failed to initialize application');

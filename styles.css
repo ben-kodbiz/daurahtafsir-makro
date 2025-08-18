@@ -451,8 +451,13 @@ html.sepia-theme .device-warning {
 .widget-container {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
     margin-bottom: 30px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Search Container */
@@ -586,6 +591,9 @@ html.sepia-theme .no-results {
     text-decoration: none;
     color: #555;
     transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease, box-shadow 0.3s ease;
+    min-width: 200px;
+    flex: 1 1 auto;
+    max-width: 300px;
 }
 
 html.dark-theme .widget {
@@ -666,4 +674,69 @@ html.dark-theme .widget.current-page:hover {
 
 html.sepia-theme .widget.current-page:hover {
     background-color: #ede0c8;
+}
+
+/* Responsive Design for Widget Container */
+@media (max-width: 1024px) {
+    .widget-container {
+        gap: 12px;
+        padding: 0 15px;
+    }
+    
+    .widget {
+        min-width: 180px;
+        max-width: 280px;
+        padding: 8px 16px;
+    }
+    
+    .widget-label {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .widget-container {
+        gap: 10px;
+        padding: 0 10px;
+    }
+    
+    .widget {
+        min-width: 150px;
+        max-width: 250px;
+        padding: 8px 12px;
+        flex: 1 1 calc(50% - 5px);
+    }
+    
+    .widget-icon {
+        font-size: 1.8rem;
+        margin-right: 8px;
+    }
+    
+    .widget-label {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .widget-container {
+        gap: 8px;
+        padding: 0 10px;
+    }
+    
+    .widget {
+        min-width: 120px;
+        max-width: none;
+        padding: 6px 10px;
+        flex: 1 1 100%;
+    }
+    
+    .widget-icon {
+        font-size: 1.6rem;
+        margin-right: 6px;
+    }
+    
+    .widget-label {
+        font-size: 0.9rem;
+        text-align: center;
+    }
 }

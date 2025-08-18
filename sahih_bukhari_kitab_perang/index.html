@@ -164,6 +164,104 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* Search Container */
+        .search-container {
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            z-index: 1;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1rem;
+            background-color: white;
+            transition: all 0.3s ease;
+            outline: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:focus {
+            border-color: #3498db;
+            box-shadow: 0 4px 20px rgba(52, 152, 219, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: #bdc3c7;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #7f8c8d;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            min-width: 35px;
+            min-height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clear-search.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .clear-search:hover {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                padding: 15px 20px;
+            }
+
+            .search-input {
+                padding: 12px 45px 12px 40px;
+                font-size: 0.9rem;
+            }
+
+            .search-icon {
+                left: 12px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-container {
+                padding: 10px 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -175,12 +273,22 @@
         
         <a href="../index.html" class="back-link">← Kembali ke Halaman Utama</a>
         
+        <div class="search-container">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Cari sesi berdasarkan judul atau nomor..." id="searchInput">
+                <button class="clear-search" id="clearSearch">✕</button>
+            </div>
+        </div>
+        
         <div id="sessions-container">
             <div class="loading">Memuat sesi...</div>
         </div>
     </div>
 
     <script>
+        let allSessions = [];
+
         async function loadSessions() {
             try {
                 const response = await fetch('./sahih_bukhari_kitab_perang.json');
@@ -189,7 +297,9 @@
                 }
                 
                 const data = await response.json();
-                displaySessions(data.sessions);
+                allSessions = data.sessions;
+                displaySessions(allSessions);
+                setupSearchFunctionality();
             } catch (error) {
                 console.error('Error loading sessions:', error);
                 document.getElementById('sessions-container').innerHTML = 
@@ -213,6 +323,40 @@
                     ${sessionsHTML}
                 </div>
             `;
+        }
+
+        function setupSearchFunctionality() {
+            const searchInput = document.getElementById('searchInput');
+            const clearButton = document.getElementById('clearSearch');
+
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim();
+                if (query) {
+                    clearButton.classList.add('visible');
+                    const filteredSessions = filterSessions(query);
+                    displaySessions(filteredSessions);
+                } else {
+                    clearButton.classList.remove('visible');
+                    displaySessions(allSessions);
+                }
+            });
+
+            clearButton.addEventListener('click', function() {
+                searchInput.value = '';
+                this.classList.remove('visible');
+                displaySessions(allSessions);
+                searchInput.focus();
+            });
+        }
+
+        function filterSessions(query) {
+            const searchTerm = query.toLowerCase();
+            return allSessions.filter(session => {
+                const titleMatch = session.title.toLowerCase().includes(searchTerm);
+                const descriptionMatch = session.description.toLowerCase().includes(searchTerm);
+                const idMatch = session.id.toString().includes(searchTerm);
+                return titleMatch || descriptionMatch || idMatch;
+            });
         }
 
         function openSession(sessionId) {

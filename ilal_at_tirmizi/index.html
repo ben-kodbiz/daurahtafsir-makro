@@ -6,6 +6,132 @@
     <title>Ilal at-Tirmizi - Kecacatan Dalam Hadith</title>
     <link rel="stylesheet" href="../styles.css">
     <style>
+        /* Search Container */
+        .search-container {
+            padding: 16px 20px;
+            background-color: #fafafa;
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+        
+        html.dark-theme .search-container {
+            background-color: #1e1e1e;
+            border-bottom-color: #333;
+        }
+        
+        html.sepia-theme .search-container {
+            background-color: #f0ead6;
+            border-bottom-color: #d4c4a8;
+        }
+        
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            box-shadow: 0 4px 12px rgba(63, 81, 181, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        html.dark-theme .search-box {
+            background-color: #424242;
+        }
+        
+        html.sepia-theme .search-box {
+            background-color: #f9f5f0;
+        }
+        
+        .search-icon {
+            color: #757575;
+            margin-left: 16px;
+            font-size: 20px;
+        }
+        
+        html.dark-theme .search-icon {
+            color: #bdbdbd;
+        }
+        
+        html.sepia-theme .search-icon {
+            color: #8d6e63;
+        }
+        
+        #session-search {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            font-size: 16px;
+            background: transparent;
+            color: #333;
+        }
+        
+        html.dark-theme #session-search {
+            color: #e0e0e0;
+        }
+        
+        html.sepia-theme #session-search {
+            color: #5b4636;
+        }
+        
+        #session-search::placeholder {
+            color: #9e9e9e;
+        }
+        
+        html.dark-theme #session-search::placeholder {
+            color: #757575;
+        }
+        
+        html.sepia-theme #session-search::placeholder {
+            color: #a1887f;
+        }
+        
+        .clear-search-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: #757575;
+            cursor: pointer;
+            padding: 8px;
+            margin-right: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            min-width: 32px;
+            min-height: 32px;
+        }
+        
+        .clear-search-btn:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+            color: #333;
+        }
+        
+        html.dark-theme .clear-search-btn {
+            color: #bdbdbd;
+        }
+        
+        html.dark-theme .clear-search-btn:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #e0e0e0;
+        }
+        
+        html.sepia-theme .clear-search-btn {
+            color: #8d6e63;
+        }
+        
+        html.sepia-theme .clear-search-btn:hover {
+            background-color: rgba(139, 110, 99, 0.08);
+            color: #5b4636;
+        }
+        
         .session-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -131,41 +257,98 @@
     </div>
 
     <div class="container">
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search-btn">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
         <div id="session-grid" class="session-grid">
             <!-- Sessions will be loaded here -->
         </div>
     </div>
 
     <script>
+        let allSessions = [];
+        
         async function loadSessions() {
             try {
                 const response = await fetch('ilal_at_tirmizi.json');
                 const data = await response.json();
+                allSessions = data.sessions;
                 
-                const sessionGrid = document.getElementById('session-grid');
-                
-                data.sessions.forEach(session => {
-                    const sessionCard = document.createElement('div');
-                    sessionCard.className = 'session-card';
-                    sessionCard.onclick = () => {
-                        window.location.href = `session${session.id}.html`;
-                    };
-                    
-                    sessionCard.innerHTML = `
-                        <div class="session-thumbnail">
-                            ${session.id}
-                        </div>
-                        <div class="session-info">
-                            <h3 class="session-title">${session.title}</h3>
-                            <p class="session-description">${session.description}</p>
-                        </div>
-                    `;
-                    
-                    sessionGrid.appendChild(sessionCard);
-                });
+                displaySessions(allSessions);
+                setupSearchFunctionality();
             } catch (error) {
                 console.error('Error loading sessions:', error);
             }
+        }
+        
+        function displaySessions(sessions) {
+            const sessionGrid = document.getElementById('session-grid');
+            sessionGrid.innerHTML = '';
+            
+            sessions.forEach(session => {
+                const sessionCard = document.createElement('div');
+                sessionCard.className = 'session-card';
+                sessionCard.onclick = () => {
+                    window.location.href = `session${session.id}.html`;
+                };
+                
+                sessionCard.innerHTML = `
+                    <div class="session-thumbnail">
+                        ${session.id}
+                    </div>
+                    <div class="session-info">
+                        <h3 class="session-title">${session.title}</h3>
+                        <p class="session-description">${session.description}</p>
+                    </div>
+                `;
+                
+                sessionGrid.appendChild(sessionCard);
+            });
+        }
+        
+        function setupSearchFunctionality() {
+            const searchInput = document.getElementById('session-search');
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase().trim();
+                    filterSessions(searchTerm);
+                    
+                    clearButton.style.display = searchTerm ? 'flex' : 'none';
+                });
+            }
+            
+            if (clearButton) {
+                clearButton.addEventListener('click', function() {
+                    searchInput.value = '';
+                    filterSessions('');
+                    this.style.display = 'none';
+                    searchInput.focus();
+                });
+            }
+        }
+        
+        function filterSessions(searchTerm) {
+            if (!searchTerm) {
+                displaySessions(allSessions);
+                return;
+            }
+            
+            const filteredSessions = allSessions.filter(session => {
+                const titleMatch = session.title.toLowerCase().includes(searchTerm);
+                const descriptionMatch = session.description.toLowerCase().includes(searchTerm);
+                const numberMatch = session.id.toString().includes(searchTerm);
+                return titleMatch || descriptionMatch || numberMatch;
+            });
+            
+            displaySessions(filteredSessions);
         }
         
         // Load sessions when page loads

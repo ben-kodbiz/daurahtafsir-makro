@@ -133,6 +133,123 @@
             margin-top: 50px;
         }
 
+        /* Search Styles */
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 16px;
+            z-index: 1;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 45px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #999;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clear-search.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .clear-search:hover {
+            color: #666;
+        }
+
+        /* Dark theme search styles */
+        body.dark-theme .search-input {
+            background-color: #2d3748;
+            border-color: #4a5568;
+            color: #e2e8f0;
+        }
+
+        body.dark-theme .search-input:focus {
+            border-color: #63b3ed;
+            box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.1);
+        }
+
+        body.dark-theme .search-icon {
+            color: #a0aec0;
+        }
+
+        body.dark-theme .clear-search {
+            color: #a0aec0;
+        }
+
+        body.dark-theme .clear-search:hover {
+            color: #e2e8f0;
+        }
+
+        /* Sepia theme search styles */
+        body.sepia-theme .search-input {
+            background-color: #f7f3e9;
+            border-color: #d4c5a0;
+            color: #5d4e37;
+        }
+
+        body.sepia-theme .search-input:focus {
+            border-color: #8b7355;
+            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+        }
+
+        body.sepia-theme .search-icon {
+            color: #8b7355;
+        }
+
+        body.sepia-theme .clear-search {
+            color: #8b7355;
+        }
+
+        body.sepia-theme .clear-search:hover {
+            color: #5d4e37;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -146,6 +263,16 @@
             .session-card {
                 padding: 15px;
             }
+
+            .search-container {
+                padding: 0 15px;
+                margin-bottom: 20px;
+            }
+
+            .search-input {
+                font-size: 16px;
+                padding: 10px 40px 10px 40px;
+            }
         }
     </style>
 </head>
@@ -158,6 +285,14 @@
             <p>Syarahan Kitab Hadith Sahih al-Bukhari - Kitab Azan (Edisi 2) oleh Maulana Muhd Asri Yusoff</p>
         </div>
 
+        <div class="search-container">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Cari sesi berdasarkan judul atau nomor..." id="searchInput">
+                <button class="clear-search" id="clearSearch">✕</button>
+            </div>
+        </div>
+
         <div id="loading" class="loading">
             Memuat sesi-sesi...
         </div>
@@ -168,37 +303,79 @@
     </div>
 
     <script>
+        let allSessions = [];
+
         async function loadSessions() {
             try {
                 const response = await fetch('sahih_bukhari_kitab_azan_edisi2.json');
                 const data = await response.json();
                 
-                const container = document.getElementById('sessions-container');
-                const loading = document.getElementById('loading');
-                
-                container.innerHTML = '';
-                
-                data.sessions.forEach(session => {
-                    const sessionCard = document.createElement('div');
-                    sessionCard.className = 'session-card';
-                    
-                    sessionCard.innerHTML = `
-                        <div class="session-number">Sesi ${session.id}</div>
-                        <div class="session-title">${session.title}</div>
-                        <div class="session-description">${session.description}</div>
-                        <a href="session${session.id}.html" class="watch-btn">Tonton Video</a>
-                    `;
-                    
-                    container.appendChild(sessionCard);
-                });
-                
-                loading.style.display = 'none';
-                container.style.display = 'grid';
+                allSessions = data.sessions;
+                displaySessions(allSessions);
+                setupSearchFunctionality();
                 
             } catch (error) {
                 console.error('Error loading sessions:', error);
                 document.getElementById('loading').innerHTML = 'Ralat memuat data. Sila cuba lagi.';
             }
+        }
+
+        function displaySessions(sessions) {
+            const container = document.getElementById('sessions-container');
+            const loading = document.getElementById('loading');
+            
+            container.innerHTML = '';
+            
+            sessions.forEach(session => {
+                const sessionCard = document.createElement('div');
+                sessionCard.className = 'session-card';
+                
+                sessionCard.innerHTML = `
+                    <div class="session-number">Sesi ${session.id}</div>
+                    <div class="session-title">${session.title}</div>
+                    <div class="session-description">${session.description}</div>
+                    <a href="session${session.id}.html" class="watch-btn">Tonton Video</a>
+                `;
+                
+                container.appendChild(sessionCard);
+            });
+            
+            loading.style.display = 'none';
+            container.style.display = 'grid';
+        }
+
+        function setupSearchFunctionality() {
+            const searchInput = document.getElementById('searchInput');
+            const clearButton = document.getElementById('clearSearch');
+
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim();
+                if (query) {
+                    clearButton.classList.add('visible');
+                    const filteredSessions = filterSessions(query);
+                    displaySessions(filteredSessions);
+                } else {
+                    clearButton.classList.remove('visible');
+                    displaySessions(allSessions);
+                }
+            });
+
+            clearButton.addEventListener('click', function() {
+                searchInput.value = '';
+                this.classList.remove('visible');
+                displaySessions(allSessions);
+                searchInput.focus();
+            });
+        }
+
+        function filterSessions(query) {
+            const searchTerm = query.toLowerCase();
+            return allSessions.filter(session => {
+                const titleMatch = session.title.toLowerCase().includes(searchTerm);
+                const descriptionMatch = session.description.toLowerCase().includes(searchTerm);
+                const idMatch = session.id.toString().includes(searchTerm);
+                return titleMatch || descriptionMatch || idMatch;
+            });
         }
 
         // Load sessions when page loads

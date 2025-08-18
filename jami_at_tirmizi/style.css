@@ -149,6 +149,132 @@ html.sepia-theme .app-bar {
         padding: 0;
     }
 }
+/* Search Container */
+.search-container {
+    padding: 16px 20px;
+    background-color: #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease;
+}
+
+html.dark-theme .search-container {
+    background-color: #1e1e1e;
+    border-bottom-color: #333;
+}
+
+html.sepia-theme .search-container {
+    background-color: #f0ead6;
+    border-bottom-color: #d4c4a8;
+}
+
+.search-box {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    box-shadow: 0 4px 12px rgba(63, 81, 181, 0.2);
+    transform: translateY(-1px);
+}
+
+html.dark-theme .search-box {
+    background-color: #424242;
+}
+
+html.sepia-theme .search-box {
+    background-color: #f9f5f0;
+}
+
+.search-icon {
+    color: #757575;
+    margin-left: 16px;
+    font-size: 20px;
+}
+
+html.dark-theme .search-icon {
+    color: #bdbdbd;
+}
+
+html.sepia-theme .search-icon {
+    color: #8d6e63;
+}
+
+#session-search {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 16px;
+    font-size: 16px;
+    background: transparent;
+    color: #333;
+}
+
+html.dark-theme #session-search {
+    color: #e0e0e0;
+}
+
+html.sepia-theme #session-search {
+    color: #5b4636;
+}
+
+#session-search::placeholder {
+    color: #9e9e9e;
+}
+
+html.dark-theme #session-search::placeholder {
+    color: #757575;
+}
+
+html.sepia-theme #session-search::placeholder {
+    color: #a1887f;
+}
+
+.clear-search-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #757575;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    min-width: 32px;
+    min-height: 32px;
+}
+
+.clear-search-btn:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: #333;
+}
+
+html.dark-theme .clear-search-btn {
+    color: #bdbdbd;
+}
+
+html.dark-theme .clear-search-btn:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #e0e0e0;
+}
+
+html.sepia-theme .clear-search-btn {
+    color: #8d6e63;
+}
+
+html.sepia-theme .clear-search-btn:hover {
+    background-color: rgba(139, 110, 99, 0.08);
+    color: #5b4636;
+}
+
 /* Session Grid - Mobile First */
 .session-grid {
   display: grid;

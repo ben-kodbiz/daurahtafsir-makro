@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usul Tafsir - Sesi 40</title>
+    <title>Usul Tafsir - Sesi {SESSION_NUMBER}</title>
     <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -14,30 +14,30 @@
             Back to Usul Tafsir
         </a>
         <div class="header">
-            <h1>Usul Tafsir - Sesi 40</h1>
+            <h1>Usul Tafsir - Sesi {SESSION_NUMBER}</h1>
         </div>
         <div class="video-container">
             <div class="video-wrapper">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_FOR_SESSION_40" frameborder="0" allowfullscreen></iframe>
+                <!-- Video iframe will be inserted here -->
             </div>
             <div class="video-info">
-                <div class="video-title">Usul Tafsir - Sesi 40</div>
+                <div class="video-title">Usul Tafsir - Sesi {SESSION_NUMBER}</div>
                 <div class="video-description">
-                    Kandungan untuk sesi 40 dalam modul Usul Tafsir.
+                    Kandungan untuk sesi {SESSION_NUMBER} dalam modul Usul Tafsir.
                 </div>
             </div>
         </div>
         
         <!-- Navigation Buttons -->
         <div class="navigation-buttons" style="display: flex; justify-content: space-between; margin-top: 20px; padding: 0 20px;">
-            <div data-prev-button style="flex: 1; margin-right: 10px;"></div>
-            <div data-next-button style="flex: 1; margin-left: 10px;"></div>
+            {PREV_BUTTON}
+            {NEXT_BUTTON}
         </div>
     </div>
     <script>
         // Session navigation data
         const totalSessions = 116;
-        const currentSession = 40;
+        const currentSession = {SESSION_NUMBER};
         
         // Update navigation buttons
         document.addEventListener('DOMContentLoaded', function() {

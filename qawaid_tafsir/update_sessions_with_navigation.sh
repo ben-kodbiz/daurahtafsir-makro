@@ -1,9 +1,29 @@
+#!/bin/bash
+
+# Script to update all Qawaid Tafsir session files with navigation buttons
+
+echo "Updating Qawaid Tafsir session files with navigation..."
+
+# Get the total number of sessions
+TOTAL_SESSIONS=116
+
+# Update each session file
+for i in $(seq 1 $TOTAL_SESSIONS); do
+    echo "Updating session_$i.html..."
+    
+    # Create backup if file exists
+    if [ -f "session_$i.html" ]; then
+        cp "session_$i.html" "session_$i.html.backup"
+    fi
+    
+    # Create the new file content directly
+    cat > "session_$i.html" << EOF
 <!DOCTYPE html>
 <html lang="ms" class="light-theme">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usul Tafsir - Sesi 40</title>
+    <title>Usul Tafsir - Sesi $i</title>
     <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -14,16 +34,16 @@
             Back to Usul Tafsir
         </a>
         <div class="header">
-            <h1>Usul Tafsir - Sesi 40</h1>
+            <h1>Usul Tafsir - Sesi $i</h1>
         </div>
         <div class="video-container">
             <div class="video-wrapper">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_FOR_SESSION_40" frameborder="0" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_FOR_SESSION_$i" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="video-info">
-                <div class="video-title">Usul Tafsir - Sesi 40</div>
+                <div class="video-title">Usul Tafsir - Sesi $i</div>
                 <div class="video-description">
-                    Kandungan untuk sesi 40 dalam modul Usul Tafsir.
+                    Kandungan untuk sesi $i dalam modul Usul Tafsir.
                 </div>
             </div>
         </div>
@@ -36,8 +56,8 @@
     </div>
     <script>
         // Session navigation data
-        const totalSessions = 116;
-        const currentSession = 40;
+        const totalSessions = $TOTAL_SESSIONS;
+        const currentSession = $i;
         
         // Update navigation buttons
         document.addEventListener('DOMContentLoaded', function() {
@@ -46,37 +66,37 @@
             
             if (prevButtonContainer) {
                 if (currentSession > 1) {
-                    prevButtonContainer.innerHTML = `
-                        <a href="session_${currentSession - 1}.html" class="watch-btn" style="display: flex; align-items: center;">
+                    prevButtonContainer.innerHTML = \`
+                        <a href="session_\${currentSession - 1}.html" class="watch-btn" style="display: flex; align-items: center;">
                             <i class="material-icons">arrow_back</i>
                             <span style="margin-left: 8px;">Sesi Sebelumnya</span>
                         </a>
-                    `;
+                    \`;
                 } else {
-                    prevButtonContainer.innerHTML = `
+                    prevButtonContainer.innerHTML = \`
                         <button class="watch-btn" style="display: flex; align-items: center; opacity: 0.5;" disabled>
                             <i class="material-icons">arrow_back</i>
                             <span style="margin-left: 8px;">Sesi Sebelumnya</span>
                         </button>
-                    `;
+                    \`;
                 }
             }
             
             if (nextButtonContainer) {
                 if (currentSession < totalSessions) {
-                    nextButtonContainer.innerHTML = `
-                        <a href="session_${currentSession + 1}.html" class="watch-btn" style="display: flex; align-items: center;">
+                    nextButtonContainer.innerHTML = \`
+                        <a href="session_\${currentSession + 1}.html" class="watch-btn" style="display: flex; align-items: center;">
                             <span style="margin-right: 8px;">Sesi Seterusnya</span>
                             <i class="material-icons">arrow_forward</i>
                         </a>
-                    `;
+                    \`;
                 } else {
-                    nextButtonContainer.innerHTML = `
+                    nextButtonContainer.innerHTML = \`
                         <button class="watch-btn" style="display: flex; align-items: center; opacity: 0.5;" disabled>
                             <span style="margin-right: 8px;">Sesi Seterusnya</span>
                             <i class="material-icons">arrow_forward</i>
                         </button>
-                    `;
+                    \`;
                 }
             }
         });
@@ -95,3 +115,8 @@
     </script>
 </body>
 </html>
+EOF
+done
+
+echo "All Qawaid Tafsir session files have been updated with navigation buttons!"
+echo "Backups of original files have been created with .backup extension."

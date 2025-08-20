@@ -1,18 +1,3 @@
-#!/bin/bash
-
-# Script to integrate enhancements into the main application
-
-echo "Integrating enhancements into the main application..."
-
-# Backup original files
-echo "Creating backups of original files..."
-cp index.html index.html.backup
-cp styles.css styles.css.backup
-cp script.js script.js.backup
-cp theme.js theme.js.backup
-
-# Create a new enhanced index.html file
-cat > index.html << 'EOF'
 <!DOCTYPE html>
 <html lang="en" class="light-theme">
 <head>
@@ -84,7 +69,7 @@ cat > index.html << 'EOF'
 
     <script src="script.js?v=1755482400"></script>
     <script src="enhanced-script.js"></script>
-    <script src="enhanced-theme.js"></script>
+    <script src="theme.js"></script>
     <div class="theme-toggle-container">
         <button class="theme-toggle" onclick="toggleTheme()">
             <i class="material-icons theme-icon">brightness_4</i>
@@ -92,20 +77,3 @@ cat > index.html << 'EOF'
     </div>
 </body>
 </html>
-EOF
-
-echo "Integration complete!"
-echo ""
-echo "Enhancements have been integrated into the main application."
-echo "Backups of original files have been created with .backup extension."
-echo ""
-echo "To test the enhanced version:"
-echo "1. Open index.html in your browser"
-echo "2. The application now has improved mobile support and enhanced Material Design components"
-echo ""
-echo "To revert to the original version:"
-echo "1. Restore the backup files:"
-echo "   mv index.html.backup index.html"
-echo "   mv styles.css.backup styles.css"
-echo "   mv script.js.backup script.js"
-echo "   mv theme.js.backup theme.js"

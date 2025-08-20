@@ -4,7 +4,7 @@ This document describes the implementation of navigation buttons ("Sesi Sebelumn
 
 ## Overview
 
-All session files in the Qawaid Tafsir module (session_1.html through session_116.html) have been updated to include navigation buttons that allow users to easily move between consecutive sessions.
+All session files in the Qawaid Tafsir module (session_1.html through session_80.html) have been updated to include navigation buttons that allow users to easily move between consecutive sessions.
 
 ## Features
 
@@ -17,13 +17,13 @@ All session files in the Qawaid Tafsir module (session_1.html through session_11
   - "Sesi Sebelumnya" button is disabled (grayed out)
   - "Sesi Seterusnya" button is enabled and links to session_2.html
 
-- **Middle Sessions** (session_2.html through session_115.html):
+- **Middle Sessions** (session_2.html through session_79.html):
   - Both buttons are enabled
   - "Sesi Sebelumnya" links to the previous session
   - "Sesi Seterusnya" links to the next session
 
-- **Last Session** (session_116.html):
-  - "Sesi Sebelumnya" button is enabled and links to session_115.html
+- **Last Session** (session_80.html):
+  - "Sesi Sebelumnya" button is enabled and links to session_79.html
   - "Sesi Seterusnya" button is disabled (grayed out)
 
 ### 3. Consistent Design
@@ -48,7 +48,7 @@ The navigation buttons are dynamically generated using JavaScript:
 
 ```javascript
 // Session navigation data
-const totalSessions = 116;
+const totalSessions = 80;
 const currentSession = [CURRENT_SESSION_NUMBER];
 
 // Update navigation buttons

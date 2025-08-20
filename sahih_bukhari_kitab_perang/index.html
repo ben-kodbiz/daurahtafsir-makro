@@ -4,495 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sahih Bukhari - Kitab Perang</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin: 20px 30px;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .back-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
-        }
-
-        .sessions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 30px;
-        }
-
-        .session-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 1px solid #e0e0e0;
-            cursor: pointer;
-        }
-
-        .session-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            border-color: #3498db;
-        }
-
-        .session-number {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .session-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .session-description {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 50px;
-            font-size: 1.2rem;
-            color: #7f8c8d;
-        }
-
-        .error {
-            text-align: center;
-            padding: 50px;
-            color: #e74c3c;
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .header p {
-                font-size: 1rem;
-            }
-
-            .sessions-grid {
-                grid-template-columns: 1fr;
-                padding: 20px;
-                gap: 15px;
-            }
-
-            .session-card {
-                padding: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 20px;
-            }
-
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .back-link {
-                margin: 15px 20px;
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Search Container */
-        .search-container {
-            padding: 20px 30px;
-            background: rgba(255, 255, 255, 0.9);
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .search-box {
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            z-index: 1;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 15px 50px 15px 45px;
-            border: 2px solid #e0e0e0;
-            border-radius: 25px;
-            font-size: 1rem;
-            background-color: white;
-            transition: all 0.3s ease;
-            outline: none;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .search-input:focus {
-            border-color: #3498db;
-            box-shadow: 0 4px 20px rgba(52, 152, 219, 0.2);
-        }
-
-        .search-input::placeholder {
-            color: #bdc3c7;
-        }
-
-        .clear-search {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #7f8c8d;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 50%;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            min-width: 35px;
-            min-height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .clear-search.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .clear-search:hover {
-            background-color: rgba(231, 76, 60, 0.1);
-            color: #e74c3c;
-        }
-
-        @media (max-width: 768px) {
-            .search-container {
-                padding: 15px 20px;
-            }
-
-            .search-input {
-                padding: 12px 45px 12px 40px;
-                font-size: 0.9rem;
-            }
-
-            .search-icon {
-                left: 12px;
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .search-container {
-                padding: 10px 15px;
-            }
-        }
-
-        /* Dark Theme Styles */
-        html.dark-theme body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        }
-
-        html.dark-theme .container {
-            background: rgba(30, 30, 30, 0.95);
-        }
-
-        html.dark-theme .header {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-        }
-
-        html.dark-theme .back-link {
-            background: rgba(255, 255, 255, 0.1);
-            color: #e0e0e0;
-        }
-
-        html.dark-theme .back-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        html.dark-theme .search-container {
-            background: rgba(40, 40, 40, 0.9);
-        }
-
-        html.dark-theme .search-input {
-            background: rgba(60, 60, 60, 0.8);
-            color: #e0e0e0;
-            border-color: #555;
-        }
-
-        html.dark-theme .search-input::placeholder {
-            color: #aaa;
-        }
-
-        html.dark-theme .session-card {
-            background: rgba(40, 40, 40, 0.9);
-            color: #e0e0e0;
-        }
-
-        html.dark-theme .session-card:hover {
-            background: rgba(50, 50, 50, 0.9);
-        }
-
-        html.dark-theme .session-number {
-            color: #64b5f6;
-        }
-
-        /* Sepia Theme Styles */
-        html.sepia-theme body {
-            background: linear-gradient(135deg, #f4f1e8 0%, #e8dcc0 100%);
-        }
-
-        html.sepia-theme .container {
-            background: rgba(250, 245, 235, 0.95);
-        }
-
-        html.sepia-theme .header {
-            background: linear-gradient(135deg, #8b7355 0%, #a0896b 100%);
-            color: #f5f5dc;
-        }
-
-        html.sepia-theme .back-link {
-            background: rgba(139, 115, 85, 0.3);
-            color: #5d4e37;
-        }
-
-        html.sepia-theme .back-link:hover {
-            background: rgba(139, 115, 85, 0.5);
-        }
-
-        html.sepia-theme .search-container {
-            background: rgba(240, 235, 220, 0.9);
-        }
-
-        html.sepia-theme .search-input {
-            background: rgba(245, 240, 225, 0.8);
-            color: #5d4e37;
-            border-color: #d2b48c;
-        }
-
-        html.sepia-theme .search-input::placeholder {
-            color: #8b7355;
-        }
-
-        html.sepia-theme .session-card {
-            background: rgba(245, 240, 225, 0.9);
-            color: #5d4e37;
-        }
-
-        html.sepia-theme .session-card:hover {
-            background: rgba(240, 235, 220, 0.9);
-        }
-
-        html.sepia-theme .session-number {
-            color: #8b4513;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
         <div class="header">
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <i class="material-icons theme-icon">brightness_4</i>
-            </button>
             <h1>Sahih Bukhari - Kitab Perang</h1>
-            <p>Sahih al-Bukhari - Kitab Maghaazi (Peperangan)</p>
         </div>
-        
-        <a href="../index.html" class="back-link">← Kembali ke Halaman Utama</a>
-        
         <div class="search-container">
             <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" class="search-input" placeholder="Cari sesi berdasarkan judul atau nomor..." id="searchInput">
-                <button class="clear-search" id="clearSearch">✕</button>
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
             </div>
         </div>
-        
-        <div id="sessions-container">
-            <div class="loading">Memuat sesi...</div>
+        <div class="session-grid" id="session-grid">
         </div>
     </div>
-
     <script>
-        let allSessions = [];
-
-        async function loadSessions() {
-            try {
-                const response = await fetch('./sahih_bukhari_kitab_perang.json');
-                if (!response.ok) {
-                    throw new Error('Gagal memuat data sesi');
-                }
-                
-                const data = await response.json();
-                allSessions = data.sessions;
-                displaySessions(allSessions);
-                setupSearchFunctionality();
-            } catch (error) {
-                console.error('Error loading sessions:', error);
-                document.getElementById('sessions-container').innerHTML = 
-                    '<div class="error">Gagal memuat sesi. Sila cuba lagi.</div>';
-            }
+        // Sample data - replace with actual data loading
+        const sessions = [];
+        for (let i = 1; i <= 124; i++) {
+            sessions.push({
+                number: i,
+                title: `Sesi ${i}`,
+                description: `Kandungan untuk sesi ${i} tentang tajuk berkaitan perang dalam kitab Sahih Bukhari.`
+            });
         }
 
-        function displaySessions(sessions) {
-            const container = document.getElementById('sessions-container');
-            
-            const sessionsHTML = sessions.map(session => `
-                <div class="session-card" onclick="openSession(${session.id})">
-                    <div class="session-number">Sesi ${session.id}</div>
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('session-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            sessionsToShow.forEach(session => {
+                const card = document.createElement('div');
+                card.className = 'session-card';
+                card.innerHTML = `
+                    <div class="session-number">Sesi ${session.number}</div>
                     <div class="session-title">${session.title}</div>
                     <div class="session-description">${session.description}</div>
-                </div>
-            `).join('');
+                    <a href="session${session.number}.html" class="watch-btn">Tonton Video</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
             
-            container.innerHTML = `
-                <div class="sessions-grid">
-                    ${sessionsHTML}
-                </div>
-            `;
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
         }
 
-        function setupSearchFunctionality() {
-            const searchInput = document.getElementById('searchInput');
-            const clearButton = document.getElementById('clearSearch');
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value;
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.add('visible');
+            } else {
+                clearButton.classList.remove('visible');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
 
-            searchInput.addEventListener('input', function() {
-                const query = this.value.trim();
-                if (query) {
-                    clearButton.classList.add('visible');
-                    const filteredSessions = filterSessions(query);
-                    displaySessions(filteredSessions);
-                } else {
-                    clearButton.classList.remove('visible');
-                    displaySessions(allSessions);
-                }
-            });
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.remove('visible');
+            displaySessions(sessions);
+        });
 
-            clearButton.addEventListener('click', function() {
-                searchInput.value = '';
-                this.classList.remove('visible');
-                displaySessions(allSessions);
-                searchInput.focus();
-            });
-        }
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
 
-        function filterSessions(query) {
-            const searchTerm = query.toLowerCase();
-            return allSessions.filter(session => {
-                const titleMatch = session.title.toLowerCase().includes(searchTerm);
-                const descriptionMatch = session.description.toLowerCase().includes(searchTerm);
-                const idMatch = session.id.toString().includes(searchTerm);
-                return titleMatch || descriptionMatch || idMatch;
-            });
-        }
-
-        function openSession(sessionId) {
-            window.location.href = `./session${sessionId}.html`;
-        }
-
-        // Load sessions when page loads
-        document.addEventListener('DOMContentLoaded', loadSessions);
-
-        // Theme toggle functionality
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.className;

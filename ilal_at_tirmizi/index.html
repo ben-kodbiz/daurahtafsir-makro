@@ -1,358 +1,114 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="ms" class="light-theme">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ilal at-Tirmizi - Kecacatan Dalam Hadith</title>
-    <link rel="stylesheet" href="../styles.css">
-    <style>
-        /* Search Container */
-        .search-container {
-            padding: 16px 20px;
-            background-color: #fafafa;
-            border-bottom: 1px solid #e0e0e0;
-            transition: background-color 0.3s ease;
-        }
-        
-        html.dark-theme .search-container {
-            background-color: #1e1e1e;
-            border-bottom-color: #333;
-        }
-        
-        html.sepia-theme .search-container {
-            background-color: #f0ead6;
-            border-bottom-color: #d4c4a8;
-        }
-        
-        .search-box {
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            background-color: white;
-            border-radius: 24px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .search-box:focus-within {
-            box-shadow: 0 4px 12px rgba(63, 81, 181, 0.2);
-            transform: translateY(-1px);
-        }
-        
-        html.dark-theme .search-box {
-            background-color: #424242;
-        }
-        
-        html.sepia-theme .search-box {
-            background-color: #f9f5f0;
-        }
-        
-        .search-icon {
-            color: #757575;
-            margin-left: 16px;
-            font-size: 20px;
-        }
-        
-        html.dark-theme .search-icon {
-            color: #bdbdbd;
-        }
-        
-        html.sepia-theme .search-icon {
-            color: #8d6e63;
-        }
-        
-        #session-search {
-            flex: 1;
-            border: none;
-            outline: none;
-            padding: 12px 16px;
-            font-size: 16px;
-            background: transparent;
-            color: #333;
-        }
-        
-        html.dark-theme #session-search {
-            color: #e0e0e0;
-        }
-        
-        html.sepia-theme #session-search {
-            color: #5b4636;
-        }
-        
-        #session-search::placeholder {
-            color: #9e9e9e;
-        }
-        
-        html.dark-theme #session-search::placeholder {
-            color: #757575;
-        }
-        
-        html.sepia-theme #session-search::placeholder {
-            color: #a1887f;
-        }
-        
-        .clear-search-btn {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: none;
-            border: none;
-            color: #757575;
-            cursor: pointer;
-            padding: 8px;
-            margin-right: 8px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            min-width: 32px;
-            min-height: 32px;
-        }
-        
-        .clear-search-btn:hover {
-            background-color: rgba(0, 0, 0, 0.04);
-            color: #333;
-        }
-        
-        html.dark-theme .clear-search-btn {
-            color: #bdbdbd;
-        }
-        
-        html.dark-theme .clear-search-btn:hover {
-            background-color: rgba(255, 255, 255, 0.08);
-            color: #e0e0e0;
-        }
-        
-        html.sepia-theme .clear-search-btn {
-            color: #8d6e63;
-        }
-        
-        html.sepia-theme .clear-search-btn:hover {
-            background-color: rgba(139, 110, 99, 0.08);
-            color: #5b4636;
-        }
-        
-        .session-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-        
-        .session-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .session-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .session-thumbnail {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 48px;
-            position: relative;
-        }
-        
-        .session-thumbnail::after {
-            content: '▶';
-            position: absolute;
-            font-size: 24px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .session-card:hover .session-thumbnail::after {
-            transform: scale(1.1);
-        }
-        
-        .session-info {
-            padding: 20px;
-        }
-        
-        .session-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-        
-        .session-description {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5;
-        }
-        
-        .page-header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            margin-bottom: 30px;
-        }
-        
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .page-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        @media (max-width: 768px) {
-            .session-grid {
-                grid-template-columns: 1fr;
-                padding: 15px;
-            }
-            
-            .page-title {
-                font-size: 2rem;
-            }
-            
-            .page-subtitle {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="../index.html">📚 Daurah Tafsir Makro</a>
-            </div>
-            <div class="nav-menu">
-                <a href="../index.html" class="nav-link">Tafsir Mikro</a>
-                <a href="../jami_at_tirmizi/index.html" class="nav-link">Jami at-Tirmizi</a>
-                <a href="index.html" class="nav-link active">Ilal at-Tirmizi</a>
-            </div>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Ilal at-Tirmizi - Kecacatan Dalam Hadith</h1>
         </div>
-    </nav>
-
-    <div class="page-header">
-        <h1 class="page-title">Ilal at-Tirmizi</h1>
-        <p class="page-subtitle">Kecacatan Dalam Hadith (at-Tirmizi)</p>
-    </div>
-
-    <div class="container">
         <div class="search-container">
             <div class="search-box">
                 <i class="material-icons search-icon">search</i>
-                <input type="text" id="session-search" placeholder="Search sessions by title or number..." />
-                <button id="clear-search" class="clear-search-btn">
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
                     <i class="material-icons">close</i>
                 </button>
             </div>
         </div>
-        <div id="session-grid" class="session-grid">
-            <!-- Sessions will be loaded here -->
+        <div class="session-grid" id="session-grid">
         </div>
     </div>
-
     <script>
-        let allSessions = [];
-        
-        async function loadSessions() {
-            try {
-                const response = await fetch('ilal_at_tirmizi.json');
-                const data = await response.json();
-                allSessions = data.sessions;
-                
-                displaySessions(allSessions);
-                setupSearchFunctionality();
-            } catch (error) {
-                console.error('Error loading sessions:', error);
-            }
-        }
-        
-        function displaySessions(sessions) {
-            const sessionGrid = document.getElementById('session-grid');
-            sessionGrid.innerHTML = '';
-            
-            sessions.forEach(session => {
-                const sessionCard = document.createElement('div');
-                sessionCard.className = 'session-card';
-                sessionCard.onclick = () => {
-                    window.location.href = `session${session.id}.html`;
-                };
-                
-                sessionCard.innerHTML = `
-                    <div class="session-thumbnail">
-                        ${session.id}
-                    </div>
-                    <div class="session-info">
-                        <h3 class="session-title">${session.title}</h3>
-                        <p class="session-description">${session.description}</p>
-                    </div>
-                `;
-                
-                sessionGrid.appendChild(sessionCard);
+        // Sample data - replace with actual data loading
+        const sessions = [];
+        for (let i = 1; i <= 45; i++) {
+            sessions.push({
+                number: i,
+                title: `Sesi ${i}`,
+                description: `Kandungan untuk sesi ${i} tentang kecacatan dalam hadith dari kitab Ilal at-Tirmizi.`
             });
         }
-        
-        function setupSearchFunctionality() {
-            const searchInput = document.getElementById('session-search');
-            const clearButton = document.getElementById('clear-search');
-            
-            if (searchInput) {
-                searchInput.addEventListener('input', function() {
-                    const searchTerm = this.value.toLowerCase().trim();
-                    filterSessions(searchTerm);
-                    
-                    clearButton.style.display = searchTerm ? 'flex' : 'none';
-                });
-            }
-            
-            if (clearButton) {
-                clearButton.addEventListener('click', function() {
-                    searchInput.value = '';
-                    filterSessions('');
-                    this.style.display = 'none';
-                    searchInput.focus();
-                });
-            }
-        }
-        
-        function filterSessions(searchTerm) {
-            if (!searchTerm) {
-                displaySessions(allSessions);
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('session-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
                 return;
             }
-            
-            const filteredSessions = allSessions.filter(session => {
-                const titleMatch = session.title.toLowerCase().includes(searchTerm);
-                const descriptionMatch = session.description.toLowerCase().includes(searchTerm);
-                const numberMatch = session.id.toString().includes(searchTerm);
-                return titleMatch || descriptionMatch || numberMatch;
+
+            sessionsToShow.forEach(session => {
+                const card = document.createElement('div');
+                card.className = 'session-card';
+                card.innerHTML = `
+                    <div class="session-number">Sesi ${session.number}</div>
+                    <div class="session-title">${session.title}</div>
+                    <div class="session-description">${session.description}</div>
+                    <a href="session${session.number}.html" class="watch-btn">Tonton Video</a>
+                `;
+                grid.appendChild(card);
             });
-            
-            displaySessions(filteredSessions);
         }
-        
-        // Load sessions when page loads
-        document.addEventListener('DOMContentLoaded', loadSessions);
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value;
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.add('visible');
+            } else {
+                clearButton.classList.remove('visible');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.remove('visible');
+            displaySessions(sessions);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
     </script>
 </body>
 </html>

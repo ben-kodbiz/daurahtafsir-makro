@@ -1,0 +1,109 @@
+# Dependencies
+node_modules/
+
+# IDE/Editor files
+.cursor/
+.vscode/
+.idea/
+
+# MCP (Model Context Protocol) files
+personal-kg-mcp/
+.kg/
+
+# Backup files
+*.backup
+*~
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# OS generated files
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Configuration files that might contain sensitive information
+.env
+.env.local
+.env.production
+config.json
+
+# Generated files that shouldn't be committed
+dist/
+build/
+*.min.js
+*.min.css
+
+# Test files
+*.test.*
+coverage/
+
+# Package manager lock files (we'll keep package.json but not lock files)
+yarn.lock
+pnpm-lock.yaml
+package-lock.json
+
+# GitHub specific (keep workflows but not other files)
+.github/FUNDING.yml
+
+# MCP-related scripts that are not needed for deployment
+setup-mcp.sh
+init-mcp.sh
+test-mcp.js
+
+# Development and automation scripts that are for local use only
+clean_titles.py
+extract_video_ids.py
+fill_missing_sessions.py
+generate_azan_sessions.py
+generate_complete_json.py
+generate_usul_json.py
+generate_json.sh
+generate_sessions.sh
+yt-id.sh
+change_pdf.sh
+creatersurah.sh
+rempdf.sh
+session.sh
+create_session_files.sh
+channel_video_extractor.py
+auto_playlist_organizer.py
+automation_tools.py
+complete_video_organizer.py
+create_all_html_files.py
+create_session_mapping.py
+demo_automation.py
+deployment_config.py
+extract_video_ids.sh
+final_verification_test.py
+fix_session_paths.py
+update_titles_from_youtube.py
+update_video_ids.py
+update_video_titles.py
+tools_channel/
+
+# Python files
+*.py
+
+# Editor swap files
+*.swp
+*.swo
+*.un~
+
+# Vim temporary files
+*.un~

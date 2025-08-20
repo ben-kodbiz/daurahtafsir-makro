@@ -3,96 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quran App</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="enhanced-styles.css">
+    <title>Daurah Hadis dan Quran</title>
     <link rel="stylesheet" href="unified-sahih-bukhari-theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <select id="language-selector" onchange="setLanguage(this.value)">
-        <option value="en">English</option>
-        <option value="ms">Malay</option>
-    </select>
-    <h1 class="main-heading">Daurah Hadis dan Quran oleh Maulana Asri (darul Kautsar)</h1>
-    
-    <!-- Module Description -->
-    <div class="module-description" style="max-width: 1000px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
-        <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Tafsir Mikro</h2>
-        <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
-            <strong>Tafsir Al-Quran ringkas (struktur micro surah-surah quran)</strong><br>
-            Modul utama yang menyediakan tafsir terperinci untuk semua 114 surah Al-Quran. Memberi fokus pada struktur dan makna setiap surah secara mikro. Menyediakan pemahaman mendalam tentang ayat-ayat Al-Quran dengan konteks dan penjelasan yang jelas.
-        </p>
-    </div>
-    
-    <div class="widget-container">
-        <div class="widget current-page enhanced">
-            <i class="material-icons widget-icon enhanced">book</i>
-            <span class="widget-label enhanced">Tafsir Mikro</span>
+    <div class="tutorial-container">
+        <div class="header">
+            <h1>Daurah Hadis dan Quran oleh Maulana Asri (darul Kautsar)</h1>
         </div>
-        <a href="qawaid_tafsir/index.html" class="widget enhanced">
-            <i class="material-icons widget-icon enhanced">school</i>
-            <span class="widget-label enhanced">Usul Tafsir</span>
-        </a>
-        <a href="usul_dirayat_hadis/index.html" class="widget enhanced">
-            <i class="material-icons widget-icon enhanced">fact_check</i>
-            <span class="widget-label enhanced">Usul Dirayat Hadis</span>
-        </a>
-        <a href="jami_at_tirmizi/index.html" class="widget enhanced">
-            <i class="material-icons widget-icon enhanced">library_books</i>
-            <span class="widget-label enhanced">Jami at-Tirmizi (Kitab Thaharah)</span>
-        </a>
-        <a href="ilal_at_tirmizi/index.html" class="widget enhanced">
-            <i class="material-icons widget-icon enhanced">error_outline</i>
-            <span class="widget-label enhanced">Ilal at-Tirmizi</span>
-        </a>
-        <a href="sahih_bukhari_kitab_perang/index.html" class="widget enhanced">
-            <i class="material-icons widget-icon enhanced">military_tech</i>
-            <span class="widget-label enhanced">Sahih Bukhari-Kitab Perang</span>
-        </a>
-        <a href="sahih_bukhari_kitab_solat/index.html" class="widget enhanced">
-            <i class="material-icons widget-icon enhanced">mosque</i>
-            <span class="widget-label enhanced">Sahih Bukhari-Kitab Solat</span>
-        </a>
-        <a href="sahih_bukhari_kitab_iman/index.html" class="widget enhanced">
-            <i class="material-icons widget-icon enhanced">shield</i>
-            <span class="widget-label enhanced">Sahih Bukhari-Kitab Iman</span>
-        </a>
-        <a href="sahih_bukhari_kitab_azan_edisi2/index.html" class="widget enhanced">
-            <i class="material-icons widget-icon enhanced">campaign</i>
-            <span class="widget-label enhanced">Sahih Bukhari-Kitab Azan(edisi2)</span>
-        </a>
-        <a href="sahih_muslim_kitab_haji/index.html" class="widget enhanced">
-            <i class="material-icons widget-icon enhanced">flight_takeoff</i>
-            <span class="widget-label enhanced">Sahih Muslim-Kitab Haji</span>
-        </a>
-    </div>
-    <div class="device-warning">
-        <i class="material-icons">smartphone</i>
-        <span>Mobile optimized version. Enjoy your learning experience!</span>
-    </div>
-
-    <div class="search-container enhanced">
-        <div class="search-box enhanced">
-            <i class="material-icons search-icon enhanced">search</i>
-            <input type="text" id="surah-search" class="enhanced" placeholder="Search for surah by name or number..." />
-            <button id="clear-search" class="clear-search-btn enhanced">
-                <i class="material-icons">close</i>
-            </button>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Daurah Hadis dan Quran</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Modul pembelajaran komprehensif tentang Al-Quran dan Hadis</strong><br>
+                Platform pembelajaran yang menyediakan berbagai modul kajian tentang Al-Quran dan Hadis. Menyediakan akses mudah ke berbagai kitab hadis dan tafsir Al-Quran dengan penjelasan yang mendalam dan terstruktur. Mencakup berbagai topik mulai dari tafsir mikro surah-surah Al-Quran hingga kajian kitab-kitab hadis.
+            </p>
         </div>
-    </div>
-
-    <div class="surah-grid enhanced" id="surah-grid">
-    </div>
-
-    <script src="script.js?v=1755482400"></script>
-    <script src="enhanced-script.js"></script>
-    <script src="enhanced-theme.js"></script>
-    <div class="theme-toggle-container">
-        <button class="theme-toggle" onclick="toggleTheme()">
-            <i class="material-icons theme-icon">brightness_4</i>
-        </button>
+        
+        <div class="widget-container">
+            <a href="syarah_quran/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">menu_book</i>
+                <span class="widget-label enhanced">Syarah Quran</span>
+            </a>
+            <a href="syarah_hadis/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">library_books</i>
+                <span class="widget-label enhanced">Syarah Hadis</span>
+            </a>
+            <a href="usul_dirayat_hadis/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">fact_check</i>
+                <span class="widget-label enhanced">Usul Dirayat Hadis</span>
+            </a>
+            <a href="jami_at_tirmizi/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">library_books</i>
+                <span class="widget-label enhanced">Jami at-Tirmizi (Kitab Thaharah)</span>
+            </a>
+            <a href="ilal_at_tirmizi/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">error_outline</i>
+                <span class="widget-label enhanced">Ilal at-Tirmizi</span>
+            </a>
+            <a href="sahih_muslim_kitab_haji/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">flight_takeoff</i>
+                <span class="widget-label enhanced">Sahih Muslim-Kitab Haji</span>
+            </a>
+        </div>
+        
+        <script>
+            // Redirect to Syarah Quran after a short delay
+            setTimeout(function() {
+                window.location.href = "syarah_quran/index.html";
+            }, 3000);
+        </script>
     </div>
 </body>
 </html>

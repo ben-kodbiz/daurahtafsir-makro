@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usul Tafsir - Sesi 89</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Usul Tafsir
+        </a>
+        <div class="header">
+            <h1>Usul Tafsir - Sesi 89</h1>
+        </div>
+        <div class="video-container">
+            <div class="video-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_FOR_SESSION_89" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <div class="video-title">Usul Tafsir - Sesi 89</div>
+                <div class="video-description">
+                    Kandungan untuk sesi 89 dalam modul Usul Tafsir.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons" style="display: flex; justify-content: space-between; margin-top: 20px; padding: 0 20px;">
+            <div data-prev-button style="flex: 1; margin-right: 10px;"></div>
+            <div data-next-button style="flex: 1; margin-left: 10px;"></div>
+        </div>
+    </div>
+    <script>
+        // Session navigation data
+        const totalSessions = 116;
+        const currentSession = 89;
+        
+        // Update navigation buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const prevButtonContainer = document.querySelector('[data-prev-button]');
+            const nextButtonContainer = document.querySelector('[data-next-button]');
+            
+            if (prevButtonContainer) {
+                if (currentSession > 1) {
+                    prevButtonContainer.innerHTML = `
+                        <a href="session_${currentSession - 1}.html" class="watch-btn" style="display: flex; align-items: center;">
+                            <i class="material-icons">arrow_back</i>
+                            <span style="margin-left: 8px;">Sesi Sebelumnya</span>
+                        </a>
+                    `;
+                } else {
+                    prevButtonContainer.innerHTML = `
+                        <button class="watch-btn" style="display: flex; align-items: center; opacity: 0.5;" disabled>
+                            <i class="material-icons">arrow_back</i>
+                            <span style="margin-left: 8px;">Sesi Sebelumnya</span>
+                        </button>
+                    `;
+                }
+            }
+            
+            if (nextButtonContainer) {
+                if (currentSession < totalSessions) {
+                    nextButtonContainer.innerHTML = `
+                        <a href="session_${currentSession + 1}.html" class="watch-btn" style="display: flex; align-items: center;">
+                            <span style="margin-right: 8px;">Sesi Seterusnya</span>
+                            <i class="material-icons">arrow_forward</i>
+                        </a>
+                    `;
+                } else {
+                    nextButtonContainer.innerHTML = `
+                        <button class="watch-btn" style="display: flex; align-items: center; opacity: 0.5;" disabled>
+                            <span style="margin-right: 8px;">Sesi Seterusnya</span>
+                            <i class="material-icons">arrow_forward</i>
+                        </button>
+                    `;
+                }
+            }
+        });
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

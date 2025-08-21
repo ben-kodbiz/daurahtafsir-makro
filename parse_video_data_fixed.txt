@@ -1,0 +1,49 @@
+    def parse_video_data(self):
+        """Parse video_data.txt and extract session information."""
+        video_data_file = self.directory_path / 'video_data.txt'
+        
+        if not video_data_file.exists():
+            print(f"❌ Error: video_data.txt not found in {self.directory_path}")
+            return False
+            
+        try:
+            with open(video_data_file, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+        except Exception as e:
+            print(f"❌ Error reading video_data.txt: {e}")
+            return False
+            
+        self.sessions = []
+        
+        for i, line in enumerate(lines):
+            line = line.strip()
+            if not line:
+                continue
+                
+            match = re.match(r'^(\S+)\s+(.+)', line)
+            if match:
+                video_id = match.group(1)
+                full_title = match.group(2).strip()
+                
+                session_match = re.search(r'Sesi\s+(\d+)', full_title)
+                session_number = i + 1
+                
+                if session_match:
+                    session_number = int(session_match.group(1))
+                
+                # Clean the title by removing anything in square brackets at the end
+                clean_title = re.sub(r'\s*\[.*?\]\s*$', '', full_title).strip()
+                
+                self.sessions.append({
+                    'number': session_number,
+                    'title': clean_title,
+                    'videoId': video_id,
+                    'fullTitle': full_title
+                })
+        
+        self.sessions.sort(key=lambda x: x['number'])
+        self.session_count = len(self.sessions)
+        print(f"✅ Parsed {self.session_count} sessions from video_data.txt")
+        return True
+    
+    def generate_material_design_grid(self):

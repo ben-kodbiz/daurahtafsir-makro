@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahih Bukhari-Kitab Azan(edisi2) - Maulana Asri</title>
+    <link rel="stylesheet" href="../../../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Syarah Kitab Bukhari
+        </a>
+        <div class="header">
+            <h1>Sahih Bukhari - Kitab Azan (Edisi 2)</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Sahih Bukhari-Kitab Azan (Edisi2)</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kajian tentang Kitab al-Azan dari Sahih al-Bukhari</strong><br>
+                Edisi kedua kajian tentang Kitab al-Azan dengan kandungan yang lebih komprehensif. Memfokuskan kepada hadis-hadis berkaitan azan dan iqamah. Menjelaskan hukum-hukum solat berjemaah dan adab-adab masjid. Membincangkan waktu-waktu solat dan panggilannya berdasarkan hadis sahih.
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="session-grid" id="session-grid">
+        </div>
+    </div>
+    <script>
+        let allSessions = [];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('session-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            sessionsToShow.forEach(session => {
+                const card = document.createElement('div');
+                card.className = 'session-card';
+                card.innerHTML = `
+                    <div class="session-number">Sesi ${session.number}</div>
+                    <div class="session-title">${session.title}</div>
+                    <div class="session-description">${session.description}</div>
+                    <a href="session${session.number}.html" class="watch-btn">Tonton Video</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return allSessions;
+            
+            return allSessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value;
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.add('visible');
+            } else {
+                clearButton.classList.remove('visible');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.remove('visible');
+            displaySessions(allSessions);
+        });
+
+        // Initialize - Load session data from JSON file
+        fetch('sahih_bukhari_kitab_azan_edisi2.json')
+            .then(response => response.json())
+            .then(data => {
+                allSessions = data.sessions.map(session => ({
+                    number: session.id,
+                    title: session.title,
+                    description: session.description,
+                    videoId: session.videoId
+                }));
+                displaySessions(allSessions);
+            })
+            .catch(error => {
+                console.error('Error loading session data:', error);
+                // Fallback to sample data if JSON fails to load
+                const sessions = [];
+                for (let i = 1; i <= 103; i++) {
+                    sessions.push({
+                        number: i,
+                        title: `Sesi ${i}`,
+                        description: `Kandungan untuk sesi ${i} tentang tajuk berkaitan azan dalam kitab Sahih Bukhari.`
+                    });
+                }
+                allSessions = sessions;
+                displaySessions(allSessions);
+            });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

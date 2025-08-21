@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahih Bukhari-Kitab Iman - Maulana Asri</title>
+    <link rel="stylesheet" href="../../../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Custom enhancements for better visual appeal */
+        .header {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .module-description {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .search-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Enhanced session card styling */
+        .session-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .session-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .watch-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .watch-btn:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .header, .module-description, .search-container {
+                padding: 15px;
+            }
+            
+            .session-card {
+                padding: 15px;
+            }
+        }
+        
+        /* Session grid */
+        .session-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .session-card {
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .session-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 10px;
+        }
+        
+        .session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .session-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .watch-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+    </style>
+<style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* Results Count */
+        .md-results-count {
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        /* Elevation classes */
+        .elevation-2 {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-4 {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-8 {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 960px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style></head>
+<body>
+    <div class="tutorial-container">
+        <a href="../../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Syarah Kitab Bukhari
+        </a>
+        <div class="header">
+            <h1>Sahih Bukhari - Kitab Iman</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px;">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Sahih Bukhari-Kitab Iman</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kajian tentang Kitab Iman dari Sahih al-Bukhari</strong><br>
+                Modul yang memfokuskan kepada kajian hadis-hadis berkaitan Iman dalam koleksi Sahih al-Bukhari. Merangkumi tatacara, hukum-hukum, dan kelebihan berkaitan dengan topik ini. Menyediakan penjelasan mendalam tentang konteks dan aplikasi hadis-hadis sahih dalam kehidupan seharian.
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">            <div class="md-grid-item" data-session="1">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/3HsLf7v9EHg/mqdefault.jpg" 
+                 alt="Sesi 1 -  Islam Dibina Atas Lima Perkara -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 1</span>
+            </div>
+            <h3 class="md-session-title">Sesi 1 -  Islam Dibina Atas Lima Perkara -</h3>
+            <a href="session1.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="1">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/5PPMfun4q5s/mqdefault.jpg" 
+                 alt="Sesi 1 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 1</span>
+            </div>
+            <h3 class="md-session-title">Sesi 1 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session1.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="2">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/rpvLk49sy6U/mqdefault.jpg" 
+                 alt="Sesi 2 - Islam Dibina Atas Lima Perkara -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 2</span>
+            </div>
+            <h3 class="md-session-title">Sesi 2 - Islam Dibina Atas Lima Perkara -</h3>
+            <a href="session2.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="2">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/PAoCU5Fblu4/mqdefault.jpg" 
+                 alt="Sesi 2 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 2</span>
+            </div>
+            <h3 class="md-session-title">Sesi 2 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session2.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="3">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/H61rtbZCuoI/mqdefault.jpg" 
+                 alt="Sesi 3 - Perkara-Perkara Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 3</span>
+            </div>
+            <h3 class="md-session-title">Sesi 3 - Perkara-Perkara Iman -</h3>
+            <a href="session3.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="4">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/WHXfZKX6g10/mqdefault.jpg" 
+                 alt="Sesi 4 - Orang Islam Manakah Yang Paling Baik? -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 4</span>
+            </div>
+            <h3 class="md-session-title">Sesi 4 - Orang Islam Manakah Yang Paling Baik? -</h3>
+            <a href="session4.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="5">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/KyqfgP6GxN8/mqdefault.jpg" 
+                 alt="Sesi 5 - Cintakan Rasul s.a.w. Adalah Sebahagian Daripada Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 5</span>
+            </div>
+            <h3 class="md-session-title">Sesi 5 - Cintakan Rasul s.a.w. Adalah Sebahagian Daripada Iman -</h3>
+            <a href="session5.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="5">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/j13kEKCyf48/mqdefault.jpg" 
+                 alt="Sesi 5 - MATAN HADITH - Sahih Bukhari -  Kitab Iman -  22-Jul-06" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 5</span>
+            </div>
+            <h3 class="md-session-title">Sesi 5 - MATAN HADITH - Sahih Bukhari -  Kitab Iman -  22-Jul-06</h3>
+            <a href="session5.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="6">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/uBAiLk6xKis/mqdefault.jpg" 
+                 alt="Sesi 6 - Cintakan Ansar Adalah Tanda Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 6</span>
+            </div>
+            <h3 class="md-session-title">Sesi 6 - Cintakan Ansar Adalah Tanda Iman -</h3>
+            <a href="session6.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="6">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/xxGqv-77NOc/mqdefault.jpg" 
+                 alt="Sesi 6 - MATAN HADITH - Sahih Bukhari -  Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 6</span>
+            </div>
+            <h3 class="md-session-title">Sesi 6 - MATAN HADITH - Sahih Bukhari -  Kitab Iman</h3>
+            <a href="session6.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="7">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/B00sxQuseog/mqdefault.jpg" 
+                 alt="Sesi 7 - Sebahagian Drpd Ajaran Agama Ialah Lari Dari Pelbagai Fitnah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 7</span>
+            </div>
+            <h3 class="md-session-title">Sesi 7 - Sebahagian Drpd Ajaran Agama Ialah Lari Dari Pelbagai Fitnah -</h3>
+            <a href="session7.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="7">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/3ULOsAy9lM0/mqdefault.jpg" 
+                 alt="Sesi 7 - MATAN HADITH - Sahih Bukhari -  Kitab Iman -  16-Sept-06" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 7</span>
+            </div>
+            <h3 class="md-session-title">Sesi 7 - MATAN HADITH - Sahih Bukhari -  Kitab Iman -  16-Sept-06</h3>
+            <a href="session7.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="8">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/5wFuuUfVHiE/mqdefault.jpg" 
+                 alt="Sesi 8 - Nabi,''Saya Adalah Org Yg Paling Tahu Diantara Kamu Ttg Allah''-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 8</span>
+            </div>
+            <h3 class="md-session-title">Sesi 8 - Nabi,''Saya Adalah Org Yg Paling Tahu Diantara Kamu Ttg Allah''-</h3>
+            <a href="session8.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="8">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/VbMcW_Pr-8w/mqdefault.jpg" 
+                 alt="Sesi 8 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 8</span>
+            </div>
+            <h3 class="md-session-title">Sesi 8 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session8.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="9">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/IMSXCJG_6-E/mqdefault.jpg" 
+                 alt="Sesi 9 - Nabi,''Saya Adalah Org Yg Paling Tahu Diantara Kamu Ttg Allah''-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 9</span>
+            </div>
+            <h3 class="md-session-title">Sesi 9 - Nabi,''Saya Adalah Org Yg Paling Tahu Diantara Kamu Ttg Allah''-</h3>
+            <a href="session9.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="10">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/0FuWV1XvJVg/mqdefault.jpg" 
+                 alt="Sesi 10 - Orang Yang Tidak Suka Kembali Kepada Kekufuran -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 10</span>
+            </div>
+            <h3 class="md-session-title">Sesi 10 - Orang Yang Tidak Suka Kembali Kepada Kekufuran -</h3>
+            <a href="session10.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="10">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/pP4P2exn4AI/mqdefault.jpg" 
+                 alt="Sesi 10 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 10</span>
+            </div>
+            <h3 class="md-session-title">Sesi 10 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session10.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="11">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/kh0RR_-4_I0/mqdefault.jpg" 
+                 alt="Sesi 11 - Perbezaan Ahli Iman Adalah Dalam Amalan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 11</span>
+            </div>
+            <h3 class="md-session-title">Sesi 11 - Perbezaan Ahli Iman Adalah Dalam Amalan -</h3>
+            <a href="session11.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="11">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/5PxbzaNLGGU/mqdefault.jpg" 
+                 alt="Sesi 11 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 11</span>
+            </div>
+            <h3 class="md-session-title">Sesi 11 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session11.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="12">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/hZ90s1e33eU/mqdefault.jpg" 
+                 alt="Sesi 12 - Biarkanlah Mereka Jika Mereka Bertaubat, Solat & Beri Zakat -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 12</span>
+            </div>
+            <h3 class="md-session-title">Sesi 12 - Biarkanlah Mereka Jika Mereka Bertaubat, Solat & Beri Zakat -</h3>
+            <a href="session12.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="12">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/K1Kv7Q-EEJo/mqdefault.jpg" 
+                 alt="Sesi 12 - MATAN HADITH - Sahih Bukhari -  Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 12</span>
+            </div>
+            <h3 class="md-session-title">Sesi 12 - MATAN HADITH - Sahih Bukhari -  Kitab Iman</h3>
+            <a href="session12.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="13">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Itt8kTDK9OA/mqdefault.jpg" 
+                 alt="Sesi 13 - Orang Yang Mengatakan Iman Itu Ialah Amal -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 13</span>
+            </div>
+            <h3 class="md-session-title">Sesi 13 - Orang Yang Mengatakan Iman Itu Ialah Amal -</h3>
+            <a href="session13.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="13">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/UwUyC677pA0/mqdefault.jpg" 
+                 alt="Sesi 13 - MATAN HADITH - Sahih Bukhari -  Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 13</span>
+            </div>
+            <h3 class="md-session-title">Sesi 13 - MATAN HADITH - Sahih Bukhari -  Kitab Iman</h3>
+            <a href="session13.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="14">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/YsQf5r7e5sA/mqdefault.jpg" 
+                 alt="Sesi 14 - Apabila Islam (Seseorang) Tidak Sebenar & Hanya Pada Ikutan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 14</span>
+            </div>
+            <h3 class="md-session-title">Sesi 14 - Apabila Islam (Seseorang) Tidak Sebenar & Hanya Pada Ikutan -</h3>
+            <a href="session14.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="14">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/xgzrf7F7yf0/mqdefault.jpg" 
+                 alt="Sesi 14 - MATAN HADITH - Sahih Bukhari -  Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 14</span>
+            </div>
+            <h3 class="md-session-title">Sesi 14 - MATAN HADITH - Sahih Bukhari -  Kitab Iman</h3>
+            <a href="session14.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="15">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/z6o3raqZvEo/mqdefault.jpg" 
+                 alt="Sesi 15 - Sebarluaskan Salam Adalah Sebahagian Daripada Ajaran Islam -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 15</span>
+            </div>
+            <h3 class="md-session-title">Sesi 15 - Sebarluaskan Salam Adalah Sebahagian Daripada Ajaran Islam -</h3>
+            <a href="session15.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="15">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/MOa0LuL3lb0/mqdefault.jpg" 
+                 alt="Sesi 15 -  MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 15</span>
+            </div>
+            <h3 class="md-session-title">Sesi 15 -  MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session15.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="16">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/p1GZHTPJPGE/mqdefault.jpg" 
+                 alt="Sesi 16 - Tidak Mengenang Budi Suami Dan Kekufuran Di Bawah Kekufuran -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 16</span>
+            </div>
+            <h3 class="md-session-title">Sesi 16 - Tidak Mengenang Budi Suami Dan Kekufuran Di Bawah Kekufuran -</h3>
+            <a href="session16.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="16">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/C8Zp0ZNf0Ug/mqdefault.jpg" 
+                 alt="Sesi 16 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 16</span>
+            </div>
+            <h3 class="md-session-title">Sesi 16 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session16.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="17">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/NoGOoqh-ouw/mqdefault.jpg" 
+                 alt="Sesi 17 - Perlakuan Maksiat Adalah Sebahagian  Cara Hidup Jahiliyyah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 17</span>
+            </div>
+            <h3 class="md-session-title">Sesi 17 - Perlakuan Maksiat Adalah Sebahagian  Cara Hidup Jahiliyyah -</h3>
+            <a href="session17.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="17">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/j76Oi_iPkoQ/mqdefault.jpg" 
+                 alt="Sesi 17 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 17</span>
+            </div>
+            <h3 class="md-session-title">Sesi 17 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session17.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="18">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/AHXp9nc7W-4/mqdefault.jpg" 
+                 alt="Sesi 18 - Perlakuan Maksiat Adalah Sebahagian  Cara Hidup Jahiliyyah-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 18</span>
+            </div>
+            <h3 class="md-session-title">Sesi 18 - Perlakuan Maksiat Adalah Sebahagian  Cara Hidup Jahiliyyah-</h3>
+            <a href="session18.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="18">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/1P3Q33DpbG8/mqdefault.jpg" 
+                 alt="Sesi 18 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 18</span>
+            </div>
+            <h3 class="md-session-title">Sesi 18 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session18.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="19">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/7U22QG4LVB8/mqdefault.jpg" 
+                 alt="Sesi 19 -Tanda-tanda Orang Munafiq -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 19</span>
+            </div>
+            <h3 class="md-session-title">Sesi 19 -Tanda-tanda Orang Munafiq -</h3>
+            <a href="session19.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="20">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/mm6tbOLnQnI/mqdefault.jpg" 
+                 alt="Sesi 20 - Beribadat Di Malam Qadar Adalah Sebahagian Daripada Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 20</span>
+            </div>
+            <h3 class="md-session-title">Sesi 20 - Beribadat Di Malam Qadar Adalah Sebahagian Daripada Iman -</h3>
+            <a href="session20.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="20">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/2rr9xK5XezY/mqdefault.jpg" 
+                 alt="Sesi 20 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 20</span>
+            </div>
+            <h3 class="md-session-title">Sesi 20 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session20.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="21">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/hroIiuQD314/mqdefault.jpg" 
+                 alt="Sesi 21 - Jihad Adalah Sebahagian Daripada Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 21</span>
+            </div>
+            <h3 class="md-session-title">Sesi 21 - Jihad Adalah Sebahagian Daripada Iman -</h3>
+            <a href="session21.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="21">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/bERxTlIh_qo/mqdefault.jpg" 
+                 alt="Sesi 21 - MATAN HADITH - Sahih Bukhari -  Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 21</span>
+            </div>
+            <h3 class="md-session-title">Sesi 21 - MATAN HADITH - Sahih Bukhari -  Kitab Iman</h3>
+            <a href="session21.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="22">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/M5-mwX3mwtA/mqdefault.jpg" 
+                 alt="Sesi 22 - Beribadat Sunat Pada Malm Ramadhan Adalah Sebahagian Dari Iman-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 22</span>
+            </div>
+            <h3 class="md-session-title">Sesi 22 - Beribadat Sunat Pada Malm Ramadhan Adalah Sebahagian Dari Iman-</h3>
+            <a href="session22.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="22">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/f79i6DI7MZY/mqdefault.jpg" 
+                 alt="Sesi 22 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 22</span>
+            </div>
+            <h3 class="md-session-title">Sesi 22 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session22.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="23">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/GpOAFw-NjRQ/mqdefault.jpg" 
+                 alt="Sesi 23 - Agama Itu Mudah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 23</span>
+            </div>
+            <h3 class="md-session-title">Sesi 23 - Agama Itu Mudah -</h3>
+            <a href="session23.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="23">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/IWd-30j1mRU/mqdefault.jpg" 
+                 alt="Sesi 23 -  MATAN HADITH - Sahih Bukhari - Kitab Iman - 19-Mei-07" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 23</span>
+            </div>
+            <h3 class="md-session-title">Sesi 23 -  MATAN HADITH - Sahih Bukhari - Kitab Iman - 19-Mei-07</h3>
+            <a href="session23.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="24">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/f4_ceD35NIc/mqdefault.jpg" 
+                 alt="Sesi 24 - Agama Itu Mudah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 24</span>
+            </div>
+            <h3 class="md-session-title">Sesi 24 - Agama Itu Mudah -</h3>
+            <a href="session24.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="25">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/2FWijMqr1zM/mqdefault.jpg" 
+                 alt="Sesi 25 - Sembahyang Adalah Sebahagian Daripada Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 25</span>
+            </div>
+            <h3 class="md-session-title">Sesi 25 - Sembahyang Adalah Sebahagian Daripada Iman -</h3>
+            <a href="session25.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="25">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/jMzftjTqoW8/mqdefault.jpg" 
+                 alt="Sesi 25 - MATAN HADITH - Sahih  Bukhari -  Kitab Iman - 16-Jun-07" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 25</span>
+            </div>
+            <h3 class="md-session-title">Sesi 25 - MATAN HADITH - Sahih  Bukhari -  Kitab Iman - 16-Jun-07</h3>
+            <a href="session25.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="26">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/7jJTmebJ2Hs/mqdefault.jpg" 
+                 alt="Sesi 26 - Sembahyang Adalah Sebahagian Daripada Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 26</span>
+            </div>
+            <h3 class="md-session-title">Sesi 26 - Sembahyang Adalah Sebahagian Daripada Iman -</h3>
+            <a href="session26.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="27">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/p8Sc1IpdHNQ/mqdefault.jpg" 
+                 alt="Sesi 27 -  Keelokan Islam Seseorang -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 27</span>
+            </div>
+            <h3 class="md-session-title">Sesi 27 -  Keelokan Islam Seseorang -</h3>
+            <a href="session27.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="27">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/MHO32icYOwA/mqdefault.jpg" 
+                 alt="Sesi 27 -  MATAN HADITH -  Bukhari  - itab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 27</span>
+            </div>
+            <h3 class="md-session-title">Sesi 27 -  MATAN HADITH -  Bukhari  - itab Iman</h3>
+            <a href="session27.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="28">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/HHozF-54z_U/mqdefault.jpg" 
+                 alt="Sesi 28 - Keelokan Islam Seseorang &(Amalan)Agama Yg Plg Disukai Allah-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 28</span>
+            </div>
+            <h3 class="md-session-title">Sesi 28 - Keelokan Islam Seseorang &(Amalan)Agama Yg Plg Disukai Allah-</h3>
+            <a href="session28.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="28">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/abUkTAjnyAw/mqdefault.jpg" 
+                 alt="Sesi 28 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 28</span>
+            </div>
+            <h3 class="md-session-title">Sesi 28 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session28.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="29">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/hJUGQdUxfAk/mqdefault.jpg" 
+                 alt="Sesi 29 - Pertambahan Dan Kekurangan Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 29</span>
+            </div>
+            <h3 class="md-session-title">Sesi 29 - Pertambahan Dan Kekurangan Iman -</h3>
+            <a href="session29.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="29">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/HV8U3GlydgM/mqdefault.jpg" 
+                 alt="Sesi 29 - MATAN HADITH - Sahih Bukhari -  Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 29</span>
+            </div>
+            <h3 class="md-session-title">Sesi 29 - MATAN HADITH - Sahih Bukhari -  Kitab Iman</h3>
+            <a href="session29.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="30">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/0JciWLiSr5c/mqdefault.jpg" 
+                 alt="Sesi 30 -  Pertambahan Dan Kekurangan Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 30</span>
+            </div>
+            <h3 class="md-session-title">Sesi 30 -  Pertambahan Dan Kekurangan Iman -</h3>
+            <a href="session30.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="31">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/FUVdLDBE-A8/mqdefault.jpg" 
+                 alt="Sesi 31 - Zakat Adalah Sebahagian Daripada Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 31</span>
+            </div>
+            <h3 class="md-session-title">Sesi 31 - Zakat Adalah Sebahagian Daripada Iman -</h3>
+            <a href="session31.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="31">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/MDOUzdyzlJI/mqdefault.jpg" 
+                 alt="Sesi 31 - MATAN HADITH - Sahih Bukhari -  Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 31</span>
+            </div>
+            <h3 class="md-session-title">Sesi 31 - MATAN HADITH - Sahih Bukhari -  Kitab Iman</h3>
+            <a href="session31.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="32">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/AeriFFxdjkM/mqdefault.jpg" 
+                 alt="Sesi 32 - Mengiringi Jenazah Adalah Sebahagian Daripada Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 32</span>
+            </div>
+            <h3 class="md-session-title">Sesi 32 - Mengiringi Jenazah Adalah Sebahagian Daripada Iman -</h3>
+            <a href="session32.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="32">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/omwAdYVZ4SQ/mqdefault.jpg" 
+                 alt="Sesi 32 - MATAN HADITH - Sahih Bukhari -  Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 32</span>
+            </div>
+            <h3 class="md-session-title">Sesi 32 - MATAN HADITH - Sahih Bukhari -  Kitab Iman</h3>
+            <a href="session32.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="33">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Rro8WW5bgic/mqdefault.jpg" 
+                 alt="Sesi 33 - Soalan Jibrail Kpd Nabi Tentang Iman, Islam,  Ihsan &Kiamat -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 33</span>
+            </div>
+            <h3 class="md-session-title">Sesi 33 - Soalan Jibrail Kpd Nabi Tentang Iman, Islam,  Ihsan &Kiamat -</h3>
+            <a href="session33.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="33">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/v0swy7Ds7R0/mqdefault.jpg" 
+                 alt="Sesi 33 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 33</span>
+            </div>
+            <h3 class="md-session-title">Sesi 33 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session33.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="34">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/zwZEJFRXG4E/mqdefault.jpg" 
+                 alt="Sesi 34 - Soalan Jibrail Kpd Nabi Tentang Iman, Islam,  Ihsan & Kiamat -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 34</span>
+            </div>
+            <h3 class="md-session-title">Sesi 34 - Soalan Jibrail Kpd Nabi Tentang Iman, Islam,  Ihsan & Kiamat -</h3>
+            <a href="session34.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="34">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/grTxzWnJrBk/mqdefault.jpg" 
+                 alt="Sesi 34 - MATAN HADITH - Sahih Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 34</span>
+            </div>
+            <h3 class="md-session-title">Sesi 34 - MATAN HADITH - Sahih Bukhari - Kitab Iman</h3>
+            <a href="session34.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="35">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/EpABuE6suVw/mqdefault.jpg" 
+                 alt="Sesi 35 - Soalan Jibrail Kpd Nabi Tentang Iman, Islam,  Ihsan & Kiamat -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 35</span>
+            </div>
+            <h3 class="md-session-title">Sesi 35 - Soalan Jibrail Kpd Nabi Tentang Iman, Islam,  Ihsan & Kiamat -</h3>
+            <a href="session35.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="36">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/UflM6Xgi_vs/mqdefault.jpg" 
+                 alt="Sesi 36 - Kelebihan Orang Yang Menjaga Kesucian Agamanya -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 36</span>
+            </div>
+            <h3 class="md-session-title">Sesi 36 - Kelebihan Orang Yang Menjaga Kesucian Agamanya -</h3>
+            <a href="session36.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="36">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/NLwVLn0q5qM/mqdefault.jpg" 
+                 alt="Sesi 36 - MATAN HADITH - Sahih Bukhari -  Kitab Iman - 15-Dis-07" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 36</span>
+            </div>
+            <h3 class="md-session-title">Sesi 36 - MATAN HADITH - Sahih Bukhari -  Kitab Iman - 15-Dis-07</h3>
+            <a href="session36.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="37">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/84_HI9VhFpA/mqdefault.jpg" 
+                 alt="Sesi 37 - Kelebihan Orang Yang Menjaga Kesucian Agamanya -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 37</span>
+            </div>
+            <h3 class="md-session-title">Sesi 37 - Kelebihan Orang Yang Menjaga Kesucian Agamanya -</h3>
+            <a href="session37.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="37">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/L2OqKCkMvj0/mqdefault.jpg" 
+                 alt="Sesi 37 - MATAN HADITH - Sahih al-Bukhari -  Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 37</span>
+            </div>
+            <h3 class="md-session-title">Sesi 37 - MATAN HADITH - Sahih al-Bukhari -  Kitab Iman</h3>
+            <a href="session37.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="38">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/MWHrlcHQ8_k/mqdefault.jpg" 
+                 alt="Sesi 38 - Menunaikan Khumus Itu Sebahagian Dari Iman -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 38</span>
+            </div>
+            <h3 class="md-session-title">Sesi 38 - Menunaikan Khumus Itu Sebahagian Dari Iman -</h3>
+            <a href="session38.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="38">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/dLfy536BSTs/mqdefault.jpg" 
+                 alt="Sesi 38 - MATAN HADITH - Sahih al-Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 38</span>
+            </div>
+            <h3 class="md-session-title">Sesi 38 - MATAN HADITH - Sahih al-Bukhari - Kitab Iman</h3>
+            <a href="session38.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="39">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/CY4B24w8zbA/mqdefault.jpg" 
+                 alt="Sesi 39 - Amalan Itu Dikira Mengikut Niat Dan Keikhlasan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 39</span>
+            </div>
+            <h3 class="md-session-title">Sesi 39 - Amalan Itu Dikira Mengikut Niat Dan Keikhlasan -</h3>
+            <a href="session39.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="39">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/AM5SYfz3vsU/mqdefault.jpg" 
+                 alt="Sesi 39 - MATAN HADITH - Sahih al-Bukhari -  Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 39</span>
+            </div>
+            <h3 class="md-session-title">Sesi 39 - MATAN HADITH - Sahih al-Bukhari -  Kitab Iman</h3>
+            <a href="session39.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="40">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/gC0X8pG66FA/mqdefault.jpg" 
+                 alt="Sesi 40 - Agama Itu Ikhlas Kerana Allah, RasulNya & Pemimpin Org Islam -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 40</span>
+            </div>
+            <h3 class="md-session-title">Sesi 40 - Agama Itu Ikhlas Kerana Allah, RasulNya & Pemimpin Org Islam -</h3>
+            <a href="session40.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="40">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/I3GhS_yvVNc/mqdefault.jpg" 
+                 alt="Sesi 40 - MATAN HADITH - Sahih al-Bukhari - Kitab Iman" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 40</span>
+            </div>
+            <h3 class="md-session-title">Sesi 40 - MATAN HADITH - Sahih al-Bukhari - Kitab Iman</h3>
+            <a href="session40.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>        </div>        <div class="md-results-count" id="md-results-count">72 videos tersedia</div>        <script>
+        // Session data
+        let allSessions = [{"id": 1, "title": "Sesi 1 -  Islam Dibina Atas Lima Perkara -", "videoId": "3HsLf7v9EHg", "description": "Sesi 1 - MATAN HADITH - Sahih Bukhari - Kitab Iman"}, {"id": 2, "title": "Sesi 2 - Islam Dibina Atas Lima Perkara -", "videoId": "rpvLk49sy6U", "description": "Sesi 2 - MATAN HADITH - Sahih Bukhari - Kitab Iman"}, {"id": 4, "title": "Sesi 4 - Orang Islam Manakah Yang Paling Baik? -", "videoId": "WHXfZKX6g10", "description": "Sesi 3 - Perkara-Perkara Iman -"}, {"id": 5, "title": "Sesi 5 - Cintakan Rasul s.a.w. Adalah Sebahagian Daripada Iman -", "videoId": "KyqfgP6GxN8", "description": "Sesi 5 - MATAN HADITH - Sahih Bukhari -  Kitab Iman -  22-Jul-06"}, {"id": 6, "title": "Sesi 6 - Cintakan Ansar Adalah Tanda Iman -", "videoId": "uBAiLk6xKis", "description": "Sesi 6 - MATAN HADITH - Sahih Bukhari -  Kitab Iman"}, {"id": 7, "title": "Sesi 7 - Sebahagian Drpd Ajaran Agama Ialah Lari Dari Pelbagai Fitnah -", "videoId": "B00sxQuseog", "description": "Sesi 7 - MATAN HADITH - Sahih Bukhari -  Kitab Iman -  16-Sept-06"}, {"id": 8, "title": "Sesi 8 - Nabi,''Saya Adalah Org Yg Paling Tahu Diantara Kamu Ttg Allah''-", "videoId": "5wFuuUfVHiE", "description": "Sesi 8 - MATAN HADITH - Sahih Bukhari - Kitab Iman"}, {"id": 10, "title": "Sesi 10 - MATAN HADITH - Sahih Bukhari - Kitab Iman", "videoId": "pP4P2exn4AI", "description": "Sesi 9 - Nabi,''Saya Adalah Org Yg Paling Tahu Diantara Kamu Ttg Allah''-"}, {"id": 11, "title": "Sesi 11 - MATAN HADITH - Sahih Bukhari - Kitab Iman", "videoId": "5PxbzaNLGGU", "description": "Sesi 10 - Orang Yang Tidak Suka Kembali Kepada Kekufuran -"}, {"id": 12, "title": "Sesi 12 - MATAN HADITH - Sahih Bukhari -  Kitab Iman", "videoId": "K1Kv7Q-EEJo", "description": "Sesi 11 - Perbezaan Ahli Iman Adalah Dalam Amalan -"}, {"id": 13, "title": "Sesi 13 - MATAN HADITH - Sahih Bukhari -  Kitab Iman", "videoId": "UwUyC677pA0", "description": "Sesi 12 - Biarkanlah Mereka Jika Mereka Bertaubat, Solat & Beri Zakat -"}, {"id": 14, "title": "Sesi 14 - MATAN HADITH - Sahih Bukhari -  Kitab Iman", "videoId": "xgzrf7F7yf0", "description": "Sesi 13 - Orang Yang Mengatakan Iman Itu Ialah Amal -"}, {"id": 15, "title": "Sesi 15 -  MATAN HADITH - Sahih Bukhari - Kitab Iman", "videoId": "MOa0LuL3lb0", "description": "Sesi 14 - Apabila Islam (Seseorang) Tidak Sebenar & Hanya Pada Ikutan -"}, {"id": 16, "title": "Sesi 16 - MATAN HADITH - Sahih Bukhari - Kitab Iman", "videoId": "C8Zp0ZNf0Ug", "description": "Sesi 15 - Sebarluaskan Salam Adalah Sebahagian Daripada Ajaran Islam -"}, {"id": 17, "title": "Sesi 17 - MATAN HADITH - Sahih Bukhari - Kitab Iman", "videoId": "j76Oi_iPkoQ", "description": "Sesi 16 - Tidak Mengenang Budi Suami Dan Kekufuran Di Bawah Kekufuran -"}, {"id": 18, "title": "Sesi 18 - MATAN HADITH - Sahih Bukhari - Kitab Iman", "videoId": "1P3Q33DpbG8", "description": "Sesi 17 - Perlakuan Maksiat Adalah Sebahagian  Cara Hidup Jahiliyyah -"}, {"id": 19, "title": "Sesi 19 -Tanda-tanda Orang Munafiq -", "videoId": "7U22QG4LVB8", "description": "Sesi 18 - Perlakuan Maksiat Adalah Sebahagian  Cara Hidup Jahiliyyah-"}, {"id": 20, "title": "Sesi 20 - Beribadat Di Malam Qadar Adalah Sebahagian Daripada Iman -", "videoId": "mm6tbOLnQnI", "description": "Sesi 20 - MATAN HADITH - Sahih Bukhari - Kitab Iman"}, {"id": 21, "title": "Sesi 21 - Jihad Adalah Sebahagian Daripada Iman -", "videoId": "hroIiuQD314", "description": "Sesi 21 - MATAN HADITH - Sahih Bukhari -  Kitab Iman"}, {"id": 22, "title": "Sesi 22 - Beribadat Sunat Pada Malm Ramadhan Adalah Sebahagian Dari Iman-", "videoId": "M5-mwX3mwtA", "description": "Sesi 22 - MATAN HADITH - Sahih Bukhari - Kitab Iman"}, {"id": 23, "title": "Sesi 23 - Agama Itu Mudah -", "videoId": "GpOAFw-NjRQ", "description": "Sesi 23 -  MATAN HADITH - Sahih Bukhari - Kitab Iman - 19-Mei-07"}, {"id": 25, "title": "Sesi 25 - MATAN HADITH - Sahih  Bukhari -  Kitab Iman - 16-Jun-07", "videoId": "jMzftjTqoW8", "description": "Sesi 24 - Agama Itu Mudah -"}, {"id": 26, "title": "Sesi 26 - Sembahyang Adalah Sebahagian Daripada Iman -", "videoId": "7jJTmebJ2Hs", "description": "Sesi 25 - Sembahyang Adalah Sebahagian Daripada Iman -"}, {"id": 27, "title": "Sesi 27 -  Keelokan Islam Seseorang -", "videoId": "p8Sc1IpdHNQ", "description": "Sesi 27 -  MATAN HADITH -  Bukhari  - itab Iman"}, {"id": 28, "title": "Sesi 28 - Keelokan Islam Seseorang &(Amalan)Agama Yg Plg Disukai Allah-", "videoId": "HHozF-54z_U", "description": "Sesi 28 - MATAN HADITH - Sahih Bukhari - Kitab Iman"}, {"id": 29, "title": "Sesi 29 - Pertambahan Dan Kekurangan Iman -", "videoId": "hJUGQdUxfAk", "description": "Sesi 29 - MATAN HADITH - Sahih Bukhari -  Kitab Iman"}, {"id": 31, "title": "Sesi 31 - MATAN HADITH - Sahih Bukhari -  Kitab Iman", "videoId": "MDOUzdyzlJI", "description": "Sesi 30 -  Pertambahan Dan Kekurangan Iman -"}, {"id": 32, "title": "Sesi 32 - MATAN HADITH - Sahih Bukhari -  Kitab Iman", "videoId": "omwAdYVZ4SQ", "description": "Sesi 31 - Zakat Adalah Sebahagian Daripada Iman -"}, {"id": 33, "title": "Sesi 33 - MATAN HADITH - Sahih Bukhari - Kitab Iman", "videoId": "v0swy7Ds7R0", "description": "Sesi 32 - Mengiringi Jenazah Adalah Sebahagian Daripada Iman -"}, {"id": 34, "title": "Sesi 34 - MATAN HADITH - Sahih Bukhari - Kitab Iman", "videoId": "grTxzWnJrBk", "description": "Sesi 33 - Soalan Jibrail Kpd Nabi Tentang Iman, Islam,  Ihsan &Kiamat -"}, {"id": 35, "title": "Sesi 35 - Soalan Jibrail Kpd Nabi Tentang Iman, Islam,  Ihsan & Kiamat -", "videoId": "EpABuE6suVw", "description": "Sesi 34 - Soalan Jibrail Kpd Nabi Tentang Iman, Islam,  Ihsan & Kiamat -"}, {"id": 36, "title": "Sesi 36 - Kelebihan Orang Yang Menjaga Kesucian Agamanya -", "videoId": "UflM6Xgi_vs", "description": "Sesi 36 - MATAN HADITH - Sahih Bukhari -  Kitab Iman - 15-Dis-07"}, {"id": 37, "title": "Sesi 37 - Kelebihan Orang Yang Menjaga Kesucian Agamanya -", "videoId": "84_HI9VhFpA", "description": "Sesi 37 - MATAN HADITH - Sahih al-Bukhari -  Kitab Iman"}, {"id": 38, "title": "Sesi 38 - Menunaikan Khumus Itu Sebahagian Dari Iman -", "videoId": "MWHrlcHQ8_k", "description": "Sesi 38 - MATAN HADITH - Sahih al-Bukhari - Kitab Iman"}, {"id": 39, "title": "Sesi 39 - Amalan Itu Dikira Mengikut Niat Dan Keikhlasan -", "videoId": "CY4B24w8zbA", "description": "Sesi 39 - MATAN HADITH - Sahih al-Bukhari -  Kitab Iman"}, {"id": 40, "title": "Sesi 40 - Agama Itu Ikhlas Kerana Allah, RasulNya & Pemimpin Org Islam -", "videoId": "gC0X8pG66FA", "description": "Sesi 40 - MATAN HADITH - Sahih al-Bukhari - Kitab Iman"}];
+        
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('session-grid');
+            grid.innerHTML = '';
+            
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+            
+            sessionsToShow.forEach(session => {
+                const card = document.createElement('div');
+                card.className = 'session-card';
+                card.innerHTML = `
+                    <div class="session-header">
+                        <div class="session-number">${session.id}</div>
+                    </div>
+                    <div class="session-title">${session.title}</div>
+                    <div class="session-description">${session.description}</div>
+                    <a href="session${session.id}.html" class="watch-btn">
+                        <i class="material-icons" style="font-size: 1rem; vertical-align: middle;">play_arrow</i>
+                        Tonton Video
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim().toLowerCase();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.add('visible');
+            } else {
+                clearButton.classList.remove('visible');
+            }
+            
+            if (!searchTerm) {
+                displaySessions(allSessions);
+                return;
+            }
+            
+            const filteredSessions = allSessions.filter(session => 
+                session.title.toLowerCase().includes(searchTerm) || 
+                session.description.toLowerCase().includes(searchTerm) ||
+                session.id.toString().includes(searchTerm)
+            );
+            
+            displaySessions(filteredSessions);
+        });
+        
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.remove('visible');
+            displaySessions(allSessions);
+        });
+        
+        // Initialize
+        displaySessions(allSessions);
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

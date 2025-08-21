@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Diyat - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* Results Count */
+        .md-results-count {
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        /* Elevation classes */
+        .elevation-2 {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-4 {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-8 {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 960px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style></head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Diyat</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Diyat</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kajian tentang Kitab Diyat dari Sahih al-Bukhari</strong><br>
+                Kajian tentang Kitab Diyat dari Sahih al-Bukhari
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">            <div class="md-grid-item" data-session="1">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/dbzKLiSQ8GQ/mqdefault.jpg" 
+                 alt="Sesi 1 -  MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 26-Jun-06" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 1</span>
+            </div>
+            <h3 class="md-session-title">Sesi 1 -  MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 26-Jun-06</h3>
+            <a href="session1.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="1">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/CWWgY96jDSk/mqdefault.jpg" 
+                 alt="Sesi 1 - Ancaman Daripada Hudud -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 1</span>
+            </div>
+            <h3 class="md-session-title">Sesi 1 - Ancaman Daripada Hudud -</h3>
+            <a href="session1.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="2">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/tfeVLf8IKyk/mqdefault.jpg" 
+                 alt="Sesi 2 - Tentang Diyat -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 2</span>
+            </div>
+            <h3 class="md-session-title">Sesi 2 - Tentang Diyat -</h3>
+            <a href="session2.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="3">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/cGc8PNNlGZs/mqdefault.jpg" 
+                 alt="Sesi 3 - Diwajibkan Keatas Mu Qisas -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 3</span>
+            </div>
+            <h3 class="md-session-title">Sesi 3 - Diwajibkan Keatas Mu Qisas -</h3>
+            <a href="session3.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="3">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ZRvPsE9SHaU/mqdefault.jpg" 
+                 alt="Sesi 3 -  MATAN HADITH - Sahih al-Bukhari -  Kitab Diyat - 03-Jul-06" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 3</span>
+            </div>
+            <h3 class="md-session-title">Sesi 3 -  MATAN HADITH - Sahih al-Bukhari -  Kitab Diyat - 03-Jul-06</h3>
+            <a href="session3.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="4">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ppcEVANXYcc/mqdefault.jpg" 
+                 alt="Sesi 4 - Kesan Kemaafan Kerana Tersilap Membunuh Dirasa Selepas Mati -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 4</span>
+            </div>
+            <h3 class="md-session-title">Sesi 4 - Kesan Kemaafan Kerana Tersilap Membunuh Dirasa Selepas Mati -</h3>
+            <a href="session4.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="4">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/dh3LYU38vMg/mqdefault.jpg" 
+                 alt="Sesi 4 -  MATAN HADITH - Sahih al-Bukhari - Matan Hadith  - Kitab Diyat - 04-Jul-06" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 4</span>
+            </div>
+            <h3 class="md-session-title">Sesi 4 -  MATAN HADITH - Sahih al-Bukhari - Matan Hadith  - Kitab Diyat - 04-Jul-06</h3>
+            <a href="session4.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="5">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/HMNkVBxR0Bc/mqdefault.jpg" 
+                 alt="Sesi 5 - Tidak Dapat Diyat Jika Tersalah Bunuh Diri -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 5</span>
+            </div>
+            <h3 class="md-session-title">Sesi 5 - Tidak Dapat Diyat Jika Tersalah Bunuh Diri -</h3>
+            <a href="session5.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="5">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/RryBJJTDCck/mqdefault.jpg" 
+                 alt="Sesi 5 - MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 10-Jul-06" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 5</span>
+            </div>
+            <h3 class="md-session-title">Sesi 5 - MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 10-Jul-06</h3>
+            <a href="session5.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="6">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/icFTAvWD2uE/mqdefault.jpg" 
+                 alt="Sesi 6 - Adakah Semua Akan Dihukum Jika Sekumpulan Kenakan Seseorang -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 6</span>
+            </div>
+            <h3 class="md-session-title">Sesi 6 - Adakah Semua Akan Dihukum Jika Sekumpulan Kenakan Seseorang -</h3>
+            <a href="session6.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="6">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/uzmYIFrReIg/mqdefault.jpg" 
+                 alt="Sesi 6 - MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 11-Jul-06" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 6</span>
+            </div>
+            <h3 class="md-session-title">Sesi 6 - MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 11-Jul-06</h3>
+            <a href="session6.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="7">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/w7xrAInY3xY/mqdefault.jpg" 
+                 alt="Sesi 7 - Qasamah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 7</span>
+            </div>
+            <h3 class="md-session-title">Sesi 7 - Qasamah -</h3>
+            <a href="session7.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="7">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/7q7pQz0LiAg/mqdefault.jpg" 
+                 alt="Sesi 7 -  MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 17-Jul-06" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 7</span>
+            </div>
+            <h3 class="md-session-title">Sesi 7 -  MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 17-Jul-06</h3>
+            <a href="session7.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="8">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/MXwWSw4CRNc/mqdefault.jpg" 
+                 alt="Sesi 8 - Aaqilah (Pampasan Atau Gantirugi) -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 8</span>
+            </div>
+            <h3 class="md-session-title">Sesi 8 - Aaqilah (Pampasan Atau Gantirugi) -</h3>
+            <a href="session8.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>        </div>        <div class="md-results-count" id="md-results-count">14 videos tersedia</div>        <script>
+        // Session data with actual titles
+        const sessions = [
+            {
+                number: 1,
+                title: `Aaqilah (Pampasan Atau Gantirugi) -`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 2,
+                title: `Qasamah -`,
+                description: `Kandungan untuk sesi 2 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 3,
+                title: `MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 17-Jul-06`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 4,
+                title: `Adakah Semua Akan Dihukum Jika Sekumpulan Kenakan Seseorang -`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 5,
+                title: `MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 11-Jul-06`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 6,
+                title: `Tidak Dapat Diyat Jika Tersalah Bunuh Diri -`,
+                description: `Kandungan untuk sesi 6 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 7,
+                title: `MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 10-Jul-06`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 8,
+                title: `Kesan Kemaafan Kerana Tersilap Membunuh Dirasa Selepas Mati -`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 9,
+                title: `MATAN HADITH - Sahih al-Bukhari - Matan Hadith - Kitab Diyat - 04-Jul-06`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 10,
+                title: `Diwajibkan Keatas Mu Qisas -`,
+                description: `Kandungan untuk sesi 10 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 11,
+                title: `MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 03-Jul-06`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 12,
+                title: `Tentang Diyat -`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 13,
+                title: `MATAN HADITH - Sahih al-Bukhari - Kitab Diyat - 26-Jun-06`,
+                description: `Kandungan untuk sesi 13 dalam modul Kitab Diyat.`
+            },
+            {
+                number: 14,
+                title: `Ancaman Daripada Hudud -`,
+                description: `Kandungan untuk sesi 14 dalam modul Kitab Diyat.`
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('session-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            sessionsToShow.forEach(session => {
+                const card = document.createElement('div');
+                card.className = 'session-card';
+                card.innerHTML = `
+                    <div class="session-number">Sesi ${session.number}</div>
+                    <div class="session-title">${session.title}</div>
+                    <div class="session-description">${session.description}</div>
+                    <a href="session${session.number}.html" class="watch-btn">Tonton Video</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value;
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.add('visible');
+            } else {
+                clearButton.classList.remove('visible');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.remove('visible');
+            displaySessions(sessions);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

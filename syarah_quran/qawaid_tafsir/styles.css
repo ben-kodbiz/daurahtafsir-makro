@@ -1,0 +1,742 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+     transition: background-color 0.3s ease, color 0.3s ease;
+}
+html.dark-theme body{
+    background-color: #333;
+    color: #f0f0f0;
+}
+html.sepia-theme body{
+   background-color: #f4ecd8;
+    color: #5b4636;
+}
+
+/* App Bar */
+.app-bar {
+    display: flex;
+    align-items: center;
+    background-color: #3f51b5; /* Material Design primary color */
+    color: white;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+html.dark-theme .app-bar{
+    background-color: #212121;
+}
+html.sepia-theme .app-bar {
+    background-color: #b1906d;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+    margin-right: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.back-button .material-icons {
+    margin-right: 8px;
+}
+
+.surah-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Content Area */
+.content-area {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     transition: background-color 0.3s ease, color 0.3s ease;
+}
+html.dark-theme .content-area{
+    background-color: #424242;
+    color: #f0f0f0;
+}
+html.sepia-theme .content-area {
+    background-color: #fbf5ea;
+    color: #5b4636;
+}
+/* Image */
+.image-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.surah-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Text Content */
+.surah-subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 10px;
+     transition: color 0.3s ease;
+}
+html.dark-theme .surah-subtitle{
+  color: #f0f0f0;
+}
+html.sepia-theme .surah-subtitle {
+    color: #5b4636;
+}
+
+.surah-description {
+    line-height: 1.6;
+    margin-bottom: 16px;
+     transition: color 0.3s ease;
+}
+html.dark-theme .surah-description{
+    color: #f0f0f0;
+}
+html.sepia-theme .surah-description {
+    color: #5b4636;
+}
+.section-heading{
+     font-size: 1.1rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 10px;
+    margin-top: 20px;
+      transition: color 0.3s ease;
+}
+html.dark-theme .section-heading{
+    color: #f0f0f0;
+}
+html.sepia-theme .section-heading {
+    color: #5b4636;
+}
+.key-themes {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
+     transition: color 0.3s ease;
+}
+html.dark-theme .key-themes{
+    color: #f0f0f0;
+}
+html.sepia-theme .key-themes {
+    color: #5b4636;
+}
+.detailed-explanation{
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+     transition: color 0.3s ease;
+}
+html.dark-theme .detailed-explanation{
+     color: #f0f0f0;
+}
+html.sepia-theme .detailed-explanation {
+    color: #5b4636;
+}
+.detailed-explanation li{
+    line-height: 1.6;
+    margin-bottom: 10px;
+     transition: color 0.3s ease;
+}
+.paragraf-list {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+/* Youtube Section */
+.youtube-videos {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.youtube-videos iframe {
+    max-width: 100%;
+}
+
+.download-links{
+    margin-top: 10px;
+}
+/* Download button styles */
+.download-button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.download-button:hover {
+    background-color: #43a047;
+}
+/*Theme Toggle */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-left: auto;
+    padding: 8px;
+    transition: color 0.3s ease;
+}
+
+.theme-toggle-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-toggle-container .theme-toggle {
+    background-color: #3f51b5;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+html.dark-theme .theme-toggle-container .theme-toggle {
+    background-color: #212121;
+}
+
+html.sepia-theme .theme-toggle-container .theme-toggle {
+    background-color: #b1906d;
+}
+
+.theme-toggle:hover {
+    color: #ccc;
+}
+
+/* Surah Grid */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+  gap: 16px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #e0e0e0; /* Light grey background for the grid */
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+html.dark-theme .surah-grid {
+  background-color: #1e1e1e; /* Dark background for the grid */
+}
+
+html.sepia-theme .surah-grid {
+  background-color: #e8dcc9; /* Sepia background for the grid */
+}
+
+.surah-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* For the tooltip */
+    overflow: hidden; /* to make sure the ripple effect is within div*/
+}
+
+html.dark-theme .surah-item {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+html.sepia-theme .surah-item {
+    background-color: #f8f0e0;
+    color: #5b4636;
+}
+
+.surah-item:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+html.dark-theme .surah-item:hover {
+    background-color: #3d3d3d;
+}
+
+html.sepia-theme .surah-item:hover {
+    background-color: #f0e6d2;
+}
+.surah-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #3f51b5;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .surah-number {
+    color: #7986cb; /* Lighter blue for dark mode */
+}
+
+html.sepia-theme .surah-number {
+    color: #8d6e63; /* Brown for sepia mode */
+}
+
+.surah-name {
+    font-size: 1rem;
+    margin-top: 8px;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .surah-name {
+    color: #e0e0e0;
+}
+
+html.sepia-theme .surah-name {
+    color: #5b4636;
+}
+
+.surah-arabic-name {
+    font-size: 1rem;
+    margin-top: 8px;
+    color: #555;
+    direction: rtl;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .surah-arabic-name {
+    color: #e0e0e0;
+}
+
+html.sepia-theme .surah-arabic-name {
+    color: #5b4636;
+}
+ /* Tooltip */
+ .tooltip {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    z-index: 100;
+    white-space: nowrap;
+    display: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease, background-color 0.3s ease;
+}
+
+html.dark-theme .tooltip {
+    background-color: rgba(20, 20, 20, 0.9);
+}
+
+html.sepia-theme .tooltip {
+    background-color: rgba(139, 110, 99, 0.9);
+}
+
+.tooltip-name{
+     display: block;
+    font-weight: 500;
+}
+.tooltip-number{
+     display: block;
+    font-size: 0.8rem;
+}
+.tooltip-type{
+    display: block;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+.tooltip-translation{
+    display: block;
+    font-size: 0.8rem;
+}
+.tooltip-ayahs{
+    display: block;
+    font-size: 0.8rem;
+}
+/* Ripple effect */
+.surah-item {
+ position: relative;
+ overflow: hidden;
+}
+.surah-item:after {
+ content: "";
+ display: block;
+ position: absolute;
+ top: 0;
+ left: 50%;
+ width: 5px;
+ padding-top: 5px;
+ border-radius: 50%;
+ background: rgba(0, 0, 0, 0.15);
+ opacity: 0;
+ transition: all 0.5s ease;
+}
+.surah-item:active:after {
+ opacity: 1;
+ transform: scale(100,100);
+ transition: 0s;
+}
+/* Main Heading */
+.main-heading {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #3f51b5;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .main-heading {
+    color: #7986cb; /* Lighter blue for dark mode */
+}
+
+html.sepia-theme .main-heading {
+    color: #8d6e63; /* Brown for sepia mode */
+}
+
+.device-warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff3e0;
+    color: #ef6c00;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark-theme .device-warning {
+    background-color: #3e2723;
+    color: #ffab91;
+}
+
+html.sepia-theme .device-warning {
+    background-color: #f5e9d7;
+    color: #a1887f;
+}
+
+.device-warning .material-icons {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* Widget Container */
+.widget-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Search Container */
+.search-container {
+    max-width: 1000px;
+    margin: 0 auto 20px;
+    padding: 0 20px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+html.dark-theme .search-box {
+    background-color: #2d2d2d;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+html.sepia-theme .search-box {
+    background-color: #f8f0e0;
+}
+
+.search-icon {
+    color: #757575;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .search-icon {
+    color: #aaaaaa;
+}
+
+html.sepia-theme .search-icon {
+    color: #8d6e63;
+}
+
+#surah-search {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: transparent;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme #surah-search {
+    color: #e0e0e0;
+}
+
+html.sepia-theme #surah-search {
+    color: #5b4636;
+}
+
+#surah-search::placeholder {
+    color: #9e9e9e;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme #surah-search::placeholder {
+    color: #757575;
+}
+
+html.sepia-theme #surah-search::placeholder {
+    color: #a1887f;
+}
+
+.clear-search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #757575;
+    display: none;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .clear-search-btn {
+    color: #aaaaaa;
+}
+
+html.sepia-theme .clear-search-btn {
+    color: #8d6e63;
+}
+
+.clear-search-btn:hover {
+    color: #f44336;
+}
+
+/* No Results Message */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: #757575;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .no-results {
+    color: #aaaaaa;
+}
+
+html.sepia-theme .no-results {
+    color: #8d6e63;
+}
+
+.no-results i {
+    font-size: 48px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.no-results p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.widget {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #555;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease, box-shadow 0.3s ease;
+    min-width: 200px;
+    flex: 1 1 auto;
+    max-width: 300px;
+}
+
+html.dark-theme .widget {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+html.sepia-theme .widget {
+    background-color: #f8f0e0;
+    color: #5b4636;
+}
+
+.widget:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+html.dark-theme .widget:hover {
+    background-color: #3d3d3d;
+}
+
+html.sepia-theme .widget:hover {
+    background-color: #f0e6d2;
+}
+
+.widget-icon {
+    font-size: 2rem;
+    margin-right: 10px;
+    color: #3f51b5;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .widget-icon {
+    color: #7986cb; /* Lighter blue for dark mode */
+}
+
+html.sepia-theme .widget-icon {
+    color: #8d6e63; /* Brown for sepia mode */
+}
+
+.widget-label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+html.dark-theme .widget-label {
+    color: #e0e0e0;
+}
+
+html.sepia-theme .widget-label {
+    color: #5b4636;
+}
+
+/* Current page widget styling */
+.widget.current-page {
+    background-color: #e8eaf6;
+    cursor: default;
+}
+
+html.dark-theme .widget.current-page {
+    background-color: #1a1a2e;
+}
+
+html.sepia-theme .widget.current-page {
+    background-color: #ede0c8;
+}
+
+.widget.current-page:hover {
+    background-color: #e8eaf6;
+    transform: none;
+}
+
+html.dark-theme .widget.current-page:hover {
+    background-color: #1a1a2e;
+}
+
+html.sepia-theme .widget.current-page:hover {
+    background-color: #ede0c8;
+}
+
+/* Responsive Design for Widget Container */
+@media (max-width: 1024px) {
+    .widget-container {
+        gap: 12px;
+        padding: 0 15px;
+    }
+    
+    .widget {
+        min-width: 180px;
+        max-width: 280px;
+        padding: 8px 16px;
+    }
+    
+    .widget-label {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .widget-container {
+        gap: 10px;
+        padding: 0 10px;
+    }
+    
+    .widget {
+        min-width: 150px;
+        max-width: 250px;
+        padding: 8px 12px;
+        flex: 1 1 calc(50% - 5px);
+    }
+    
+    .widget-icon {
+        font-size: 1.8rem;
+        margin-right: 8px;
+    }
+    
+    .widget-label {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .widget-container {
+        gap: 8px;
+        padding: 0 10px;
+    }
+    
+    .widget {
+        min-width: 120px;
+        max-width: none;
+        padding: 6px 10px;
+        flex: 1 1 100%;
+    }
+    
+    .widget-icon {
+        font-size: 1.6rem;
+        margin-right: 6px;
+    }
+    
+    .widget-label {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+}

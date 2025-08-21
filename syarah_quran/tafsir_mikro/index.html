@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tafsir Mikro - Maulana Asri</title>
+    <link rel="stylesheet" href="../../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="enhanced-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Syarah Quran
+        </a>
+        
+        <select id="language-selector" onchange="setLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="ms">Malay</option>
+        </select>
+        
+        <div class="header">
+            <h1 class="main-heading">Tafsir Mikro</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 1000px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Tafsir Mikro</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Tafsir Al-Quran ringkas (struktur micro surah-surah quran)</strong><br>
+                Modul utama yang menyediakan tafsir terperinci untuk semua 114 surah Al-Quran. Memberi fokus pada struktur dan makna setiap surah secara mikro. Menyediakan pemahaman mendalam tentang ayat-ayat Al-Quran dengan konteks dan penjelasan yang jelas.
+            </p>
+        </div>
+        
+        <div class="device-warning">
+            <i class="material-icons">smartphone</i>
+            <span>Mobile optimized version. Enjoy your learning experience!</span>
+        </div>
+
+        <div class="search-container enhanced">
+            <div class="search-box enhanced">
+                <i class="material-icons search-icon enhanced">search</i>
+                <input type="text" id="surah-search" class="enhanced" placeholder="Search for surah by name or number..." />
+                <button id="clear-search" class="clear-search-btn enhanced">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+
+        <div class="surah-grid enhanced" id="surah-grid">
+        </div>
+
+    </div>
+    
+    <script src="script.js?v=1755482400"></script>
+    <script src="enhanced-script.js"></script>
+    <div class="theme-toggle-container">
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="material-icons theme-icon">brightness_4</i>
+        </button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,2902 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahih Bukhari-Kitab Azan(edisi2) - Maulana Asri</title>
+    <link rel="stylesheet" href="../../../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* Results Count */
+        .md-results-count {
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        /* Elevation classes */
+        .elevation-2 {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-4 {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-8 {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 960px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style><style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* Results Count */
+        .md-results-count {
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        /* Elevation classes */
+        .elevation-2 {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-4 {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-8 {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 960px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style></head>
+<body>
+    <div class="tutorial-container">
+        <a href="../../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Syarah Kitab Bukhari
+        </a>
+        <div class="header">
+            <h1>Sahih Bukhari - Kitab Azan (Edisi 2)</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Sahih Bukhari-Kitab Azan (Edisi2)</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kajian tentang Kitab al-Azan dari Sahih al-Bukhari</strong><br>
+                Edisi kedua kajian tentang Kitab al-Azan dengan kandungan yang lebih komprehensif. Memfokuskan kepada hadis-hadis berkaitan azan dan iqamah. Menjelaskan hukum-hukum solat berjemaah dan adab-adab masjid. Membincangkan waktu-waktu solat dan panggilannya berdasarkan hadis sahih.
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">            <div class="md-grid-item" data-session="1">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/uRHpQrTiZEk/mqdefault.jpg" 
+                 alt="Sesi 1-  Permulaan Azan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 1</span>
+            </div>
+            <h3 class="md-session-title">Sesi 1-  Permulaan Azan -</h3>
+            <a href="session1.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="2">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/6iujIYZA9n0/mqdefault.jpg" 
+                 alt="Sesi 2- Mengeraskan Suara Azan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 2</span>
+            </div>
+            <h3 class="md-session-title">Sesi 2- Mengeraskan Suara Azan -</h3>
+            <a href="session2.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="3">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/LyOaj6o6Sc8/mqdefault.jpg" 
+                 alt="Sesi 3-  Azan Itu Dua-dua Kali -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 3</span>
+            </div>
+            <h3 class="md-session-title">Sesi 3-  Azan Itu Dua-dua Kali -</h3>
+            <a href="session3.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="4">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/7__TFK1xjuM/mqdefault.jpg" 
+                 alt="Sesi 4- Iqamat Satu-satu Kecuali Ucapan "Qad Qa Matissolah" -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 4</span>
+            </div>
+            <h3 class="md-session-title">Sesi 4- Iqamat Satu-satu Kecuali Ucapan "Qad Qa Matissolah" -</h3>
+            <a href="session4.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="5">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/_rSe6-_LIt4/mqdefault.jpg" 
+                 alt="Sesi 5 - Mengeraskan Suara Azan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 5</span>
+            </div>
+            <h3 class="md-session-title">Sesi 5 - Mengeraskan Suara Azan -</h3>
+            <a href="session5.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="6">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/2rS6OTno_08/mqdefault.jpg" 
+                 alt="Sesi 6 - Nyawa Terpelihara Kerana Azan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 6</span>
+            </div>
+            <h3 class="md-session-title">Sesi 6 - Nyawa Terpelihara Kerana Azan -</h3>
+            <a href="session6.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="7">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/UAPrsL41ka4/mqdefault.jpg" 
+                 alt="Sesi 7 - Apa Yg Diucapkan Ketika Mendengar Suara Muazzin -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 7</span>
+            </div>
+            <h3 class="md-session-title">Sesi 7 - Apa Yg Diucapkan Ketika Mendengar Suara Muazzin -</h3>
+            <a href="session7.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="8">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/R2meIE5PmVY/mqdefault.jpg" 
+                 alt="Sesi 8 - Apa Yang Diucapkan Ketika Mendengar Suara Muazzin -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 8</span>
+            </div>
+            <h3 class="md-session-title">Sesi 8 - Apa Yang Diucapkan Ketika Mendengar Suara Muazzin -</h3>
+            <a href="session8.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="9">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/iL7XqFAipCc/mqdefault.jpg" 
+                 alt="Sesi 9 - Doa Sebaik Saja Selesai Azan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 9</span>
+            </div>
+            <h3 class="md-session-title">Sesi 9 - Doa Sebaik Saja Selesai Azan -</h3>
+            <a href="session9.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="10">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/VYvA3lnMbL0/mqdefault.jpg" 
+                 alt="Sesi 10 - Apa yang diucapkan ketika mendengar suara muazzin -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 10</span>
+            </div>
+            <h3 class="md-session-title">Sesi 10 - Apa yang diucapkan ketika mendengar suara muazzin -</h3>
+            <a href="session10.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="11">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/b_dAEn95Xzs/mqdefault.jpg" 
+                 alt="Sesi 11 -  Mencabut Undi Untuk Mengumandangkan Azan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 11</span>
+            </div>
+            <h3 class="md-session-title">Sesi 11 -  Mencabut Undi Untuk Mengumandangkan Azan -</h3>
+            <a href="session11.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="12">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/G6ufYCaWQ6g/mqdefault.jpg" 
+                 alt="Sesi 12 - Bercakap Ketika Azan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 12</span>
+            </div>
+            <h3 class="md-session-title">Sesi 12 - Bercakap Ketika Azan -</h3>
+            <a href="session12.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="13">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Pn82ysZPvyg/mqdefault.jpg" 
+                 alt="Sesi 13 - Azan Orang Buta  Apabila Ada Orang Memberitahu Kepadanya -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 13</span>
+            </div>
+            <h3 class="md-session-title">Sesi 13 - Azan Orang Buta  Apabila Ada Orang Memberitahu Kepadanya -</h3>
+            <a href="session13.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="14">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/_djIUpCql4k/mqdefault.jpg" 
+                 alt="Sesi 14 - Azan Sebelum Subuh -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 14</span>
+            </div>
+            <h3 class="md-session-title">Sesi 14 - Azan Sebelum Subuh -</h3>
+            <a href="session14.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="14">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/YTOEK_ji5kE/mqdefault.jpg" 
+                 alt="Sesi 14- MATAN HADITH - Sahih al-Bukhari - Kitab Azan" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 14</span>
+            </div>
+            <h3 class="md-session-title">Sesi 14- MATAN HADITH - Sahih al-Bukhari - Kitab Azan</h3>
+            <a href="session14.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="15">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/yxaIaJX9vZE/mqdefault.jpg" 
+                 alt="Sesi 15 - Berapa Lama Waktu Sepatutnya Di Antara Azan dan Iqamah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 15</span>
+            </div>
+            <h3 class="md-session-title">Sesi 15 - Berapa Lama Waktu Sepatutnya Di Antara Azan dan Iqamah -</h3>
+            <a href="session15.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="16">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/g_tXma6FBY4/mqdefault.jpg" 
+                 alt="Sesi 16 - Orang Yang Menunggu Iqamah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 16</span>
+            </div>
+            <h3 class="md-session-title">Sesi 16 - Orang Yang Menunggu Iqamah -</h3>
+            <a href="session16.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="17">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/nj4pZI9XyVs/mqdefault.jpg" 
+                 alt="Sesi 17 - Di antara Dua Azan Ada Solat Bagi Sesiapa Yang Mahu -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 17</span>
+            </div>
+            <h3 class="md-session-title">Sesi 17 - Di antara Dua Azan Ada Solat Bagi Sesiapa Yang Mahu -</h3>
+            <a href="session17.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="18">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/YVrpc28hXMQ/mqdefault.jpg" 
+                 alt="Sesi 18 - Azan Dan Iqamah Bagi Orang Musafir -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 18</span>
+            </div>
+            <h3 class="md-session-title">Sesi 18 - Azan Dan Iqamah Bagi Orang Musafir -</h3>
+            <a href="session18.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="18">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Y36gtSXB2wo/mqdefault.jpg" 
+                 alt="Sesi 18  - MATAN HADITH - Sahih al-Bukhari - Kitab Azan" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 18</span>
+            </div>
+            <h3 class="md-session-title">Sesi 18  - MATAN HADITH - Sahih al-Bukhari - Kitab Azan</h3>
+            <a href="session18.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="19">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/JJzIBIzl0r0/mqdefault.jpg" 
+                 alt="Sesi 19 - Azan Dan Iqamah Bagi Orang Musafir -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 19</span>
+            </div>
+            <h3 class="md-session-title">Sesi 19 - Azan Dan Iqamah Bagi Orang Musafir -</h3>
+            <a href="session19.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="20">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/STRZXDrHVmA/mqdefault.jpg" 
+                 alt="Sesi 20 -  Mu'azzin Meliuk Mulut  kanan Kiri & Menoleh Ketika Azan? -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 20</span>
+            </div>
+            <h3 class="md-session-title">Sesi 20 -  Mu'azzin Meliuk Mulut  kanan Kiri & Menoleh Ketika Azan? -</h3>
+            <a href="session20.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="21">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/2y0aPdC9A4g/mqdefault.jpg" 
+                 alt="Sesi 21 - Ucapan Seseorang, "Kami Terlepas Sholat.."  -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 21</span>
+            </div>
+            <h3 class="md-session-title">Sesi 21 - Ucapan Seseorang, "Kami Terlepas Sholat.."  -</h3>
+            <a href="session21.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="22">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/wuhqL17xx5w/mqdefault.jpg" 
+                 alt="Sesi 22 - Jemaah Berdiri Sebaik Mereka Nampak Imam Ketika Diiqamatkan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 22</span>
+            </div>
+            <h3 class="md-session-title">Sesi 22 - Jemaah Berdiri Sebaik Mereka Nampak Imam Ketika Diiqamatkan -</h3>
+            <a href="session22.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="23">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ffZBuHpIadM/mqdefault.jpg" 
+                 alt="Sesi 23 - Jemaah Berdiri Sebaik Mereka Nampak Imam Ketika Diiqamatkan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 23</span>
+            </div>
+            <h3 class="md-session-title">Sesi 23 - Jemaah Berdiri Sebaik Mereka Nampak Imam Ketika Diiqamatkan -</h3>
+            <a href="session23.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="24">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/bKwAWW6Q81w/mqdefault.jpg" 
+                 alt="Sesi 24 - Bolehkah Keluar Dari Masjid Kerana Sesuatu Keperluan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 24</span>
+            </div>
+            <h3 class="md-session-title">Sesi 24 - Bolehkah Keluar Dari Masjid Kerana Sesuatu Keperluan -</h3>
+            <a href="session24.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="25">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/eXNeeGmPywU/mqdefault.jpg" 
+                 alt="Sesi 25 - Imam Mengatakan "Teruslah Berada Di Tempat Kamu" -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 25</span>
+            </div>
+            <h3 class="md-session-title">Sesi 25 - Imam Mengatakan "Teruslah Berada Di Tempat Kamu" -</h3>
+            <a href="session25.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="26">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/SRi_eYu3OJI/mqdefault.jpg" 
+                 alt="Sesi 26 -  Kata-kata Seseorang, "Kami Belum Bersolat" -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 26</span>
+            </div>
+            <h3 class="md-session-title">Sesi 26 -  Kata-kata Seseorang, "Kami Belum Bersolat" -</h3>
+            <a href="session26.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="27">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/kqHyBe9oWM8/mqdefault.jpg" 
+                 alt="Sesi 27 - Imam Tiba-tiba Ada Hajat Selepas Diiqamatkan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 27</span>
+            </div>
+            <h3 class="md-session-title">Sesi 27 - Imam Tiba-tiba Ada Hajat Selepas Diiqamatkan -</h3>
+            <a href="session27.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="28">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/IpL015_ezyQ/mqdefault.jpg" 
+                 alt="Sesi 28 - Kewajipan Solat Berjemaah - Maulana Asri -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 28</span>
+            </div>
+            <h3 class="md-session-title">Sesi 28 - Kewajipan Solat Berjemaah - Maulana Asri -</h3>
+            <a href="session28.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="29">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/-kyRu6MMbyI/mqdefault.jpg" 
+                 alt="Sesi 29 - Kewajipan Solat Berjemaah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 29</span>
+            </div>
+            <h3 class="md-session-title">Sesi 29 - Kewajipan Solat Berjemaah -</h3>
+            <a href="session29.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="30">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/2URSg9Zv59k/mqdefault.jpg" 
+                 alt="Sesi 30 - Jika Ibu Seseorang Melarangnya Drpd Pergi Sembahyang Isya' -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 30</span>
+            </div>
+            <h3 class="md-session-title">Sesi 30 - Jika Ibu Seseorang Melarangnya Drpd Pergi Sembahyang Isya' -</h3>
+            <a href="session30.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="31">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/iFTc4u8goxE/mqdefault.jpg" 
+                 alt="Sesi 31 - Kelebihan Solat Jemaah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 31</span>
+            </div>
+            <h3 class="md-session-title">Sesi 31 - Kelebihan Solat Jemaah -</h3>
+            <a href="session31.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="32">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/3Eiy7bQZEJE/mqdefault.jpg" 
+                 alt="Sesi 32 - Kelebihan Solat Jemaah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 32</span>
+            </div>
+            <h3 class="md-session-title">Sesi 32 - Kelebihan Solat Jemaah -</h3>
+            <a href="session32.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="33">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Nn-nq85FNWQ/mqdefault.jpg" 
+                 alt="Sesi 33 - Kelebihan Solat Jemaah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 33</span>
+            </div>
+            <h3 class="md-session-title">Sesi 33 - Kelebihan Solat Jemaah -</h3>
+            <a href="session33.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="34">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/lRKWl-DfVdA/mqdefault.jpg" 
+                 alt="Sesi 34 - Kelebihan Solat Subuh  Dengan Berjema'ah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 34</span>
+            </div>
+            <h3 class="md-session-title">Sesi 34 - Kelebihan Solat Subuh  Dengan Berjema'ah -</h3>
+            <a href="session34.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="35">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Duxx8kZgLug/mqdefault.jpg" 
+                 alt="Sesi 35 - Kelebihan Solat Subuh  Dengan Berjema'ah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 35</span>
+            </div>
+            <h3 class="md-session-title">Sesi 35 - Kelebihan Solat Subuh  Dengan Berjema'ah -</h3>
+            <a href="session35.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="36">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/XCwA3smIU8g/mqdefault.jpg" 
+                 alt="Sesi 36 - Kelebihan Bersegera Pergi Untuk Bersembahyang Zohor -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 36</span>
+            </div>
+            <h3 class="md-session-title">Sesi 36 - Kelebihan Bersegera Pergi Untuk Bersembahyang Zohor -</h3>
+            <a href="session36.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="37">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/5vhuPJAs9T0/mqdefault.jpg" 
+                 alt="Sesi 37 - Kelebihan Bersegera Pergi Untuk Bersembahyang Zohor -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 37</span>
+            </div>
+            <h3 class="md-session-title">Sesi 37 - Kelebihan Bersegera Pergi Untuk Bersembahyang Zohor -</h3>
+            <a href="session37.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="38">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/2BZQSgFxVtg/mqdefault.jpg" 
+                 alt="Sesi 38 - Kelebihan Bersegera Peri Untuk Bersembahyang Zohor -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 38</span>
+            </div>
+            <h3 class="md-session-title">Sesi 38 - Kelebihan Bersegera Peri Untuk Bersembahyang Zohor -</h3>
+            <a href="session38.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="39">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/_jich9_WOrk/mqdefault.jpg" 
+                 alt="Sesi 39 - Mengharapkan Pahala Dari Langkah-langkah Kaki -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 39</span>
+            </div>
+            <h3 class="md-session-title">Sesi 39 - Mengharapkan Pahala Dari Langkah-langkah Kaki -</h3>
+            <a href="session39.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="40">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/iYgTZjHj9jg/mqdefault.jpg" 
+                 alt="Sesi 40 - Keutamaan Solat Isyaa' berjemaah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 40</span>
+            </div>
+            <h3 class="md-session-title">Sesi 40 - Keutamaan Solat Isyaa' berjemaah -</h3>
+            <a href="session40.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="41">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/urg4KemWxpk/mqdefault.jpg" 
+                 alt="Sesi 41 - Keutamaan Solat Isyaa' berjemaah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 41</span>
+            </div>
+            <h3 class="md-session-title">Sesi 41 - Keutamaan Solat Isyaa' berjemaah -</h3>
+            <a href="session41.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="42">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/nIafRJRSU3s/mqdefault.jpg" 
+                 alt="Sesi 42 - Dua Orang  Keatas Sudah Dikira Berjemaah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 42</span>
+            </div>
+            <h3 class="md-session-title">Sesi 42 - Dua Orang  Keatas Sudah Dikira Berjemaah -</h3>
+            <a href="session42.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="43">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/aqqK3nIdDw8/mqdefault.jpg" 
+                 alt="Sesi 43 - Kelebihan  Duduk Di Dalam Masjid Menunggu Sembahyang -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 43</span>
+            </div>
+            <h3 class="md-session-title">Sesi 43 - Kelebihan  Duduk Di Dalam Masjid Menunggu Sembahyang -</h3>
+            <a href="session43.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="44">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/fbbpdzbJlxU/mqdefault.jpg" 
+                 alt="Sesi 44 - Kelebihan  Duduk Di Dalam Masjid Mennggu Sembahyang -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 44</span>
+            </div>
+            <h3 class="md-session-title">Sesi 44 - Kelebihan  Duduk Di Dalam Masjid Mennggu Sembahyang -</h3>
+            <a href="session44.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="45">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/rOxFPyRpNro/mqdefault.jpg" 
+                 alt="Sesi 45 - Kelebihan  Duduk Di Dalam Masjid Mennggu Sembahyang -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 45</span>
+            </div>
+            <h3 class="md-session-title">Sesi 45 - Kelebihan  Duduk Di Dalam Masjid Mennggu Sembahyang -</h3>
+            <a href="session45.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="46">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Np1yftNlWns/mqdefault.jpg" 
+                 alt="Sesi 46 - Keutamaan Ke Masjid (Untuk SolatJemaah) Waktu Pagi & Petang -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 46</span>
+            </div>
+            <h3 class="md-session-title">Sesi 46 - Keutamaan Ke Masjid (Untuk SolatJemaah) Waktu Pagi & Petang -</h3>
+            <a href="session46.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="47">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/jakKKRGQg7c/mqdefault.jpg" 
+                 alt="Sesi 47 -Bila Diiqamat Untuk Solat Fardhu, Tiada Lagi Solat Lain -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 47</span>
+            </div>
+            <h3 class="md-session-title">Sesi 47 -Bila Diiqamat Untuk Solat Fardhu, Tiada Lagi Solat Lain -</h3>
+            <a href="session47.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="48">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/U5gJtVRSNJs/mqdefault.jpg" 
+                 alt="Sesi 48 - Bila Diiqamat Untuk Solat Fardhu, Tiada Lagi Solat Lain -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 48</span>
+            </div>
+            <h3 class="md-session-title">Sesi 48 - Bila Diiqamat Untuk Solat Fardhu, Tiada Lagi Solat Lain -</h3>
+            <a href="session48.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="49">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/E2djNBZtCRs/mqdefault.jpg" 
+                 alt="Sesi 49 - Had Orang Sakit Yang Dapat Menghadiri Shalat Jemaah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 49</span>
+            </div>
+            <h3 class="md-session-title">Sesi 49 - Had Orang Sakit Yang Dapat Menghadiri Shalat Jemaah -</h3>
+            <a href="session49.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="50">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/q2qCfEoZ4jg/mqdefault.jpg" 
+                 alt="Sesi 50 - Had Orang Sakit Yang Dapat Menghadiri Solat Jemaah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 50</span>
+            </div>
+            <h3 class="md-session-title">Sesi 50 - Had Orang Sakit Yang Dapat Menghadiri Solat Jemaah -</h3>
+            <a href="session50.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="51">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/e0vp7Jtn4sk/mqdefault.jpg" 
+                 alt="Sesi 51 - Boleh solat Di Rumah  Ketika Hujan & Ketika Ada Keuzuran -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 51</span>
+            </div>
+            <h3 class="md-session-title">Sesi 51 - Boleh solat Di Rumah  Ketika Hujan & Ketika Ada Keuzuran -</h3>
+            <a href="session51.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="52">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/POwXn5fvgsc/mqdefault.jpg" 
+                 alt="Sesi 52 - Boleh solat Di Rumah  Ketika Hujan & Ketika Ada Keuzuran -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 52</span>
+            </div>
+            <h3 class="md-session-title">Sesi 52 - Boleh solat Di Rumah  Ketika Hujan & Ketika Ada Keuzuran -</h3>
+            <a href="session52.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="53">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/qFMZTbOBRl8/mqdefault.jpg" 
+                 alt="Sesi 53 - Adakah Imam Akan Bersolat Bersama Dengan Orang Yang Hadir? -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 53</span>
+            </div>
+            <h3 class="md-session-title">Sesi 53 - Adakah Imam Akan Bersolat Bersama Dengan Orang Yang Hadir? -</h3>
+            <a href="session53.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="54">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/1czTOc0jueI/mqdefault.jpg" 
+                 alt="Sesi 54 - Adakah Imam Akan Bersolat Bersama Dengan Orang Yang Hadir? -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 54</span>
+            </div>
+            <h3 class="md-session-title">Sesi 54 - Adakah Imam Akan Bersolat Bersama Dengan Orang Yang Hadir? -</h3>
+            <a href="session54.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="55">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/DlmxAF2QkdQ/mqdefault.jpg" 
+                 alt="Sesi 55 - Bila makanan  terhidang, makan sebelum solat maghrib -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 55</span>
+            </div>
+            <h3 class="md-session-title">Sesi 55 - Bila makanan  terhidang, makan sebelum solat maghrib -</h3>
+            <a href="session55.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="56">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/XpaQr9X-Sws/mqdefault.jpg" 
+                 alt="Sesi 56 - Bila makanan  terhidang, makan sebelum solat maghrib -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 56</span>
+            </div>
+            <h3 class="md-session-title">Sesi 56 - Bila makanan  terhidang, makan sebelum solat maghrib -</h3>
+            <a href="session56.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="57">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/y2hOhXZO0L0/mqdefault.jpg" 
+                 alt="Sesi 57 - Imam Dipanggil  Solat Di Tangannya  Ada Makanan Yg  Dimakan -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 57</span>
+            </div>
+            <h3 class="md-session-title">Sesi 57 - Imam Dipanggil  Solat Di Tangannya  Ada Makanan Yg  Dimakan -</h3>
+            <a href="session57.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="58">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/lOByXP9VO_c/mqdefault.jpg" 
+                 alt="Sesi 58 - Orang bantu keluarganya lalu diiqamatkan, dia  keluar solat -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 58</span>
+            </div>
+            <h3 class="md-session-title">Sesi 58 - Orang bantu keluarganya lalu diiqamatkan, dia  keluar solat -</h3>
+            <a href="session58.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="59">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/KcCtWXSmfdY/mqdefault.jpg" 
+                 alt="Sesi 59 - Mengimami solat jemaah bermaksud tunjuk tatacara solat nabi -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 59</span>
+            </div>
+            <h3 class="md-session-title">Sesi 59 - Mengimami solat jemaah bermaksud tunjuk tatacara solat nabi -</h3>
+            <a href="session59.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="60">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/mh82VrM82WY/mqdefault.jpg" 
+                 alt="Sesi 60 - Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 60</span>
+            </div>
+            <h3 class="md-session-title">Sesi 60 - Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam -</h3>
+            <a href="session60.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="61">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/FahO9vbvtV8/mqdefault.jpg" 
+                 alt="Sesi 61 - Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 61</span>
+            </div>
+            <h3 class="md-session-title">Sesi 61 - Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam -</h3>
+            <a href="session61.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="62">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/FO3dZKJwhXE/mqdefault.jpg" 
+                 alt="Sesi 62 - Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 62</span>
+            </div>
+            <h3 class="md-session-title">Sesi 62 - Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam -</h3>
+            <a href="session62.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="63">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/DvId3T7NpTM/mqdefault.jpg" 
+                 alt="Sesi 63 - Orang Yang Imamkan  Solat, Boleh Mundur, Solat Tetap Sah -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 63</span>
+            </div>
+            <h3 class="md-session-title">Sesi 63 - Orang Yang Imamkan  Solat, Boleh Mundur, Solat Tetap Sah -</h3>
+            <a href="session63.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="64">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/4QFf5z5oejA/mqdefault.jpg" 
+                 alt="Sesi 64 -Jika Kemampuan Baca Quran Sama, Yg Lebih Tua Berhak Jadi Imam -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 64</span>
+            </div>
+            <h3 class="md-session-title">Sesi 64 -Jika Kemampuan Baca Quran Sama, Yg Lebih Tua Berhak Jadi Imam -</h3>
+            <a href="session64.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="65">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/pk3oFBVcvzQ/mqdefault.jpg" 
+                 alt="Sesi 65 -Bila Ketua Negeri Mengunjungi Suatu Kaum Dia Boleh Imami Mereka-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 65</span>
+            </div>
+            <h3 class="md-session-title">Sesi 65 -Bila Ketua Negeri Mengunjungi Suatu Kaum Dia Boleh Imami Mereka-</h3>
+            <a href="session65.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="66">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/I17Qil7k5ZE/mqdefault.jpg" 
+                 alt="Sesi 66 -Bila Ketua Negeri Mengunjungi Suatu Kaum Dia Boleh Imami Mereka-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 66</span>
+            </div>
+            <h3 class="md-session-title">Sesi 66 -Bila Ketua Negeri Mengunjungi Suatu Kaum Dia Boleh Imami Mereka-</h3>
+            <a href="session66.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="67">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/rdmq83kwYys/mqdefault.jpg" 
+                 alt="Sesi 67 - Sesungguhnya Imam Dilantik Untuk Diikuti -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 67</span>
+            </div>
+            <h3 class="md-session-title">Sesi 67 - Sesungguhnya Imam Dilantik Untuk Diikuti -</h3>
+            <a href="session67.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="68">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/rJMArjj87_k/mqdefault.jpg" 
+                 alt="Sesi 68 - Sesungguhnya Imam Dilantik Untuk Diikuti -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 68</span>
+            </div>
+            <h3 class="md-session-title">Sesi 68 - Sesungguhnya Imam Dilantik Untuk Diikuti -</h3>
+            <a href="session68.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="69">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/CE3BYhUtypE/mqdefault.jpg" 
+                 alt="Sesi 69 - Sesungguhnya Imam Dilantik Untuk Diikuti -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 69</span>
+            </div>
+            <h3 class="md-session-title">Sesi 69 - Sesungguhnya Imam Dilantik Untuk Diikuti -</h3>
+            <a href="session69.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="70">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ZxVtWqqiJk8/mqdefault.jpg" 
+                 alt="Sesi 70 - Bilakah Orang Di Belakang Imam Bersujud? -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 70</span>
+            </div>
+            <h3 class="md-session-title">Sesi 70 - Bilakah Orang Di Belakang Imam Bersujud? -</h3>
+            <a href="session70.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="71">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/sLDMMBfMeHo/mqdefault.jpg" 
+                 alt="Sesi 71 - Dosa Orang Yang Mengangkat Kepalanya Sebelum Imam -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 71</span>
+            </div>
+            <h3 class="md-session-title">Sesi 71 - Dosa Orang Yang Mengangkat Kepalanya Sebelum Imam -</h3>
+            <a href="session71.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="72">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/g8wxBcuRobY/mqdefault.jpg" 
+                 alt="Sesi 72 - (Hukum) Hamba Atau Maula (Bekas Hamba) Menjadi Imam (Sholat) -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 72</span>
+            </div>
+            <h3 class="md-session-title">Sesi 72 - (Hukum) Hamba Atau Maula (Bekas Hamba) Menjadi Imam (Sholat) -</h3>
+            <a href="session72.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="73">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/fI9_ynnveWE/mqdefault.jpg" 
+                 alt="Sesi 73 - Jika Imam Tidak Bersolat Dengan Sempurna  -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 73</span>
+            </div>
+            <h3 class="md-session-title">Sesi 73 - Jika Imam Tidak Bersolat Dengan Sempurna  -</h3>
+            <a href="session73.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="74">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/iZ6oWWH7BVw/mqdefault.jpg" 
+                 alt="Sesi 74-Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam-[Sahih Bukhari-Kitab Azan" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 74</span>
+            </div>
+            <h3 class="md-session-title">Sesi 74-Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam-[Sahih Bukhari-Kitab Azan</h3>
+            <a href="session74.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="75">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/MPQ1f3acp20/mqdefault.jpg" 
+                 alt="Sesi 75-Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam-[Sahih Bukhari-Kitab Azan" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 75</span>
+            </div>
+            <h3 class="md-session-title">Sesi 75-Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam-[Sahih Bukhari-Kitab Azan</h3>
+            <a href="session75.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="76">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/yW2B4IUuOuc/mqdefault.jpg" 
+                 alt="Sesi 76-Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam-[Sahih Bukhari-Kitab Azan" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 76</span>
+            </div>
+            <h3 class="md-session-title">Sesi 76-Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam-[Sahih Bukhari-Kitab Azan</h3>
+            <a href="session76.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="77">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/zlxzM5FXtUA/mqdefault.jpg" 
+                 alt="Sesi 77- Makmum Berdiri Sebelah Kanan Imam Sejajar Dengannya, Jika Berdua-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 77</span>
+            </div>
+            <h3 class="md-session-title">Sesi 77- Makmum Berdiri Sebelah Kanan Imam Sejajar Dengannya, Jika Berdua-</h3>
+            <a href="session77.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="78">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/_0GmJCaa8Cs/mqdefault.jpg" 
+                 alt="Sesi 78 - Tidak Batal Solat Imam Alihkan Dari Kiri Ke  Kanan Makmum -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 78</span>
+            </div>
+            <h3 class="md-session-title">Sesi 78 - Tidak Batal Solat Imam Alihkan Dari Kiri Ke  Kanan Makmum -</h3>
+            <a href="session78.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="79">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/0wh-A1Xe35w/mqdefault.jpg" 
+                 alt="Sesi 79 -Hukum Berniat Jadi Imam Selepas Memulakan Solat Bila Ada Makmum -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 79</span>
+            </div>
+            <h3 class="md-session-title">Sesi 79 -Hukum Berniat Jadi Imam Selepas Memulakan Solat Bila Ada Makmum -</h3>
+            <a href="session79.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="80">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/AI2fe52WXf4/mqdefault.jpg" 
+                 alt="Sesi 80 -Imam Ringkaskan Bacaan Ketika Berdiri, Tetap Sempurnakan Rukuk & Sujud-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 80</span>
+            </div>
+            <h3 class="md-session-title">Sesi 80 -Imam Ringkaskan Bacaan Ketika Berdiri, Tetap Sempurnakan Rukuk & Sujud-</h3>
+            <a href="session80.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="81">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ECwakZvM5jc/mqdefault.jpg" 
+                 alt="Sesi 81 - Seseorang Boleh Panjangkan Solat Sekehendaknya Jika Solat Sendirian-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 81</span>
+            </div>
+            <h3 class="md-session-title">Sesi 81 - Seseorang Boleh Panjangkan Solat Sekehendaknya Jika Solat Sendirian-</h3>
+            <a href="session81.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="82">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/9VRBn0DQ1JM/mqdefault.jpg" 
+                 alt="Sesi 82 - Orang Yang Mengadu Kepada Pemimpinnya Bila Imam Memanjangkan Solatnya-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 82</span>
+            </div>
+            <h3 class="md-session-title">Sesi 82 - Orang Yang Mengadu Kepada Pemimpinnya Bila Imam Memanjangkan Solatnya-</h3>
+            <a href="session82.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="83">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/iTN6GXMOiwY/mqdefault.jpg" 
+                 alt="Sesi 83- Orang Yang Mengadu Kepada Pemimpinnya Bila Imam Memanjangkan Solatnya-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 83</span>
+            </div>
+            <h3 class="md-session-title">Sesi 83- Orang Yang Mengadu Kepada Pemimpinnya Bila Imam Memanjangkan Solatnya-</h3>
+            <a href="session83.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="84">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/JpDn2LNDkgc/mqdefault.jpg" 
+                 alt="Sesi 84 -  Memendekkan Bacaan Di Dalam Solat Di Samping Menyempurnakan Solat -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 84</span>
+            </div>
+            <h3 class="md-session-title">Sesi 84 -  Memendekkan Bacaan Di Dalam Solat Di Samping Menyempurnakan Solat -</h3>
+            <a href="session84.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="85">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/XKbzLRjo6EE/mqdefault.jpg" 
+                 alt="Sesi 85-Orang Yang Percepatkan Shalatnya Ketika Mendengar Tangisan Kanak-kanak -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 85</span>
+            </div>
+            <h3 class="md-session-title">Sesi 85-Orang Yang Percepatkan Shalatnya Ketika Mendengar Tangisan Kanak-kanak -</h3>
+            <a href="session85.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="86">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/WXKbjY9t8po/mqdefault.jpg" 
+                 alt="Sesi 86 - Jadi Imam Kepada Sekumpulan Orang Selepas Mengerjakan Solat Fardhu -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 86</span>
+            </div>
+            <h3 class="md-session-title">Sesi 86 - Jadi Imam Kepada Sekumpulan Orang Selepas Mengerjakan Solat Fardhu -</h3>
+            <a href="session86.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="87">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/wR01v6DZOzE/mqdefault.jpg" 
+                 alt="Sesi 87 - Orang Yang Memperdengarkan Takbir Imam Kepada Orang Ramai -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 87</span>
+            </div>
+            <h3 class="md-session-title">Sesi 87 - Orang Yang Memperdengarkan Takbir Imam Kepada Orang Ramai -</h3>
+            <a href="session87.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="88">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/mYQsa4nJX88/mqdefault.jpg" 
+                 alt="Sesi 88-Orang Yang Ikuti Solat Imam,Sedangkan Orang Lain Pula Mengikuti Solatnya- Bukhari-Kitab Azan" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 88</span>
+            </div>
+            <h3 class="md-session-title">Sesi 88-Orang Yang Ikuti Solat Imam,Sedangkan Orang Lain Pula Mengikuti Solatnya- Bukhari-Kitab Azan</h3>
+            <a href="session88.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="89">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/YDzeoOntvio/mqdefault.jpg" 
+                 alt="Sesi 89-Orang Yang Ikuti Solat Imam,Sedangkan Orang Lain Pula Mengikuti Solatnya- Bukhari-Kitab Azan" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 89</span>
+            </div>
+            <h3 class="md-session-title">Sesi 89-Orang Yang Ikuti Solat Imam,Sedangkan Orang Lain Pula Mengikuti Solatnya- Bukhari-Kitab Azan</h3>
+            <a href="session89.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="90">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/SBCTMczviW0/mqdefault.jpg" 
+                 alt="Sesi 90 - Bolehkah Imam Menerima Keterangan Ma'mum Jika Ia Ragu? -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 90</span>
+            </div>
+            <h3 class="md-session-title">Sesi 90 - Bolehkah Imam Menerima Keterangan Ma'mum Jika Ia Ragu? -</h3>
+            <a href="session90.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="91">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/WJRAcSCIV9Q/mqdefault.jpg" 
+                 alt="Sesi 91 - Apabila Imam Menangis Dalam Shalat -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 91</span>
+            </div>
+            <h3 class="md-session-title">Sesi 91 - Apabila Imam Menangis Dalam Shalat -</h3>
+            <a href="session91.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="92">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/W1WmZlQUFBo/mqdefault.jpg" 
+                 alt="Sesi 92 - Meluruskan Shaf-Shaf Ketika Diiqamah Dan Sesudahnya -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 92</span>
+            </div>
+            <h3 class="md-session-title">Sesi 92 - Meluruskan Shaf-Shaf Ketika Diiqamah Dan Sesudahnya -</h3>
+            <a href="session92.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="93">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ij5WwpQJ7RY/mqdefault.jpg" 
+                 alt="Sesi 93 - Imam Menghadap Makmum Ketika Meluruskan Shaf -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 93</span>
+            </div>
+            <h3 class="md-session-title">Sesi 93 - Imam Menghadap Makmum Ketika Meluruskan Shaf -</h3>
+            <a href="session93.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="94">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/NKXBohqUxg4/mqdefault.jpg" 
+                 alt="Sesi 94 - (Pahala) Shaf Pertama -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 94</span>
+            </div>
+            <h3 class="md-session-title">Sesi 94 - (Pahala) Shaf Pertama -</h3>
+            <a href="session94.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="95">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/TmTG23yeVQ0/mqdefault.jpg" 
+                 alt="Sesi 95 - Meluruskan Shaf-" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 95</span>
+            </div>
+            <h3 class="md-session-title">Sesi 95 - Meluruskan Shaf-</h3>
+            <a href="session95.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="96">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/qZSBNi03ib4/mqdefault.jpg" 
+                 alt="Sesi 96 - Dosa Orang Yang Tidak Sempurnakan Shaf & Sejajarkan Bahu Dengan Bahu -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 96</span>
+            </div>
+            <h3 class="md-session-title">Sesi 96 - Dosa Orang Yang Tidak Sempurnakan Shaf & Sejajarkan Bahu Dengan Bahu -</h3>
+            <a href="session96.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="96">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/xVhxo85S5H4/mqdefault.jpg" 
+                 alt="Sesi 96 - Dosa Orang Yang Tidak Sempurnakan Shaf & Sejajarkan Bahu Dengan Bahu -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 96</span>
+            </div>
+            <h3 class="md-session-title">Sesi 96 - Dosa Orang Yang Tidak Sempurnakan Shaf & Sejajarkan Bahu Dengan Bahu -</h3>
+            <a href="session96.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="97">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/dG_ZCkPhoGs/mqdefault.jpg" 
+                 alt="Sesi 97 - Merapatkan (Sejajarkan) Bahu Dengan Bahu Dan Kaki Dengan Kaki Dalam Shaf -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 97</span>
+            </div>
+            <h3 class="md-session-title">Sesi 97 - Merapatkan (Sejajarkan) Bahu Dengan Bahu Dan Kaki Dengan Kaki Dalam Shaf -</h3>
+            <a href="session97.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="98">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/t85r2ACQgmE/mqdefault.jpg" 
+                 alt="Sesi 98 -Wanita Bersolat Sendirian (Di Belakang Saf Lelaki) Dikira Sebagai Satu Saf -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 98</span>
+            </div>
+            <h3 class="md-session-title">Sesi 98 -Wanita Bersolat Sendirian (Di Belakang Saf Lelaki) Dikira Sebagai Satu Saf -</h3>
+            <a href="session98.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="99">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/dAO7gMQqnh4/mqdefault.jpg" 
+                 alt="Sesi 99 -Jika Di Antara Imam Dan Ma'mum Ada Dinding Atau Penghadang -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 99</span>
+            </div>
+            <h3 class="md-session-title">Sesi 99 -Jika Di Antara Imam Dan Ma'mum Ada Dinding Atau Penghadang -</h3>
+            <a href="session99.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="100">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/wFWasIpvyS8/mqdefault.jpg" 
+                 alt="Sesi 100 - Solat Malam -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 100</span>
+            </div>
+            <h3 class="md-session-title">Sesi 100 - Solat Malam -</h3>
+            <a href="session100.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="101">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/iPCGgLXlqcM/mqdefault.jpg" 
+                 alt="Sesi 101 -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 101</span>
+            </div>
+            <h3 class="md-session-title">Sesi 101 -</h3>
+            <a href="session101.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="102">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/w00DLBzobu0/mqdefault.jpg" 
+                 alt="Sesi 102 -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 102</span>
+            </div>
+            <h3 class="md-session-title">Sesi 102 -</h3>
+            <a href="session102.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="104">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/iMoU7o5hYKM/mqdefault.jpg" 
+                 alt="Sesi 104 -" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 104</span>
+            </div>
+            <h3 class="md-session-title">Sesi 104 -</h3>
+            <a href="session104.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>        </div>        <div class="md-results-count" id="md-results-count">106 videos tersedia</div>        <script>
+        let allSessions = [];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('session-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            sessionsToShow.forEach(session => {
+                const card = document.createElement('div');
+                card.className = 'session-card';
+                card.innerHTML = `
+                    <div class="session-number">Sesi ${session.number}</div>
+                    <div class="session-title">${session.title}</div>
+                    <div class="session-description">${session.description}</div>
+                    <a href="session${session.number}.html" class="watch-btn">Tonton Video</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return allSessions;
+            
+            return allSessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value;
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.add('visible');
+            } else {
+                clearButton.classList.remove('visible');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.remove('visible');
+            displaySessions(allSessions);
+        });
+
+        // Initialize - Load session data from JSON file
+        fetch('sahih_bukhari_kitab_azan_edisi2.json')
+            .then(response => response.json())
+            .then(data => {
+                allSessions = data.sessions.map(session => ({
+                    number: session.id,
+                    title: session.title,
+                    description: session.description,
+                    videoId: session.videoId
+                }));
+                displaySessions(allSessions);
+            })
+            .catch(error => {
+                console.error('Error loading session data:', error);
+                // Fallback to sample data if JSON fails to load
+                const sessions = [];
+                for (let i = 1; i <= 103; i++) {
+                    sessions.push({
+                        number: i,
+                        title: `Sesi ${i}`,
+                        description: `Kandungan untuk sesi ${i} tentang tajuk berkaitan azan dalam kitab Sahih Bukhari.`
+                    });
+                }
+                allSessions = sessions;
+                displaySessions(allSessions);
+            });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

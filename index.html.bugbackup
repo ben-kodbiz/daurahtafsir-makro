@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daurah Hadis dan Quran</title>
+    <link rel="stylesheet" href="unified-sahih-bukhari-theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div class="tutorial-container">
+        <div class="header">
+            <h1>Daurah Hadis dan Quran oleh Maulana Asri (darul Kautsar)</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Daurah Hadis dan Quran</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Modul pembelajaran komprehensif tentang Al-Quran dan Hadis</strong><br>
+                Platform pembelajaran yang menyediakan berbagai modul kajian tentang Al-Quran dan Hadis. Menyediakan akses mudah ke berbagai kitab hadis dan tafsir Al-Quran dengan penjelasan yang mendalam dan terstruktur. Mencakup berbagai topik mulai dari tafsir mikro surah-surah Al-Quran hingga kajian kitab-kitab hadis.
+            </p>
+        </div>
+        
+        <div class="widget-container">
+            <a href="syarah_quran/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">menu_book</i>
+                <span class="widget-label enhanced">Syarah Quran</span>
+            </a>
+            <a href="syarah_hadis/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">library_books</i>
+                <span class="widget-label enhanced">Syarah Hadis</span>
+            </a>
+            <a href="usul_dirayat_hadis/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">fact_check</i>
+                <span class="widget-label enhanced">Usul Dirayat Hadis</span>
+            </a>
+            <a href="jami_at_tirmizi/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">library_books</i>
+                <span class="widget-label enhanced">Jami at-Tirmizi (Kitab Thaharah)</span>
+            </a>
+            <a href="ilal_at_tirmizi/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">error_outline</i>
+                <span class="widget-label enhanced">Ilal at-Tirmizi</span>
+            </a>
+            <a href="sahih_muslim_kitab_haji/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">flight_takeoff</i>
+                <span class="widget-label enhanced">Sahih Muslim-Kitab Haji</span>
+            </a>
+        </div>
+        
+        <script>
+            // Redirect to Syarah Quran after a short delay
+            setTimeout(function() {
+                window.location.href = "syarah_quran/index.html";
+            }, 3000);
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahih Bukhari-Kitab Perang - Maulana Asri</title>
+    <link rel="stylesheet" href="../../../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Custom enhancements for better visual appeal */
+        .header {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .module-description {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .search-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Enhanced session card styling */
+        .session-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .session-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .watch-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .watch-btn:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Syarah Kitab Bukhari
+        </a>
+        <div class="header">
+            <h1>Sahih Bukhari - Kitab Perang</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px;">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Sahih Bukhari-Kitab Perang</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kajian tentang Kitab al-Maghazi (Peperangan) dari Sahih al-Bukhari</strong><br>
+                Modul yang memfokuskan kepada kajian hadis-hadis berkaitan peperangan dalam koleksi Sahih al-Bukhari. Merangkumi tatacara, hukum-hukum, dan kelebihan berkaitan dengan peperangan Islam. Menyediakan penjelasan mendalam tentang konteks dan aplikasi hadis-hadis sahih dalam situasi peperangan. Membincangkan strategi dan prinsip ketenteraan Islam berdasarkan sunnah Nabi SAW.
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="session-grid" id="session-grid">
+        </div>
+    </div>
+    <script>
+        let allSessions = [];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('session-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            sessionsToShow.forEach(session => {
+                const card = document.createElement('div');
+                card.className = 'session-card';
+                card.innerHTML = `
+                    <div class="session-number">Sesi ${session.number}</div>
+                    <div class="session-title">${session.title}</div>
+                    <div class="session-description">${session.description}</div>
+                    <a href="session${session.number}.html" class="watch-btn">Tonton Video</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return allSessions;
+            
+            return allSessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value;
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.add('visible');
+            } else {
+                clearButton.classList.remove('visible');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.remove('visible');
+            displaySessions(allSessions);
+        });
+
+        // Initialize - Load session data from JSON file
+        fetch('sahih_bukhari_kitab_perang.json')
+            .then(response => response.json())
+            .then(data => {
+                allSessions = data.sessions.map(session => ({
+                    number: session.id,
+                    title: session.title,
+                    description: session.description,
+                    videoId: session.videoId
+                }));
+                displaySessions(allSessions);
+            })
+            .catch(error => {
+                console.error('Error loading session data:', error);
+                // Fallback to sample data if JSON fails to load
+                const sessions = [];
+                for (let i = 1; i <= 124; i++) {
+                    sessions.push({
+                        number: i,
+                        title: `Sesi ${i}`,
+                        description: `Kandungan untuk sesi ${i} tentang tajuk berkaitan peperangan dalam kitab Sahih Bukhari.`
+                    });
+                }
+                allSessions = sessions;
+                displaySessions(allSessions);
+            });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

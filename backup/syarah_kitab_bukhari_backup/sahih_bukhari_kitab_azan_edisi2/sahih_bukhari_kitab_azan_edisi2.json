@@ -1,0 +1,624 @@
+{
+  "title": "Sahih Bukhari-Kitab Azan(edisi2)",
+  "description": "Syarahan Kitab Hadith Sahih al-Bukhari - Kitab Azan (Edisi 2) oleh Maulana Muhd Asri Yusoff",
+  "sessions": [
+    {
+      "id": 1,
+      "title": "Sesi 1 - Permulaan Azan",
+      "videoId": "uRHpQrTiZEk",
+      "description": "Permulaan Azan - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 2,
+      "title": "Sesi 2 - Mengeraskan Suara Azan",
+      "videoId": "6iujIYZA9n0",
+      "description": "Mengeraskan Suara Azan - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 3,
+      "title": "Sesi 3 - Azan Itu Dua-dua Kali",
+      "videoId": "LyOaj6o6Sc8",
+      "description": "Azan Itu Dua-dua Kali - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 4,
+      "title": "Sesi 4 - Iqamat Satu-satu Kecuali Ucapan 'Qad Qa Matissolah'",
+      "videoId": "7__TFK1xjuM",
+      "description": "Iqamat Satu-satu Kecuali Ucapan 'Qad Qa Matissolah' - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 5,
+      "title": "Sesi 5 - Mengeraskan Suara Azan",
+      "videoId": "_rSe6-_LIt4",
+      "description": "Mengeraskan Suara Azan - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 6,
+      "title": "Sesi 6 - Nyawa Terpelihara Kerana Azan",
+      "videoId": "2rS6OTno_08",
+      "description": "Nyawa Terpelihara Kerana Azan - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 7,
+      "title": "Sesi 7 - Apa Yg Diucapkan Ketika Mendengar Suara Muazzin",
+      "videoId": "UAPrsL41ka4",
+      "description": "Apa Yg Diucapkan Ketika Mendengar Suara Muazzin - [Sahih Bukhari - Kitab Azan - Kitab Azan]"
+    },
+    {
+      "id": 8,
+      "title": "Sesi 8 - Apa Yang Diucapkan Ketika Mendengar Suara Muazzin",
+      "videoId": "R2meIE5PmVY",
+      "description": "Apa Yang Diucapkan Ketika Mendengar Suara Muazzin - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 9,
+      "title": "Sesi 9 - Doa Sebaik Saja Selesai Azan",
+      "videoId": "iL7XqFAipCc",
+      "description": "Doa Sebaik Saja Selesai Azan - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 10,
+      "title": "Sesi 10 - Apa yang diucapkan ketika mendengar suara muazzin",
+      "videoId": "VYvA3lnMbL0",
+      "description": "Apa yang diucapkan ketika mendengar suara muazzin - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 11,
+      "title": "Sesi 11 - Mencabut Undi Untuk Mengumandangkan Azan",
+      "videoId": "b_dAEn95Xzs",
+      "description": "Mencabut Undi Untuk Mengumandangkan Azan - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 12,
+      "title": "Sesi 12 - Bercakap Ketika Azan",
+      "videoId": "G6ufYCaWQ6g",
+      "description": "Bercakap Ketika Azan - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 13,
+      "title": "Sesi 13 - Azan Orang Buta Apabila Ada Orang Memberitahu Kepadanya",
+      "videoId": "Pn82ysZPvyg",
+      "description": "Azan Orang Buta Apabila Ada Orang Memberitahu Kepadanya - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 14,
+      "title": "Sesi 14 - Azan Sebelum Subuh",
+      "videoId": "_djIUpCql4k",
+      "description": "Azan Sebelum Subuh - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 15,
+      "title": "Sesi 15 - Berapa Lama Waktu Sepatutnya Di Antara Azan dan Iqamah",
+      "videoId": "yxaIaJX9vZE",
+      "description": "Berapa Lama Waktu Sepatutnya Di Antara Azan dan Iqamah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 16,
+      "title": "Sesi 16 - Orang Yang Menunggu Iqamah",
+      "videoId": "g_tXma6FBY4",
+      "description": "Orang Yang Menunggu Iqamah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 17,
+      "title": "Sesi 17 - Di antara Dua Azan Ada Solat Bagi Sesiapa Yang Mahu",
+      "videoId": "nj4pZI9XyVs",
+      "description": "Di antara Dua Azan Ada Solat Bagi Sesiapa Yang Mahu - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 18,
+      "title": "Sesi 18 - Azan Dan Iqamah Bagi Orang Musafir",
+      "videoId": "YVrpc28hXMQ",
+      "description": "Azan Dan Iqamah Bagi Orang Musafir - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 19,
+      "title": "Sesi 19 - Azan Dan Iqamah Bagi Orang Musafir",
+      "videoId": "JJzIBIzl0r0",
+      "description": "Azan Dan Iqamah Bagi Orang Musafir - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 20,
+      "title": "Sesi 20 - Mu'azzin Meliuk Mulut kanan Kiri & Menoleh Ketika Azan?",
+      "videoId": "STRZXDrHVmA",
+      "description": "Mu'azzin Meliuk Mulut kanan Kiri & Menoleh Ketika Azan? - [Sahih al-Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 21,
+      "title": "Sesi 21 - Ucapan Seseorang, 'Kami Terlepas Sholat..'",
+      "videoId": "2y0aPdC9A4g",
+      "description": "Ucapan Seseorang, 'Kami Terlepas Sholat..' - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 22,
+      "title": "Sesi 22 - Jemaah Berdiri Sebaik Mereka Nampak Imam Ketika Diiqamatkan",
+      "videoId": "wuhqL17xx5w",
+      "description": "Jemaah Berdiri Sebaik Mereka Nampak Imam Ketika Diiqamatkan - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 23,
+      "title": "Sesi 23 - Jemaah Berdiri Sebaik Mereka Nampak Imam Ketika Diiqamatkan",
+      "videoId": "ffZBuHpIadM",
+      "description": "Jemaah Berdiri Sebaik Mereka Nampak Imam Ketika Diiqamatkan - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 24,
+      "title": "Sesi 24 - Bolehkah Keluar Dari Masjid Kerana Sesuatu Keperluan",
+      "videoId": "bKwAWW6Q81w",
+      "description": "Bolehkah Keluar Dari Masjid Kerana Sesuatu Keperluan - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 25,
+      "title": "Sesi 25 - Imam Mengatakan 'Teruslah Berada Di Tempat Kamu'",
+      "videoId": "eXNeeGmPywU",
+      "description": "Imam Mengatakan 'Teruslah Berada Di Tempat Kamu' - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 26,
+      "title": "Sesi 26 - Kata-kata Seseorang, 'Kami Belum Bersolat'",
+      "videoId": "SRi_eYu3OJI",
+      "description": "Kata-kata Seseorang, 'Kami Belum Bersolat' - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 27,
+      "title": "Sesi 27 - Imam Tiba-tiba Ada Hajat Selepas Diiqamatkan",
+      "videoId": "kqHyBe9oWM8",
+      "description": "Imam Tiba-tiba Ada Hajat Selepas Diiqamatkan - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 28,
+      "title": "Sesi 28 - Kewajipan Solat Berjemaah",
+      "videoId": "IpL015_ezyQ",
+      "description": "Kewajipan Solat Berjemaah - Maulana Asri - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 29,
+      "title": "Sesi 29 - Kewajipan Solat Berjemaah",
+      "videoId": "-kyRu6MMbyI",
+      "description": "Kewajipan Solat Berjemaah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 30,
+      "title": "Sesi 30 - Jika Ibu Seseorang Melarangnya Drpd Pergi Sembahyang Isya'",
+      "videoId": "2URSg9Zv59k",
+      "description": "Jika Ibu Seseorang Melarangnya Drpd Pergi Sembahyang Isya' - [Sahih al-Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 31,
+      "title": "Sesi 31 - Kelebihan Solat Jemaah",
+      "videoId": "iFTc4u8goxE",
+      "description": "Kelebihan Solat Jemaah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 32,
+      "title": "Sesi 32 - Kelebihan Solat Jemaah",
+      "videoId": "3Eiy7bQZEJE",
+      "description": "Kelebihan Solat Jemaah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 33,
+      "title": "Sesi 33 - Kelebihan Solat Jemaah",
+      "videoId": "Nn-nq85FNWQ",
+      "description": "Kelebihan Solat Jemaah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 34,
+      "title": "Sesi 34 - Kelebihan Solat Subuh Dengan Berjema'ah",
+      "videoId": "lRKWl-DfVdA",
+      "description": "Kelebihan Solat Subuh Dengan Berjema'ah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 35,
+      "title": "Sesi 35 - Kelebihan Solat Subuh Dengan Berjema'ah",
+      "videoId": "Duxx8kZgLug",
+      "description": "Kelebihan Solat Subuh Dengan Berjema'ah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 36,
+      "title": "Sesi 36 - Kelebihan Bersegera Pergi Untuk Bersembahyang Zohor",
+      "videoId": "XCwA3smIU8g",
+      "description": "Kelebihan Bersegera Pergi Untuk Bersembahyang Zohor - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 37,
+      "title": "Sesi 37 - Kelebihan Bersegera Pergi Untuk Bersembahyang Zohor",
+      "videoId": "5vhuPJAs9T0",
+      "description": "Kelebihan Bersegera Pergi Untuk Bersembahyang Zohor - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 38,
+      "title": "Sesi 38 - Kelebihan Bersegera Peri Untuk Bersembahyang Zohor",
+      "videoId": "2BZQSgFxVtg",
+      "description": "Kelebihan Bersegera Peri Untuk Bersembahyang Zohor - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 39,
+      "title": "Sesi 39 - Mengharapkan Pahala Dari Langkah-langkah Kaki",
+      "videoId": "_jich9_WOrk",
+      "description": "Mengharapkan Pahala Dari Langkah-langkah Kaki - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 40,
+      "title": "Sesi 40 - Keutamaan Solat Isyaa' berjemaah",
+      "videoId": "iYgTZjHj9jg",
+      "description": "Keutamaan Solat Isyaa' berjemaah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 41,
+      "title": "Sesi 41 - Keutamaan Solat Isyaa' berjemaah",
+      "videoId": "urg4KemWxpk",
+      "description": "Keutamaan Solat Isyaa' berjemaah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 42,
+      "title": "Sesi 42 - Dua Orang Keatas Sudah Dikira Berjemaah",
+      "videoId": "nIafRJRSU3s",
+      "description": "Dua Orang Keatas Sudah Dikira Berjemaah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 43,
+      "title": "Sesi 43 - Kelebihan Duduk Di Dalam Masjid Menunggu Sembahyang",
+      "videoId": "aqqK3nIdDw8",
+      "description": "Kelebihan Duduk Di Dalam Masjid Menunggu Sembahyang - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 44,
+      "title": "Sesi 44 - Kelebihan Duduk Di Dalam Masjid Mennggu Sembahyang",
+      "videoId": "fbbpdzbJlxU",
+      "description": "Kelebihan Duduk Di Dalam Masjid Mennggu Sembahyang - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 45,
+      "title": "Sesi 45 - Kelebihan Duduk Di Dalam Masjid Mennggu Sembahyang",
+      "videoId": "rOxFPyRpNro",
+      "description": "Kelebihan Duduk Di Dalam Masjid Mennggu Sembahyang - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 46,
+      "title": "Sesi 46 - Keutamaan Ke Masjid (Untuk SolatJemaah) Waktu Pagi & Petang",
+      "videoId": "Np1yftNlWns",
+      "description": "Keutamaan Ke Masjid (Untuk SolatJemaah) Waktu Pagi & Petang - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 47,
+      "title": "Sesi 47 - Bila Diiqamat Untuk Solat Fardhu, Tiada Lagi Solat Lain",
+      "videoId": "jakKKRGQg7c",
+      "description": "Bila Diiqamat Untuk Solat Fardhu, Tiada Lagi Solat Lain - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 48,
+      "title": "Sesi 48 - Bila Diiqamat Untuk Solat Fardhu, Tiada Lagi Solat Lain",
+      "videoId": "U5gJtVRSNJs",
+      "description": "Bila Diiqamat Untuk Solat Fardhu, Tiada Lagi Solat Lain - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 49,
+      "title": "Sesi 49 - Had Orang Sakit Yang Dapat Menghadiri Shalat Jemaah",
+      "videoId": "E2djNBZtCRs",
+      "description": "Had Orang Sakit Yang Dapat Menghadiri Shalat Jemaah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 50,
+      "title": "Sesi 50 - Had Orang Sakit Yang Dapat Menghadiri Solat Jemaah",
+      "videoId": "q2qCfEoZ4jg",
+      "description": "Had Orang Sakit Yang Dapat Menghadiri Solat Jemaah - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 51,
+      "title": "Sesi 51 - Boleh solat Di Rumah Ketika Hujan & Ketika Ada Keuzuran",
+      "videoId": "e0vp7Jtn4sk",
+      "description": "Boleh solat Di Rumah Ketika Hujan & Ketika Ada Keuzuran - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 52,
+      "title": "Sesi 52 - Boleh solat Di Rumah Ketika Hujan & Ketika Ada Keuzuran",
+      "videoId": "POwXn5fvgsc",
+      "description": "Boleh solat Di Rumah Ketika Hujan & Ketika Ada Keuzuran - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 53,
+      "title": "Sesi 53 - Adakah Imam Akan Bersolat Bersama Dengan Orang Yang Hadir?",
+      "videoId": "qFMZTbOBRl8",
+      "description": "Adakah Imam Akan Bersolat Bersama Dengan Orang Yang Hadir? - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 54,
+      "title": "Sesi 54 - Adakah Imam Akan Bersolat Bersama Dengan Orang Yang Hadir?",
+      "videoId": "1czTOc0jueI",
+      "description": "Adakah Imam Akan Bersolat Bersama Dengan Orang Yang Hadir? - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 55,
+      "title": "Sesi 55 - Bila makanan terhidang, makan sebelum solat maghrib",
+      "videoId": "DlmxAF2QkdQ",
+      "description": "Bila makanan terhidang, makan sebelum solat maghrib - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 56,
+      "title": "Sesi 56 - Bila makanan terhidang, makan sebelum solat maghrib",
+      "videoId": "XpaQr9X-Sws",
+      "description": "Bila makanan terhidang, makan sebelum solat maghrib - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 57,
+      "title": "Sesi 57 - Imam Dipanggil Solat Di Tangannya Ada Makanan Yg Dimakan",
+      "videoId": "y2hOhXZO0L0",
+      "description": "Imam Dipanggil Solat Di Tangannya Ada Makanan Yg Dimakan - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 58,
+      "title": "Sesi 58 - Orang bantu keluarganya lalu diiqamatkan, dia keluar solat",
+      "videoId": "lOByXP9VO_c",
+      "description": "Orang bantu keluarganya lalu diiqamatkan, dia keluar solat - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 59,
+      "title": "Sesi 59 - Mengimami solat jemaah bermaksud tunjuk tatacara solat nabi",
+      "videoId": "KcCtWXSmfdY",
+      "description": "Mengimami solat jemaah bermaksud tunjuk tatacara solat nabi - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 60,
+      "title": "Sesi 60 - Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam",
+      "videoId": "mh82VrM82WY",
+      "description": "Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 61,
+      "title": "Sesi 61 - Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam",
+      "videoId": "FahO9vbvtV8",
+      "description": "Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 62,
+      "title": "Sesi 62 - Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam",
+      "videoId": "FO3dZKJwhXE",
+      "description": "Orang Yg Berilmu & Memiliki Keutamaan Lebih Berhak Jadi Imam - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 63,
+      "title": "Sesi 63 - Orang Yang Imamkan Solat, Boleh Mundur, Solat Tetap Sah",
+      "videoId": "DvId3T7NpTM",
+      "description": "Orang Yang Imamkan Solat, Boleh Mundur, Solat Tetap Sah - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 64,
+      "title": "Sesi 64 - Jika Kemampuan Baca Quran Sama, Yg Lebih Tua Berhak Jadi Imam",
+      "videoId": "4QFf5z5oejA",
+      "description": "Jika Kemampuan Baca Quran Sama, Yg Lebih Tua Berhak Jadi Imam - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 65,
+      "title": "Sesi 65 - Bila Ketua Negeri Mengunjungi Suatu Kaum Dia Boleh Imami Mereka",
+      "videoId": "pk3oFBVcvzQ",
+      "description": "Bila Ketua Negeri Mengunjungi Suatu Kaum Dia Boleh Imami Mereka-[Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 66,
+      "title": "Sesi 66 - Bila Ketua Negeri Mengunjungi Suatu Kaum Dia Boleh Imami Mereka",
+      "videoId": "I17Qil7k5ZE",
+      "description": "Bila Ketua Negeri Mengunjungi Suatu Kaum Dia Boleh Imami Mereka-[Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 67,
+      "title": "Sesi 67 - Sesungguhnya Imam Dilantik Untuk Diikuti",
+      "videoId": "rdmq83kwYys",
+      "description": "Sesungguhnya Imam Dilantik Untuk Diikuti - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 68,
+      "title": "Sesi 68 - Sesungguhnya Imam Dilantik Untuk Diikuti",
+      "videoId": "rJMArjj87_k",
+      "description": "Sesungguhnya Imam Dilantik Untuk Diikuti - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 69,
+      "title": "Sesi 69 - Sesungguhnya Imam Dilantik Untuk Diikuti",
+      "videoId": "CE3BYhUtypE",
+      "description": "Sesungguhnya Imam Dilantik Untuk Diikuti - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 70,
+      "title": "Sesi 70 - Bilakah Orang Di Belakang Imam Bersujud?",
+      "videoId": "ZxVtWqqiJk8",
+      "description": "Bilakah Orang Di Belakang Imam Bersujud? - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 71,
+      "title": "Sesi 71 - Dosa Orang Yang Mengangkat Kepalanya Sebelum Imam",
+      "videoId": "sLDMMBfMeHo",
+      "description": "Dosa Orang Yang Mengangkat Kepalanya Sebelum Imam - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 72,
+      "title": "Sesi 72 - (Hukum) Hamba Atau Maula (Bekas Hamba) Menjadi Imam (Sholat)",
+      "videoId": "g8wxBcuRobY",
+      "description": "(Hukum) Hamba Atau Maula (Bekas Hamba) Menjadi Imam (Sholat) - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 73,
+      "title": "Sesi 73 - Jika Imam Tidak Bersolat Dengan Sempurna",
+      "videoId": "fI9_ynnveWE",
+      "description": "Jika Imam Tidak Bersolat Dengan Sempurna - [Sahih Bukhari- Kitab Azan]"
+    },
+    {
+      "id": 74,
+      "title": "Sesi 74 - Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam",
+      "videoId": "iZ6oWWH7BVw",
+      "description": "Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam-[Sahih Bukhari-Kitab Azan"
+    },
+    {
+      "id": 75,
+      "title": "Sesi 75 - Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam",
+      "videoId": "MPQ1f3acp20",
+      "description": "Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam-[Sahih Bukhari-Kitab Azan"
+    },
+    {
+      "id": 76,
+      "title": "Sesi 76 - Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam",
+      "videoId": "yW2B4IUuOuc",
+      "description": "Hukum Pemberontak Kpd Pemerintah Yg Sah & Ahli Bid'ah Menjadi Imam-[Sahih Bukhari-Kitab Azan"
+    },
+    {
+      "id": 77,
+      "title": "Sesi 77 - Makmum Berdiri Sebelah Kanan Imam Sejajar Dengannya, Jika Berdua",
+      "videoId": "zlxzM5FXtUA",
+      "description": "Makmum Berdiri Sebelah Kanan Imam Sejajar Dengannya, Jika Berdua-[Sahih Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 78,
+      "title": "Sesi 78 - Tidak Batal Solat Imam Alihkan Dari Kiri Ke Kanan Makmum",
+      "videoId": "_0GmJCaa8Cs",
+      "description": "Tidak Batal Solat Imam Alihkan Dari Kiri Ke Kanan Makmum - [Sahih Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 79,
+      "title": "Sesi 79 - Hukum Berniat Jadi Imam Selepas Memulakan Solat Bila Ada Makmum",
+      "videoId": "0wh-A1Xe35w",
+      "description": "Hukum Berniat Jadi Imam Selepas Memulakan Solat Bila Ada Makmum -[Sahih Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 80,
+      "title": "Sesi 80 - Imam Ringkaskan Bacaan Ketika Berdiri, Tetap Sempurnakan Rukuk & Sujud",
+      "videoId": "AI2fe52WXf4",
+      "description": "Imam Ringkaskan Bacaan Ketika Berdiri, Tetap Sempurnakan Rukuk & Sujud-[Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 81,
+      "title": "Sesi 81 - Seseorang Boleh Panjangkan Solat Sekehendaknya Jika Solat Sendirian",
+      "videoId": "ECwakZvM5jc",
+      "description": "Seseorang Boleh Panjangkan Solat Sekehendaknya Jika Solat Sendirian-[Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 82,
+      "title": "Sesi 82 - Orang Yang Mengadu Kepada Pemimpinnya Bila Imam Memanjangkan Solatnya",
+      "videoId": "9VRBn0DQ1JM",
+      "description": "Orang Yang Mengadu Kepada Pemimpinnya Bila Imam Memanjangkan Solatnya-[Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 83,
+      "title": "Sesi 83 - Orang Yang Mengadu Kepada Pemimpinnya Bila Imam Memanjangkan Solatnya",
+      "videoId": "iTN6GXMOiwY",
+      "description": "Orang Yang Mengadu Kepada Pemimpinnya Bila Imam Memanjangkan Solatnya-[Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 84,
+      "title": "Sesi 84 - Memendekkan Bacaan Di Dalam Solat Di Samping Menyempurnakan Solat",
+      "videoId": "JpDn2LNDkgc",
+      "description": "Memendekkan Bacaan Di Dalam Solat Di Samping Menyempurnakan Solat - [Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 85,
+      "title": "Sesi 85 - Orang Yang Percepatkan Shalatnya Ketika Mendengar Tangisan Kanak-kanak",
+      "videoId": "XKbzLRjo6EE",
+      "description": "Orang Yang Percepatkan Shalatnya Ketika Mendengar Tangisan Kanak-kanak -[Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 86,
+      "title": "Sesi 86 - Jadi Imam Kepada Sekumpulan Orang Selepas Mengerjakan Solat Fardhu",
+      "videoId": "WXKbjY9t8po",
+      "description": "Jadi Imam Kepada Sekumpulan Orang Selepas Mengerjakan Solat Fardhu - [Bukhari -Kitab Azan]"
+    },
+    {
+      "id": 87,
+      "title": "Sesi 87 - Orang Yang Memperdengarkan Takbir Imam Kepada Orang Ramai",
+      "videoId": "wR01v6DZOzE",
+      "description": "Orang Yang Memperdengarkan Takbir Imam Kepada Orang Ramai - [Bukhari -Kitab Azan]"
+    },
+    {
+      "id": 88,
+      "title": "Sesi 88 - Orang Yang Ikuti Solat Imam,Sedangkan Orang Lain Pula Mengikuti Solatnya",
+      "videoId": "mYQsa4nJX88",
+      "description": "Orang Yang Ikuti Solat Imam,Sedangkan Orang Lain Pula Mengikuti Solatnya- Bukhari-Kitab Azan"
+    },
+    {
+      "id": 89,
+      "title": "Sesi 89 - Orang Yang Ikuti Solat Imam,Sedangkan Orang Lain Pula Mengikuti Solatnya",
+      "videoId": "YDzeoOntvio",
+      "description": "Orang Yang Ikuti Solat Imam,Sedangkan Orang Lain Pula Mengikuti Solatnya- Bukhari-Kitab Azan"
+    },
+    {
+      "id": 90,
+      "title": "Sesi 90 - Bolehkah Imam Menerima Keterangan Ma'mum Jika Ia Ragu?",
+      "videoId": "SBCTMczviW0",
+      "description": "Bolehkah Imam Menerima Keterangan Ma'mum Jika Ia Ragu? - [Sahih Bukhari-Kitab Azan]"
+    },
+    {
+      "id": 91,
+      "title": "Sesi 91 - Apabila Imam Menangis Dalam Shalat",
+      "videoId": "WJRAcSCIV9Q",
+      "description": "Apabila Imam Menangis Dalam Shalat - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 92,
+      "title": "Sesi 92 - Meluruskan Shaf-Shaf Ketika Diiqamah Dan Sesudahnya",
+      "videoId": "W1WmZlQUFBo",
+      "description": "Meluruskan Shaf-Shaf Ketika Diiqamah Dan Sesudahnya - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 93,
+      "title": "Sesi 93 - Imam Menghadap Makmum Ketika Meluruskan Shaf",
+      "videoId": "ij5WwpQJ7RY",
+      "description": "Imam Menghadap Makmum Ketika Meluruskan Shaf - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 94,
+      "title": "Sesi 94 - (Pahala) Shaf Pertama",
+      "videoId": "NKXBohqUxg4",
+      "description": "(Pahala) Shaf Pertama - [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 95,
+      "title": "Sesi 95 - Meluruskan Shaf",
+      "videoId": "TmTG23yeVQ0",
+      "description": "Meluruskan Shaf- [Sahih Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 96,
+      "title": "Sesi 96 - Dosa Orang Yang Tidak Sempurnakan Shaf & Sejajarkan Bahu Dengan Bahu",
+      "videoId": "qZSBNi03ib4",
+      "description": "Dosa Orang Yang Tidak Sempurnakan Shaf & Sejajarkan Bahu Dengan Bahu - [Bukhari - Azan]"
+    },
+    {
+      "id": 97,
+      "title": "Sesi 97 - Merapatkan (Sejajarkan) Bahu Dengan Bahu Dan Kaki Dengan Kaki Dalam Shaf",
+      "videoId": "dG_ZCkPhoGs",
+      "description": "Merapatkan (Sejajarkan) Bahu Dengan Bahu Dan Kaki Dengan Kaki Dalam Shaf - [Bukhari- Azan]"
+    },
+    {
+      "id": 98,
+      "title": "Sesi 98 - Wanita Bersolat Sendirian (Di Belakang Saf Lelaki) Dikira Sebagai Satu Saf",
+      "videoId": "t85r2ACQgmE",
+      "description": "Wanita Bersolat Sendirian (Di Belakang Saf Lelaki) Dikira Sebagai Satu Saf -[Bukhari- Azan]"
+    },
+    {
+      "id": 99,
+      "title": "Sesi 99 - Jika Di Antara Imam Dan Ma'mum Ada Dinding Atau Penghadang",
+      "videoId": "dAO7gMQqnh4",
+      "description": "Jika Di Antara Imam Dan Ma'mum Ada Dinding Atau Penghadang -[Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 100,
+      "title": "Sesi 100 - Solat Malam",
+      "videoId": "wFWasIpvyS8",
+      "description": "Solat Malam - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 101,
+      "title": "Sesi 101 - Kewajiban Bertakbir Ketika Memulai Solat",
+      "videoId": "iPCGgLXlqcM",
+      "description": "Kewajiban Bertakbir Ketika Memulai Solat - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 102,
+      "title": "Sesi 102 - Kewajiban Bertakbir Ketika Memulai Solat",
+      "videoId": "w00DLBzobu0",
+      "description": "Kewajiban Bertakbir Ketika Memulai Solat - [Sahih al-Bukhari - Kitab Azan]"
+    },
+    {
+      "id": 103,
+      "title": "Sesi 103 - Angkat Kedua Belah Tangan Pada Takbir Pertama Bersamaan Dengan Mula Solat",
+      "videoId": "iMoU7o5hYKM",
+      "description": "Angkat Kedua Belah Tangan Pada Takbir Pertama Bersamaan Dengan Mula Solat [Bukhari]"
+    }
+  ]
+}

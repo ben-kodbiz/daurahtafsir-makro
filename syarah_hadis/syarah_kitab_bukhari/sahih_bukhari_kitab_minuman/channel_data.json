@@ -1,0 +1,19 @@
+{
+  "title": "Kitab Minuman",
+  "description": "Kajian tentang Kitab Minuman dari Sahih al-Bukhari",
+  "total_sessions": 2,
+  "sessions": [
+    {
+      "session_number": 1,
+      "title": "Sesi 1 - Tentang Minuman - [Sahih al-Bukhari - Kitab Minuman]",
+      "video_id": "OAetBFTtwBA",
+      "youtube_url": "https://www.youtube.com/watch?v=OAetBFTtwBA"
+    },
+    {
+      "session_number": 2,
+      "title": "Sesi 1 - MATAN HADITH - Sahih al-Bukhari - Kitab  Minuman",
+      "video_id": "8rPL-E7rk4E",
+      "youtube_url": "https://www.youtube.com/watch?v=8rPL-E7rk4E"
+    }
+  ]
+}

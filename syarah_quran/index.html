@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syarah Quran - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Syarah Quran</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Syarah Quran</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kajian terperinci Tafsir Al-Quran dan prinsip-prinsip tafsir</strong><br>
+                Modul utama yang menyediakan tafsir terperinci untuk semua 114 surah Al-Quran serta prinsip-prinsip tafsir (usul tafsir). Menyediakan pemahaman mendalam tentang ayat-ayat Al-Quran dengan konteks dan penjelasan yang jelas.
+            </p>
+        </div>
+        
+        <div class="widget-container">
+            <a href="tafsir_mikro/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">book</i>
+                <span class="widget-label enhanced">Tafsir Mikro</span>
+            </a>
+            <a href="qawaid_tafsir/index.html" class="widget enhanced">
+                <i class="material-icons widget-icon enhanced">school</i>
+                <span class="widget-label enhanced">Usul Tafsir</span>
+            </a>
+        </div>
+    </div>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "number": 1,
+  "name": "سُورَةُ ٱلْفَاتِحَةِ",
+  "englishName": "Al-Faatiha",
+  "englishNameTranslation": "The Opening",
+  "numberOfAyahs": 7,
+  "revelationType": "Meccan",
+  "key_concepts": ["Guidance", "Lord of the Universe", "The Straight Path", "Mercy", "Worship"],
+  "image_path": "images/alfatihah.png",
+  "youtube_links": [
+    "https://www.youtube.com/watch?v=sG2oSk2qGNI"
+  ],
+  "detailed_explanation": [
+    {
+      "key": "Struktur Makro Surah Al-Fatihah",
+      "value": "Surah al-Fatihah mengandung empat paragraf.",
+        "Paragraf1": "Paragraf tempat memohon doa' adab doa",
+        "Paragraf2": "Paragraf kedua tentang kelayakan Allah sebagai tempat memohon doa",
+        "Paragraf3": "Paragraf ketiga tentang lafaz doa yang sebenarnya",
+        "Paragraf4": "Paragtaf keempat ialah tentang keterangan dan perincian doa"
+    },
+    {
+      "key": "Summary",
+      "value": "Kata kunci utama Surah alfatihah"
+    },
+    {
+      "key": "Alhamd",
+      "value": "Pujian dan segala bentuknya. Atau pujian yang sempurna dan lengkap."
+    },
+    {
+      "key": "Alhamdulillah",
+      "value": "Perkataan’ “Alhamd” yang digabungkan dengan “Allah” memberi erti syukur kepada Allah."
+    },
+    {
+      "key": "Rabb",
+      "value": "Bererti penjaga, pemelihara, pengasuh, pendidik, tuan, pemilik, pencipta dan lain-lain."
+    },
+    {
+      "key": "Ar-Rahman",
+      "value": "Atas wazan “fa’lan” merupakan isim mubalaghah yang memberi erti Tuhan yang rahmat-Nya Maha luas dan sempurna."
+    },
+    {
+      "key": "Ar-Rahim",
+      "value": "Atas wazan “faa’il” merupakan isim sifat yang memberi erti Tuhan yang rahmat-Nya berterusan dan berkekalan."
+    },
+    {
+      "key": "Ad-Din",
+      "value": "Bererti agama, cara hidup, balasan baik dan buruk atau ganjaran dan hukuman. Ia juga bererti pengadilan yang sebenar. Inilah yang dimaksudkan di sini setelah mempercayai adanya hari kiamat, mempercayai pula bahawa hanya Allah s.w.t. jua yang berkuasa pada hari itu. Dialah yang akan mengadili manusia, kemudian memberikan balasan yang baik atau buruk kepada mereka."
+    },
+    {
+      "key": "Ibadah",
+      "value": "Mempunyai tiga pengertian; Pertama, penghambaan, kedua, ketaatan, dan ketiga, pemujaan."
+    },
+    {
+      "key": "Isti’anah",
+      "value": "Bererti meminta dan memohon pertolongan hanya kepada Allah khususnya dalam perkara-perkara di luar kemampuan manusia."
+    }
+    
+  ]
+}

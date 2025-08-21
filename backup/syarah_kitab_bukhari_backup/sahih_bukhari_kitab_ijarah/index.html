@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahih Bukhari-Kitab Ijarah - Maulana Asri</title>
+    <link rel="stylesheet" href="../../../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Custom enhancements for better visual appeal */
+        .header {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .module-description {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .search-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Enhanced session card styling */
+        .session-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .session-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .watch-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .watch-btn:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .header, .module-description, .search-container {
+                padding: 15px;
+            }
+            
+            .session-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Syarah Kitab Bukhari
+        </a>
+        <div class="header">
+            <h1>Sahih Bukhari - Kitab Ijarah</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px;">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Sahih Bukhari-Kitab Ijarah</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kajian tentang Kitab Ijarah dari Sahih al-Bukhari</strong><br>
+                Modul yang memfokuskan kepada kajian hadis-hadis berkaitan Ijarah dalam koleksi Sahih al-Bukhari. Merangkumi tatacara, hukum-hukum, dan kelebihan berkaitan dengan topik ini. Menyediakan penjelasan mendalam tentang konteks dan aplikasi hadis-hadis sahih dalam kehidupan seharian.
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="session-grid" id="session-grid">
+            <!-- Sessions will be loaded here dynamically -->
+        </div>
+    </div>
+    <script>
+        // Placeholder for future session data
+        let allSessions = [];
+        
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('session-grid');
+            grid.innerHTML = '';
+            
+            // Show placeholder message
+            grid.innerHTML = '<div class="no-results"><i class="material-icons">construction</i><p>Content coming soon...</p></div>';
+        }
+        
+        // Initialize
+        displaySessions([]);
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

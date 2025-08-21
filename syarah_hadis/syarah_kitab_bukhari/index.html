@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syarah Kitab Bukhari - Maulana Asri</title>
+    <link rel="stylesheet" href="../../unified-sahih-bukhari-theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Enhanced Widget Grid Styles */
+        .widget-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+        
+        .widget-grid-item {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%); /* Bright green gradient for all clickable items */
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid #4CAF50; /* Solid green border */
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .widget-grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.5);
+            background: linear-gradient(135deg, #8BC34A 0%, #4CAF50 100%); /* Reverse gradient on hover */
+        }
+        
+        .widget-grid-content {
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+        }
+        
+        .widget-grid-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff, #f5f5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .widget-grid-label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            line-height: 1.4;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .widget-grid-item:hover .widget-grid-label {
+            color: #ffffff;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .widget-grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .widget-grid-content {
+                padding: 15px;
+                min-height: 100px;
+            }
+            
+            .widget-grid-icon {
+                font-size: 2rem;
+            }
+            
+            .widget-grid-label {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .widget-grid-container {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .widget-grid-content {
+                padding: 12px;
+                min-height: 90px;
+            }
+            
+            .widget-grid-label {
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Category styling */
+        .category-header {
+            margin: 30px 0 15px 0;
+            padding: 10px 0;
+            border-bottom: 2px solid #4CAF50;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .category-container {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Syarah Hadis
+        </a>
+        <div class="header">
+            <h1>Syarah Kitab Bukhari</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Syarah Kitab Bukhari</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kajian terperinci tentang kitab-kitab dalam koleksi hadis Sahih Bukhari</strong><br>
+                Modul yang memfokuskan kepada kajian terperinci berbagai kitab dalam koleksi Sahih Bukhari. Merangkumi kitab-kitab seperti Solat, Iman, Fadhail Sahabat, Perang, dan Azan. Menyediakan penjelasan mendalam tentang hadis-hadis sahih dengan konteks dan aplikasi yang relevan. Mengupas metodologi dan struktur kitab-kitab hadis dalam koleksi Sahih Bukhari.
+            </p>
+        </div>
+        
+        <!-- Search Container -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="kitab-search" class="search-input" placeholder="Search kitab by title..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Widget Grid Container -->
+        <div class="widget-grid-container" id="kitab-grid">
+            <!-- Kitab items will be populated dynamically from JSON data -->
+        </div>
+    </div>
+    <script>
+        // Kitab data from JSON
+        const kitabData = [
+          {
+            "title": "Kitab-Kitab Hadith (PDF)",
+            "url": "https://syarahanhadits.school.blog/kitab-kitab-syarah-hadith-pdf/"
+          },
+          {
+            "title": "2. Kitab Wahyu (Kota Bharu)",
+            "url": "https://syarahanhadits.school.blog/sahih-al-bukhari-kitab-wahyu/"
+          },
+          {
+            "title": "3. Kitab Iman (Lembah Klang)",
+            "url": "https://syarahanhadits.school.blog/kitab-iman-kl/"
+          },
+          {
+            "title": "2. Kitab Wahyu (Lembah Klang)",
+            "url": "https://syarahanhadits.school.blog/sahih-bukhari-lembah-klang-kitab-wahyu/"
+          },
+          {
+            "title": "3. Kitab Iman ( Kota Bharu)",
+            "url": "https://syarahanhadits.school.blog/kitab-iman-kb-sb/"
+          },
+          {
+            "title": "4. Kitab Ilmu",
+            "url": "https://syarahanhadits.school.blog/kitab-ilmu/"
+          },
+          {
+            "title": "4. Kitab Ilmu (Atas Talian)",
+            "url": "https://syarahanhadits.school.blog/kitab-ilmu-atas-talian/"
+          },
+          {
+            "title": "5. Kitab Wudhu’",
+            "url": "https://syarahanhadits.school.blog/kitab-wudhu-sb/"
+          },
+          {
+            "title": "6. Kitab Mandi Janabah",
+            "url": "https://syarahanhadits.school.blog/kitab-mandi-janabah-sb/"
+          },
+          {
+            "title": "7. Kitab Haidh",
+            "url": "https://syarahanhadits.school.blog/kitab-haid/"
+          },
+          {
+            "title": "8. Kitab Tayammum",
+            "url": "https://syarahanhadits.school.blog/kitab-tayammum/"
+          },
+          {
+            "title": "9. Kitab Sembahyang",
+            "url": "https://syarahanhadits.school.blog/kitab-sembahyang-sb/"
+          },
+          {
+            "title": "10. Kitab Waktu-waktu Sembahyang",
+            "url": "https://syarahanhadits.school.blog/kitab-waktu2-sembahyang/"
+          },
+          {
+            "title": "11. Kitab Azan",
+            "url": "https://syarahanhadits.school.blog/kitab-azan/"
+          },
+          {
+            "title": "12. Kitab Solat Jumaat",
+            "url": "https://syarahanhadits.school.blog/kitab-jumaat/"
+          },
+          {
+            "title": "13. Kitab Sembahyang Khauf.",
+            "url": "https://syarahanhadits.school.blog/kitab-sembahyang-khauf/"
+          },
+          {
+            "title": "14. Kitab Solat Dua Hari Raya",
+            "url": "https://syarahanhadits.school.blog/kitab-sembahyang-dua-hari-raya/"
+          },
+          {
+            "title": "15. Kitab Solat Witir",
+            "url": "https://syarahanhadits.school.blog/solat-witr/"
+          },
+          {
+            "title": "17. Kitab Solat Gerhana",
+            "url": "https://syarahanhadits.school.blog/kitab-solat-gerhana/"
+          },
+          {
+            "title": "19. Kitab Mengqasarkan Solat",
+            "url": "https://syarahanhadits.school.blog/kitab-mengqasarkan-solat/"
+          },
+          {
+            "title": "20. Kitab Solat Malam",
+            "url": "https://syarahanhadits.school.blog/kitab-solat-malam/"
+          },
+          {
+            "title": "22. Kitab Perbuatan Dalam Solat",
+            "url": "https://syarahanhadits.school.blog/perbuatan-dalam-solat/"
+          },
+          {
+            "title": "23. Kitab Sujud Sahwi",
+            "url": "https://syarahanhadits.school.blog/kitab-sujud-sahwi/"
+          },
+          {
+            "title": "24. Kitab Jenazah",
+            "url": "https://syarahanhadits.school.blog/kitab-solat-jenazah/"
+          },
+          {
+            "title": "26. Kitab Manaasik",
+            "url": "https://syarahanhadits.school.blog/kitab-manasik/"
+          },
+          {
+            "title": "30. Kitab Kelebihan Madinah",
+            "url": "https://syarahanhadits.school.blog/kitab-kelebihan-madinah/"
+          },
+          {
+            "title": "31. Kitab Puasa",
+            "url": "https://syarahanhadits.school.blog/kitab-puasa/"
+          },
+          {
+            "title": "35. Kitab Jual Beli",
+            "url": "https://syarahanhadits.school.blog/kitab-jual-beli-2/"
+          },
+          {
+            "title": "56. Kitab Wasiat",
+            "url": "https://syarahanhadits.school.blog/kitab-wasiat/"
+          },
+          {
+            "title": "57. Kitab Jihad",
+            "url": "https://syarahanhadits.school.blog/kitab-jihad/"
+          },
+          {
+            "title": "58. Kitab Fardhil Khumus",
+            "url": "https://syarahanhadits.school.blog/sahih-bukhari-kota-bharu-kitab-fardhil-khumus/"
+          },
+          {
+            "title": "59. Kitab Jizyah Wal Muwaada’ah",
+            "url": "https://syarahanhadits.school.blog/kitab-jizyah-wal-muwaadaah/"
+          },
+          {
+            "title": "60. Kitab Permulaan Kejadian",
+            "url": "https://syarahanhadits.school.blog/sahih-al-bukhari-kitab-permulaan-kejadian/"
+          },
+          {
+            "title": "61. Kitab Nabi-Nabi",
+            "url": "https://syarahanhadits.school.blog/kitab-kenabian/"
+          },
+          {
+            "title": "62. Kitab Manaqib",
+            "url": "https://syarahanhadits.school.blog/kitab-manakib/"
+          },
+          {
+            "title": "63. Kitab Kelebihan Para Sahabat",
+            "url": "https://syarahanhadits.school.blog/sahih-bukhari-kota-bharu-kitab-kelebihan-para-sahabat-nabi-saw/"
+          },
+          {
+            "title": "65. Kitab Al-Maghaazi",
+            "url": "https://syarahanhadits.school.blog/sahih-bukhari-kitab-al-maghaazi/"
+          },
+          {
+            "title": "70. Kitab Nafqah (Perbelanjaan Keluarga)",
+            "url": "https://syarahanhadits.school.blog/kitab-nafkah/"
+          },
+          {
+            "title": "71. Kitab Makanan",
+            "url": "https://syarahanhadits.school.blog/kitab-makanan/"
+          },
+          {
+            "title": "72. Kitab Aqiqah",
+            "url": "https://syarahanhadits.school.blog/kitab-aqiqah/"
+          },
+          {
+            "title": "73. Kitab Sembelihan & Perburuan",
+            "url": "https://syarahanhadits.school.blog/kitab-sembelihan-perburuan/"
+          },
+          {
+            "title": "74. Kitab Qurban",
+            "url": "https://syarahanhadits.school.blog/kitab-qurban/"
+          },
+          {
+            "title": "75. Kitab Minuman",
+            "url": "https://syarahanhadits.school.blog/kitab-minuman/"
+          },
+          {
+            "title": "76. Kitab Orang-Orang Sakit",
+            "url": "https://syarahanhadits.school.blog/kitab-orang-sakit/"
+          },
+          {
+            "title": "77. Kitab Perubatan",
+            "url": "https://syarahanhadits.school.blog/kitab-perubatan/"
+          },
+          {
+            "title": "78. Kitab Pakaian",
+            "url": "https://syarahanhadits.school.blog/kitab-pakaian/"
+          },
+          {
+            "title": "79. Kitab Adab Kesopanan",
+            "url": "https://syarahanhadits.school.blog/kitab-adab-kesopanan/"
+          },
+          {
+            "title": "80. Kitab Minta Izin",
+            "url": "https://syarahanhadits.school.blog/kitab-minta-izin/"
+          },
+          {
+            "title": "81. Kitab Doa-Doa",
+            "url": "https://syarahanhadits.school.blog/kitab-doa/"
+          },
+          {
+            "title": "82. Kitab Melembutkan Hati",
+            "url": "https://syarahanhadits.school.blog/kitab-melembutkan-hati/"
+          },
+          {
+            "title": "83. Kitab Kolam",
+            "url": "https://syarahanhadits.school.blog/kitab-kolam/"
+          },
+          {
+            "title": "84. Kitab Taqdir",
+            "url": "https://syarahanhadits.school.blog/kitab-taqdir/"
+          },
+          {
+            "title": "85. Kitab Sumpah & Nazar",
+            "url": "https://syarahanhadits.school.blog/kitab-sumpah-nazar/"
+          },
+          {
+            "title": "87. Kitab Faraid",
+            "url": "https://syarahanhadits.school.blog/kitab-faraid/"
+          },
+          {
+            "title": "88. Kitab Hudud",
+            "url": "https://syarahanhadits.school.blog/kitab-hudud/"
+          },
+          {
+            "title": "89. Kitab Diyat",
+            "url": "https://syarahanhadits.school.blog/kitab-diyat/"
+          },
+          {
+            "title": "90. Kitab Meminta Pemberontak..",
+            "url": "https://syarahanhadits.school.blog/kitab-meminta-pemberontak/"
+          },
+          {
+            "title": "91. Kitab Paksaan",
+            "url": "https://syarahanhadits.school.blog/4246-2/"
+          },
+          {
+            "title": "92. Kitab Helah-Helah",
+            "url": "https://syarahanhadits.school.blog/4260-2/"
+          },
+          {
+            "title": "93. Kitab Penafsiran Mimpi",
+            "url": "https://syarahanhadits.school.blog/kitab-penafsiran-mimpi/"
+          },
+          {
+            "title": "94. Kitab Fitnah-Fitnah",
+            "url": "https://syarahanhadits.school.blog/kitab-fitan/"
+          },
+          {
+            "title": "95. Kitab Pemerintahan",
+            "url": "https://syarahanhadits.school.blog/kitab-pemerintahan/"
+          },
+          {
+            "title": "96. Kitab Cita-Cita",
+            "url": "https://syarahanhadits.school.blog/kitab-solat-khauf/"
+          },
+          {
+            "title": "97. Kitab Hadith Ahad",
+            "url": "https://syarahanhadits.school.blog/kitab-hadith-ahad/"
+          },
+          {
+            "title": "98. Kitab Berpegang Teguh",
+            "url": "https://syarahanhadits.school.blog/kitab-berpegang-teguh/"
+          },
+          {
+            "title": "99. Kitab Tauhid",
+            "url": "https://syarahanhadits.school.blog/kitab-tauhid/"
+          }
+        ];
+
+        // Mapping of kitab titles to local directory paths
+        const titleToDirectoryMap = {
+          "Kitab-Kitab Hadith (PDF)": "sahih_bukhari_kitab-kitab_hadith_pdf",
+          "2. Kitab Wahyu (Kota Bharu)": "sahih_bukhari_kitab_wahyu_kota_bharu",
+          "3. Kitab Iman (Lembah Klang)": "sahih_bukhari_kitab_iman_lembah_klang",
+          "2. Kitab Wahyu (Lembah Klang)": "sahih_bukhari_kitab_wahyu_lembah_klang",
+          "3. Kitab Iman ( Kota Bharu)": "sahih_bukhari_kitab_iman__kota_bharu",
+          "4. Kitab Ilmu": "sahih_bukhari_kitab_ilmu",
+          "4. Kitab Ilmu (Atas Talian)": "sahih_bukhari_kitab_ilmu_atas_talian",
+          "5. Kitab Wudhu’": "sahih_bukhari_kitab_wudhu",
+          "6. Kitab Mandi Janabah": "sahih_bukhari_kitab_mandi_janabah",
+          "7. Kitab Haidh": "sahih_bukhari_kitab_haidh",
+          "8. Kitab Tayammum": "sahih_bukhari_kitab_tayammum",
+          "9. Kitab Sembahyang": "sahih_bukhari_kitab_sembahyang",
+          "10. Kitab Waktu-waktu Sembahyang": "sahih_bukhari_kitab_waktu-waktu_sembahyang",
+          "11. Kitab Azan": "sahih_bukhari_kitab_azan",
+          "12. Kitab Solat Jumaat": "sahih_bukhari_kitab_solat_jumaat",
+          "13. Kitab Sembahyang Khauf.": "sahih_bukhari_kitab_sembahyang_khauf",
+          "14. Kitab Solat Dua Hari Raya": "sahih_bukhari_kitab_solat_dua_hari_raya",
+          "15. Kitab Solat Witir": "sahih_bukhari_kitab_solat_witir",
+          "17. Kitab Solat Gerhana": "sahih_bukhari_kitab_solat_gerhana",
+          "19. Kitab Mengqasarkan Solat": "sahih_bukhari_kitab_mengqasarkan_solat",
+          "20. Kitab Solat Malam": "sahih_bukhari_kitab_solat_malam",
+          "22. Kitab Perbuatan Dalam Solat": "sahih_bukhari_kitab_perbuatan_dalam_solat",
+          "23. Kitab Sujud Sahwi": "sahih_bukhari_kitab_sujud_sahwi",
+          "24. Kitab Jenazah": "sahih_bukhari_kitab_jenazah",
+          "26. Kitab Manaasik": "sahih_bukhari_kitab_manaasik",
+          "30. Kitab Kelebihan Madinah": "sahih_bukhari_kitab_kelebihan_madinah",
+          "31. Kitab Puasa": "sahih_bukhari_kitab_puasa",
+          "35. Kitab Jual Beli": "sahih_bukhari_kitab_jual_beli",
+          "56. Kitab Wasiat": "sahih_bukhari_kitab_wasiat",
+          "57. Kitab Jihad": "sahih_bukhari_kitab_perang",
+          "58. Kitab Fardhil Khumus": "sahih_bukhari_kitab_fardhil_khumus",
+          "59. Kitab Jizyah Wal Muwaada’ah": "sahih_bukhari_kitab_jizyah_wal_muwaadaah",
+          "60. Kitab Permulaan Kejadian": "sahih_bukhari_kitab_permulaan_kejadian",
+          "61. Kitab Nabi-Nabi": "sahih_bukhari_kitab_nabi-nabi",
+          "62. Kitab Manaqib": "sahih_bukhari_kitab_manaqib",
+          "63. Kitab Kelebihan Para Sahabat": "sahih_bukhari_kitab_kelebihan_para_sahabat",
+          "65. Kitab Al-Maghaazi": "sahih_bukhari_kitab_al-maghaazi",
+          "70. Kitab Nafqah (Perbelanjaan Keluarga)": "sahih_bukhari_kitab_nafqah_perbelanjaan_keluarga",
+          "71. Kitab Makanan": "sahih_bukhari_kitab_makanan",
+          "72. Kitab Aqiqah": "sahih_bukhari_kitab_aqiqah",
+          "73. Kitab Sembelihan & Perburuan": "sahih_bukhari_kitab_sembelihan__perburuan",
+          "74. Kitab Qurban": "sahih_bukhari_kitab_qurban",
+          "75. Kitab Minuman": "sahih_bukhari_kitab_minuman",
+          "76. Kitab Orang-Orang Sakit": "sahih_bukhari_kitab_orang-orang_sakit",
+          "77. Kitab Perubatan": "sahih_bukhari_kitab_perubatan",
+          "78. Kitab Pakaian": "sahih_bukhari_kitab_pakaian",
+          "79. Kitab Adab Kesopanan": "sahih_bukhari_kitab_adab_kesopanan",
+          "80. Kitab Minta Izin": "sahih_bukhari_kitab_minta_izin",
+          "81. Kitab Doa-Doa": "sahih_bukhari_kitab_doa-doa",
+          "82. Kitab Melembutkan Hati": "sahih_bukhari_kitab_melembutkan_hati",
+          "83. Kitab Kolam": "sahih_bukhari_kitab_kolam",
+          "84. Kitab Taqdir": "sahih_bukhari_kitab_taqdir",
+          "85. Kitab Sumpah & Nazar": "sahih_bukhari_kitab_sumpah__nazar",
+          "87. Kitab Faraid": "sahih_bukhari_kitab_faraid",
+          "88. Kitab Hudud": "sahih_bukhari_kitab_hudud",
+          "89. Kitab Diyat": "sahih_bukhari_kitab_diyat",
+          "90. Kitab Meminta Pemberontak..": "sahih_bukhari_kitab_meminta_pemberontak",
+          "91. Kitab Paksaan": "sahih_bukhari_kitab_paksaan",
+          "92. Kitab Helah-Helah": "sahih_bukhari_kitab_helah-helah",
+          "93. Kitab Penafsiran Mimpi": "sahih_bukhari_kitab_penafsiran_mimpi",
+          "94. Kitab Fitnah-Fitnah": "sahih_bukhari_kitab_fitnah-fitnah",
+          "95. Kitab Pemerintahan": "sahih_bukhari_kitab_pemerintahan",
+          "96. Kitab Cita-Cita": "sahih_bukhari_kitab_cita-cita",
+          "97. Kitab Hadith Ahad": "sahih_bukhari_kitab_hadith_ahad",
+          "98. Kitab Berpegang Teguh": "sahih_bukhari_kitab_berpegang_teguh",
+          "99. Kitab Tauhid": "sahih_bukhari_kitab_tauhid"
+        };
+
+        // Function to create kitab grid items
+        function createKitabGrid(kitabsToShow) {
+            const grid = document.getElementById('kitab-grid');
+            grid.innerHTML = '';
+
+            if (kitabsToShow.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="material-icons">search_off</i><p>No kitabs found</p></div>';
+                return;
+            }
+
+            kitabsToShow.forEach(kitab => {
+                const card = document.createElement('a');
+                card.className = 'widget-grid-item';
+                
+                // Use local directory path instead of external URL if available
+                const directoryName = titleToDirectoryMap[kitab.title];
+                if (directoryName) {
+                    card.href = directoryName + '/index.html';
+                } else {
+                    card.href = kitab.url;
+                    card.target = '_blank'; // Open external links in new tab
+                }
+                
+                // Extract icon based on kitab title
+                let icon = 'book';
+                if (kitab.title.includes('Solat') || kitab.title.includes('Sembahyang')) {
+                    icon = 'mosque';
+                } else if (kitab.title.includes('Azan')) {
+                    icon = 'campaign';
+                } else if (kitab.title.includes('Wahyu')) {
+                    icon = 'auto_stories';
+                } else if (kitab.title.includes('Iman')) {
+                    icon = 'shield';
+                } else if (kitab.title.includes('Ilmu')) {
+                    icon = 'school';
+                } else if (kitab.title.includes('Wudhu') || kitab.title.includes('Mandi')) {
+                    icon = 'water_drop';
+                } else if (kitab.title.includes('Haidh') || kitab.title.includes('Tayammum')) {
+                    icon = 'self_improvement';
+                } else if (kitab.title.includes('Jumaat')) {
+                    icon = 'calendar_today';
+                } else if (kitab.title.includes('Gerhana')) {
+                    icon = 'brightness_low';
+                } else if (kitab.title.includes('Malam')) {
+                    icon = 'nights_stay';
+                } else if (kitab.title.includes('Jenazah')) {
+                    icon = 'local_florist';
+                } else if (kitab.title.includes('Manaasik') || kitab.title.includes('Haji')) {
+                    icon = 'flight_takeoff';
+                } else if (kitab.title.includes('Puasa')) {
+                    icon = 'fastfood';
+                } else if (kitab.title.includes('Jual Beli')) {
+                    icon = 'shopping_cart';
+                } else if (kitab.title.includes('Wasiat')) {
+                    icon = 'description';
+                } else if (kitab.title.includes('Jihad') || kitab.title.includes('Perang')) {
+                    icon = 'military_tech';
+                } else if (kitab.title.includes('Nabi')) {
+                    icon = 'group';
+                } else if (kitab.title.includes('Sahabat')) {
+                    icon = 'people';
+                } else if (kitab.title.includes('Makanan')) {
+                    icon = 'restaurant_menu';
+                } else if (kitab.title.includes('Minuman')) {
+                    icon = 'local_bar';
+                } else if (kitab.title.includes('Sakit')) {
+                    icon = 'local_hospital';
+                } else if (kitab.title.includes('Pakaian')) {
+                    icon = 'checkroom';
+                } else if (kitab.title.includes('Doa')) {
+                    icon = 'auto_awesome';
+                }
+                
+                card.innerHTML = `
+                    <div class="widget-grid-content">
+                        <i class="material-icons widget-grid-icon">${icon}</i>
+                        <span class="widget-grid-label">${kitab.title}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Function to filter kitabs based on search term
+        function filterKitabs(searchTerm) {
+            if (!searchTerm) return kitabData;
+            
+            return kitabData.filter(kitab => 
+                kitab.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('kitab-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.add('visible');
+            } else {
+                clearButton.classList.remove('visible');
+            }
+            
+            const filteredKitabs = filterKitabs(searchTerm);
+            createKitabGrid(filteredKitabs);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('kitab-search').value = '';
+            this.classList.remove('visible');
+            createKitabGrid(kitabData);
+        });
+
+        // Initialize the grid with all kitabs
+        document.addEventListener('DOMContentLoaded', function() {
+            createKitabGrid(kitabData);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

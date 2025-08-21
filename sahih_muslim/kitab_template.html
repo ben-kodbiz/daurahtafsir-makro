@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{kitab_title}} - Sahih Muslim</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div class="header">
+        <h1>{{kitab_title}}</h1>
+        <p>Sahih Muslim</p>
+    </div>
+    
+    <div class="container">
+        <a href="index.html" class="back-button">
+            <i class="material-icons">arrow_back</i>
+            Back to Sahih Muslim
+        </a>
+        
+        <div class="module-description">
+            <h2>{{kitab_title}}</h2>
+            <p>
+                Detailed study of {{kitab_title}} from Sahih Muslim.
+            </p>
+        </div>
+        
+        <div class="sessions-container">
+            <!-- Sessions will be populated here -->
+            <div class="session-card">
+                <h3>Session 1: Introduction to {{kitab_title}}</h3>
+                <p>Brief overview and importance of this Kitab.</p>
+                <a href="sessions/session_1.html" class="session-link">View Session</a>
+            </div>
+            
+            <div class="session-card">
+                <h3>Session 2: Key Hadiths in {{kitab_title}}</h3>
+                <p>Analysis of the most important Hadiths in this Kitab.</p>
+                <a href="sessions/session_2.html" class="session-link">View Session</a>
+            </div>
+            
+            <div class="session-card">
+                <h3>Session 3: Practical Applications</h3>
+                <p>How the teachings of this Kitab apply to daily life.</p>
+                <a href="sessions/session_3.html" class="session-link">View Session</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="theme-toggle-container">
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="material-icons theme-icon">brightness_4</i>
+        </button>
+    </div>
+    
+    <script src="../theme.js"></script>
+</body>
+</html>

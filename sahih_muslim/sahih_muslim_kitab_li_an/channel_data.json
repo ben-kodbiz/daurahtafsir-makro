@@ -1,0 +1,25 @@
+{
+  "title": "Kitab Li'an",
+  "description": "Kitab Li'an from Sahih Muslim series",
+  "total_sessions": 3,
+  "sessions": [
+    {
+      "session_number": 1,
+      "title": "Sesi 1 - MATAN HADITH - Sahih Muslim - Kitab Li'an   211205",
+      "video_id": "RZ5vzXpw-mU",
+      "youtube_url": "https://www.youtube.com/watch?v=RZ5vzXpw-mU"
+    },
+    {
+      "session_number": 2,
+      "title": "Sesi 1 - Tentang Li'an - [Sahih Muslim - Kitab Li'an]",
+      "video_id": "a5nKaB07uVI",
+      "youtube_url": "https://www.youtube.com/watch?v=a5nKaB07uVI"
+    },
+    {
+      "session_number": 3,
+      "title": "Sesi 2 - Tentang Li'an - [Sahih Muslim - Kitab Li'an]",
+      "video_id": "tkr_yILOC_U",
+      "youtube_url": "https://www.youtube.com/watch?v=tkr_yILOC_U"
+    }
+  ]
+}

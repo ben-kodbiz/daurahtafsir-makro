@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Haji - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Watch Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #3f51b5, #607d8b);
+            color: white;
+            text-decoration: none;
+            border-radius: 24px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(63, 81, 181, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #607d8b, #3f51b5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(63, 81, 181, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Haji</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Haji</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Haji from Sahih Muslim series</strong><br>
+                Kitab Haji from Sahih Muslim series
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+        </div>
+    </div>
+    <script>
+        // Session data with actual titles
+        const sessions = [
+            {
+                number: 1,
+                title: `Tentang Ibadat Haji -`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Haji.`,
+                videoId: "X65m4uo7MUc"
+            },
+            {
+                number: 1,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Haji.`,
+                videoId: "hIzRSKBeCq8"
+            },
+            {
+                number: 2,
+                title: `Waktu-waktu Haji  Dan Umrah -`,
+                description: `Kandungan untuk sesi 2 dalam modul Kitab Haji.`,
+                videoId: "Ee-AHPkBLWo"
+            },
+            {
+                number: 2,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 2 dalam modul Kitab Haji.`,
+                videoId: "ykoPCmvLe9U"
+            },
+            {
+                number: 3,
+                title: `Talbiah-  Sifatnya Dan Waktunya -`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Haji.`,
+                videoId: "w55zLZw7zTc"
+            },
+            {
+                number: 3,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Haji.`,
+                videoId: "dFYhGW6NCjE"
+            },
+            {
+                number: 4,
+                title: `Elok memakai wangi-wangian sebelum ihram -`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Haji.`,
+                videoId: "Yn-Ss61z5uI"
+            },
+            {
+                number: 4,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Haji.`,
+                videoId: "D90NZ2qe7BY"
+            },
+            {
+                number: 5,
+                title: `Apa Yang Digalakkan Kepada Orang Muhrim Untuk Membunuhnya -`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Haji.`,
+                videoId: "pEeYROvzJO4"
+            },
+            {
+                number: 5,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Haji.`,
+                videoId: "8j9xE5zM3Nc"
+            },
+            {
+                number: 6,
+                title: `Keharusan Muhrim  (Orang Yang Memakai Ihram) Mengubati Matanya -`,
+                description: `Kandungan untuk sesi 6 dalam modul Kitab Haji.`,
+                videoId: "d_fUvqz3zGQ"
+            },
+            {
+                number: 6,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 6 dalam modul Kitab Haji.`,
+                videoId: "iPetfj8nUGQ"
+            },
+            {
+                number: 7,
+                title: `Orang Yang Berihram Harus Membuat Syarat Untuk Tahallul -`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Haji.`,
+                videoId: "GC3OptWqBHY"
+            },
+            {
+                number: 8,
+                title: `Bentuk Ihram Dan Harus melakukan Haji Ifrad, Tamattu' Dan Qiran -`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Haji.`,
+                videoId: "c7juIeg1gEI"
+            },
+            {
+                number: 8,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Haji.`,
+                videoId: "kKcud8KrtwI"
+            },
+            {
+                number: 9,
+                title: `Bentuk Ihram Dan Harus melakukan Haji Ifrad, Tamattu' Dan Qiran -`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Haji.`,
+                videoId: "BnMb3pIl0lM"
+            },
+            {
+                number: 9,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Haji.`,
+                videoId: "eR6je9g2RmA"
+            },
+            {
+                number: 10,
+                title: `Bentuk Ihram Dan Harus melakukan Haji Ifrad, Tamattu' Dan Qiran -`,
+                description: `Kandungan untuk sesi 10 dalam modul Kitab Haji.`,
+                videoId: "2yEUSlpnQ-U"
+            },
+            {
+                number: 11,
+                title: `Bentuk Ihram Dan Harus melakukan Haji Ifrad, Tamattu' Dan Qiran -`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Haji.`,
+                videoId: "eeTh19JAzqw"
+            },
+            {
+                number: 12,
+                title: `Haji Nabi s.a.w. -`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Haji.`,
+                videoId: "VW4c0SRWufM"
+            },
+            {
+                number: 12,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Haji.`,
+                videoId: "vFeWIY6z1Cc"
+            },
+            {
+                number: 13,
+                title: `Haji Nabi s.a.w. -`,
+                description: `Kandungan untuk sesi 13 dalam modul Kitab Haji.`,
+                videoId: "SSvBPRxuawQ"
+            },
+            {
+                number: 14,
+                title: `Haji Nabi s.a.w. -`,
+                description: `Kandungan untuk sesi 14 dalam modul Kitab Haji.`,
+                videoId: "hOurlUUFoEY"
+            },
+            {
+                number: 15,
+                title: `Haji Nabi s.a.w. -`,
+                description: `Kandungan untuk sesi 15 dalam modul Kitab Haji.`,
+                videoId: "gBLRtw4uzkM"
+            },
+            {
+                number: 16,
+                title: `Haji Nabi s.a.w. -`,
+                description: `Kandungan untuk sesi 16 dalam modul Kitab Haji.`,
+                videoId: "UE0z8LQMrbg"
+            },
+            {
+                number: 17,
+                title: `Keharusan Melakukan haji Tamattu' -`,
+                description: `Kandungan untuk sesi 17 dalam modul Kitab Haji.`,
+                videoId: "Muq8XGpj1xg"
+            },
+            {
+                number: 17,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 17 dalam modul Kitab Haji.`,
+                videoId: "-1SDHgaPhBM"
+            },
+            {
+                number: 18,
+                title: `Keharusan Melakukan Haji Tamattu' -`,
+                description: `Kandungan untuk sesi 18 dalam modul Kitab Haji.`,
+                videoId: "Do-hCbPDkNc"
+            },
+            {
+                number: 19,
+                title: `Kewajipan Membayar Dam Ke Atas Mutamatti -`,
+                description: `Kandungan untuk sesi 19 dalam modul Kitab Haji.`,
+                videoId: "_PUa4TklH_s"
+            },
+            {
+                number: 19,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 19 dalam modul Kitab Haji.`,
+                videoId: "vqLUh4KHgos"
+            },
+            {
+                number: 20,
+                title: `Harus Tahallul Dgn Sebab Ihsar & Harus Mengerjakan Haji Qiran -`,
+                description: `Kandungan untuk sesi 20 dalam modul Kitab Haji.`,
+                videoId: "uMC0FVhdf68"
+            },
+            {
+                number: 20,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 20 dalam modul Kitab Haji.`,
+                videoId: "QhhGX2zrsYA"
+            },
+            {
+                number: 21,
+                title: `Orang  Berumrah Tak Boleh Buka Ihram Dengan Tawaf Sebelum  Sa'ei -`,
+                description: `Kandungan untuk sesi 21 dalam modul Kitab Haji.`,
+                videoId: "JHk6QoufdSA"
+            },
+            {
+                number: 21,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 21 dalam modul Kitab Haji.`,
+                videoId: "iE-oiQhjqtQ"
+            },
+            {
+                number: 22,
+                title: `Tandakan Binatang Korban Dengan Luka Bonggol Pada Ketika Ihram -`,
+                description: `Kandungan untuk sesi 22 dalam modul Kitab Haji.`,
+                videoId: "8iFkAieLx4Y"
+            },
+            {
+                number: 22,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 22 dalam modul Kitab Haji.`,
+                videoId: "gZMtxdMw7Mc"
+            },
+            {
+                number: 23,
+                title: `Kelebihan Umrah Pada Bulan Ramadhan -`,
+                description: `Kandungan untuk sesi 23 dalam modul Kitab Haji.`,
+                videoId: "CtNH85Y3NNI"
+            },
+            {
+                number: 23,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 23 dalam modul Kitab Haji.`,
+                videoId: "WJzPbv2OhI4"
+            },
+            {
+                number: 24,
+                title: `Elok Istilam Dua Rukun Yamani pada Ketika Tawaf -`,
+                description: `Kandungan untuk sesi 24 dalam modul Kitab Haji.`,
+                videoId: "c4fNxXGxcNI"
+            },
+            {
+                number: 24,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 24 dalam modul Kitab Haji.`,
+                videoId: "fHFLgZilArg"
+            },
+            {
+                number: 25,
+                title: `Sa'ei Di Antara Safa Dan Marwah Adalah Satu Rukun Haji -`,
+                description: `Kandungan untuk sesi 25 dalam modul Kitab Haji.`,
+                videoId: "VFUE3Z_7xB4"
+            },
+            {
+                number: 25,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 25 dalam modul Kitab Haji.`,
+                videoId: "_Pc0dn6EqxI"
+            },
+            {
+                number: 26,
+                title: `Teruskan Talbiah Hingga Melontar Jamratul Aqabah Pada Hari Nahar -`,
+                description: `Kandungan untuk sesi 26 dalam modul Kitab Haji.`,
+                videoId: "DTeiUgMhU-U"
+            },
+            {
+                number: 26,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 26 dalam modul Kitab Haji.`,
+                videoId: "lJZ_A0YKUK0"
+            },
+            {
+                number: 27,
+                title: `Berangkat Dari Arafah Ke Muzdalifah Dan Elok Mengerjakan 2 Solat -`,
+                description: `Kandungan untuk sesi 27 dalam modul Kitab Haji.`,
+                videoId: "jWIaVf8dGzo"
+            },
+            {
+                number: 27,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 27 dalam modul Kitab Haji.`,
+                videoId: "9GIvgcSltlw"
+            },
+            {
+                number: 28,
+                title: `Elok Hantar Dulu Orang Yang Lemah   Dari Muzdalifah Ke Mina -`,
+                description: `Kandungan untuk sesi 28 dalam modul Kitab Haji.`,
+                videoId: "fcJ6NE24rrE"
+            },
+            {
+                number: 28,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 28 dalam modul Kitab Haji.`,
+                videoId: "BZ66ZC3jE6U"
+            },
+            {
+                number: 29,
+                title: `Menyatakan Waktu Elok Melontar -`,
+                description: `Kandungan untuk sesi 29 dalam modul Kitab Haji.`,
+                videoId: "YFufDLLXtm0"
+            },
+            {
+                number: 29,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 29 dalam modul Kitab Haji.`,
+                videoId: "kh-Zj0Ke2ac"
+            },
+            {
+                number: 30,
+                title: `Harus Sembelih  Sebelum Melontar Dan Bercukur Sebelum Sembelih-`,
+                description: `Kandungan untuk sesi 30 dalam modul Kitab Haji.`,
+                videoId: "KuidKsNnk20"
+            },
+            {
+                number: 30,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 30 dalam modul Kitab Haji.`,
+                videoId: "zqLm1M6XS3k"
+            },
+            {
+                number: 31,
+                title: `Bersedekah Daging, Kulit Haiwan &  Kain Yg Dipakai Haiwan Qurban-`,
+                description: `Kandungan untuk sesi 31 dalam modul Kitab Haji.`,
+                videoId: "gZOHH3N2Sbw"
+            },
+            {
+                number: 31,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 31 dalam modul Kitab Haji.`,
+                videoId: "ZW_2ZnZbFQU"
+            },
+            {
+                number: 32,
+                title: `Elok Menghantar Binatang Qurban Ke Tanah Haram Jika Tak Pergi -`,
+                description: `Kandungan untuk sesi 32 dalam modul Kitab Haji.`,
+                videoId: "o3tT0yUvcnY"
+            },
+            {
+                number: 33,
+                title: `Wajib Tawaf Wada Dan Gugur Tawaf Wada Drp Wanita Yang  Berhaidh -`,
+                description: `Kandungan untuk sesi 33 dalam modul Kitab Haji.`,
+                videoId: "4JpuHAdwHNk"
+            },
+            {
+                number: 33,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 33 dalam modul Kitab Haji.`,
+                videoId: "kxdaQnU9CvA"
+            },
+            {
+                number: 34,
+                title: `Merobohkan Ka'abah Dan Membinanya Semula -`,
+                description: `Kandungan untuk sesi 34 dalam modul Kitab Haji.`,
+                videoId: "nkEeS7jJ0Qo"
+            },
+            {
+                number: 34,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 34 dalam modul Kitab Haji.`,
+                videoId: "ypg95NdWEp8"
+            },
+            {
+                number: 35,
+                title: `Haji Bagi Pihak Yg Tak Mampu Kerana Sakit Panjang,Tua  Atau Mati -`,
+                description: `Kandungan untuk sesi 35 dalam modul Kitab Haji.`,
+                videoId: "TzWGUYSBJxc"
+            },
+            {
+                number: 35,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 35 dalam modul Kitab Haji.`,
+                videoId: "j4zayZcsEZQ"
+            },
+            {
+                number: 36,
+                title: `Fardhu Haji Sekali Sepanjang Hayat -`,
+                description: `Kandungan untuk sesi 36 dalam modul Kitab Haji.`,
+                videoId: "tFxc6gxsf_c"
+            },
+            {
+                number: 36,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 36 dalam modul Kitab Haji.`,
+                videoId: "ZXyaJDNYH5M"
+            },
+            {
+                number: 37,
+                title: `Elok Berzikir Bila Seseorang Itu Menaiki Kenderaannya -`,
+                description: `Kandungan untuk sesi 37 dalam modul Kitab Haji.`,
+                videoId: "hWknUfLCKOM"
+            },
+            {
+                number: 37,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 37 dalam modul Kitab Haji.`,
+                videoId: "cAv0RuVIlTg"
+            },
+            {
+                number: 38,
+                title: `Singgahnya Orang Haji Di Mekah & Mewariskan Rumah-Rumah Di Mekah-`,
+                description: `Kandungan untuk sesi 38 dalam modul Kitab Haji.`,
+                videoId: "sK1Rxv8Po2s"
+            },
+            {
+                number: 38,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 38 dalam modul Kitab Haji.`,
+                videoId: "q4f3vSrtuHY"
+            },
+            {
+                number: 39,
+                title: `Pengharaman Mekah &Binatang Buruan, Rumput, Pokok&Barang Tercicir-`,
+                description: `Kandungan untuk sesi 39 dalam modul Kitab Haji.`,
+                videoId: "UBqGZq9OPfA"
+            },
+            {
+                number: 40,
+                title: `Kelebihan Madinah &Doa Nabi Utk Keberkatan Madinah&Pengharamannya-`,
+                description: `Kandungan untuk sesi 40 dalam modul Kitab Haji.`,
+                videoId: "CFujUR4Uy-0"
+            },
+            {
+                number: 40,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 40 dalam modul Kitab Haji.`,
+                videoId: "VEAz_jIRau4"
+            },
+            {
+                number: 41,
+                title: `Kelebihan Madinah &Doa Nabi Utk Keberkatan Madinah&Pengharamannya-`,
+                description: `Kandungan untuk sesi 41 dalam modul Kitab Haji.`,
+                videoId: "8XmpLpNwpjc"
+            },
+            {
+                number: 42,
+                title: `Kelebihan Madinah &Doa Nabi Utk Keberkatan Madinah&Pengharamannya-`,
+                description: `Kandungan untuk sesi 42 dalam modul Kitab Haji.`,
+                videoId: "rDZ7G3MTyNk"
+            },
+            {
+                number: 43,
+                title: `Halangan Dari Mahukan Keburukan Terhadap Penduduk Madinah -`,
+                description: `Kandungan untuk sesi 43 dalam modul Kitab Haji.`,
+                videoId: "XE4LBJkzmXI"
+            },
+            {
+                number: 43,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 43 dalam modul Kitab Haji.`,
+                videoId: "2VHeOGu4A2g"
+            },
+            {
+                number: 44,
+                title: `Kelebihan Sembahyang Di Masjid Mekah Dan Madinah -`,
+                description: `Kandungan untuk sesi 44 dalam modul Kitab Haji.`,
+                videoId: "qLatUlTms3c"
+            },
+            {
+                number: 44,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Haji`,
+                description: `Kandungan untuk sesi 44 dalam modul Kitab Haji.`,
+                videoId: "OHLtwfXMdY0"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

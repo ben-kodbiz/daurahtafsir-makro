@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Perkahwinan - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Watch Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #3f51b5, #607d8b);
+            color: white;
+            text-decoration: none;
+            border-radius: 24px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(63, 81, 181, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #607d8b, #3f51b5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(63, 81, 181, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Perkahwinan</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Perkahwinan</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Perkahwinan from Sahih Muslim series</strong><br>
+                Kitab Perkahwinan from Sahih Muslim series
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+        </div>
+    </div>
+    <script>
+        // Session data with actual titles
+        const sessions = [
+            {
+                number: 1,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Perkahwinan.`,
+                videoId: "gT6FSt0cg0k"
+            },
+            {
+                number: 1,
+                title: `Kitab Tentang Perkahwinan -`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Perkahwinan.`,
+                videoId: "pbB9A6tXxss"
+            },
+            {
+                number: 2,
+                title: `Anjuran Kpd Orang Ternampak Perempuan Supaya Mendatangi Isterinya-`,
+                description: `Kandungan untuk sesi 2 dalam modul Kitab Perkahwinan.`,
+                videoId: "okl8LnHf7kM"
+            },
+            {
+                number: 3,
+                title: `Haram Menghimpunkan Di Antara Seorang Perempuan & Ibu Saudaranya-`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Perkahwinan.`,
+                videoId: "GMoiTm5eXu8"
+            },
+            {
+                number: 3,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Perkahwinan.`,
+                videoId: "71989pf1Lmk"
+            },
+            {
+                number: 4,
+                title: `Haram Meminang Atas Pinangan Seseorang -`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Perkahwinan.`,
+                videoId: "bIy7Vwaw2RI"
+            },
+            {
+                number: 4,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Perkahwinan.`,
+                videoId: "rrGfi3hqImw"
+            },
+            {
+                number: 5,
+                title: `Izin  Nikah Dari Janda Dgn Sebutan, Izin Anak Dara Dgn Diamnya -`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Perkahwinan.`,
+                videoId: "Xtf47pPnf2g"
+            },
+            {
+                number: 5,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Perkahwinan.`,
+                videoId: "FVmq7G5cXgI"
+            },
+            {
+                number: 6,
+                title: `Keharusan Ayah Mengahwinkan Anak Perempuannya Yang Masih Kecil -`,
+                description: `Kandungan untuk sesi 6 dalam modul Kitab Perkahwinan.`,
+                videoId: "NzU9eHx-ZNU"
+            },
+            {
+                number: 7,
+                title: `Keharusan Ayah Mengahwinkan Anak Perempuannya Yang Masih Kecil -`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Perkahwinan.`,
+                videoId: "xcXgrHcXwOM"
+            },
+            {
+                number: 8,
+                title: `Elok Berkahwin Dan Mengahwinkan (Orang Lain) Pada Bulan Syawal -`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Perkahwinan.`,
+                videoId: "xBMpg39xZ8w"
+            },
+            {
+                number: 8,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Perkahwinan.`,
+                videoId: "yZpfuDtS-h8"
+            },
+            {
+                number: 9,
+                title: `Kelebihan  Memerdekakan Hambanya Kemudian Berkahwin Dengannya -`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Perkahwinan.`,
+                videoId: "ZCLPXy3x_64"
+            },
+            {
+                number: 9,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Perkahwinan.`,
+                videoId: "G8rfdeKth54"
+            },
+            {
+                number: 10,
+                title: `Kelebihan  Memerdekakan Hambanya Kemudian Berkahwin Dengannya -`,
+                description: `Kandungan untuk sesi 10 dalam modul Kitab Perkahwinan.`,
+                videoId: "-HLHxhkXPp4"
+            },
+            {
+                number: 10,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 10 dalam modul Kitab Perkahwinan.`,
+                videoId: "fiHpR7aUOxY"
+            },
+            {
+                number: 11,
+                title: `Perkahwinan Zainab Bt Jahsh  &  Adanya Kenduri Kahwin. -`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Perkahwinan.`,
+                videoId: "ZXzMG5WP6yA"
+            },
+            {
+                number: 11,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Perkahwinan.`,
+                videoId: "gzmE6c4DQPc"
+            },
+            {
+                number: 12,
+                title: `Perintah Menerima Jemputan Orang Yang Menjemput -`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Perkahwinan.`,
+                videoId: "8Ue8-ufCqak"
+            },
+            {
+                number: 12,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Perkahwinan.`,
+                videoId: "aQJv_7zY_pk"
+            },
+            {
+                number: 13,
+                title: `Hukum 'Azal - [Sahih Muslim - Kitab Nikah] -`,
+                description: `Kandungan untuk sesi 13 dalam modul Kitab Perkahwinan.`,
+                videoId: "p96HFxkAEFo"
+            },
+            {
+                number: 13,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 13 dalam modul Kitab Perkahwinan.`,
+                videoId: "yQyUc0AJZRY"
+            },
+            {
+                number: 14,
+                title: `Keharusan Ghilah (Menyetubuhi Wanita Yang Sedang Menyusukan Anak) -`,
+                description: `Kandungan untuk sesi 14 dalam modul Kitab Perkahwinan.`,
+                videoId: "AZFd8q8jYGc"
+            },
+            {
+                number: 14,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Nikah`,
+                description: `Kandungan untuk sesi 14 dalam modul Kitab Perkahwinan.`,
+                videoId: "upsGDxMVpQ0"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

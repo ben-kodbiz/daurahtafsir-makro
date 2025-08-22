@@ -34,32 +34,32 @@ This document tracks the implementation status of all 56 Kitab from Sahih Muslim
 | 20 | Kitab Li'an | ✅ Completed | 3 sessions | All sessions processed from YouTube channel @sahihmuslim-kitablianmaula9352 |
 | 21 | Kitab Kemerdekaan | ❌ Not Started | TBD |  |
 | 22 | Kitab Jual-Beli | ✅ Completed | 18 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabjualbeli-1686 |
-| 23 | Kitab Musaqat | ❌ Not Started | TBD |  |
-| 24 | Kitab Faraid | ❌ Not Started | TBD |  |
-| 25 | Kitab Hibah | ❌ Not Started | TBD |  |
-| 26 | Kitab Wasiyyah | ❌ Not Started | TBD |  |
-| 27 | Kitab Nazar | ❌ Not Started | TBD |  |
+| 23 | Kitab Musaqat | ✅ Completed | 32 sessions | All sessions processed from YouTube channel @muslimmusaqat10 |
+| 24 | Kitab Faraid | ✅ Completed | 7 sessions | All sessions processed from YouTube channel @muslimpusaka09 |
+| 25 | Kitab Hibah | ✅ Completed | 4 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabhibah-mau3174 |
+| 26 | Kitab Wasiyyah | ✅ Completed | 7 sessions | All sessions processed from YouTube channel @muslimwasiat09 |
+| 27 | Kitab Nazar | ✅ Completed | 6 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabnazar-mau6807 |
 | 28 |  | ❌ Not Started | TBD |  |
-| 29 | Kitab Sumpah & Qasamah | ❌ Not Started | TBD |  |
-| 30 | Kitab Hudud | ❌ Not Started | TBD |  |
-| 31 | Kitab Memutuskan Pengadilan | ❌ Not Started | TBD |  |
-| 32 | Harta Benda Temuan | ❌ Not Started | TBD |  |
-| 33 | Kitab Jihad Dan Sirah | ❌ Not Started | TBD |  |
-| 34 | Kitab Pemerintahan | ❌ Not Started | TBD |  |
+| 42 | Kitab Sumpah & Qasamah | ✅ Completed | 21 sessions | All sessions processed from YouTube channel @muslimqasamah09 |
+| 30 | Kitab Hudud | ✅ Completed | 18 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabhudud-mau2505 |
+| 31 | Kitab Memutuskan Pengadilan | ✅ Completed | 12 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabmemutuska8811 |
+| 32 | Harta Benda Temuan | ✅ Completed | 6 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabluqathahh9988 |
+| 33 | Kitab Jihad Dan Sirah | ✅ Completed | 45 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabjihadsira8985 |
+| 34 | Kitab Pemerintahan | ✅ Completed | 34 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabpemerinta3956 |
 | 35 | Kitab Perburuan Dan Sembelihan | ❌ Not Started | TBD |  |
-| 36 | Kitab Qurban | ❌ Not Started | TBD |  |
-| 37 | Kitab Minuman | ❌ Not Started | TBD |  |
-| 38 | Kitab Pakaian Dan Perhiasan | ❌ Not Started | TBD |  |
-| 39 | Kitab Adab | ❌ Not Started | TBD |  |
-| 40 | Kitab Salam | ❌ Not Started | TBD |  |
-| 41 | Kitab Adab Berbahasa | ❌ Not Started | TBD |  |
-| 42 | Kitab Syair | ❌ Not Started | TBD |  |
-| 43 | Kitab Mimpi | ❌ Not Started | TBD |  |
-| 44 | Kitab Keutamaan | ❌ Not Started | TBD |  |
-| 45 | Kitab Kelebihan Sahabat | ❌ Not Started | TBD |  |
-| 46 | Kitab Kebajikan, Silaturrahim Dan Etika | ❌ Not Started | TBD |  |
-| 47 | Kitab Taqdir | ❌ Not Started | TBD |  |
-| 48 | Kitab Ilmu | ❌ Not Started | TBD |  |
+| 35 | Kitab Qurban | ✅ Completed | 7 sessions | All sessions processed from YouTube channel @muslimqurban09 |
+| 36 | Kitab Minuman | ✅ Completed | 27 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabminuman-m6427 |
+| 37 | Kitab Pakaian Dan Perhiasan | ✅ Completed | 16 sessions | All sessions processed from YouTube channel @muslimlibaas09 |
+| 38 | Kitab Adab | ✅ Completed | 7 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabadab-mual1925 |
+| 39 | Kitab Salam | ✅ Completed | 30 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabsalam-mau5088 |
+| 40 | Kitab Adab Berbahasa | ✅ Completed | 2 sessions | All sessions processed from YouTube channel @muslimadabberbahasa1 |
+| 41 | Kitab Syair | ✅ Completed | 2 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabsyair-mau1558 |
+| 43 | Kitab Mimpi | ✅ Completed | 4 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabmimpi-mau9559 |
+| 44 | Kitab Keutamaan | ✅ Completed | 34 sessions | All sessions processed from YouTube channel @muslimfadhail10 |
+| 45 | Kitab Kelebihan Sahabat | ✅ Completed | 63 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabkelebihan7774 |
+| 46 | Kitab Kebajikan, Silaturrahim Dan Etika | ✅ Completed | 30 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabberbuatba8431 |
+| 47 | Kitab Taqdir | ✅ Completed | 8 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabtaqdir-ma3202 |
+| 48 | Kitab Ilmu | ✅ Completed | 3 sessions | All sessions processed from YouTube channel @sahihmuslim-kitabilmu-maul3376 |
 | 49 | Zikir, Doa, Taubat | ❌ Not Started | TBD |  |
 | 50 | Kitab Taubat | ❌ Not Started | TBD |  |
 | 51 | Kitab Sifat-sifat Orang Munafik | ❌ Not Started | TBD |  |
@@ -90,10 +90,10 @@ For each new Kitab implementation:
 
 ## Progress Summary
 
-- **Completed**: 8 Kitab (14.3%)
+- **Completed**: 28 Kitab (50.0%)
 - **In Progress**: 0 Kitab (0%)
 - **Planned**: 0 Kitab (0%)
-- **Not Started**: 48 Kitab (85.7%)
+- **Not Started**: 28 Kitab (50.0%)
 - **Total**: 56 Kitab (100%)
 
 Last Updated: August 22, 2025

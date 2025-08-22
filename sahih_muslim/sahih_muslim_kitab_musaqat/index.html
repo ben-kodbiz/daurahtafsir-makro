@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Musaqat - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* Results Count */
+        .md-results-count {
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        /* Elevation classes */
+        .elevation-2 {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-4 {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-8 {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 960px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Musaqat</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Musaqat</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Musaqat from Sahih Muslim series</strong><br>
+                Kitab Musaqat from Sahih Muslim series
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+            <div class="md-grid-item" data-session="1">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/lZSJI_3dUrw/mqdefault.jpg" 
+                 alt="Sesi 1 - Penyiraman Tanaman Atau Kebun & Berpawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 1</span>
+            </div>
+            <h3 class="md-session-title">Sesi 1 - Penyiraman Tanaman Atau Kebun & Berpawah</h3>
+            <a href="session1.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="1">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/dF5ommi8Vuc/mqdefault.jpg" 
+                 alt="Sesi 1 - MATAN HADITH - Sahih Muslim - Kitab Musaqat" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 1</span>
+            </div>
+            <h3 class="md-session-title">Sesi 1 - MATAN HADITH - Sahih Muslim - Kitab Musaqat</h3>
+            <a href="session1.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="2">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/mX3Em_oW6V8/mqdefault.jpg" 
+                 alt="Sesi 2 - Kelebihan Menanam Pokok Dan Bercucuk Tanam" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 2</span>
+            </div>
+            <h3 class="md-session-title">Sesi 2 - Kelebihan Menanam Pokok Dan Bercucuk Tanam</h3>
+            <a href="session2.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="2">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/bshlYCwRInk/mqdefault.jpg" 
+                 alt="Sesi 2 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman)  & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 2</span>
+            </div>
+            <h3 class="md-session-title">Sesi 2 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman)  & Pawah</h3>
+            <a href="session2.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="3">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/GIcWMHAR3ZI/mqdefault.jpg" 
+                 alt="Sesi 3 - Elok Mengurangkan Hutang" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 3</span>
+            </div>
+            <h3 class="md-session-title">Sesi 3 - Elok Mengurangkan Hutang</h3>
+            <a href="session3.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="3">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ssUX6ZC1bfQ/mqdefault.jpg" 
+                 alt="Sesi 3 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 3</span>
+            </div>
+            <h3 class="md-session-title">Sesi 3 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session3.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="4">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/O1v0dCt_e5c/mqdefault.jpg" 
+                 alt="Sesi 4 - Mengambil Kembali Barang Yang Dijual Daripada Pembeli Muflis" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 4</span>
+            </div>
+            <h3 class="md-session-title">Sesi 4 - Mengambil Kembali Barang Yang Dijual Daripada Pembeli Muflis</h3>
+            <a href="session4.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="5">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/wh-zAsvajrs/mqdefault.jpg" 
+                 alt="Sesi 5 - Haram Orang Kaya Berdolak Dalik Dan Sah Pemindahan Hutang" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 5</span>
+            </div>
+            <h3 class="md-session-title">Sesi 5 - Haram Orang Kaya Berdolak Dalik Dan Sah Pemindahan Hutang</h3>
+            <a href="session5.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="5">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/faxe3quhhV4/mqdefault.jpg" 
+                 alt="Sesi 5 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 5</span>
+            </div>
+            <h3 class="md-session-title">Sesi 5 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session5.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="6">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ItBk-MTmvLs/mqdefault.jpg" 
+                 alt="Sesi 6 - Pengharaman Harga Anjing" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 6</span>
+            </div>
+            <h3 class="md-session-title">Sesi 6 - Pengharaman Harga Anjing</h3>
+            <a href="session6.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="6">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/9hmRiVO4Sms/mqdefault.jpg" 
+                 alt="Sesi 6 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 6</span>
+            </div>
+            <h3 class="md-session-title">Sesi 6 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session6.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="7">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Btukj8AKOWg/mqdefault.jpg" 
+                 alt="Sesi 7 - Haram Menjual Arak, Bangkai, Babi Dan Berhala" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 7</span>
+            </div>
+            <h3 class="md-session-title">Sesi 7 - Haram Menjual Arak, Bangkai, Babi Dan Berhala</h3>
+            <a href="session7.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="7">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Imz30RZWO8w/mqdefault.jpg" 
+                 alt="Sesi 7 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 7</span>
+            </div>
+            <h3 class="md-session-title">Sesi 7 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session7.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="8">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/jyWO7NML_Ec/mqdefault.jpg" 
+                 alt="Sesi 8 - Khutbah nabi s.a.w. Di Madinah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 8</span>
+            </div>
+            <h3 class="md-session-title">Sesi 8 - Khutbah nabi s.a.w. Di Madinah</h3>
+            <a href="session8.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="9">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/yxIDXuUNaNM/mqdefault.jpg" 
+                 alt="Sesi 9 - Riba" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 9</span>
+            </div>
+            <h3 class="md-session-title">Sesi 9 - Riba</h3>
+            <a href="session9.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="9">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/aAS5-vYPbPU/mqdefault.jpg" 
+                 alt="Sesi 9 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 9</span>
+            </div>
+            <h3 class="md-session-title">Sesi 9 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session9.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="10">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/WRTK3Zoc5Z4/mqdefault.jpg" 
+                 alt="Sesi 10 - Riba" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 10</span>
+            </div>
+            <h3 class="md-session-title">Sesi 10 - Riba</h3>
+            <a href="session10.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="11">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/bMommlEj6uc/mqdefault.jpg" 
+                 alt="Sesi 11 - Riba" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 11</span>
+            </div>
+            <h3 class="md-session-title">Sesi 11 - Riba</h3>
+            <a href="session11.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="12">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Sfh86HvS6ns/mqdefault.jpg" 
+                 alt="Sesi 12 - Riba" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 12</span>
+            </div>
+            <h3 class="md-session-title">Sesi 12 - Riba</h3>
+            <a href="session12.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="13">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/dV1Q-RhtanQ/mqdefault.jpg" 
+                 alt="Sesi 13 - Mengambil Yang Halal Dan Meninggalkan Yang Syubhat" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 13</span>
+            </div>
+            <h3 class="md-session-title">Sesi 13 - Mengambil Yang Halal Dan Meninggalkan Yang Syubhat</h3>
+            <a href="session13.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="13">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/OE7nE11_0gs/mqdefault.jpg" 
+                 alt="Sesi 13 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 13</span>
+            </div>
+            <h3 class="md-session-title">Sesi 13 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session13.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="14">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/CRK6sxNvTrY/mqdefault.jpg" 
+                 alt="Sesi 14 - Mengambil Yang Halal Dan Meninggalkan Yang Syubhat" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 14</span>
+            </div>
+            <h3 class="md-session-title">Sesi 14 - Mengambil Yang Halal Dan Meninggalkan Yang Syubhat</h3>
+            <a href="session14.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="15">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/5UGxGUQZAd8/mqdefault.jpg" 
+                 alt="Sesi 15 - Mengambil Yang Halal Dan Meninggalkan Yang Syubhat" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 15</span>
+            </div>
+            <h3 class="md-session-title">Sesi 15 - Mengambil Yang Halal Dan Meninggalkan Yang Syubhat</h3>
+            <a href="session15.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="15">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/9LKqNXVL5Pc/mqdefault.jpg" 
+                 alt="Sesi 15 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 15</span>
+            </div>
+            <h3 class="md-session-title">Sesi 15 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session15.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="16">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/tBGwci49CrM/mqdefault.jpg" 
+                 alt="Sesi 16 - Harus Meminjam Atau Berhutang Binatang" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 16</span>
+            </div>
+            <h3 class="md-session-title">Sesi 16 - Harus Meminjam Atau Berhutang Binatang</h3>
+            <a href="session16.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="16">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/VoO0K_3C59s/mqdefault.jpg" 
+                 alt="Sesi 16 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 16</span>
+            </div>
+            <h3 class="md-session-title">Sesi 16 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session16.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="17">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Qv7O15na5FE/mqdefault.jpg" 
+                 alt="Sesi 17 - Jual Beli Salam" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 17</span>
+            </div>
+            <h3 class="md-session-title">Sesi 17 - Jual Beli Salam</h3>
+            <a href="session17.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="17">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/F7-gzWNhD_Y/mqdefault.jpg" 
+                 alt="Sesi 17 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 17</span>
+            </div>
+            <h3 class="md-session-title">Sesi 17 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session17.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="18">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/18GKSSLTCi4/mqdefault.jpg" 
+                 alt="Sesi 18 - Shuf'a" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 18</span>
+            </div>
+            <h3 class="md-session-title">Sesi 18 - Shuf'a</h3>
+            <a href="session18.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="18">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/qw2FHIjxEcY/mqdefault.jpg" 
+                 alt="Sesi 18 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 18</span>
+            </div>
+            <h3 class="md-session-title">Sesi 18 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session18.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="19">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/LKpps2fqLdw/mqdefault.jpg" 
+                 alt="Sesi 19 - Memacak Atau Memasang Kayu Pada Dinding Jiran" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 19</span>
+            </div>
+            <h3 class="md-session-title">Sesi 19 - Memacak Atau Memasang Kayu Pada Dinding Jiran</h3>
+            <a href="session19.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="19">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/XY6-qz0u5pw/mqdefault.jpg" 
+                 alt="Sesi 19 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 19</span>
+            </div>
+            <h3 class="md-session-title">Sesi 19 - MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah</h3>
+            <a href="session19.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+        </div>
+        <div class="md-results-count" id="md-results-count">32 videos tersedia</div>
+        <script>
+        // Session data with actual titles
+        const sessions = [
+            {
+                number: 1,
+                title: `Memacak Atau Memasang Kayu Pada Dinding Jiran -`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 2,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 2 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 3,
+                title: `Shuf'a -`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 4,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 5,
+                title: `Jual Beli Salam -`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 6,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 6 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 7,
+                title: `Harus Meminjam Atau Berhutang Binatang -`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 8,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 9,
+                title: `Mengambil Yang Halal Dan Meninggalkan Yang Syubhat -`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 10,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 10 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 11,
+                title: `Mengambil Yang Halal Dan Meninggalkan Yang Syubhat -`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 12,
+                title: `Mengambil Yang Halal Dan Meninggalkan Yang Syubhat -`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 13,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 13 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 14,
+                title: `Riba -`,
+                description: `Kandungan untuk sesi 14 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 15,
+                title: `Riba -`,
+                description: `Kandungan untuk sesi 15 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 16,
+                title: `Riba -`,
+                description: `Kandungan untuk sesi 16 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 17,
+                title: `Riba -`,
+                description: `Kandungan untuk sesi 17 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 18,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 18 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 19,
+                title: `Khutbah nabi s.a.w. Di Madinah -`,
+                description: `Kandungan untuk sesi 19 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 20,
+                title: `Haram Menjual Arak, Bangkai, Babi Dan Berhala -`,
+                description: `Kandungan untuk sesi 20 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 21,
+                title: `Pengharaman Harga Anjing -`,
+                description: `Kandungan untuk sesi 21 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 22,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 22 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 23,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 23 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 24,
+                title: `Haram Orang Kaya Berdolak Dalik Dan Sah Pemindahan Hutang -`,
+                description: `Kandungan untuk sesi 24 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 25,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 25 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 26,
+                title: `Mengambil Kembali Barang Yang Dijual Daripada Pembeli Muflis -`,
+                description: `Kandungan untuk sesi 26 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 27,
+                title: `Elok Mengurangkan Hutang -`,
+                description: `Kandungan untuk sesi 27 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 28,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 28 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 29,
+                title: `Kelebihan Menanam Pokok Dan Bercucuk Tanam -`,
+                description: `Kandungan untuk sesi 29 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 30,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat (Penyiraman Tanaman) & Pawah`,
+                description: `Kandungan untuk sesi 30 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 31,
+                title: `Penyiraman Tanaman Atau Kebun & Berpawah -`,
+                description: `Kandungan untuk sesi 31 dalam modul Kitab Musaqat.`
+            },
+            {
+                number: 32,
+                title: `MATAN HADITH - Sahih Muslim - Kitab Musaqat`,
+                description: `Kandungan untuk sesi 32 dalam modul Kitab Musaqat.`
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('session-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            sessionsToShow.forEach(session => {
+                const card = document.createElement('div');
+                card.className = 'session-card';
+                card.innerHTML = `
+                    <div class="session-number">Sesi ${session.number}</div>
+                    <div class="session-title">${session.title}</div>
+                    <div class="session-description">${session.description}</div>
+                    <a href="session${session.number}.html" class="watch-btn">Tonton Video</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value;
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.add('visible');
+            } else {
+                clearButton.classList.remove('visible');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.remove('visible');
+            displaySessions(sessions);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

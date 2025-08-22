@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Fitnah Dan Tanda Kiamat - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Watch Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #3f51b5, #607d8b);
+            color: white;
+            text-decoration: none;
+            border-radius: 24px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(63, 81, 181, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #607d8b, #3f51b5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(63, 81, 181, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Fitnah Dan Tanda Kiamat</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Fitnah Dan Tanda Kiamat</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Fitnah Dan Tanda Kiamat from Sahih Muslim series</strong><br>
+                Kitab Fitnah Dan Tanda Kiamat from Sahih Muslim series
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+            <!-- Grid items will be dynamically generated by JavaScript -->
+        </div>
+    </div>
+    <script>
+        // Session data with actual titles
+        const sessions = [
+            {
+                number: 1,
+                title: `Sesi 23 -  Hampirnya Hari Kiamat - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 23 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "3vuG4n15ZKs"
+            },
+            {
+                number: 2,
+                title: `Sesi 22 -  Saki-Baki Riwayat Tentang Dajjal - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 22 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "XLY94C-yjgw"
+            },
+            {
+                number: 3,
+                title: `Sesi 22 - MATAN HADITH - Sahih Muslim -  Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 22 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "fDVaSFnBQDE"
+            },
+            {
+                number: 4,
+                title: `Sesi 21 -  Kisah Al-Jasasah - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 21 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "PdVV2DRPq5o"
+            },
+            {
+                number: 5,
+                title: `Sesi 21 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 21 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "OGfeZl25LoE"
+            },
+            {
+                number: 6,
+                title: `Sesi 20 - Tentang Dajjal,  Dia Terlalu Hina Di Sisi Allah - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 20 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "IHiy66IxL_A"
+            },
+            {
+                number: 7,
+                title: `Sesi 20 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 20 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "2Jm-Ww5Zp0U"
+            },
+            {
+                number: 8,
+                title: `Sesi 19 - Tentang Dajjal - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 19 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "LWHheb_Y4U0"
+            },
+            {
+                number: 9,
+                title: `Sesi 18 - Tentang Dajjal - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 18 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "S1uel3dXdMk"
+            },
+            {
+                number: 10,
+                title: `Sesi 17 - Tentang Dajjal - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 17 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "qffLP3lPBOw"
+            },
+            {
+                number: 11,
+                title: `Sesi 17 - MATAN HADITH - Sahih Muslim - Kitab  Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 17 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "iNOF4g91B0c"
+            },
+            {
+                number: 12,
+                title: `Sesi 16 - Tentang Dajjal - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 16 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "PBG7oRpOVuc"
+            },
+            {
+                number: 13,
+                title: `Sesi 15 - Tentang Dajjal - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 15 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "4gkVB3gBZH4"
+            },
+            {
+                number: 14,
+                title: `Sesi 15 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 15 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "66ZfkASVSeU"
+            },
+            {
+                number: 15,
+                title: `Sesi 14 - Kisah Ibnu Shayyad - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 14 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "im7nP8LFb-s"
+            },
+            {
+                number: 16,
+                title: `Sesi 13 - Kisah Ibnu Shayyad - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 13 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "84UPWy4RrKU"
+            },
+            {
+                number: 17,
+                title: `Sesi 13 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 13 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "L4sQDUdsK24"
+            },
+            {
+                number: 18,
+                title: `Sesi 12 -Kiamat Tak Berlaku Selagi Seorang Lalu Dikubur &  Menyesal - [Sahih Muslim- Kiamat]`,
+                description: `Kandungan untuk Sesi 12 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "t3TFLOO6os8"
+            },
+            {
+                number: 19,
+                title: `Sesi 12 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 12 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "KYCthmF5Cpo"
+            },
+            {
+                number: 20,
+                title: `Sesi 11 -Kiamat Tidak Berlaku Selagi Seorang Lalu Dikubur &  Menyesal - [S.Muslim - Fitnah  Kiamat]`,
+                description: `Kandungan untuk Sesi 11 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "yBK3pSW5oP4"
+            },
+            {
+                number: 21,
+                title: `Sesi 11 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 11 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "0FmJYkxXNqA"
+            },
+            {
+                number: 22,
+                title: `Sesi 10 -MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 10 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "H9uOQbF9y7Y"
+            },
+            {
+                number: 23,
+                title: `Sesi 10 -  Keadaan Orang Kafir Di Padang Mahsyar Dan Di Neraka - [Sahih Muslim - Fitnah Kiamat]`,
+                description: `Kandungan untuk Sesi 10 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "Lg6bHrD1Tz4"
+            },
+            {
+                number: 24,
+                title: `Sesi 9 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 9 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "CVmmashQnbU"
+            },
+            {
+                number: 25,
+                title: `Sesi 9 -  Tuhan Memperjalankan Orang Kafir Di Atas Mukanya - [Sahih Muslim- Fitnah & Kiamat]`,
+                description: `Kandungan untuk Sesi 9 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "mGpSp7ldNzY"
+            },
+            {
+                number: 26,
+                title: `Sesi 8 - Matan Hadith - Sahih Muslim -  Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 8 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "l6JJkwavRDc"
+            },
+            {
+                number: 27,
+                title: `Sesi 8 -  Terbelah Bulan - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 8 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "sx5FsLlE9wM"
+            },
+            {
+                number: 28,
+                title: `Sesi 7 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 7 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "9TVFpM3jJYE"
+            },
+            {
+                number: 29,
+                title: `Sesi 7 -  Soalan Kaum Yahudi Kepada Nabi Tentang Roh - [Sahih Muslim - Fitnah & Kiamat]`,
+                description: `Kandungan untuk Sesi 7 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "dtUc_RjvFfM"
+            },
+            {
+                number: 30,
+                title: `Sesi 6 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 6 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "WPy4FZi8F3w"
+            },
+            {
+                number: 31,
+                title: `Sesi 6 -  Permulaan Kejadian Makhluk Dan Kejadian Adam - [Sahih Muslim - Fitnah & Kiamat]`,
+                description: `Kandungan untuk Sesi 6 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "KbkBbyMyt4A"
+            },
+            {
+                number: 32,
+                title: `Sesi 5 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 5 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "Odf1g6zxPxs"
+            },
+            {
+                number: 33,
+                title: `Sesi 5 - Gambaran Hari Kiamat, Syurga Dan Neraka - [Sahih Muslim - Fitnah & Tanda Kiamat]`,
+                description: `Kandungan untuk Sesi 5 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "CBEDBn5XSHo"
+            },
+            {
+                number: 34,
+                title: `Sesi 4 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 4 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "M9lw-dqKoJw"
+            },
+            {
+                number: 35,
+                title: `Sesi 3 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 3 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "Se-6TfH2VDc"
+            },
+            {
+                number: 36,
+                title: `Sesi 2 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 2 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "aqHgJRYbQnk"
+            },
+            {
+                number: 37,
+                title: `Sesi 1 - MATAN HADITH - Sahih Muslim - Kitab Fitnah & Tanda Kiamat`,
+                description: `Kandungan untuk Sesi 1 dalam modul Kitab Fitnah Dan Tanda Kiamat.`,
+                videoId: "tlsJWLa-grc"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

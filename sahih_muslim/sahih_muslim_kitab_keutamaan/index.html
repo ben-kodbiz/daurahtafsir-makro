@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Keutamaan - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Watch Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #3f51b5, #607d8b);
+            color: white;
+            text-decoration: none;
+            border-radius: 24px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(63, 81, 181, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #607d8b, #3f51b5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(63, 81, 181, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+<style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* Results Count */
+        .md-results-count {
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        /* Elevation classes */
+        .elevation-2 {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-4 {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .elevation-8 {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 960px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Keutamaan</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Keutamaan</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Keutamaan from Sahih Muslim series</strong><br>
+                Kitab Keutamaan from Sahih Muslim series
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+            <div class="md-grid-item" data-session="1">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/zrmiQyz7cRI/mqdefault.jpg" 
+                 alt="Sesi 22 - Kelebihan Khadir a.s" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 22</span>
+            </div>
+            <h3 class="md-session-title">Sesi 22 - Kelebihan Khadir a.s</h3>
+            <a href="session1.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="2">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/6trUFdpE6lE/mqdefault.jpg" 
+                 alt="Sesi 21 - Kelebihan Khadhir a.s" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 21</span>
+            </div>
+            <h3 class="md-session-title">Sesi 21 - Kelebihan Khadhir a.s</h3>
+            <a href="session2.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="3">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/JJwU7zFIo58/mqdefault.jpg" 
+                 alt="Sesi 20 - Kelebihan Nabi Yusuf Dan Nabi Zakaria a.s" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 20</span>
+            </div>
+            <h3 class="md-session-title">Sesi 20 - Kelebihan Nabi Yusuf Dan Nabi Zakaria a.s</h3>
+            <a href="session3.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="4">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/6Vj7Zx4wbgU/mqdefault.jpg" 
+                 alt="Sesi 20 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 20</span>
+            </div>
+            <h3 class="md-session-title">Sesi 20 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session4.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="5">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/2idM0s2-GXI/mqdefault.jpg" 
+                 alt="Sesi 19 - Kelebihan Nabi Musa a.s" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 19</span>
+            </div>
+            <h3 class="md-session-title">Sesi 19 - Kelebihan Nabi Musa a.s</h3>
+            <a href="session5.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="6">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ZUGt_4g6Ez0/mqdefault.jpg" 
+                 alt="Sesi 18 - Kelebihan Nabi Musa a.s" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 18</span>
+            </div>
+            <h3 class="md-session-title">Sesi 18 - Kelebihan Nabi Musa a.s</h3>
+            <a href="session6.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="7">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/-MFf40sFywA/mqdefault.jpg" 
+                 alt="Sesi 17 - Kelebihan Nabi Ibrahim a.s" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 17</span>
+            </div>
+            <h3 class="md-session-title">Sesi 17 - Kelebihan Nabi Ibrahim a.s</h3>
+            <a href="session7.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="8">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/5E2sTDZwVLQ/mqdefault.jpg" 
+                 alt="Sesi 16 - Kelebihan Nabi Isa a.s Dan Nabi Ibrahim a.s." 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 16</span>
+            </div>
+            <h3 class="md-session-title">Sesi 16 - Kelebihan Nabi Isa a.s Dan Nabi Ibrahim a.s.</h3>
+            <a href="session8.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="9">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/HqccWTIwUMM/mqdefault.jpg" 
+                 alt="Sesi 16 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 16</span>
+            </div>
+            <h3 class="md-session-title">Sesi 16 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session9.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="10">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/K8wfsT9ElZs/mqdefault.jpg" 
+                 alt="Sesi 15 - Kewajipan Menjunjung Sabda Nabi s.a.w Berupa Syariat" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 15</span>
+            </div>
+            <h3 class="md-session-title">Sesi 15 - Kewajipan Menjunjung Sabda Nabi s.a.w Berupa Syariat</h3>
+            <a href="session10.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="11">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/mD4mqAOu-DI/mqdefault.jpg" 
+                 alt="Sesi 15 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 15</span>
+            </div>
+            <h3 class="md-session-title">Sesi 15 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session11.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="12">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/djB0X-s405Q/mqdefault.jpg" 
+                 alt="Sesi 14 - Memuliakan Nabi &Tak Banyak Bertanya  Perkara Yg Tak Perlu" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 14</span>
+            </div>
+            <h3 class="md-session-title">Sesi 14 - Memuliakan Nabi &Tak Banyak Bertanya  Perkara Yg Tak Perlu</h3>
+            <a href="session12.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="13">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/lUvZyBtCS-Y/mqdefault.jpg" 
+                 alt="Sesi 14 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 14</span>
+            </div>
+            <h3 class="md-session-title">Sesi 14 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session13.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="14">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/fsqI9hTmKGE/mqdefault.jpg" 
+                 alt="Sesi 13 - Pengetahuan Rasulullah s.a.w Tentang Allah s.w.t" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 13</span>
+            </div>
+            <h3 class="md-session-title">Sesi 13 - Pengetahuan Rasulullah s.a.w Tentang Allah s.w.t</h3>
+            <a href="session14.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="15">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/dgeSQBdXmJQ/mqdefault.jpg" 
+                 alt="Sesi 13 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 13</span>
+            </div>
+            <h3 class="md-session-title">Sesi 13 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session15.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="16">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/oTag80ggVnc/mqdefault.jpg" 
+                 alt="Sesi 12 - Umur Nabi & Selama Mana Nabi  Berada Di Makkah Dan Madinah" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 12</span>
+            </div>
+            <h3 class="md-session-title">Sesi 12 - Umur Nabi & Selama Mana Nabi  Berada Di Makkah Dan Madinah</h3>
+            <a href="session16.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="17">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/DHqWuitmg2M/mqdefault.jpg" 
+                 alt="Sesi 12 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 12</span>
+            </div>
+            <h3 class="md-session-title">Sesi 12 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session17.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="18">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/kcRESVGRbCk/mqdefault.jpg" 
+                 alt="Sesi 11 - Uban Nabi s.a.w" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 11</span>
+            </div>
+            <h3 class="md-session-title">Sesi 11 - Uban Nabi s.a.w</h3>
+            <a href="session18.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="19">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/E78hK6aL1So/mqdefault.jpg" 
+                 alt="Sesi 11 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 11</span>
+            </div>
+            <h3 class="md-session-title">Sesi 11 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session19.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="20">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/kms5HycmY-g/mqdefault.jpg" 
+                 alt="Sesi 10 - Wanginya Peluh Nabi s.a.w Dan Mengambil Berkat Dengannya" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 10</span>
+            </div>
+            <h3 class="md-session-title">Sesi 10 - Wanginya Peluh Nabi s.a.w Dan Mengambil Berkat Dengannya</h3>
+            <a href="session20.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="21">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/T6CaIqeFKJk/mqdefault.jpg" 
+                 alt="Sesi 9 - Kasihan Belas Dan Berlembutnya  Nabi s.a.w Terhadap Wanita" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 9</span>
+            </div>
+            <h3 class="md-session-title">Sesi 9 - Kasihan Belas Dan Berlembutnya  Nabi s.a.w Terhadap Wanita</h3>
+            <a href="session21.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="22">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ZvaFiWEcSg8/mqdefault.jpg" 
+                 alt="Sesi 8 -Simpati Nabi Terhadap Kanak2, Ahli Keluarga &  Merendah Diri" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 8</span>
+            </div>
+            <h3 class="md-session-title">Sesi 8 -Simpati Nabi Terhadap Kanak2, Ahli Keluarga &  Merendah Diri</h3>
+            <a href="session22.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="23">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/63k6PNSMHsg/mqdefault.jpg" 
+                 alt="Sesi 8 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 8</span>
+            </div>
+            <h3 class="md-session-title">Sesi 8 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session23.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="24">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/WRaG9TOLvWo/mqdefault.jpg" 
+                 alt="Sesi 7 -Nabi Adalah Orang Yang Paling Pemurah Dalam Berbuat Kebajikan" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 7</span>
+            </div>
+            <h3 class="md-session-title">Sesi 7 -Nabi Adalah Orang Yang Paling Pemurah Dalam Berbuat Kebajikan</h3>
+            <a href="session24.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="25">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/ESkLl78xe9c/mqdefault.jpg" 
+                 alt="Sesi 7 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 7</span>
+            </div>
+            <h3 class="md-session-title">Sesi 7 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session25.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="26">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/LHTUTf3qIbI/mqdefault.jpg" 
+                 alt="Sesi 6 - Menyatakan Adanya Kolam Nabi s.a.w Dan Sifat-sifatnya" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 6</span>
+            </div>
+            <h3 class="md-session-title">Sesi 6 - Menyatakan Adanya Kolam Nabi s.a.w Dan Sifat-sifatnya</h3>
+            <a href="session26.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="27">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Bf--V0sm4sc/mqdefault.jpg" 
+                 alt="Sesi 5 - Menyatakan Adanya Kolam Nabi s.a.w Dan Sifat-sifatnya" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 5</span>
+            </div>
+            <h3 class="md-session-title">Sesi 5 - Menyatakan Adanya Kolam Nabi s.a.w Dan Sifat-sifatnya</h3>
+            <a href="session27.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="28">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/fB-MwPz8wK4/mqdefault.jpg" 
+                 alt="Sesi 5 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 5</span>
+            </div>
+            <h3 class="md-session-title">Sesi 5 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session28.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="29">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/Obnwzox3_HU/mqdefault.jpg" 
+                 alt="Sesi 4 - Nabi s.a.w Adalah Penutup Sekalian Nabi" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 4</span>
+            </div>
+            <h3 class="md-session-title">Sesi 4 - Nabi s.a.w Adalah Penutup Sekalian Nabi</h3>
+            <a href="session29.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="30">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/SaF-vN40U9g/mqdefault.jpg" 
+                 alt="Sesi 3 - Tawakkal Nabi s.a.w Kepada Allah s.w.t" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 3</span>
+            </div>
+            <h3 class="md-session-title">Sesi 3 - Tawakkal Nabi s.a.w Kepada Allah s.w.t</h3>
+            <a href="session30.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="31">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/bqxq2BUpBAQ/mqdefault.jpg" 
+                 alt="Sesi 3 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 3</span>
+            </div>
+            <h3 class="md-session-title">Sesi 3 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session31.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="32">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/nWHXlZPEjpo/mqdefault.jpg" 
+                 alt="Sesi 2 - Tentang Mukjizat Nabi s.a.w" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 2</span>
+            </div>
+            <h3 class="md-session-title">Sesi 2 - Tentang Mukjizat Nabi s.a.w</h3>
+            <a href="session32.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="33">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/FkRnOAJKTds/mqdefault.jpg" 
+                 alt="Sesi 1 -  Kelebihan Nabi s.a.w Daripada Orang Lain" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 1</span>
+            </div>
+            <h3 class="md-session-title">Sesi 1 -  Kelebihan Nabi s.a.w Daripada Orang Lain</h3>
+            <a href="session33.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+<div class="md-grid-item" data-session="34">
+        <div class="md-thumbnail-container elevation-2">
+            <img src="https://img.youtube.com/vi/U475xT2K53E/mqdefault.jpg" 
+                 alt="Sesi 1 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)" 
+                 class="md-thumbnail" 
+                 onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+            <div class="md-play-overlay">
+                <i class="material-icons md-play-icon">play_arrow</i>
+            </div>
+        </div>
+        <div class="md-session-info">
+            <div class="md-session-chip">
+                <i class="material-icons md-chip-icon">confirmation_number</i>
+                <span class="md-chip-text">Sesi 1</span>
+            </div>
+            <h3 class="md-session-title">Sesi 1 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)</h3>
+            <a href="session34.html" class="md-watch-button">
+                <i class="material-icons md-button-icon">play_circle_outline</i>
+                <span>Tonton Video</span>
+            </a>
+        </div>
+    </div>
+        </div>
+    </div>
+    <script>
+        // Session data with actual titles
+        const sessions = [
+            {
+                number: 1,
+                title: `Sesi 22 - Kelebihan Khadir a.s`,
+                description: `Kandungan untuk sesi 22 dalam modul Kitab Keutamaan.`,
+                videoId: "zrmiQyz7cRI"
+            },
+            {
+                number: 2,
+                title: `Sesi 21 - Kelebihan Khadhir a.s`,
+                description: `Kandungan untuk sesi 21 dalam modul Kitab Keutamaan.`,
+                videoId: "6trUFdpE6lE"
+            },
+            {
+                number: 3,
+                title: `Sesi 20 - Kelebihan Nabi Yusuf Dan Nabi Zakaria a.s`,
+                description: `Kandungan untuk sesi 20 dalam modul Kitab Keutamaan.`,
+                videoId: "JJwU7zFIo58"
+            },
+            {
+                number: 4,
+                title: `Sesi 20 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 20 dalam modul Kitab Keutamaan.`,
+                videoId: "6Vj7Zx4wbgU"
+            },
+            {
+                number: 5,
+                title: `Sesi 19 - Kelebihan Nabi Musa a.s`,
+                description: `Kandungan untuk sesi 19 dalam modul Kitab Keutamaan.`,
+                videoId: "2idM0s2-GXI"
+            },
+            {
+                number: 6,
+                title: `Sesi 18 - Kelebihan Nabi Musa a.s`,
+                description: `Kandungan untuk sesi 18 dalam modul Kitab Keutamaan.`,
+                videoId: "ZUGt_4g6Ez0"
+            },
+            {
+                number: 7,
+                title: `Sesi 17 - Kelebihan Nabi Ibrahim a.s`,
+                description: `Kandungan untuk sesi 17 dalam modul Kitab Keutamaan.`,
+                videoId: "-MFf40sFywA"
+            },
+            {
+                number: 8,
+                title: `Sesi 16 - Kelebihan Nabi Isa a.s Dan Nabi Ibrahim a.s.`,
+                description: `Kandungan untuk sesi 16 dalam modul Kitab Keutamaan.`,
+                videoId: "5E2sTDZwVLQ"
+            },
+            {
+                number: 9,
+                title: `Sesi 16 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 16 dalam modul Kitab Keutamaan.`,
+                videoId: "HqccWTIwUMM"
+            },
+            {
+                number: 10,
+                title: `Sesi 15 - Kewajipan Menjunjung Sabda Nabi s.a.w Berupa Syariat`,
+                description: `Kandungan untuk sesi 15 dalam modul Kitab Keutamaan.`,
+                videoId: "K8wfsT9ElZs"
+            },
+            {
+                number: 11,
+                title: `Sesi 15 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 15 dalam modul Kitab Keutamaan.`,
+                videoId: "mD4mqAOu-DI"
+            },
+            {
+                number: 12,
+                title: `Sesi 14 - Memuliakan Nabi &Tak Banyak Bertanya  Perkara Yg Tak Perlu`,
+                description: `Kandungan untuk sesi 14 dalam modul Kitab Keutamaan.`,
+                videoId: "djB0X-s405Q"
+            },
+            {
+                number: 13,
+                title: `Sesi 14 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 14 dalam modul Kitab Keutamaan.`,
+                videoId: "lUvZyBtCS-Y"
+            },
+            {
+                number: 14,
+                title: `Sesi 13 - Pengetahuan Rasulullah s.a.w Tentang Allah s.w.t`,
+                description: `Kandungan untuk sesi 13 dalam modul Kitab Keutamaan.`,
+                videoId: "fsqI9hTmKGE"
+            },
+            {
+                number: 15,
+                title: `Sesi 13 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 13 dalam modul Kitab Keutamaan.`,
+                videoId: "dgeSQBdXmJQ"
+            },
+            {
+                number: 16,
+                title: `Sesi 12 - Umur Nabi & Selama Mana Nabi  Berada Di Makkah Dan Madinah`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Keutamaan.`,
+                videoId: "oTag80ggVnc"
+            },
+            {
+                number: 17,
+                title: `Sesi 12 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Keutamaan.`,
+                videoId: "DHqWuitmg2M"
+            },
+            {
+                number: 18,
+                title: `Sesi 11 - Uban Nabi s.a.w`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Keutamaan.`,
+                videoId: "kcRESVGRbCk"
+            },
+            {
+                number: 19,
+                title: `Sesi 11 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Keutamaan.`,
+                videoId: "E78hK6aL1So"
+            },
+            {
+                number: 20,
+                title: `Sesi 10 - Wanginya Peluh Nabi s.a.w Dan Mengambil Berkat Dengannya`,
+                description: `Kandungan untuk sesi 10 dalam modul Kitab Keutamaan.`,
+                videoId: "kms5HycmY-g"
+            },
+            {
+                number: 21,
+                title: `Sesi 9 - Kasihan Belas Dan Berlembutnya  Nabi s.a.w Terhadap Wanita`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Keutamaan.`,
+                videoId: "T6CaIqeFKJk"
+            },
+            {
+                number: 22,
+                title: `Sesi 8 -Simpati Nabi Terhadap Kanak2, Ahli Keluarga &  Merendah Diri`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Keutamaan.`,
+                videoId: "ZvaFiWEcSg8"
+            },
+            {
+                number: 23,
+                title: `Sesi 8 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Keutamaan.`,
+                videoId: "63k6PNSMHsg"
+            },
+            {
+                number: 24,
+                title: `Sesi 7 -Nabi Adalah Orang Yang Paling Pemurah Dalam Berbuat Kebajikan`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Keutamaan.`,
+                videoId: "WRaG9TOLvWo"
+            },
+            {
+                number: 25,
+                title: `Sesi 7 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Keutamaan.`,
+                videoId: "ESkLl78xe9c"
+            },
+            {
+                number: 26,
+                title: `Sesi 6 - Menyatakan Adanya Kolam Nabi s.a.w Dan Sifat-sifatnya`,
+                description: `Kandungan untuk sesi 6 dalam modul Kitab Keutamaan.`,
+                videoId: "LHTUTf3qIbI"
+            },
+            {
+                number: 27,
+                title: `Sesi 5 - Menyatakan Adanya Kolam Nabi s.a.w Dan Sifat-sifatnya`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Keutamaan.`,
+                videoId: "Bf--V0sm4sc"
+            },
+            {
+                number: 28,
+                title: `Sesi 5 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Keutamaan.`,
+                videoId: "fB-MwPz8wK4"
+            },
+            {
+                number: 29,
+                title: `Sesi 4 - Nabi s.a.w Adalah Penutup Sekalian Nabi`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Keutamaan.`,
+                videoId: "Obnwzox3_HU"
+            },
+            {
+                number: 30,
+                title: `Sesi 3 - Tawakkal Nabi s.a.w Kepada Allah s.w.t`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Keutamaan.`,
+                videoId: "SaF-vN40U9g"
+            },
+            {
+                number: 31,
+                title: `Sesi 3 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Keutamaan.`,
+                videoId: "bqxq2BUpBAQ"
+            },
+            {
+                number: 32,
+                title: `Sesi 2 - Tentang Mukjizat Nabi s.a.w`,
+                description: `Kandungan untuk sesi 2 dalam modul Kitab Keutamaan.`,
+                videoId: "nWHXlZPEjpo"
+            },
+            {
+                number: 33,
+                title: `Sesi 1 -  Kelebihan Nabi s.a.w Daripada Orang Lain`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Keutamaan.`,
+                videoId: "FkRnOAJKTds"
+            },
+            {
+                number: 34,
+                title: `Sesi 1 - MATAN HADITH - Sahih Muslim - Kitab Fadhail (Keutamaan)`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Keutamaan.`,
+                videoId: "U475xT2K53E"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

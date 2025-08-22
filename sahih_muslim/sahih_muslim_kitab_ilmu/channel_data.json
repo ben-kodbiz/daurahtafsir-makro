@@ -1,0 +1,25 @@
+{
+  "title": "Kitab Ilmu",
+  "description": "Kitab Ilmu from Sahih Muslim series",
+  "total_sessions": 3,
+  "sessions": [
+    {
+      "session_number": 1,
+      "title": "Sesi 2 - Ilmu Diangkat & Meluasnya Kejahilan Dan Fitnah Di Akhir Zaman - [Sahih Muslim - Kitab Ilmu]",
+      "video_id": "eZajPys0pAM",
+      "youtube_url": "https://www.youtube.com/watch?v=eZajPys0pAM"
+    },
+    {
+      "session_number": 2,
+      "title": "Sesi 1 - MATAN HADITH - Sahih Muslim - Kitab Ilmu",
+      "video_id": "YGbr1yxPUfA",
+      "youtube_url": "https://www.youtube.com/watch?v=YGbr1yxPUfA"
+    },
+    {
+      "session_number": 3,
+      "title": "Sesi 1 - Larangan Mengikuti Ayat Quran Yang Mutasyabih (Yang Tak Jelas) - [Sahih Muslim- Kitab Ilmu]",
+      "video_id": "1wGEsoAk4Wc",
+      "youtube_url": "https://www.youtube.com/watch?v=1wGEsoAk4Wc"
+    }
+  ]
+}

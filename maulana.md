@@ -799,10 +799,68 @@ cd kitab_directory
 ../tools/enhance_kitab_grid.py video_data.txt --name "Kitab Name" --description "Kitab Description"
 ```
 
+## Making Kitab Cards Clickable After Deployment
+
+After deploying videos and grid views, it's essential to ensure that the kitab cards in the main index.html file are clickable and properly linked to their respective directories.
+
+### Steps to Make Kitab Cards Clickable:
+
+1. **Update Main Index File**:
+   - Open the main `index.html` file in the project root
+   - Locate the JavaScript code that generates kitab cards
+   - Add specific handlers for new kitabs to make them clickable links
+
+2. **Example Implementation**:
+   ```javascript
+   // In the kitab creation function, ensure links are properly set
+   function createKitabCard(kitab) {
+       // Check if kitab has a specific handler (clickable link)
+       if (kitabHandlers[kitab.name]) {
+           return `<a href="${kitabHandlers[kitab.name]}" class="kitab-card-link">
+               <div class="kitab-card">
+                   <h3>${kitab.name}</h3>
+                   <p>${kitab.description}</p>
+               </div>
+           </a>`;
+       } else {
+           // Fallback for kitabs without handlers (static div)
+           return `<div class="kitab-card">
+               <h3>${kitab.name}</h3>
+               <p>${kitab.description}</p>
+           </div>`;
+       }
+   }
+   
+   // Define handlers for clickable kitabs
+   const kitabHandlers = {
+       "Kitab Mimpi": "sahih_muslim_kitab_mimpi/index.html",
+       "Kitab Keutamaan": "sahih_muslim_kitab_keutamaan/index.html",
+       "Kitab Kelebihan Sahabat": "sahih_muslim_kitab_kelebihan_sahabat/index.html",
+       // Add more kitab handlers as they are implemented
+   };
+   ```
+
+3. **Verification Steps**:
+   - After updating the main index.html, verify that each kitab card is clickable
+   - Test that clicking each card navigates to the correct kitab directory
+   - Ensure the URL structure matches the actual deployed directories
+   - Check that all implemented kitabs have handlers in the `kitabHandlers` object
+
+4. **Common Issues and Solutions**:
+   - **Card Not Clickable**: Ensure the kitab name in `kitabHandlers` exactly matches the name in `kitabList`
+   - **Broken Links**: Verify that the directory paths in the handlers are correct
+   - **Missing Handlers**: Add entries to `kitabHandlers` for all implemented kitabs
+
+### Best Practices:
+- Always verify that kitab names in `kitabHandlers` exactly match those in the kitab list
+- Test all links after deployment to ensure proper navigation
+- Update `kitabHandlers` whenever new kitabs are implemented
+- Use relative paths in handlers to maintain portability
+
 ## Contact Information
 
 For issues or enhancements to this process, contact the development team.
 
 ---
-Document Version: 1.3
-Last Updated: August 21, 2025
+Document Version: 1.4
+Last Updated: August 22, 2025

@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Nikah - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Nikah</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Nikah</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Nikah from Sunan Abi Daud</strong><br>
+                Kitab Nikah from Sunan Abi Daud (65 sessions)
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+                            <div class="md-grid-item" data-session="1">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/WlRvAJKwnX8/mqdefault.jpg" 
+                             alt="Galakan Berkahwin -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 1</span>
+                        </div>
+                        <h3 class="md-session-title">Galakan Berkahwin -</h3>
+                        <a href="session1.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="1">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/gtNgLxQ0Jg8/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 1</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session1.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="2">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/czUy7aWMaG8/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 2</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session2.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="2">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/b1O5jHl6RdE/mqdefault.jpg" 
+                             alt="Perintah Mengahwini Perempuan Yang Beragama -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 2</span>
+                        </div>
+                        <h3 class="md-session-title">Perintah Mengahwini Perempuan Yang Beragama -</h3>
+                        <a href="session2.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="3">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/EWL88vTPSSw/mqdefault.jpg" 
+                             alt="Penzina Lelaki Tak Boleh Kahwin Melainkan Dgn PenzinaPerempuan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 3</span>
+                        </div>
+                        <h3 class="md-session-title">Penzina Lelaki Tak Boleh Kahwin Melainkan Dgn PenzinaPerempuan -</h3>
+                        <a href="session3.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="3">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/TENoD1NnPy4/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 3</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session3.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="4">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/jYT-gAWFWy4/mqdefault.jpg" 
+                             alt="Orang Yang Merdekakan Hamba  Perempuannya Kemudian Berkahwin -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 4</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yang Merdekakan Hamba  Perempuannya Kemudian Berkahwin -</h3>
+                        <a href="session4.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="4">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/qj5jbftjyTY/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 4</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session4.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="5">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/FBAJU4kWexU/mqdefault.jpg" 
+                             alt="Haram Sebab Penyusuan  Ialah Yg Haram Dengan Sebab Keturunan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 5</span>
+                        </div>
+                        <h3 class="md-session-title">Haram Sebab Penyusuan  Ialah Yg Haram Dengan Sebab Keturunan -</h3>
+                        <a href="session5.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="5">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/hAtGkYPXm9A/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 5</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session5.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="6">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/3O_jZMOEYtA/mqdefault.jpg" 
+                             alt="Hukum Penyusuan Orang Yang Sudah Besar (Bukan Kanak-kanak) -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 6</span>
+                        </div>
+                        <h3 class="md-session-title">Hukum Penyusuan Orang Yang Sudah Besar (Bukan Kanak-kanak) -</h3>
+                        <a href="session6.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="6">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/isRGXeY1dmk/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 6</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session6.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="7">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/rTgmZBtG8kM/mqdefault.jpg" 
+                             alt="Orang Yg Menghukum Haram (Menjadi Mahram) Dgn Sebab Penyusuan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 7</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yg Menghukum Haram (Menjadi Mahram) Dgn Sebab Penyusuan -</h3>
+                        <a href="session7.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="7">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/u7Thl9QME18/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 7</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session7.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="8">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/c6gxRYU-iyY/mqdefault.jpg" 
+                             alt="Adakah Penyusuan Kurang Dari Lima Kali Menjadikan Mahram? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 8</span>
+                        </div>
+                        <h3 class="md-session-title">Adakah Penyusuan Kurang Dari Lima Kali Menjadikan Mahram? -</h3>
+                        <a href="session8.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="8">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/-Ksyorwx3QY/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 8</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session8.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="9">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/8Kg4UrHzQ-k/mqdefault.jpg" 
+                             alt="Pemberian Pada Ketika Menghentikan Penyusuan Kanak-kanak -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 9</span>
+                        </div>
+                        <h3 class="md-session-title">Pemberian Pada Ketika Menghentikan Penyusuan Kanak-kanak -</h3>
+                        <a href="session9.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="9">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/4pQI_WtwCz4/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 9</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session9.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="10">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/ZmwLCZZHupc/mqdefault.jpg" 
+                             alt="Perempuan Yg Dilarang Dihimpunkan  Seseorang Sebagai Isteri -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 10</span>
+                        </div>
+                        <h3 class="md-session-title">Perempuan Yg Dilarang Dihimpunkan  Seseorang Sebagai Isteri -</h3>
+                        <a href="session10.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="11">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/k-XHlti354E/mqdefault.jpg" 
+                             alt="Nikah Mut'ah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 11</span>
+                        </div>
+                        <h3 class="md-session-title">Nikah Mut'ah -</h3>
+                        <a href="session11.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="11">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/UIkB4fIwS0E/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 11</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session11.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="12">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/3XMvXq4YqLg/mqdefault.jpg" 
+                             alt="Tentang Nikah Tahlil ('Cina Buta') -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 12</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Nikah Tahlil ('Cina Buta') -</h3>
+                        <a href="session12.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="12">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/gnc7ZcOSeC4/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 12</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session12.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="13">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/ttIYFocmQR4/mqdefault.jpg" 
+                             alt="Bolehkah Seseorang Melihat Perempuan Yang Mahu Dikahwininya? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 13</span>
+                        </div>
+                        <h3 class="md-session-title">Bolehkah Seseorang Melihat Perempuan Yang Mahu Dikahwininya? -</h3>
+                        <a href="session13.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="13">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/A5S6C7-rFPY/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 13</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session13.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="14">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/FXxjB4cE1dM/mqdefault.jpg" 
+                             alt="Tentang Wali -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 14</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Wali -</h3>
+                        <a href="session14.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="14">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/6M9I5z-3zRU/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 14</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session14.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="15">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/uT5s_eHXDBs/mqdefault.jpg" 
+                             alt="Galakan Berkahwin -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 15</span>
+                        </div>
+                        <h3 class="md-session-title">Galakan Berkahwin -</h3>
+                        <a href="session15.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="15">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/5mxnH-7jm18/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 15</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session15.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="16">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/RnZHsKwwGd4/mqdefault.jpg" 
+                             alt="Meminta Suruhan Perempuan Supaya Mengahwinkannya -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 16</span>
+                        </div>
+                        <h3 class="md-session-title">Meminta Suruhan Perempuan Supaya Mengahwinkannya -</h3>
+                        <a href="session16.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="16">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/oDCGNO6H-HA/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 16</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session16.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="17">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/oq4wRCgfpvc/mqdefault.jpg" 
+                             alt="Tentang Janda -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 17</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Janda -</h3>
+                        <a href="session17.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="17">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/-0WQfJj6UKA/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 17</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session17.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="18">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/WPyTOXCk0Kw/mqdefault.jpg" 
+                             alt="Kufu (Setara Atau Sepadan) Dalam Perkahwinan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 18</span>
+                        </div>
+                        <h3 class="md-session-title">Kufu (Setara Atau Sepadan) Dalam Perkahwinan -</h3>
+                        <a href="session18.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="18">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/xZrfIzD7Vh4/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 18</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session18.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="19">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/J543_1DMIvc/mqdefault.jpg" 
+                             alt="Maskahwin -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 19</span>
+                        </div>
+                        <h3 class="md-session-title">Maskahwin -</h3>
+                        <a href="session19.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="19">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/3eqas4vAtog/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 19</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session19.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="20">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/JeqHx6Zmvgw/mqdefault.jpg" 
+                             alt="Nilai Mahar  (Maskahwin) Yang Paling Minima -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 20</span>
+                        </div>
+                        <h3 class="md-session-title">Nilai Mahar  (Maskahwin) Yang Paling Minima -</h3>
+                        <a href="session20.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="20">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/ffK2TZFz4Ck/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 20</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session20.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="21">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/w8wFvQ8aQRE/mqdefault.jpg" 
+                             alt="Bolehkah Upah Dari Kerja Yg Belum Diperolehi Jadi Maskahwin? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 21</span>
+                        </div>
+                        <h3 class="md-session-title">Bolehkah Upah Dari Kerja Yg Belum Diperolehi Jadi Maskahwin? -</h3>
+                        <a href="session21.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="21">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/_2hBJgtYFFs/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 21</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session21.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="22">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/CoblZop2SOQ/mqdefault.jpg" 
+                             alt="Orang Yg Berkahwin Tapi Tidak Sebut Maskahwinnya Sampai Mati -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 22</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yg Berkahwin Tapi Tidak Sebut Maskahwinnya Sampai Mati -</h3>
+                        <a href="session22.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="22">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/L31F-pSCCOI/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 22</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session22.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="23">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/nPf6RJHGd4Y/mqdefault.jpg" 
+                             alt="Khutbah Nikah & Bab Mengahwinkan Kanak-kanak -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 23</span>
+                        </div>
+                        <h3 class="md-session-title">Khutbah Nikah & Bab Mengahwinkan Kanak-kanak -</h3>
+                        <a href="session23.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="23">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/SHMQqapt3q8/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 23</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session23.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="24">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/f-va--5zTwk/mqdefault.jpg" 
+                             alt="Berada Bersama Isteri Yang Masih Dara -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 24</span>
+                        </div>
+                        <h3 class="md-session-title">Berada Bersama Isteri Yang Masih Dara -</h3>
+                        <a href="session24.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="24">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/X7VM8x4KAhY/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 24</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session24.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="25">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/7q5WkSXSS2M/mqdefault.jpg" 
+                             alt="Orang Yang Berkahwin Dgn Seorang Perempuan Yang  Mengandung -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 25</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yang Berkahwin Dgn Seorang Perempuan Yang  Mengandung -</h3>
+                        <a href="session25.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="25">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/FFCeDT2V3-w/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 25</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session25.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="26">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/khFO83d4kLc/mqdefault.jpg" 
+                             alt="Giliran Di Antara Isteri-isteri -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 26</span>
+                        </div>
+                        <h3 class="md-session-title">Giliran Di Antara Isteri-isteri -</h3>
+                        <a href="session26.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="26">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/saIGnfJ7ehk/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 26</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session26.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="27">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/nqbyPey7QgA/mqdefault.jpg" 
+                             alt="Tentang Giliran Di Antara Isteri-Isteri -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 27</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Giliran Di Antara Isteri-Isteri -</h3>
+                        <a href="session27.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="28">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/sTH62Qg0_Xc/mqdefault.jpg" 
+                             alt="Orang Yg Syaratkan  Isterinya Untuk Tetap Berada Di Rumahnya - [Sunan Abi Daud- Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 28</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yg Syaratkan  Isterinya Untuk Tetap Berada Di Rumahnya - [Sunan Abi Daud- Kitab Nikah</h3>
+                        <a href="session28.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="28">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/I7nAwGlV888/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 28</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session28.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="29">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/vVzQRcrhikY/mqdefault.jpg" 
+                             alt="Memukul Isteri & Perintah Menjaga Pandangan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 29</span>
+                        </div>
+                        <h3 class="md-session-title">Memukul Isteri & Perintah Menjaga Pandangan -</h3>
+                        <a href="session29.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="29">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/qB0bdE7lhYw/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 29</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session29.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="30">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/B1O7JtUFWOA/mqdefault.jpg" 
+                             alt="Menyetubuhi Perempuan-perempuan Tawanan Perang -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 30</span>
+                        </div>
+                        <h3 class="md-session-title">Menyetubuhi Perempuan-perempuan Tawanan Perang -</h3>
+                        <a href="session30.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="30">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Eu4Kgh17K6U/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 30</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session30.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="31">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/g-JVVUhpf4Q/mqdefault.jpg" 
+                             alt="Pelbagai Hadith Berhubung Dengan Perkahwinan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 31</span>
+                        </div>
+                        <h3 class="md-session-title">Pelbagai Hadith Berhubung Dengan Perkahwinan -</h3>
+                        <a href="session31.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="31">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/UsQH3dYZYv8/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 31</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session31.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="32">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/BQVXpjPAvO4/mqdefault.jpg" 
+                             alt="Pelbagai Hadith Berhubung Dengan Perkahwinan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 32</span>
+                        </div>
+                        <h3 class="md-session-title">Pelbagai Hadith Berhubung Dengan Perkahwinan -</h3>
+                        <a href="session32.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="33">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/mUGvU2g3_cg/mqdefault.jpg" 
+                             alt="Hadith-Hadith Berhubung Dengan 'Azal' -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 33</span>
+                        </div>
+                        <h3 class="md-session-title">Hadith-Hadith Berhubung Dengan 'Azal' -</h3>
+                        <a href="session33.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="33">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/eceMEAZZVEQ/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 33</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session33.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="34">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/KTchJ8_sP24/mqdefault.jpg" 
+                             alt="Larangan  Menyebutkan Apa Yang Dilakukannya Dengan Isterinya -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 34</span>
+                        </div>
+                        <h3 class="md-session-title">Larangan  Menyebutkan Apa Yang Dilakukannya Dengan Isterinya -</h3>
+                        <a href="session34.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="34">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/McSGCGEoDgU/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Nikah" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 34</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Nikah</h3>
+                        <a href="session34.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script>
+        // Session data with actual titles
+        const sessions = [
+            {
+                number: 1,
+                title: `Galakan Berkahwin -`,
+                description: `Kandungan untuk sesi 1 dalam modul Mukaddimah.`,
+                videoId: "WlRvAJKwnX8"
+            },
+            {
+                number: 1,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 1 dalam modul Mukaddimah.`,
+                videoId: "gtNgLxQ0Jg8"
+            },
+            {
+                number: 2,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 2 dalam modul Mukaddimah.`,
+                videoId: "czUy7aWMaG8"
+            },
+            {
+                number: 2,
+                title: `Perintah Mengahwini Perempuan Yang Beragama -`,
+                description: `Kandungan untuk sesi 2 dalam modul Mukaddimah.`,
+                videoId: "b1O5jHl6RdE"
+            },
+            {
+                number: 3,
+                title: `Penzina Lelaki Tak Boleh Kahwin Melainkan Dgn PenzinaPerempuan -`,
+                description: `Kandungan untuk sesi 3 dalam modul Mukaddimah.`,
+                videoId: "EWL88vTPSSw"
+            },
+            {
+                number: 3,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 3 dalam modul Mukaddimah.`,
+                videoId: "TENoD1NnPy4"
+            },
+            {
+                number: 4,
+                title: `Orang Yang Merdekakan Hamba  Perempuannya Kemudian Berkahwin -`,
+                description: `Kandungan untuk sesi 4 dalam modul Mukaddimah.`,
+                videoId: "jYT-gAWFWy4"
+            },
+            {
+                number: 4,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 4 dalam modul Mukaddimah.`,
+                videoId: "qj5jbftjyTY"
+            },
+            {
+                number: 5,
+                title: `Haram Sebab Penyusuan  Ialah Yg Haram Dengan Sebab Keturunan -`,
+                description: `Kandungan untuk sesi 5 dalam modul Mukaddimah.`,
+                videoId: "FBAJU4kWexU"
+            },
+            {
+                number: 5,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 5 dalam modul Mukaddimah.`,
+                videoId: "hAtGkYPXm9A"
+            },
+            {
+                number: 6,
+                title: `Hukum Penyusuan Orang Yang Sudah Besar (Bukan Kanak-kanak) -`,
+                description: `Kandungan untuk sesi 6 dalam modul Mukaddimah.`,
+                videoId: "3O_jZMOEYtA"
+            },
+            {
+                number: 6,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 6 dalam modul Mukaddimah.`,
+                videoId: "isRGXeY1dmk"
+            },
+            {
+                number: 7,
+                title: `Orang Yg Menghukum Haram (Menjadi Mahram) Dgn Sebab Penyusuan -`,
+                description: `Kandungan untuk sesi 7 dalam modul Mukaddimah.`,
+                videoId: "rTgmZBtG8kM"
+            },
+            {
+                number: 7,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 7 dalam modul Mukaddimah.`,
+                videoId: "u7Thl9QME18"
+            },
+            {
+                number: 8,
+                title: `Adakah Penyusuan Kurang Dari Lima Kali Menjadikan Mahram? -`,
+                description: `Kandungan untuk sesi 8 dalam modul Mukaddimah.`,
+                videoId: "c6gxRYU-iyY"
+            },
+            {
+                number: 8,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 8 dalam modul Mukaddimah.`,
+                videoId: "-Ksyorwx3QY"
+            },
+            {
+                number: 9,
+                title: `Pemberian Pada Ketika Menghentikan Penyusuan Kanak-kanak -`,
+                description: `Kandungan untuk sesi 9 dalam modul Mukaddimah.`,
+                videoId: "8Kg4UrHzQ-k"
+            },
+            {
+                number: 9,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 9 dalam modul Mukaddimah.`,
+                videoId: "4pQI_WtwCz4"
+            },
+            {
+                number: 10,
+                title: `Perempuan Yg Dilarang Dihimpunkan  Seseorang Sebagai Isteri -`,
+                description: `Kandungan untuk sesi 10 dalam modul Mukaddimah.`,
+                videoId: "ZmwLCZZHupc"
+            },
+            {
+                number: 11,
+                title: `Nikah Mut'ah -`,
+                description: `Kandungan untuk sesi 11 dalam modul Mukaddimah.`,
+                videoId: "k-XHlti354E"
+            },
+            {
+                number: 11,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 11 dalam modul Mukaddimah.`,
+                videoId: "UIkB4fIwS0E"
+            },
+            {
+                number: 12,
+                title: `Tentang Nikah Tahlil ('Cina Buta') -`,
+                description: `Kandungan untuk sesi 12 dalam modul Mukaddimah.`,
+                videoId: "3XMvXq4YqLg"
+            },
+            {
+                number: 12,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 12 dalam modul Mukaddimah.`,
+                videoId: "gnc7ZcOSeC4"
+            },
+            {
+                number: 13,
+                title: `Bolehkah Seseorang Melihat Perempuan Yang Mahu Dikahwininya? -`,
+                description: `Kandungan untuk sesi 13 dalam modul Mukaddimah.`,
+                videoId: "ttIYFocmQR4"
+            },
+            {
+                number: 13,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 13 dalam modul Mukaddimah.`,
+                videoId: "A5S6C7-rFPY"
+            },
+            {
+                number: 14,
+                title: `Tentang Wali -`,
+                description: `Kandungan untuk sesi 14 dalam modul Mukaddimah.`,
+                videoId: "FXxjB4cE1dM"
+            },
+            {
+                number: 14,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 14 dalam modul Mukaddimah.`,
+                videoId: "6M9I5z-3zRU"
+            },
+            {
+                number: 15,
+                title: `Galakan Berkahwin -`,
+                description: `Kandungan untuk sesi 15 dalam modul Mukaddimah.`,
+                videoId: "uT5s_eHXDBs"
+            },
+            {
+                number: 15,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 15 dalam modul Mukaddimah.`,
+                videoId: "5mxnH-7jm18"
+            },
+            {
+                number: 16,
+                title: `Meminta Suruhan Perempuan Supaya Mengahwinkannya -`,
+                description: `Kandungan untuk sesi 16 dalam modul Mukaddimah.`,
+                videoId: "RnZHsKwwGd4"
+            },
+            {
+                number: 16,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 16 dalam modul Mukaddimah.`,
+                videoId: "oDCGNO6H-HA"
+            },
+            {
+                number: 17,
+                title: `Tentang Janda -`,
+                description: `Kandungan untuk sesi 17 dalam modul Mukaddimah.`,
+                videoId: "oq4wRCgfpvc"
+            },
+            {
+                number: 17,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 17 dalam modul Mukaddimah.`,
+                videoId: "-0WQfJj6UKA"
+            },
+            {
+                number: 18,
+                title: `Kufu (Setara Atau Sepadan) Dalam Perkahwinan -`,
+                description: `Kandungan untuk sesi 18 dalam modul Mukaddimah.`,
+                videoId: "WPyTOXCk0Kw"
+            },
+            {
+                number: 18,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 18 dalam modul Mukaddimah.`,
+                videoId: "xZrfIzD7Vh4"
+            },
+            {
+                number: 19,
+                title: `Maskahwin -`,
+                description: `Kandungan untuk sesi 19 dalam modul Mukaddimah.`,
+                videoId: "J543_1DMIvc"
+            },
+            {
+                number: 19,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 19 dalam modul Mukaddimah.`,
+                videoId: "3eqas4vAtog"
+            },
+            {
+                number: 20,
+                title: `Nilai Mahar  (Maskahwin) Yang Paling Minima -`,
+                description: `Kandungan untuk sesi 20 dalam modul Mukaddimah.`,
+                videoId: "JeqHx6Zmvgw"
+            },
+            {
+                number: 20,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 20 dalam modul Mukaddimah.`,
+                videoId: "ffK2TZFz4Ck"
+            },
+            {
+                number: 21,
+                title: `Bolehkah Upah Dari Kerja Yg Belum Diperolehi Jadi Maskahwin? -`,
+                description: `Kandungan untuk sesi 21 dalam modul Mukaddimah.`,
+                videoId: "w8wFvQ8aQRE"
+            },
+            {
+                number: 21,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 21 dalam modul Mukaddimah.`,
+                videoId: "_2hBJgtYFFs"
+            },
+            {
+                number: 22,
+                title: `Orang Yg Berkahwin Tapi Tidak Sebut Maskahwinnya Sampai Mati -`,
+                description: `Kandungan untuk sesi 22 dalam modul Mukaddimah.`,
+                videoId: "CoblZop2SOQ"
+            },
+            {
+                number: 22,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 22 dalam modul Mukaddimah.`,
+                videoId: "L31F-pSCCOI"
+            },
+            {
+                number: 23,
+                title: `Khutbah Nikah & Bab Mengahwinkan Kanak-kanak -`,
+                description: `Kandungan untuk sesi 23 dalam modul Mukaddimah.`,
+                videoId: "nPf6RJHGd4Y"
+            },
+            {
+                number: 23,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 23 dalam modul Mukaddimah.`,
+                videoId: "SHMQqapt3q8"
+            },
+            {
+                number: 24,
+                title: `Berada Bersama Isteri Yang Masih Dara -`,
+                description: `Kandungan untuk sesi 24 dalam modul Mukaddimah.`,
+                videoId: "f-va--5zTwk"
+            },
+            {
+                number: 24,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 24 dalam modul Mukaddimah.`,
+                videoId: "X7VM8x4KAhY"
+            },
+            {
+                number: 25,
+                title: `Orang Yang Berkahwin Dgn Seorang Perempuan Yang  Mengandung -`,
+                description: `Kandungan untuk sesi 25 dalam modul Mukaddimah.`,
+                videoId: "7q5WkSXSS2M"
+            },
+            {
+                number: 25,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 25 dalam modul Mukaddimah.`,
+                videoId: "FFCeDT2V3-w"
+            },
+            {
+                number: 26,
+                title: `Giliran Di Antara Isteri-isteri -`,
+                description: `Kandungan untuk sesi 26 dalam modul Mukaddimah.`,
+                videoId: "khFO83d4kLc"
+            },
+            {
+                number: 26,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 26 dalam modul Mukaddimah.`,
+                videoId: "saIGnfJ7ehk"
+            },
+            {
+                number: 27,
+                title: `Tentang Giliran Di Antara Isteri-Isteri -`,
+                description: `Kandungan untuk sesi 27 dalam modul Mukaddimah.`,
+                videoId: "nqbyPey7QgA"
+            },
+            {
+                number: 28,
+                title: `Orang Yg Syaratkan  Isterinya Untuk Tetap Berada Di Rumahnya - [Sunan Abi Daud- Kitab Nikah`,
+                description: `Kandungan untuk sesi 28 dalam modul Mukaddimah.`,
+                videoId: "sTH62Qg0_Xc"
+            },
+            {
+                number: 28,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 28 dalam modul Mukaddimah.`,
+                videoId: "I7nAwGlV888"
+            },
+            {
+                number: 29,
+                title: `Memukul Isteri & Perintah Menjaga Pandangan -`,
+                description: `Kandungan untuk sesi 29 dalam modul Mukaddimah.`,
+                videoId: "vVzQRcrhikY"
+            },
+            {
+                number: 29,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 29 dalam modul Mukaddimah.`,
+                videoId: "qB0bdE7lhYw"
+            },
+            {
+                number: 30,
+                title: `Menyetubuhi Perempuan-perempuan Tawanan Perang -`,
+                description: `Kandungan untuk sesi 30 dalam modul Mukaddimah.`,
+                videoId: "B1O7JtUFWOA"
+            },
+            {
+                number: 30,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 30 dalam modul Mukaddimah.`,
+                videoId: "Eu4Kgh17K6U"
+            },
+            {
+                number: 31,
+                title: `Pelbagai Hadith Berhubung Dengan Perkahwinan -`,
+                description: `Kandungan untuk sesi 31 dalam modul Mukaddimah.`,
+                videoId: "g-JVVUhpf4Q"
+            },
+            {
+                number: 31,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 31 dalam modul Mukaddimah.`,
+                videoId: "UsQH3dYZYv8"
+            },
+            {
+                number: 32,
+                title: `Pelbagai Hadith Berhubung Dengan Perkahwinan -`,
+                description: `Kandungan untuk sesi 32 dalam modul Mukaddimah.`,
+                videoId: "BQVXpjPAvO4"
+            },
+            {
+                number: 33,
+                title: `Hadith-Hadith Berhubung Dengan 'Azal' -`,
+                description: `Kandungan untuk sesi 33 dalam modul Mukaddimah.`,
+                videoId: "mUGvU2g3_cg"
+            },
+            {
+                number: 33,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 33 dalam modul Mukaddimah.`,
+                videoId: "eceMEAZZVEQ"
+            },
+            {
+                number: 34,
+                title: `Larangan  Menyebutkan Apa Yang Dilakukannya Dengan Isterinya -`,
+                description: `Kandungan untuk sesi 34 dalam modul Mukaddimah.`,
+                videoId: "KTchJ8_sP24"
+            },
+            {
+                number: 34,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Nikah`,
+                description: `Kandungan untuk sesi 34 dalam modul Mukaddimah.`,
+                videoId: "McSGCGEoDgU"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

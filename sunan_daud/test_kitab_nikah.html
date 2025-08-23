@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kitab Nikah Clickable Test</title>
+</head>
+<body>
+    <h1>Kitab Nikah Clickable Test</h1>
+    <div id="kitab-grid"></div>
+    
+    <script>
+        // Test the exact same logic as in the main file
+        const kitabList = [
+            "Mukaddimah",
+            "Kitab Thaharah",
+            "Kitab Sembahyang",
+            "Kitab Zakat",
+            "Kitab Manaasik",
+            "Kitab Nikah",
+            "Kitab Thalaq"
+        ];
+        
+        function populateKitabGrid(kitabs) {
+            const grid = document.getElementById('kitab-grid');
+            grid.innerHTML = '';
+            
+            console.log("Populating kitab grid with:", kitabs);
+            
+            kitabs.forEach((kitab, index) => {
+                console.log("Processing kitab:", kitab, "at index:", index);
+                // Check if kitab has a specific handler (clickable link)
+                let card;
+                
+                if (kitab === "Mukaddimah") {
+                    console.log("Creating clickable link for Mukaddimah");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Mukaddimah/index.html';
+                } else if (kitab === "Kitab Thaharah") {
+                    console.log("Creating clickable link for Kitab Thaharah");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Thaharah/index.html';
+                } else if (kitab === "Kitab Sembahyang") {
+                    console.log("Creating clickable link for Kitab Sembahyang with href: Kitab_Sembahyang/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Sembahyang/index.html';
+                } else if (kitab === "Kitab Zakat") {
+                    console.log("Creating clickable link for Kitab Zakat with href: Kitab_Zakat/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Zakat/index.html';
+                } else if (kitab === "Kitab Manaasik") {
+                    console.log("Creating clickable link for Kitab Manaasik with href: Kitab_Manaasik/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Manaasik/index.html';
+                } else if (kitab === "Kitab Nikah") {
+                    console.log("Creating clickable link for Kitab Nikah with href: Kitab_Nikah/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Nikah/index.html';
+                } else {
+                    console.log("Creating static card for", kitab);
+                    // For kitabs without specific handlers, create a static div (non-clickable)
+                    card = document.createElement('div');
+                    card.className = 'kitab-card';
+                }
+                
+                // Set the inner HTML for all cards
+                card.innerHTML = `
+                    <div class="kitab-number">${index + 1}</div>
+                    <h3 class="kitab-title">${kitab}</h3>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        // Initialize the grid
+        console.log("Initializing kitab grid with list:", kitabList);
+        // Also log each kitab individually
+        kitabList.forEach((kitab, index) => {
+            console.log("Kitab", index + 1, ":", kitab);
+        });
+        populateKitabGrid(kitabList);
+    </script>
+    
+    <style>
+        .kitab-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+        }
+        
+        .kitab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .kitab-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #3f51b5;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .kitab-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+            padding-right: 35px;
+        }
+        
+        #kitab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+    </style>
+</body>
+</html>

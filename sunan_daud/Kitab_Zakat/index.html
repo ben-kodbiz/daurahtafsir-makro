@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Zakat - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Zakat</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Zakat</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Zakat from Sunan Abi Daud</strong><br>
+                Kitab Zakat from Sunan Abi Daud (48 sessions)
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+                            <div class="md-grid-item" data-session="1">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/mGxANh7YGgg/mqdefault.jpg" 
+                             alt="Wajib Zakat -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 1</span>
+                        </div>
+                        <h3 class="md-session-title">Wajib Zakat -</h3>
+                        <a href="session1.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="1">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/6TmkmwvFeUQ/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 1</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session1.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="2">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/i2dGzTgqd3k/mqdefault.jpg" 
+                             alt="Kadar Harta Yang Dikenakan Zakat -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 2</span>
+                        </div>
+                        <h3 class="md-session-title">Kadar Harta Yang Dikenakan Zakat -</h3>
+                        <a href="session2.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="2">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/QZdXgRxfAT4/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 2</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session2.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="3">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/PY50ocKBGdk/mqdefault.jpg" 
+                             alt="Zakat Binatang Ternakan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 3</span>
+                        </div>
+                        <h3 class="md-session-title">Zakat Binatang Ternakan -</h3>
+                        <a href="session3.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="3">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/04ZAyFo3R1Q/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 3</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session3.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="4">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/gHwltH98Pos/mqdefault.jpg" 
+                             alt="Zakat Binatang Ternakan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 4</span>
+                        </div>
+                        <h3 class="md-session-title">Zakat Binatang Ternakan -</h3>
+                        <a href="session4.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="5">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/TVPsOBuk6ZQ/mqdefault.jpg" 
+                             alt="Zakat Binatang Ternakan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 5</span>
+                        </div>
+                        <h3 class="md-session-title">Zakat Binatang Ternakan -</h3>
+                        <a href="session5.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="6">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Cyr9NtLT2vU/mqdefault.jpg" 
+                             alt="Zakat Binatang Ternakan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 6</span>
+                        </div>
+                        <h3 class="md-session-title">Zakat Binatang Ternakan -</h3>
+                        <a href="session6.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="6">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/nZOPMhFk5Mk/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 6</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session6.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="7">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/ISwifWCPNjU/mqdefault.jpg" 
+                             alt="Doa Pemungut Zakat Kepada Pemberi Zakat -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 7</span>
+                        </div>
+                        <h3 class="md-session-title">Doa Pemungut Zakat Kepada Pemberi Zakat -</h3>
+                        <a href="session7.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="7">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/MpXf6cQIYr0/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 7</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session7.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="8">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Aejyqjqqx1w/mqdefault.jpg" 
+                             alt="Zakat Hamba -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 8</span>
+                        </div>
+                        <h3 class="md-session-title">Zakat Hamba -</h3>
+                        <a href="session8.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="8">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/qtLlIeTvo1A/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 8</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session8.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="9">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/uLtY-5yrong/mqdefault.jpg" 
+                             alt="Anggaran  Buah Tamar -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 9</span>
+                        </div>
+                        <h3 class="md-session-title">Anggaran  Buah Tamar -</h3>
+                        <a href="session9.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="9">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/pMF5vEBKBAI/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 9</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session9.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="10">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/-GuQifFZX5Q/mqdefault.jpg" 
+                             alt="Zakat Fitrah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 10</span>
+                        </div>
+                        <h3 class="md-session-title">Zakat Fitrah -</h3>
+                        <a href="session10.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="10">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/nhd6P1K044s/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 10</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session10.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="11">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/hQUoAiiq1oE/mqdefault.jpg" 
+                             alt="Berapakah  Nilai Zakat Fitrah Yang Perlu Ditunaikan? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 11</span>
+                        </div>
+                        <h3 class="md-session-title">Berapakah  Nilai Zakat Fitrah Yang Perlu Ditunaikan? -</h3>
+                        <a href="session11.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="11">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/uNqA3RIw8yc/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 11</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session11.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="12">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/iI6YC6jMM30/mqdefault.jpg" 
+                             alt="Orang Yang Meriwayatkan Setengah Gantang Gandum -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 12</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yang Meriwayatkan Setengah Gantang Gandum -</h3>
+                        <a href="session12.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="12">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/SHYEEH9_b-M/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 12</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session12.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="13">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/lQfYAHtJ15U/mqdefault.jpg" 
+                             alt="Bolehkah Zakat  Dibawa Dari Satu Negeri ke Negeri Yang Lain? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 13</span>
+                        </div>
+                        <h3 class="md-session-title">Bolehkah Zakat  Dibawa Dari Satu Negeri ke Negeri Yang Lain? -</h3>
+                        <a href="session13.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="13">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Wexgts65joc/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 13</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session13.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="14">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/P8ohrBWT__I/mqdefault.jpg" 
+                             alt="Orang Yang Diberi Zakat Dan Batas Kekayaan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 14</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yang Diberi Zakat Dan Batas Kekayaan -</h3>
+                        <a href="session14.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="14">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/cpWcTECYHto/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 14</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session14.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="15">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/-cKojlokOPw/mqdefault.jpg" 
+                             alt="Orang Kaya Yang Boleh Menerima Zakat -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 15</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Kaya Yang Boleh Menerima Zakat -</h3>
+                        <a href="session15.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="15">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/5SWs6Iel9pU/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 15</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session15.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="16">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/OiGoHXUJSv8/mqdefault.jpg" 
+                             alt="Larangan Meminta -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 16</span>
+                        </div>
+                        <h3 class="md-session-title">Larangan Meminta -</h3>
+                        <a href="session16.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="16">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/4L4OyqLs7Hk/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 16</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session16.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="17">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/6ff_m0of_Z8/mqdefault.jpg" 
+                             alt="Menjaga diri dari Meminta-Minta -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 17</span>
+                        </div>
+                        <h3 class="md-session-title">Menjaga diri dari Meminta-Minta -</h3>
+                        <a href="session17.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="17">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/f4nt2s-Ap5U/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 17</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session17.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="18">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/S1lO2iIJiFo/mqdefault.jpg" 
+                             alt="Hak-hak Harta -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 18</span>
+                        </div>
+                        <h3 class="md-session-title">Hak-hak Harta -</h3>
+                        <a href="session18.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="18">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/hpWZk92TrqY/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 18</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session18.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="19">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/hpiudiX4EGc/mqdefault.jpg" 
+                             alt="Orang yang Meminta-minta -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 19</span>
+                        </div>
+                        <h3 class="md-session-title">Orang yang Meminta-minta -</h3>
+                        <a href="session19.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="19">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/4V25hTm2gmA/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat/;" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 19</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat/;</h3>
+                        <a href="session19.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="20">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/dy0Hi7P3CJc/mqdefault.jpg" 
+                             alt="Meminta-minta Di Dalam Masjid -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 20</span>
+                        </div>
+                        <h3 class="md-session-title">Meminta-minta Di Dalam Masjid -</h3>
+                        <a href="session20.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="20">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/JTgTZEYGtx0/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 20</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session20.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="21">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/XXMAJmQdhqI/mqdefault.jpg" 
+                             alt="Kelebihan Memberikan Air -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 21</span>
+                        </div>
+                        <h3 class="md-session-title">Kelebihan Memberikan Air -</h3>
+                        <a href="session21.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="21">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Odr1hlmbVq8/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 21</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session21.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="22">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/9boDXMi23rU/mqdefault.jpg" 
+                             alt="Ganjaran Orang yang menjaga Harta -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 22</span>
+                        </div>
+                        <h3 class="md-session-title">Ganjaran Orang yang menjaga Harta -</h3>
+                        <a href="session22.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="22">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/EojK58AFQMo/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 22</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session22.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="23">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/kbFH7tGkZY8/mqdefault.jpg" 
+                             alt="Tentang Kedekut -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 23</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Kedekut -</h3>
+                        <a href="session23.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="23">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/HEJ1Wbx0wxs/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 23</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session23.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="24">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/JnQqiseD1bM/mqdefault.jpg" 
+                             alt="Tentang Barangan Tercicir -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 24</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Barangan Tercicir -</h3>
+                        <a href="session24.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="24">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/c4chUFYVqJQ/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 24</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session24.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="25">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/bT-1v1FfHYU/mqdefault.jpg" 
+                             alt="Tentang Barangan Tercicir -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 25</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Barangan Tercicir -</h3>
+                        <a href="session25.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="25">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/3qKMHnusR7U/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Zakat" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 25</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Zakat</h3>
+                        <a href="session25.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script>
+        // Session data with actual titles
+        const sessions = [
+            {
+                number: 1,
+                title: `Wajib Zakat -`,
+                description: `Kandungan untuk sesi 1 dalam modul Mukaddimah.`,
+                videoId: "mGxANh7YGgg"
+            },
+            {
+                number: 1,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 1 dalam modul Mukaddimah.`,
+                videoId: "6TmkmwvFeUQ"
+            },
+            {
+                number: 2,
+                title: `Kadar Harta Yang Dikenakan Zakat -`,
+                description: `Kandungan untuk sesi 2 dalam modul Mukaddimah.`,
+                videoId: "i2dGzTgqd3k"
+            },
+            {
+                number: 2,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 2 dalam modul Mukaddimah.`,
+                videoId: "QZdXgRxfAT4"
+            },
+            {
+                number: 3,
+                title: `Zakat Binatang Ternakan -`,
+                description: `Kandungan untuk sesi 3 dalam modul Mukaddimah.`,
+                videoId: "PY50ocKBGdk"
+            },
+            {
+                number: 3,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 3 dalam modul Mukaddimah.`,
+                videoId: "04ZAyFo3R1Q"
+            },
+            {
+                number: 4,
+                title: `Zakat Binatang Ternakan -`,
+                description: `Kandungan untuk sesi 4 dalam modul Mukaddimah.`,
+                videoId: "gHwltH98Pos"
+            },
+            {
+                number: 5,
+                title: `Zakat Binatang Ternakan -`,
+                description: `Kandungan untuk sesi 5 dalam modul Mukaddimah.`,
+                videoId: "TVPsOBuk6ZQ"
+            },
+            {
+                number: 6,
+                title: `Zakat Binatang Ternakan -`,
+                description: `Kandungan untuk sesi 6 dalam modul Mukaddimah.`,
+                videoId: "Cyr9NtLT2vU"
+            },
+            {
+                number: 6,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 6 dalam modul Mukaddimah.`,
+                videoId: "nZOPMhFk5Mk"
+            },
+            {
+                number: 7,
+                title: `Doa Pemungut Zakat Kepada Pemberi Zakat -`,
+                description: `Kandungan untuk sesi 7 dalam modul Mukaddimah.`,
+                videoId: "ISwifWCPNjU"
+            },
+            {
+                number: 7,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 7 dalam modul Mukaddimah.`,
+                videoId: "MpXf6cQIYr0"
+            },
+            {
+                number: 8,
+                title: `Zakat Hamba -`,
+                description: `Kandungan untuk sesi 8 dalam modul Mukaddimah.`,
+                videoId: "Aejyqjqqx1w"
+            },
+            {
+                number: 8,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 8 dalam modul Mukaddimah.`,
+                videoId: "qtLlIeTvo1A"
+            },
+            {
+                number: 9,
+                title: `Anggaran  Buah Tamar -`,
+                description: `Kandungan untuk sesi 9 dalam modul Mukaddimah.`,
+                videoId: "uLtY-5yrong"
+            },
+            {
+                number: 9,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 9 dalam modul Mukaddimah.`,
+                videoId: "pMF5vEBKBAI"
+            },
+            {
+                number: 10,
+                title: `Zakat Fitrah -`,
+                description: `Kandungan untuk sesi 10 dalam modul Mukaddimah.`,
+                videoId: "-GuQifFZX5Q"
+            },
+            {
+                number: 10,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 10 dalam modul Mukaddimah.`,
+                videoId: "nhd6P1K044s"
+            },
+            {
+                number: 11,
+                title: `Berapakah  Nilai Zakat Fitrah Yang Perlu Ditunaikan? -`,
+                description: `Kandungan untuk sesi 11 dalam modul Mukaddimah.`,
+                videoId: "hQUoAiiq1oE"
+            },
+            {
+                number: 11,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 11 dalam modul Mukaddimah.`,
+                videoId: "uNqA3RIw8yc"
+            },
+            {
+                number: 12,
+                title: `Orang Yang Meriwayatkan Setengah Gantang Gandum -`,
+                description: `Kandungan untuk sesi 12 dalam modul Mukaddimah.`,
+                videoId: "iI6YC6jMM30"
+            },
+            {
+                number: 12,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 12 dalam modul Mukaddimah.`,
+                videoId: "SHYEEH9_b-M"
+            },
+            {
+                number: 13,
+                title: `Bolehkah Zakat  Dibawa Dari Satu Negeri ke Negeri Yang Lain? -`,
+                description: `Kandungan untuk sesi 13 dalam modul Mukaddimah.`,
+                videoId: "lQfYAHtJ15U"
+            },
+            {
+                number: 13,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 13 dalam modul Mukaddimah.`,
+                videoId: "Wexgts65joc"
+            },
+            {
+                number: 14,
+                title: `Orang Yang Diberi Zakat Dan Batas Kekayaan -`,
+                description: `Kandungan untuk sesi 14 dalam modul Mukaddimah.`,
+                videoId: "P8ohrBWT__I"
+            },
+            {
+                number: 14,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 14 dalam modul Mukaddimah.`,
+                videoId: "cpWcTECYHto"
+            },
+            {
+                number: 15,
+                title: `Orang Kaya Yang Boleh Menerima Zakat -`,
+                description: `Kandungan untuk sesi 15 dalam modul Mukaddimah.`,
+                videoId: "-cKojlokOPw"
+            },
+            {
+                number: 15,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 15 dalam modul Mukaddimah.`,
+                videoId: "5SWs6Iel9pU"
+            },
+            {
+                number: 16,
+                title: `Larangan Meminta -`,
+                description: `Kandungan untuk sesi 16 dalam modul Mukaddimah.`,
+                videoId: "OiGoHXUJSv8"
+            },
+            {
+                number: 16,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 16 dalam modul Mukaddimah.`,
+                videoId: "4L4OyqLs7Hk"
+            },
+            {
+                number: 17,
+                title: `Menjaga diri dari Meminta-Minta -`,
+                description: `Kandungan untuk sesi 17 dalam modul Mukaddimah.`,
+                videoId: "6ff_m0of_Z8"
+            },
+            {
+                number: 17,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 17 dalam modul Mukaddimah.`,
+                videoId: "f4nt2s-Ap5U"
+            },
+            {
+                number: 18,
+                title: `Hak-hak Harta -`,
+                description: `Kandungan untuk sesi 18 dalam modul Mukaddimah.`,
+                videoId: "S1lO2iIJiFo"
+            },
+            {
+                number: 18,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 18 dalam modul Mukaddimah.`,
+                videoId: "hpWZk92TrqY"
+            },
+            {
+                number: 19,
+                title: `Orang yang Meminta-minta -`,
+                description: `Kandungan untuk sesi 19 dalam modul Mukaddimah.`,
+                videoId: "hpiudiX4EGc"
+            },
+            {
+                number: 19,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat/;`,
+                description: `Kandungan untuk sesi 19 dalam modul Mukaddimah.`,
+                videoId: "4V25hTm2gmA"
+            },
+            {
+                number: 20,
+                title: `Meminta-minta Di Dalam Masjid -`,
+                description: `Kandungan untuk sesi 20 dalam modul Mukaddimah.`,
+                videoId: "dy0Hi7P3CJc"
+            },
+            {
+                number: 20,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 20 dalam modul Mukaddimah.`,
+                videoId: "JTgTZEYGtx0"
+            },
+            {
+                number: 21,
+                title: `Kelebihan Memberikan Air -`,
+                description: `Kandungan untuk sesi 21 dalam modul Mukaddimah.`,
+                videoId: "XXMAJmQdhqI"
+            },
+            {
+                number: 21,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 21 dalam modul Mukaddimah.`,
+                videoId: "Odr1hlmbVq8"
+            },
+            {
+                number: 22,
+                title: `Ganjaran Orang yang menjaga Harta -`,
+                description: `Kandungan untuk sesi 22 dalam modul Mukaddimah.`,
+                videoId: "9boDXMi23rU"
+            },
+            {
+                number: 22,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 22 dalam modul Mukaddimah.`,
+                videoId: "EojK58AFQMo"
+            },
+            {
+                number: 23,
+                title: `Tentang Kedekut -`,
+                description: `Kandungan untuk sesi 23 dalam modul Mukaddimah.`,
+                videoId: "kbFH7tGkZY8"
+            },
+            {
+                number: 23,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 23 dalam modul Mukaddimah.`,
+                videoId: "HEJ1Wbx0wxs"
+            },
+            {
+                number: 24,
+                title: `Tentang Barangan Tercicir -`,
+                description: `Kandungan untuk sesi 24 dalam modul Mukaddimah.`,
+                videoId: "JnQqiseD1bM"
+            },
+            {
+                number: 24,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 24 dalam modul Mukaddimah.`,
+                videoId: "c4chUFYVqJQ"
+            },
+            {
+                number: 25,
+                title: `Tentang Barangan Tercicir -`,
+                description: `Kandungan untuk sesi 25 dalam modul Mukaddimah.`,
+                videoId: "bT-1v1FfHYU"
+            },
+            {
+                number: 25,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Zakat`,
+                description: `Kandungan untuk sesi 25 dalam modul Mukaddimah.`,
+                videoId: "3qKMHnusR7U"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

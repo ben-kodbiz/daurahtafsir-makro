@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Percukaian, Harta Rampasan Perang Dan Pemerintahan - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Percukaian, Harta Rampasan Perang Dan Pemerintahan</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Percukaian, Harta Rampasan Perang Dan Pemerintahan</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Percukaian, Harta Rampasan Perang Dan Pemerintahan from Sunan Abi Daud</strong><br>
+                Kitab Percukaian, Harta Rampasan Perang Dan Pemerintahan from Sunan Abi Daud
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+            <!-- Grid items will be dynamically populated by JavaScript -->
+        </div>
+    </div>
+    <script>
+        // Session data for Kitab Percukaian
+        const sessions = [
+            {
+                number: 1,
+                title: `Sesi 1-Kewajipan Pemimpin Atas Apa Yg Menjadi Hak Rakyatnya`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "40X83PmAY3k"
+            },
+            {
+                number: 2,
+                title: `Sesi 2 - Orang Buta Yang Diberikan Jawatan`,
+                description: `Kandungan untuk sesi 2 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "ay_DyXjNEZw"
+            },
+            {
+                number: 3,
+                title: `Sesi 3 -Melantik Setiausaha`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "1X_27PJ1dc8"
+            },
+            {
+                number: 4,
+                title: `Sesi 3 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "cPo6M3XLrr8"
+            },
+            {
+                number: 5,
+                title: `Sesi 4 - Memilih Pengganti Pemimpin`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "C6RtvhvmLtw"
+            },
+            {
+                number: 6,
+                title: `Sesi 4 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "y8HeTN5P_3s"
+            },
+            {
+                number: 7,
+                title: `Sesi 5 -  Gaji Penjawat Awam`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "ojmDXdyEuIE"
+            },
+            {
+                number: 8,
+                title: `Sesi 5 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "gD1Zdv4JbkU"
+            },
+            {
+                number: 9,
+                title: `Sesi 5 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "tVnrQILVBbM"
+            },
+            {
+                number: 10,
+                title: `Sesi 6- Kewajipan Pemerintah`,
+                description: `Kandungan untuk sesi 6 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "Od8mnA0ib7Q"
+            },
+            {
+                number: 11,
+                title: `Sesi 7- Pemberian Rezeki Kepada Zuriat`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "MzF5gd1uKIs"
+            },
+            {
+                number: 12,
+                title: `Sesi 8- Mangatur Dalam Pemberian`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "qU_osyJC_Cw"
+            },
+            {
+                number: 13,
+                title: `Sesi 8 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "tksz4IV_9kA"
+            },
+            {
+                number: 14,
+                title: `Sesi 9-  Bahagian Harta Fai Untuk Nabi  Sebelum Ia Dibahagikan`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "nYJZqMkqmFk"
+            },
+            {
+                number: 15,
+                title: `Sesi 9 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "Kl3O8SyMuAw"
+            },
+            {
+                number: 16,
+                title: `Sesi 10- Bahagian Harta Fai Untuk Nabi Sebelum Ia Dibahagikan`,
+                description: `Kandungan untuk sesi 10 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "pnDOoequoJk"
+            },
+            {
+                number: 17,
+                title: `Sesi 11- Bahagian Harta Fai Untuk Nabi Sebelum Ia Dibahagikan`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "ydWdGssRe2I"
+            },
+            {
+                number: 18,
+                title: `Sesi 11 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "qN_9_ckV3uI"
+            },
+            {
+                number: 19,
+                title: `Sesi 12 - Bahagian Harta Fai Untuk Nabi Sebelum Ia Dibahagikan`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "TCtqOKRSZVw"
+            },
+            {
+                number: 20,
+                title: `Sesi 12 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "L_K1meTlzKc"
+            },
+            {
+                number: 21,
+                title: `Sesi 13 - Tempat Pembahagian Khumus dan Bahagian Ahli Kerabat`,
+                description: `Kandungan untuk sesi 13 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "r7kLo2gVo9A"
+            },
+            {
+                number: 22,
+                title: `Sesi 13 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 13 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "EqOYXhWc260"
+            },
+            {
+                number: 23,
+                title: `Sesi 14 - Tempat Pembahagian Khumus dan Bahagian Ahli Kerabat`,
+                description: `Kandungan untuk sesi 14 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "fMcSeICw8JE"
+            },
+            {
+                number: 24,
+                title: `Sesi 14 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 14 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "9ZW3hgBKiDM"
+            },
+            {
+                number: 25,
+                title: `Sesi 15  -Tempat Pembahagian Khumus dan Bahagian Ahli Kerabat`,
+                description: `Kandungan untuk sesi 15 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "lbO2iHaLVOo"
+            },
+            {
+                number: 26,
+                title: `Sesi 16-Tempat Pembahagian Khumus dan Bahagian Ahli Kerabat`,
+                description: `Kandungan untuk sesi 16 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "-jdQ39px7pU"
+            },
+            {
+                number: 27,
+                title: `Sesi 17 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 17 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "0FtNlEK3C8Y"
+            },
+            {
+                number: 28,
+                title: `Sesi 17- Tempat Pembahagian Khumus dan Bahagian Ahli Kerabat`,
+                description: `Kandungan untuk sesi 17 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "SU492ufUMAY"
+            },
+            {
+                number: 29,
+                title: `Sesi 18 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 18 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "wRrdFJ_xJvo"
+            },
+            {
+                number: 30,
+                title: `Sesi 18 - Bagaimana Yahudi dikeluarkan dari Madinah`,
+                description: `Kandungan untuk sesi 18 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "AzebuVJXzrg"
+            },
+            {
+                number: 31,
+                title: `Sesi 19 - Bagaimana Yahudi dikeluarkan dari Madinah - [Sunan Abi Daud - Kitab Pemerintahan 0`,
+                description: `Kandungan untuk sesi 19 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "_GouPu3Q6cc"
+            },
+            {
+                number: 32,
+                title: `Sesi 20 - Khabar Bani Nadhir`,
+                description: `Kandungan untuk sesi 20 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "_rYA392WQBI"
+            },
+            {
+                number: 33,
+                title: `Sesi 21- Khabar Bani Nadhir`,
+                description: `Kandungan untuk sesi 21 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "Hd6wvbVrjnM"
+            },
+            {
+                number: 34,
+                title: `Sesi 22 - Kisah Makkah - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 22 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "JDCLEdCmIKE"
+            },
+            {
+                number: 35,
+                title: `Sesi 23 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 23 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "2EqxNCNn6jQ"
+            },
+            {
+                number: 36,
+                title: `Sesi 23- Pembukaan Thaif - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 23 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "pkRquVuXWwk"
+            },
+            {
+                number: 37,
+                title: `Sesi 24 - Pengusiran Yahudi Dari Jazirah Arab - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 24 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "K41hUPx1bXE"
+            },
+            {
+                number: 38,
+                title: `Sesi 25 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 25 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "bicKR4YA8Pw"
+            },
+            {
+                number: 39,
+                title: `Sesi 25 - Negeri yang ditaklukkan (untuk memberikan pajak) - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 25 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "bXsTNNGswkY"
+            },
+            {
+                number: 40,
+                title: `Sesi 26 -Mewaqafkan tanah Iraq yang subur - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 26 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "ONj7dIoQ8_k"
+            },
+            {
+                number: 41,
+                title: `Sesi 27 - Mengambil Jizyah Dari Majusi - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 27 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "qaBcIFrix-w"
+            },
+            {
+                number: 42,
+                title: `Sesi 28 - Mengambil Jizyah Dengan Kasar - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 28 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "z709ENjvRUc"
+            },
+            {
+                number: 43,
+                title: `Sesi 29 - Kafir Dzimmi Yang Memeluk Islam - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 29 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "SxPmf5WZFA4"
+            },
+            {
+                number: 44,
+                title: `Sesi 30 - Pemimpin menerima hadiah daripada musyrikin - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 30 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "cFXSaHem_pY"
+            },
+            {
+                number: 45,
+                title: `Sesi 31 - Pemberian tanah-tanah bernilai kepada rakyat - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 31 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "nbhyTF3S0bo"
+            },
+            {
+                number: 46,
+                title: `Sesi 32 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 32 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "ZA3rNBOPfHE"
+            },
+            {
+                number: 47,
+                title: `Sesi 32 - Pemberian tanah-tanah bernilai kepada rakyat - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 32 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "im8hZbFEWYQ"
+            },
+            {
+                number: 48,
+                title: `Sesi 33 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 33 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "71PUu4SGoVA"
+            },
+            {
+                number: 49,
+                title: `Sesi 33 - Pemberian tanah-tanah bernilai kepada rakyat - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 33 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "VBVqSd4gUFU"
+            },
+            {
+                number: 50,
+                title: `Sesi 34 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 34 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "ZFHSfQpZ8fg"
+            },
+            {
+                number: 51,
+                title: `Sesi 34 -Sesiapa Hidupkan Tanah Mati (Maka) Ia Menjadi Haknya`,
+                description: `Kandungan untuk sesi 34 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "qWVuZMRPQf8"
+            },
+            {
+                number: 52,
+                title: `Sesi 35 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 35 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "nS-P2gs9pAM"
+            },
+            {
+                number: 53,
+                title: `Sesi 35 - Pemberian tanah-tanah bernilai kepada rakyat - [Sunan Abu Daud - Kitab Pemerintahan]`,
+                description: `Kandungan untuk sesi 35 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "FHu1Q__D8w0"
+            },
+            {
+                number: 54,
+                title: `Sesi 36 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 36 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "WHwHWNIS4ig"
+            },
+            {
+                number: 55,
+                title: `Sesi 36 - Sesiapa Hidupkan Tanah Mati (Maka) Ia Menjadi Haknya`,
+                description: `Kandungan untuk sesi 36 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "wBlxjaWpF2c"
+            },
+            {
+                number: 56,
+                title: `Sesi 37 - Sesiapa Hidupkan Tanah Mati (Maka) Ia Menjadi Haknya`,
+                description: `Kandungan untuk sesi 37 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "4TFAH5hM3vc"
+            },
+            {
+                number: 57,
+                title: `Sesi 38 - MATAN HADITH - Sunan Abi Daud - Kitab Percukaian, Harta Rampasan Perang & Pemerintahan`,
+                description: `Kandungan untuk sesi 38 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "FIo4f_0NzEk"
+            },
+            {
+                number: 58,
+                title: `Sesi 38 -  Tanah Yang Seseorang Ketua Khususkan Untuk Dirinya`,
+                description: `Kandungan untuk sesi 38 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "Vtc7l5OkCSI"
+            },
+            {
+                number: 59,
+                title: `Sesi 39 - Membongkar Kubur Lama`,
+                description: `Kandungan untuk sesi 39 dalam modul Kitab Percukaian Harta Rampasan Perang Dan Pemerintahan.`,
+                videoId: "BEZId3Z1aKM"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

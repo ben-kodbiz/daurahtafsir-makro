@@ -766,6 +766,17 @@
                         <h3 class="kitab-title">${kitab}</h3>
                     `;
                     grid.appendChild(card);
+                } else if (kitab === "Kitab Tafsir") {
+                    const card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'sahih_muslim_kitab_tafsir/index.html';
+                    card.style.textDecoration = 'none';
+                    card.style.color = 'inherit';
+                    card.innerHTML = `
+                        <div class="kitab-number">${index + 1}</div>
+                        <h3 class="kitab-title">${kitab}</h3>
+                    `;
+                    grid.appendChild(card);
                 } else {
                     // For kitabs without specific handlers, create a static div (non-clickable)
                     // In the future, these could be made clickable if directories are created

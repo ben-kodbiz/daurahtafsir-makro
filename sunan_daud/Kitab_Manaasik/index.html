@@ -1,0 +1,3306 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Manaasik - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Manaasik</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Manaasik</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Manaasik from Sunan Abi Daud</strong><br>
+                Kitab Manaasik from Sunan Abi Daud (103 sessions)
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+                            <div class="md-grid-item" data-session="1">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/YLnWDULpF1M/mqdefault.jpg" 
+                             alt="Kefardhuan Haji -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 1</span>
+                        </div>
+                        <h3 class="md-session-title">Kefardhuan Haji -</h3>
+                        <a href="session1.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="1">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/sZx80cjQ11E/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 1</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session1.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="2">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/CvFwLjPK8ns/mqdefault.jpg" 
+                             alt="Seorang Perempuan Mengerjakan Haji Tanpa Mahram -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 2</span>
+                        </div>
+                        <h3 class="md-session-title">Seorang Perempuan Mengerjakan Haji Tanpa Mahram -</h3>
+                        <a href="session2.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="2">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/FgsWWaE9L2U/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 2</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session2.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="3">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/aPJaCsPMB_w/mqdefault.jpg" 
+                             alt="Menyewakan Binatang (Kenderaan) Untuk Melakukan Ibadat Haji -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 3</span>
+                        </div>
+                        <h3 class="md-session-title">Menyewakan Binatang (Kenderaan) Untuk Melakukan Ibadat Haji -</h3>
+                        <a href="session3.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="4">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/pVAFoO_T3As/mqdefault.jpg" 
+                             alt="Tempat Yang Ditentukan Untuk Memulakan Kerja Haji Dan Umrah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 4</span>
+                        </div>
+                        <h3 class="md-session-title">Tempat Yang Ditentukan Untuk Memulakan Kerja Haji Dan Umrah -</h3>
+                        <a href="session4.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="4">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Pxlveu7iXuI/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 4</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session4.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="5">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/BoH_hjklcm4/mqdefault.jpg" 
+                             alt="Binatang Qurban -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 5</span>
+                        </div>
+                        <h3 class="md-session-title">Binatang Qurban -</h3>
+                        <a href="session5.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="5">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/oDS8Vd40Cic/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 5</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session5.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="6">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/WMbDzv1dSpI/mqdefault.jpg" 
+                             alt="Isy'ar Iaitu Membuat Tanda Pada Binatang Untuk Qurban -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 6</span>
+                        </div>
+                        <h3 class="md-session-title">Isy'ar Iaitu Membuat Tanda Pada Binatang Untuk Qurban -</h3>
+                        <a href="session6.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="6">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/yrpKDbtP2Tc/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 6</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session6.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="7">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Glh9zzLUkjs/mqdefault.jpg" 
+                             alt="Binatang Qurban Yg Hampir Binasa Sebelum Sampai KeTanah Haram -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 7</span>
+                        </div>
+                        <h3 class="md-session-title">Binatang Qurban Yg Hampir Binasa Sebelum Sampai KeTanah Haram -</h3>
+                        <a href="session7.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="7">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/0Rx-NNZmzr0/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 7</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session7.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="8">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/7hkG_yqjULg/mqdefault.jpg" 
+                             alt="Waktu Untuk Memakai Ihram -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 8</span>
+                        </div>
+                        <h3 class="md-session-title">Waktu Untuk Memakai Ihram -</h3>
+                        <a href="session8.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="8">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Khl5qjzF3uI/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 8</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session8.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="9">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/OGojZwTWPv4/mqdefault.jpg" 
+                             alt="Haji Ifrad -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 9</span>
+                        </div>
+                        <h3 class="md-session-title">Haji Ifrad -</h3>
+                        <a href="session9.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="9">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/mO4HoXcudm0/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 9</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session9.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="10">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/0Kz8oHyTrww/mqdefault.jpg" 
+                             alt="Haji Ifrad -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 10</span>
+                        </div>
+                        <h3 class="md-session-title">Haji Ifrad -</h3>
+                        <a href="session10.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="11">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/RSPpysdvsgs/mqdefault.jpg" 
+                             alt="Haji Ifrad -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 11</span>
+                        </div>
+                        <h3 class="md-session-title">Haji Ifrad -</h3>
+                        <a href="session11.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="11">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/kZJimv5h6FI/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 11</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session11.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="12">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/hxbAP9BUXSo/mqdefault.jpg" 
+                             alt="Haji Ifrad -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 12</span>
+                        </div>
+                        <h3 class="md-session-title">Haji Ifrad -</h3>
+                        <a href="session12.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="12">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/7r20HarJyXY/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 12</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session12.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="13">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/DN_YwRLkap8/mqdefault.jpg" 
+                             alt="Haji Ifrad -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 13</span>
+                        </div>
+                        <h3 class="md-session-title">Haji Ifrad -</h3>
+                        <a href="session13.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="13">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/ItHFKj7Efik/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 13</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session13.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="14">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/u7hAQIQjBl0/mqdefault.jpg" 
+                             alt="Haji Qiran -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 14</span>
+                        </div>
+                        <h3 class="md-session-title">Haji Qiran -</h3>
+                        <a href="session14.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="14">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Ux9-w-cyZRM/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 14</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session14.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="15">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/jQsMHgtNYPI/mqdefault.jpg" 
+                             alt="Haji Qiran -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 15</span>
+                        </div>
+                        <h3 class="md-session-title">Haji Qiran -</h3>
+                        <a href="session15.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="16">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/HEDzkTzo56Y/mqdefault.jpg" 
+                             alt="Seseorang Mengerjakan Haji Untuk Orang Lain -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 16</span>
+                        </div>
+                        <h3 class="md-session-title">Seseorang Mengerjakan Haji Untuk Orang Lain -</h3>
+                        <a href="session16.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="16">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/5nDMKssrui0/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 16</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session16.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="17">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Gm7dQ3qVq5M/mqdefault.jpg" 
+                             alt="Bilakah Orang Yang Berihram Haji Itu Berhenti Bertalbiyah?  -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 17</span>
+                        </div>
+                        <h3 class="md-session-title">Bilakah Orang Yang Berihram Haji Itu Berhenti Bertalbiyah?  -</h3>
+                        <a href="session17.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="17">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/eG0CeEQV4MU/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 17</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session17.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="18">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Iy78OKXUNcU/mqdefault.jpg" 
+                             alt="Apa Yang Boleh Dipakai Oleh "Muhrim" -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 18</span>
+                        </div>
+                        <h3 class="md-session-title">Apa Yang Boleh Dipakai Oleh "Muhrim" -</h3>
+                        <a href="session18.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="18">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/2kkL6nw4cTI/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 18</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session18.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="19">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/TBGlxP6QMys/mqdefault.jpg" 
+                             alt="Orang Yang Berihram Hendak Berteduh -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 19</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yang Berihram Hendak Berteduh -</h3>
+                        <a href="session19.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="19">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/4NMcrQL5eng/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 19</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session19.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="20">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/t7FtSinXU60/mqdefault.jpg" 
+                             alt="Orang Yang Berihram Berkahwin -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 20</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yang Berihram Berkahwin -</h3>
+                        <a href="session20.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="21">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/_l3-H1s7gko/mqdefault.jpg" 
+                             alt="Binatang Apakah Yang Boleh Dibunuh Oleh Orang  Yang Berihram? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 21</span>
+                        </div>
+                        <h3 class="md-session-title">Binatang Apakah Yang Boleh Dibunuh Oleh Orang  Yang Berihram? -</h3>
+                        <a href="session21.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="21">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/cjQa96uNTGU/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 21</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session21.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="22">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/R9DTKGJXZqI/mqdefault.jpg" 
+                             alt="Belalang Untuk Orang Yang Berihram -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 22</span>
+                        </div>
+                        <h3 class="md-session-title">Belalang Untuk Orang Yang Berihram -</h3>
+                        <a href="session22.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="22">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/kBEcsaNRAYs/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 22</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session22.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="23">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/kzd3ETTjHkA/mqdefault.jpg" 
+                             alt="Tentang Fidyah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 23</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Fidyah -</h3>
+                        <a href="session23.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="24">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/jJ8tLheSthQ/mqdefault.jpg" 
+                             alt="Ihsor (terhalang dari melakukan ibadat haji atau umrah) -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 24</span>
+                        </div>
+                        <h3 class="md-session-title">Ihsor (terhalang dari melakukan ibadat haji atau umrah) -</h3>
+                        <a href="session24.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="25">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/2R1w0Xd4d1U/mqdefault.jpg" 
+                             alt="Angkat Tangan Ketika Melihat Kaabah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 25</span>
+                        </div>
+                        <h3 class="md-session-title">Angkat Tangan Ketika Melihat Kaabah -</h3>
+                        <a href="session25.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="25">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/CKzymb2fB-Q/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 25</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session25.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="26">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/K8RAR5sesko/mqdefault.jpg" 
+                             alt="Istilam Bucu-bucu Kaabah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 26</span>
+                        </div>
+                        <h3 class="md-session-title">Istilam Bucu-bucu Kaabah -</h3>
+                        <a href="session26.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="26">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/DqM0Ayoz3RY/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 26</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session26.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="27">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/9EagIqNy22E/mqdefault.jpg" 
+                             alt="Menampakkan Bahu Ketika Bertawaf -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 27</span>
+                        </div>
+                        <h3 class="md-session-title">Menampakkan Bahu Ketika Bertawaf -</h3>
+                        <a href="session27.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="27">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/zHdHLPNcwhI/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 27</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session27.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="28">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/RLwdd26DE1U/mqdefault.jpg" 
+                             alt="Tawaf Qiran -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 28</span>
+                        </div>
+                        <h3 class="md-session-title">Tawaf Qiran -</h3>
+                        <a href="session28.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="28">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/eDUu8V_OWPI/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 28</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session28.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="29">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/QvRURuaop9s/mqdefault.jpg" 
+                             alt="Kedudukan Safa dan Marwah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 29</span>
+                        </div>
+                        <h3 class="md-session-title">Kedudukan Safa dan Marwah -</h3>
+                        <a href="session29.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="29">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/4GFEJrrypOQ/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 29</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session29.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="30">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/xMjAMvfDqTQ/mqdefault.jpg" 
+                             alt="Gambaran Haji Nabi s.a.w. -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 30</span>
+                        </div>
+                        <h3 class="md-session-title">Gambaran Haji Nabi s.a.w. -</h3>
+                        <a href="session30.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="30">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/5jw4CU-T3sQ/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 30</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session30.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="31">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/rZ3Jbk_B0Pw/mqdefault.jpg" 
+                             alt="Gambaran Haji Nabi s.a.w -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 31</span>
+                        </div>
+                        <h3 class="md-session-title">Gambaran Haji Nabi s.a.w -</h3>
+                        <a href="session31.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="33">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/1RTfmMa27FI/mqdefault.jpg" 
+                             alt="Gambaran Haji Nabi s.a.w -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 33</span>
+                        </div>
+                        <h3 class="md-session-title">Gambaran Haji Nabi s.a.w -</h3>
+                        <a href="session33.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="34">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/eax8PnupvyU/mqdefault.jpg" 
+                             alt="Gambaran Haji Nabi -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 34</span>
+                        </div>
+                        <h3 class="md-session-title">Gambaran Haji Nabi -</h3>
+                        <a href="session34.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="35">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/53RFqRZ0p-s/mqdefault.jpg" 
+                             alt="Gambaran Haji Nabi s.a.w -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 35</span>
+                        </div>
+                        <h3 class="md-session-title">Gambaran Haji Nabi s.a.w -</h3>
+                        <a href="session35.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="35">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/vmzGKmir-sI/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 35</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session35.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="36">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/rMVBLt3XHqU/mqdefault.jpg" 
+                             alt="Khutbah Nabi s.a.w -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 36</span>
+                        </div>
+                        <h3 class="md-session-title">Khutbah Nabi s.a.w -</h3>
+                        <a href="session36.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="36">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/KFf4Ixy0d08/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 36</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session36.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="37">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/oPplB1PppCA/mqdefault.jpg" 
+                             alt="Berangkat Dari Arafah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 37</span>
+                        </div>
+                        <h3 class="md-session-title">Berangkat Dari Arafah -</h3>
+                        <a href="session37.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="37">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/pJY72yoTpx8/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 37</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session37.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="38">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/FnXhc5KelJ8/mqdefault.jpg" 
+                             alt="Bersembahyang di Jam'in (Muzdhalifah) -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 38</span>
+                        </div>
+                        <h3 class="md-session-title">Bersembahyang di Jam'in (Muzdhalifah) -</h3>
+                        <a href="session38.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="38">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/OrjnN9lIvLs/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 38</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session38.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="39">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/E3Y0nEERyu8/mqdefault.jpg" 
+                             alt="Bersegera Meninggalkan Muzdalifah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 39</span>
+                        </div>
+                        <h3 class="md-session-title">Bersegera Meninggalkan Muzdalifah -</h3>
+                        <a href="session39.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="39">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Vmm2LURBJO4/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 39</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session39.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="40">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/AaJAZrz0beA/mqdefault.jpg" 
+                             alt="Bulan-bulan Haram -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 40</span>
+                        </div>
+                        <h3 class="md-session-title">Bulan-bulan Haram -</h3>
+                        <a href="session40.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="40">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/xt5sulR8wMs/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 40</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session40.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="41">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/sZiU2ilhoAE/mqdefault.jpg" 
+                             alt="Pada Hari Apakah Imam Berucap Di Mina? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 41</span>
+                        </div>
+                        <h3 class="md-session-title">Pada Hari Apakah Imam Berucap Di Mina? -</h3>
+                        <a href="session41.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="41">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/CsKUz9LBDmg/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 41</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session41.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="42">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/NONwm-uB7B8/mqdefault.jpg" 
+                             alt="Bermalam Di Mekah Pada Malam-malam Mina -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 42</span>
+                        </div>
+                        <h3 class="md-session-title">Bermalam Di Mekah Pada Malam-malam Mina -</h3>
+                        <a href="session42.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="42">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/9c-oA2rN0o0/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 42</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session42.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="43">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/kVqi18vXXRQ/mqdefault.jpg" 
+                             alt="Melontar Jamrah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 43</span>
+                        </div>
+                        <h3 class="md-session-title">Melontar Jamrah -</h3>
+                        <a href="session43.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="43">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/tTImsvQpEOI/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 43</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session43.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="44">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/6PTgfnOJPgE/mqdefault.jpg" 
+                             alt="Bercukur Dan Gunting Rambut Semasa Mengerjakan Haji -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 44</span>
+                        </div>
+                        <h3 class="md-session-title">Bercukur Dan Gunting Rambut Semasa Mengerjakan Haji -</h3>
+                        <a href="session44.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="44">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/5VAdOydWLqU/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 44</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session44.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="45">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/1OkITTV-Z2c/mqdefault.jpg" 
+                             alt="Umrah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 45</span>
+                        </div>
+                        <h3 class="md-session-title">Umrah -</h3>
+                        <a href="session45.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="45">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/OHbp8zb4pbQ/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 45</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session45.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="46">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/0PRaEg0hxxs/mqdefault.jpg" 
+                             alt="Umrah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 46</span>
+                        </div>
+                        <h3 class="md-session-title">Umrah -</h3>
+                        <a href="session46.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="47">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Z5fJvPKir1Q/mqdefault.jpg" 
+                             alt="Wanita Yg Berihlal Umrah Berhaidh & Hampir Utk Kerjakan Haji-" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 47</span>
+                        </div>
+                        <h3 class="md-session-title">Wanita Yg Berihlal Umrah Berhaidh & Hampir Utk Kerjakan Haji-</h3>
+                        <a href="session47.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="47">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/AhdBbViGe_E/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 47</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session47.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="48">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/kIESX0oB88o/mqdefault.jpg" 
+                             alt="Tawaf Ifadhah Dalam Mengerjakan Haji -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 48</span>
+                        </div>
+                        <h3 class="md-session-title">Tawaf Ifadhah Dalam Mengerjakan Haji -</h3>
+                        <a href="session48.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="48">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/GhCZ1hxcj2U/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 48</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session48.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="48">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/GPg1XT7u96A/mqdefault.jpg" 
+                             alt="Ses 32 -  Gambaran Haji Nabi s.a.w -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 48</span>
+                        </div>
+                        <h3 class="md-session-title">Ses 32 -  Gambaran Haji Nabi s.a.w -</h3>
+                        <a href="session48.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="49">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/lszg8AGREPA/mqdefault.jpg" 
+                             alt="Hukum Tawaf  Wida' -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 49</span>
+                        </div>
+                        <h3 class="md-session-title">Hukum Tawaf  Wida' -</h3>
+                        <a href="session49.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="49">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/3mObgcL0wao/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 49</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session49.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="50">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/yAtmT6BxbUQ/mqdefault.jpg" 
+                             alt="(Apakah Hukum) Berhenti Atau Singgah Di Muhassab? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 50</span>
+                        </div>
+                        <h3 class="md-session-title">(Apakah Hukum) Berhenti Atau Singgah Di Muhassab? -</h3>
+                        <a href="session50.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="50">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/AA8jpac7yN8/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 50</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session50.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="51">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/a11lqCkwMoE/mqdefault.jpg" 
+                             alt="Mekah Dan Pengistiharan Mekah Sebagai Tanah  Haram -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 51</span>
+                        </div>
+                        <h3 class="md-session-title">Mekah Dan Pengistiharan Mekah Sebagai Tanah  Haram -</h3>
+                        <a href="session51.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="51">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/tBrNlJyeKoQ/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 51</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session51.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="52">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/4OVjFq6zblI/mqdefault.jpg" 
+                             alt="Memberi Minum Kepada Orang Yang Mengerjakan Haji Dan Umrah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 52</span>
+                        </div>
+                        <h3 class="md-session-title">Memberi Minum Kepada Orang Yang Mengerjakan Haji Dan Umrah -</h3>
+                        <a href="session52.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="52">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/vy-n-gd-PCU/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 52</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session52.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="53">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/z83kZTu35s0/mqdefault.jpg" 
+                             alt="Sembahyang Di Dalam Kaabah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 53</span>
+                        </div>
+                        <h3 class="md-session-title">Sembahyang Di Dalam Kaabah -</h3>
+                        <a href="session53.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="53">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/3WLzT6gMFnY/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 53</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session53.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="54">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/4h6wZ6X0Ulo/mqdefault.jpg" 
+                             alt="Tentang Pergi Ke Madinah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 54</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Pergi Ke Madinah -</h3>
+                        <a href="session54.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="54">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Byey4sGnt38/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 54</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session54.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="55">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/hO6muiAnNSE/mqdefault.jpg" 
+                             alt="Tentang Pergi Ke Madinah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 55</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Pergi Ke Madinah -</h3>
+                        <a href="session55.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="56">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/rxOk_w5QoQc/mqdefault.jpg" 
+                             alt="Ziarah Kubu -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 56</span>
+                        </div>
+                        <h3 class="md-session-title">Ziarah Kubu -</h3>
+                        <a href="session56.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="56">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/PSWUGsc5WVU/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 56</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session56.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="57">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/XrIXZAdzgM8/mqdefault.jpg" 
+                             alt="Ziarah Kubur -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 57</span>
+                        </div>
+                        <h3 class="md-session-title">Ziarah Kubur -</h3>
+                        <a href="session57.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="58">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Ob2C5xAAsaQ/mqdefault.jpg" 
+                             alt="Ziarah Kubur -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 58</span>
+                        </div>
+                        <h3 class="md-session-title">Ziarah Kubur -</h3>
+                        <a href="session58.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="58">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/F0S6A6WEz-o/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 58</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)</h3>
+                        <a href="session58.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script>
+        // Session data with actual titles
+        const sessions = [
+            {
+                number: 1,
+                title: `Kefardhuan Haji -`,
+                description: `Kandungan untuk sesi 1 dalam modul Mukaddimah.`,
+                videoId: "YLnWDULpF1M"
+            },
+            {
+                number: 1,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 1 dalam modul Mukaddimah.`,
+                videoId: "sZx80cjQ11E"
+            },
+            {
+                number: 2,
+                title: `Seorang Perempuan Mengerjakan Haji Tanpa Mahram -`,
+                description: `Kandungan untuk sesi 2 dalam modul Mukaddimah.`,
+                videoId: "CvFwLjPK8ns"
+            },
+            {
+                number: 2,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 2 dalam modul Mukaddimah.`,
+                videoId: "FgsWWaE9L2U"
+            },
+            {
+                number: 3,
+                title: `Menyewakan Binatang (Kenderaan) Untuk Melakukan Ibadat Haji -`,
+                description: `Kandungan untuk sesi 3 dalam modul Mukaddimah.`,
+                videoId: "aPJaCsPMB_w"
+            },
+            {
+                number: 4,
+                title: `Tempat Yang Ditentukan Untuk Memulakan Kerja Haji Dan Umrah -`,
+                description: `Kandungan untuk sesi 4 dalam modul Mukaddimah.`,
+                videoId: "pVAFoO_T3As"
+            },
+            {
+                number: 4,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 4 dalam modul Mukaddimah.`,
+                videoId: "Pxlveu7iXuI"
+            },
+            {
+                number: 5,
+                title: `Binatang Qurban -`,
+                description: `Kandungan untuk sesi 5 dalam modul Mukaddimah.`,
+                videoId: "BoH_hjklcm4"
+            },
+            {
+                number: 5,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 5 dalam modul Mukaddimah.`,
+                videoId: "oDS8Vd40Cic"
+            },
+            {
+                number: 6,
+                title: `Isy'ar Iaitu Membuat Tanda Pada Binatang Untuk Qurban -`,
+                description: `Kandungan untuk sesi 6 dalam modul Mukaddimah.`,
+                videoId: "WMbDzv1dSpI"
+            },
+            {
+                number: 6,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 6 dalam modul Mukaddimah.`,
+                videoId: "yrpKDbtP2Tc"
+            },
+            {
+                number: 7,
+                title: `Binatang Qurban Yg Hampir Binasa Sebelum Sampai KeTanah Haram -`,
+                description: `Kandungan untuk sesi 7 dalam modul Mukaddimah.`,
+                videoId: "Glh9zzLUkjs"
+            },
+            {
+                number: 7,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 7 dalam modul Mukaddimah.`,
+                videoId: "0Rx-NNZmzr0"
+            },
+            {
+                number: 8,
+                title: `Waktu Untuk Memakai Ihram -`,
+                description: `Kandungan untuk sesi 8 dalam modul Mukaddimah.`,
+                videoId: "7hkG_yqjULg"
+            },
+            {
+                number: 8,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 8 dalam modul Mukaddimah.`,
+                videoId: "Khl5qjzF3uI"
+            },
+            {
+                number: 9,
+                title: `Haji Ifrad -`,
+                description: `Kandungan untuk sesi 9 dalam modul Mukaddimah.`,
+                videoId: "OGojZwTWPv4"
+            },
+            {
+                number: 9,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 9 dalam modul Mukaddimah.`,
+                videoId: "mO4HoXcudm0"
+            },
+            {
+                number: 10,
+                title: `Haji Ifrad -`,
+                description: `Kandungan untuk sesi 10 dalam modul Mukaddimah.`,
+                videoId: "0Kz8oHyTrww"
+            },
+            {
+                number: 11,
+                title: `Haji Ifrad -`,
+                description: `Kandungan untuk sesi 11 dalam modul Mukaddimah.`,
+                videoId: "RSPpysdvsgs"
+            },
+            {
+                number: 11,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 11 dalam modul Mukaddimah.`,
+                videoId: "kZJimv5h6FI"
+            },
+            {
+                number: 12,
+                title: `Haji Ifrad -`,
+                description: `Kandungan untuk sesi 12 dalam modul Mukaddimah.`,
+                videoId: "hxbAP9BUXSo"
+            },
+            {
+                number: 12,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 12 dalam modul Mukaddimah.`,
+                videoId: "7r20HarJyXY"
+            },
+            {
+                number: 13,
+                title: `Haji Ifrad -`,
+                description: `Kandungan untuk sesi 13 dalam modul Mukaddimah.`,
+                videoId: "DN_YwRLkap8"
+            },
+            {
+                number: 13,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 13 dalam modul Mukaddimah.`,
+                videoId: "ItHFKj7Efik"
+            },
+            {
+                number: 14,
+                title: `Haji Qiran -`,
+                description: `Kandungan untuk sesi 14 dalam modul Mukaddimah.`,
+                videoId: "u7hAQIQjBl0"
+            },
+            {
+                number: 14,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 14 dalam modul Mukaddimah.`,
+                videoId: "Ux9-w-cyZRM"
+            },
+            {
+                number: 15,
+                title: `Haji Qiran -`,
+                description: `Kandungan untuk sesi 15 dalam modul Mukaddimah.`,
+                videoId: "jQsMHgtNYPI"
+            },
+            {
+                number: 16,
+                title: `Seseorang Mengerjakan Haji Untuk Orang Lain -`,
+                description: `Kandungan untuk sesi 16 dalam modul Mukaddimah.`,
+                videoId: "HEDzkTzo56Y"
+            },
+            {
+                number: 16,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 16 dalam modul Mukaddimah.`,
+                videoId: "5nDMKssrui0"
+            },
+            {
+                number: 17,
+                title: `Bilakah Orang Yang Berihram Haji Itu Berhenti Bertalbiyah?  -`,
+                description: `Kandungan untuk sesi 17 dalam modul Mukaddimah.`,
+                videoId: "Gm7dQ3qVq5M"
+            },
+            {
+                number: 17,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 17 dalam modul Mukaddimah.`,
+                videoId: "eG0CeEQV4MU"
+            },
+            {
+                number: 18,
+                title: `Apa Yang Boleh Dipakai Oleh &quot;Muhrim&quot; -`,
+                description: `Kandungan untuk sesi 18 dalam modul Mukaddimah.`,
+                videoId: "Iy78OKXUNcU"
+            },
+            {
+                number: 18,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 18 dalam modul Mukaddimah.`,
+                videoId: "2kkL6nw4cTI"
+            },
+            {
+                number: 19,
+                title: `Orang Yang Berihram Hendak Berteduh -`,
+                description: `Kandungan untuk sesi 19 dalam modul Mukaddimah.`,
+                videoId: "TBGlxP6QMys"
+            },
+            {
+                number: 19,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 19 dalam modul Mukaddimah.`,
+                videoId: "4NMcrQL5eng"
+            },
+            {
+                number: 20,
+                title: `Orang Yang Berihram Berkahwin -`,
+                description: `Kandungan untuk sesi 20 dalam modul Mukaddimah.`,
+                videoId: "t7FtSinXU60"
+            },
+            {
+                number: 21,
+                title: `Binatang Apakah Yang Boleh Dibunuh Oleh Orang  Yang Berihram? -`,
+                description: `Kandungan untuk sesi 21 dalam modul Mukaddimah.`,
+                videoId: "_l3-H1s7gko"
+            },
+            {
+                number: 21,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 21 dalam modul Mukaddimah.`,
+                videoId: "cjQa96uNTGU"
+            },
+            {
+                number: 22,
+                title: `Belalang Untuk Orang Yang Berihram -`,
+                description: `Kandungan untuk sesi 22 dalam modul Mukaddimah.`,
+                videoId: "R9DTKGJXZqI"
+            },
+            {
+                number: 22,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 22 dalam modul Mukaddimah.`,
+                videoId: "kBEcsaNRAYs"
+            },
+            {
+                number: 23,
+                title: `Tentang Fidyah -`,
+                description: `Kandungan untuk sesi 23 dalam modul Mukaddimah.`,
+                videoId: "kzd3ETTjHkA"
+            },
+            {
+                number: 24,
+                title: `Ihsor (terhalang dari melakukan ibadat haji atau umrah) -`,
+                description: `Kandungan untuk sesi 24 dalam modul Mukaddimah.`,
+                videoId: "jJ8tLheSthQ"
+            },
+            {
+                number: 25,
+                title: `Angkat Tangan Ketika Melihat Kaabah -`,
+                description: `Kandungan untuk sesi 25 dalam modul Mukaddimah.`,
+                videoId: "2R1w0Xd4d1U"
+            },
+            {
+                number: 25,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 25 dalam modul Mukaddimah.`,
+                videoId: "CKzymb2fB-Q"
+            },
+            {
+                number: 26,
+                title: `Istilam Bucu-bucu Kaabah -`,
+                description: `Kandungan untuk sesi 26 dalam modul Mukaddimah.`,
+                videoId: "K8RAR5sesko"
+            },
+            {
+                number: 26,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 26 dalam modul Mukaddimah.`,
+                videoId: "DqM0Ayoz3RY"
+            },
+            {
+                number: 27,
+                title: `Menampakkan Bahu Ketika Bertawaf -`,
+                description: `Kandungan untuk sesi 27 dalam modul Mukaddimah.`,
+                videoId: "9EagIqNy22E"
+            },
+            {
+                number: 27,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 27 dalam modul Mukaddimah.`,
+                videoId: "zHdHLPNcwhI"
+            },
+            {
+                number: 28,
+                title: `Tawaf Qiran -`,
+                description: `Kandungan untuk sesi 28 dalam modul Mukaddimah.`,
+                videoId: "RLwdd26DE1U"
+            },
+            {
+                number: 28,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 28 dalam modul Mukaddimah.`,
+                videoId: "eDUu8V_OWPI"
+            },
+            {
+                number: 29,
+                title: `Kedudukan Safa dan Marwah -`,
+                description: `Kandungan untuk sesi 29 dalam modul Mukaddimah.`,
+                videoId: "QvRURuaop9s"
+            },
+            {
+                number: 29,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 29 dalam modul Mukaddimah.`,
+                videoId: "4GFEJrrypOQ"
+            },
+            {
+                number: 30,
+                title: `Gambaran Haji Nabi s.a.w. -`,
+                description: `Kandungan untuk sesi 30 dalam modul Mukaddimah.`,
+                videoId: "xMjAMvfDqTQ"
+            },
+            {
+                number: 30,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 30 dalam modul Mukaddimah.`,
+                videoId: "5jw4CU-T3sQ"
+            },
+            {
+                number: 31,
+                title: `Gambaran Haji Nabi s.a.w -`,
+                description: `Kandungan untuk sesi 31 dalam modul Mukaddimah.`,
+                videoId: "rZ3Jbk_B0Pw"
+            },
+            {
+                number: 33,
+                title: `Gambaran Haji Nabi s.a.w -`,
+                description: `Kandungan untuk sesi 33 dalam modul Mukaddimah.`,
+                videoId: "1RTfmMa27FI"
+            },
+            {
+                number: 34,
+                title: `Gambaran Haji Nabi -`,
+                description: `Kandungan untuk sesi 34 dalam modul Mukaddimah.`,
+                videoId: "eax8PnupvyU"
+            },
+            {
+                number: 35,
+                title: `Gambaran Haji Nabi s.a.w -`,
+                description: `Kandungan untuk sesi 35 dalam modul Mukaddimah.`,
+                videoId: "53RFqRZ0p-s"
+            },
+            {
+                number: 35,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 35 dalam modul Mukaddimah.`,
+                videoId: "vmzGKmir-sI"
+            },
+            {
+                number: 36,
+                title: `Khutbah Nabi s.a.w -`,
+                description: `Kandungan untuk sesi 36 dalam modul Mukaddimah.`,
+                videoId: "rMVBLt3XHqU"
+            },
+            {
+                number: 36,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 36 dalam modul Mukaddimah.`,
+                videoId: "KFf4Ixy0d08"
+            },
+            {
+                number: 37,
+                title: `Berangkat Dari Arafah -`,
+                description: `Kandungan untuk sesi 37 dalam modul Mukaddimah.`,
+                videoId: "oPplB1PppCA"
+            },
+            {
+                number: 37,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 37 dalam modul Mukaddimah.`,
+                videoId: "pJY72yoTpx8"
+            },
+            {
+                number: 38,
+                title: `Bersembahyang di Jam'in (Muzdhalifah) -`,
+                description: `Kandungan untuk sesi 38 dalam modul Mukaddimah.`,
+                videoId: "FnXhc5KelJ8"
+            },
+            {
+                number: 38,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 38 dalam modul Mukaddimah.`,
+                videoId: "OrjnN9lIvLs"
+            },
+            {
+                number: 39,
+                title: `Bersegera Meninggalkan Muzdalifah -`,
+                description: `Kandungan untuk sesi 39 dalam modul Mukaddimah.`,
+                videoId: "E3Y0nEERyu8"
+            },
+            {
+                number: 39,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 39 dalam modul Mukaddimah.`,
+                videoId: "Vmm2LURBJO4"
+            },
+            {
+                number: 40,
+                title: `Bulan-bulan Haram -`,
+                description: `Kandungan untuk sesi 40 dalam modul Mukaddimah.`,
+                videoId: "AaJAZrz0beA"
+            },
+            {
+                number: 40,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 40 dalam modul Mukaddimah.`,
+                videoId: "xt5sulR8wMs"
+            },
+            {
+                number: 41,
+                title: `Pada Hari Apakah Imam Berucap Di Mina? -`,
+                description: `Kandungan untuk sesi 41 dalam modul Mukaddimah.`,
+                videoId: "sZiU2ilhoAE"
+            },
+            {
+                number: 41,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 41 dalam modul Mukaddimah.`,
+                videoId: "CsKUz9LBDmg"
+            },
+            {
+                number: 42,
+                title: `Bermalam Di Mekah Pada Malam-malam Mina -`,
+                description: `Kandungan untuk sesi 42 dalam modul Mukaddimah.`,
+                videoId: "NONwm-uB7B8"
+            },
+            {
+                number: 42,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 42 dalam modul Mukaddimah.`,
+                videoId: "9c-oA2rN0o0"
+            },
+            {
+                number: 43,
+                title: `Melontar Jamrah -`,
+                description: `Kandungan untuk sesi 43 dalam modul Mukaddimah.`,
+                videoId: "kVqi18vXXRQ"
+            },
+            {
+                number: 43,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 43 dalam modul Mukaddimah.`,
+                videoId: "tTImsvQpEOI"
+            },
+            {
+                number: 44,
+                title: `Bercukur Dan Gunting Rambut Semasa Mengerjakan Haji -`,
+                description: `Kandungan untuk sesi 44 dalam modul Mukaddimah.`,
+                videoId: "6PTgfnOJPgE"
+            },
+            {
+                number: 44,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 44 dalam modul Mukaddimah.`,
+                videoId: "5VAdOydWLqU"
+            },
+            {
+                number: 45,
+                title: `Umrah -`,
+                description: `Kandungan untuk sesi 45 dalam modul Mukaddimah.`,
+                videoId: "1OkITTV-Z2c"
+            },
+            {
+                number: 45,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 45 dalam modul Mukaddimah.`,
+                videoId: "OHbp8zb4pbQ"
+            },
+            {
+                number: 46,
+                title: `Umrah -`,
+                description: `Kandungan untuk sesi 46 dalam modul Mukaddimah.`,
+                videoId: "0PRaEg0hxxs"
+            },
+            {
+                number: 47,
+                title: `Wanita Yg Berihlal Umrah Berhaidh & Hampir Utk Kerjakan Haji-`,
+                description: `Kandungan untuk sesi 47 dalam modul Mukaddimah.`,
+                videoId: "Z5fJvPKir1Q"
+            },
+            {
+                number: 47,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 47 dalam modul Mukaddimah.`,
+                videoId: "AhdBbViGe_E"
+            },
+            {
+                number: 48,
+                title: `Tawaf Ifadhah Dalam Mengerjakan Haji -`,
+                description: `Kandungan untuk sesi 48 dalam modul Mukaddimah.`,
+                videoId: "kIESX0oB88o"
+            },
+            {
+                number: 48,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 48 dalam modul Mukaddimah.`,
+                videoId: "GhCZ1hxcj2U"
+            },
+            {
+                number: 48,
+                title: `Ses 32 -  Gambaran Haji Nabi s.a.w -`,
+                description: `Kandungan untuk sesi 48 dalam modul Mukaddimah.`,
+                videoId: "GPg1XT7u96A"
+            },
+            {
+                number: 49,
+                title: `Hukum Tawaf  Wida' -`,
+                description: `Kandungan untuk sesi 49 dalam modul Mukaddimah.`,
+                videoId: "lszg8AGREPA"
+            },
+            {
+                number: 49,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 49 dalam modul Mukaddimah.`,
+                videoId: "3mObgcL0wao"
+            },
+            {
+                number: 50,
+                title: `(Apakah Hukum) Berhenti Atau Singgah Di Muhassab? -`,
+                description: `Kandungan untuk sesi 50 dalam modul Mukaddimah.`,
+                videoId: "yAtmT6BxbUQ"
+            },
+            {
+                number: 50,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 50 dalam modul Mukaddimah.`,
+                videoId: "AA8jpac7yN8"
+            },
+            {
+                number: 51,
+                title: `Mekah Dan Pengistiharan Mekah Sebagai Tanah  Haram -`,
+                description: `Kandungan untuk sesi 51 dalam modul Mukaddimah.`,
+                videoId: "a11lqCkwMoE"
+            },
+            {
+                number: 51,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 51 dalam modul Mukaddimah.`,
+                videoId: "tBrNlJyeKoQ"
+            },
+            {
+                number: 52,
+                title: `Memberi Minum Kepada Orang Yang Mengerjakan Haji Dan Umrah -`,
+                description: `Kandungan untuk sesi 52 dalam modul Mukaddimah.`,
+                videoId: "4OVjFq6zblI"
+            },
+            {
+                number: 52,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 52 dalam modul Mukaddimah.`,
+                videoId: "vy-n-gd-PCU"
+            },
+            {
+                number: 53,
+                title: `Sembahyang Di Dalam Kaabah -`,
+                description: `Kandungan untuk sesi 53 dalam modul Mukaddimah.`,
+                videoId: "z83kZTu35s0"
+            },
+            {
+                number: 53,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 53 dalam modul Mukaddimah.`,
+                videoId: "3WLzT6gMFnY"
+            },
+            {
+                number: 54,
+                title: `Tentang Pergi Ke Madinah -`,
+                description: `Kandungan untuk sesi 54 dalam modul Mukaddimah.`,
+                videoId: "4h6wZ6X0Ulo"
+            },
+            {
+                number: 54,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 54 dalam modul Mukaddimah.`,
+                videoId: "Byey4sGnt38"
+            },
+            {
+                number: 55,
+                title: `Tentang Pergi Ke Madinah -`,
+                description: `Kandungan untuk sesi 55 dalam modul Mukaddimah.`,
+                videoId: "hO6muiAnNSE"
+            },
+            {
+                number: 56,
+                title: `Ziarah Kubu -`,
+                description: `Kandungan untuk sesi 56 dalam modul Mukaddimah.`,
+                videoId: "rxOk_w5QoQc"
+            },
+            {
+                number: 56,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 56 dalam modul Mukaddimah.`,
+                videoId: "PSWUGsc5WVU"
+            },
+            {
+                number: 57,
+                title: `Ziarah Kubur -`,
+                description: `Kandungan untuk sesi 57 dalam modul Mukaddimah.`,
+                videoId: "XrIXZAdzgM8"
+            },
+            {
+                number: 58,
+                title: `Ziarah Kubur -`,
+                description: `Kandungan untuk sesi 58 dalam modul Mukaddimah.`,
+                videoId: "Ob2C5xAAsaQ"
+            },
+            {
+                number: 58,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Manaasik (Haji Dan Umrah)`,
+                description: `Kandungan untuk sesi 58 dalam modul Mukaddimah.`,
+                videoId: "F0S6A6WEz-o"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

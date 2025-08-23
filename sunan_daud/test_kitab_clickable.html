@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Kitab Clickable</title>
+</head>
+<body>
+    <div id="kitab-grid"></div>
+    
+    <script>
+        const kitabList = [
+            "Mukaddimah",
+            "Kitab Thaharah",
+            "Kitab Sembahyang",
+            "Kitab Zakat"
+        ];
+        
+        function populateKitabGrid(kitabs) {
+            const grid = document.getElementById('kitab-grid');
+            grid.innerHTML = '';
+            
+            kitabs.forEach((kitab, index) => {
+                if (kitab === "Mukaddimah") {
+                    const card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Mukaddimah/index.html';
+                    card.innerHTML = `
+                        <div class="kitab-number">${index + 1}</div>
+                        <h3 class="kitab-title">${kitab}</h3>
+                    `;
+                    grid.appendChild(card);
+                } else if (kitab === "Kitab Thaharah") {
+                    console.log("Creating clickable link for Kitab Thaharah");
+                    const card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Thaharah/index.html';
+                    card.innerHTML = `
+                        <div class="kitab-number">${index + 1}</div>
+                        <h3 class="kitab-title">${kitab}</h3>
+                    `;
+                    grid.appendChild(card);
+                } else if (kitab === "Kitab Sembahyang") {
+                    console.log("Creating clickable link for Kitab Sembahyang");
+                    const card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Sembahyang/index.html';
+                    card.innerHTML = `
+                        <div class="kitab-number">${index + 1}</div>
+                        <h3 class="kitab-title">${kitab}</h3>
+                    `;
+                    grid.appendChild(card);
+                } else {
+                    const card = document.createElement('div');
+                    card.className = 'kitab-card';
+                    card.innerHTML = `
+                        <div class="kitab-number">${index + 1}</div>
+                        <h3 class="kitab-title">${kitab}</h3>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
+        }
+        
+        populateKitabGrid(kitabList);
+    </script>
+</body>
+</html>

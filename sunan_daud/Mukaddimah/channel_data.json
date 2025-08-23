@@ -1,0 +1,25 @@
+{
+  "title": "Mukaddimah",
+  "description": "Introduction to Sunan Abi Daud",
+  "total_sessions": 3,
+  "sessions": [
+    {
+      "session_number": 1,
+      "title": "Sesi 3 - Syarah Dan Hasyiah Sunan Abi Daud - [Sunan Abi Daud - Muqaddimah]",
+      "video_id": "NlRCGqEBNQU",
+      "youtube_url": "https://www.youtube.com/watch?v=NlRCGqEBNQU"
+    },
+    {
+      "session_number": 2,
+      "title": "Sesi 2 - Berkenalan Dengan Kitab Sunan Abi Daud - [Sunan Abi Daud - Muqaddimah]",
+      "video_id": "MBjzP-TZUD0",
+      "youtube_url": "https://www.youtube.com/watch?v=MBjzP-TZUD0"
+    },
+    {
+      "session_number": 3,
+      "title": "Sesi 1 - Biografi Imam Abu Daud & Maklumat Tentang Kitab Sunannya - [Sunan Abi Daud - Muqaddimah]",
+      "video_id": "4JXjpYMJKzw",
+      "youtube_url": "https://www.youtube.com/watch?v=4JXjpYMJKzw"
+    }
+  ]
+}

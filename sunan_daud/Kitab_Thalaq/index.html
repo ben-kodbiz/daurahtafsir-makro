@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Thalaq - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Thalaq</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Thalaq</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Thalaq from Sunan Abi Daud</strong><br>
+                Kitab Thalaq from Sunan Abi Daud (63 sessions)
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+                            <div class="md-grid-item" data-session="1">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/OZD0YYcwveE/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 1</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session1.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="1">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/gN9Sc-E_EOY/mqdefault.jpg" 
+                             alt="Orang Yang Menghasut Seseorang Perempuan Terhadap Suaminya -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 1</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yang Menghasut Seseorang Perempuan Terhadap Suaminya -</h3>
+                        <a href="session1.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="2">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/_RvRY3YIhuc/mqdefault.jpg" 
+                             alt="Tentang Makruhnya Thalaq -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 2</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Makruhnya Thalaq -</h3>
+                        <a href="session2.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="3">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/BDopLrSCI6I/mqdefault.jpg" 
+                             alt="Tentang Thalaq Sunnah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 3</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Thalaq Sunnah -</h3>
+                        <a href="session3.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="4">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/W3s5SS9JIgs/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 4</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session4.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="4">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/LV-GLUMVz-M/mqdefault.jpg" 
+                             alt="Nasakhnya Rujuk Selepas Thalaq Tiga -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 4</span>
+                        </div>
+                        <h3 class="md-session-title">Nasakhnya Rujuk Selepas Thalaq Tiga -</h3>
+                        <a href="session4.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="5">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/kIvMVBZ1SEo/mqdefault.jpg" 
+                             alt="Bab :  Nasakhnya Rujuk Selepas Thalaq Tiga -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 5</span>
+                        </div>
+                        <h3 class="md-session-title">Bab :  Nasakhnya Rujuk Selepas Thalaq Tiga -</h3>
+                        <a href="session5.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="6">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/6LyXEaWxRAw/mqdefault.jpg" 
+                             alt="Tentang Sunnah Thalaq Hamba -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 6</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Sunnah Thalaq Hamba -</h3>
+                        <a href="session6.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="6">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/TkCxvyFzV2Q/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 6</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session6.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="7">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/x8RDDfx0MYU/mqdefault.jpg" 
+                             alt="Cerai Sebelum Kahwin -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 7</span>
+                        </div>
+                        <h3 class="md-session-title">Cerai Sebelum Kahwin -</h3>
+                        <a href="session7.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="7">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/7Wi0AhUkTzs/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 7</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session7.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="8">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/A6IoN7rvRMA/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 8</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session8.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="8">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/29Zgtv8oEk0/mqdefault.jpg" 
+                             alt="Mansukhnya Rujuk Selepas Thalaq Tiga -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 8</span>
+                        </div>
+                        <h3 class="md-session-title">Mansukhnya Rujuk Selepas Thalaq Tiga -</h3>
+                        <a href="session8.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="9">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/aTUmA5CBJ4c/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 9</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session9.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="9">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/YlcseHg4WWk/mqdefault.jpg" 
+                             alt="Mansukhnya Rujuk Selepas Thalaq Tiga -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 9</span>
+                        </div>
+                        <h3 class="md-session-title">Mansukhnya Rujuk Selepas Thalaq Tiga -</h3>
+                        <a href="session9.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="10">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/V1bVGAn3nRY/mqdefault.jpg" 
+                             alt="Lafaz-lafaz Yang Dimaksudkan Niat Dengannya -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 10</span>
+                        </div>
+                        <h3 class="md-session-title">Lafaz-lafaz Yang Dimaksudkan Niat Dengannya -</h3>
+                        <a href="session10.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="10">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/t4XnQ1h3LgU/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 10</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session10.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="11">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/z9s4mwaM5us/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 11</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session11.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="11">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/kZf4B87Bwv0/mqdefault.jpg" 
+                             alt="Kata Seseorang Kpd Isterinya: Urusan Ceraimu Berada DiTanganmu-" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 11</span>
+                        </div>
+                        <h3 class="md-session-title">Kata Seseorang Kpd Isterinya: Urusan Ceraimu Berada DiTanganmu-</h3>
+                        <a href="session11.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="12">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/kgkxpf50R1k/mqdefault.jpg" 
+                             alt="Thalaq Putus -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 12</span>
+                        </div>
+                        <h3 class="md-session-title">Thalaq Putus -</h3>
+                        <a href="session12.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="12">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/miLAErHxB8I/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 12</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session12.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="13">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/-T-GYF3iBAw/mqdefault.jpg" 
+                             alt="Seseorang Berkata Kpd Isterinya,"Wahai Saudara Perempuanku"-- Sunan Abi Daud: Kitab Thalaq]" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 13</span>
+                        </div>
+                        <h3 class="md-session-title">Seseorang Berkata Kpd Isterinya,"Wahai Saudara Perempuanku"-- Sunan Abi Daud: Kitab Thalaq]</h3>
+                        <a href="session13.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="13">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/RE6qttDwaAA/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 13</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session13.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="14">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/LQuX19pG_XE/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 14</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session14.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="14">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/F9u1d2J8mSE/mqdefault.jpg" 
+                             alt="Tentang Zihar -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 14</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Zihar -</h3>
+                        <a href="session14.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="15">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/tkhgius0_kU/mqdefault.jpg" 
+                             alt="Tentang Zihar -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 15</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Zihar -</h3>
+                        <a href="session15.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="16">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/ys9i4NWF-6w/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 16</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session16.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="16">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/OhHKov-hXoQ/mqdefault.jpg" 
+                             alt="Tentang Zihar & Tentang Khulu' (Tebus Thalaq) -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 16</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Zihar & Tentang Khulu' (Tebus Thalaq) -</h3>
+                        <a href="session16.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="17">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/tnCTmZ-s9A8/mqdefault.jpg" 
+                             alt="Tentang Khulu' (Tebus Thalaq) -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 17</span>
+                        </div>
+                        <h3 class="md-session-title">Tentang Khulu' (Tebus Thalaq) -</h3>
+                        <a href="session17.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="17">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/s0rWKOgX0hM/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 17</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session17.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="18">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/gPyhxbSbUIo/mqdefault.jpg" 
+                             alt="Hamba Wanita Yang Dimerdekakan -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 18</span>
+                        </div>
+                        <h3 class="md-session-title">Hamba Wanita Yang Dimerdekakan -</h3>
+                        <a href="session18.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="18">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/mogwyzW3KQA/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 18</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session18.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="19">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Pt5qKFSKNho/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 19</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session19.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="19">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/agC4ExCzdPE/mqdefault.jpg" 
+                             alt="Sampai Bilakah Ada Hak Khiyar Untuk Hamba Perempuan? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 19</span>
+                        </div>
+                        <h3 class="md-session-title">Sampai Bilakah Ada Hak Khiyar Untuk Hamba Perempuan? -</h3>
+                        <a href="session19.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="20">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/e87DODELYnw/mqdefault.jpg" 
+                             alt="Masa  Peluk Islam Seseorang Ada Isteri Lebih Dari 4 Orang -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 20</span>
+                        </div>
+                        <h3 class="md-session-title">Masa  Peluk Islam Seseorang Ada Isteri Lebih Dari 4 Orang -</h3>
+                        <a href="session20.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="20">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/DkxPgTwEze4/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 20</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session20.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="21">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Ok16PVyCuug/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 21</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session21.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="21">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Rg7nW4X3U9c/mqdefault.jpg" 
+                             alt="Hukum Li'an -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 21</span>
+                        </div>
+                        <h3 class="md-session-title">Hukum Li'an -</h3>
+                        <a href="session21.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="22">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/viiERDSa5IU/mqdefault.jpg" 
+                             alt="Hukum Li'an -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 22</span>
+                        </div>
+                        <h3 class="md-session-title">Hukum Li'an -</h3>
+                        <a href="session22.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="23">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/Hgr-X3Yr9GI/mqdefault.jpg" 
+                             alt="Hukum Li'an -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 23</span>
+                        </div>
+                        <h3 class="md-session-title">Hukum Li'an -</h3>
+                        <a href="session23.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="24">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/W3Ta13kMVXg/mqdefault.jpg" 
+                             alt="Hukum Li'an -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 24</span>
+                        </div>
+                        <h3 class="md-session-title">Hukum Li'an -</h3>
+                        <a href="session24.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="25">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/mc_JxXinbu8/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 25</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session25.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="25">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/0xoGCVBQsG4/mqdefault.jpg" 
+                             alt="Apabila Seseorang Syak Tentang Anaknya -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 25</span>
+                        </div>
+                        <h3 class="md-session-title">Apabila Seseorang Syak Tentang Anaknya -</h3>
+                        <a href="session25.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="26">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/UCBcR5fEUhI/mqdefault.jpg" 
+                             alt="Ahli-ahli Ilmu Qiafah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 26</span>
+                        </div>
+                        <h3 class="md-session-title">Ahli-ahli Ilmu Qiafah -</h3>
+                        <a href="session26.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="26">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/QFResYBVYQo/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 26</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session26.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="27">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/LsnPlJLfLrk/mqdefault.jpg" 
+                             alt="Anak Adalah Kepunyaan Suami Yang Sah -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 27</span>
+                        </div>
+                        <h3 class="md-session-title">Anak Adalah Kepunyaan Suami Yang Sah -</h3>
+                        <a href="session27.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="27">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/x-uJkXAD2ls/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 27</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session27.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="28">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/-W_x0MLM5bM/mqdefault.jpg" 
+                             alt="Siapakah Yang Lebih Berhak Untuk Menjaga Anak? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 28</span>
+                        </div>
+                        <h3 class="md-session-title">Siapakah Yang Lebih Berhak Untuk Menjaga Anak? -</h3>
+                        <a href="session28.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="28">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/YlCsg3VF3bY/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 28</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session28.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="29">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/d-jkzqKeGUA/mqdefault.jpg" 
+                             alt="Iddah Perempuan Yang Dicerai -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 29</span>
+                        </div>
+                        <h3 class="md-session-title">Iddah Perempuan Yang Dicerai -</h3>
+                        <a href="session29.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="29">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/usVWUKCEzSQ/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 29</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session29.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="30">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/BIhv1rkYHlM/mqdefault.jpg" 
+                             alt="Nafkah Perempuan Yang Dicerai Putus -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 30</span>
+                        </div>
+                        <h3 class="md-session-title">Nafkah Perempuan Yang Dicerai Putus -</h3>
+                        <a href="session30.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="30">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/UM_8fPiewa0/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 30</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session30.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="31">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/rR3O5ZiBQ1Y/mqdefault.jpg" 
+                             alt="Nafkah Perempuan Yang Dicerai Putus -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 31</span>
+                        </div>
+                        <h3 class="md-session-title">Nafkah Perempuan Yang Dicerai Putus -</h3>
+                        <a href="session31.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="32">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/K7Jgk1JGFO8/mqdefault.jpg" 
+                             alt="Orang Yang Membantah Fatimah Kerana Mengemukakan Hadith Itu -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 32</span>
+                        </div>
+                        <h3 class="md-session-title">Orang Yang Membantah Fatimah Kerana Mengemukakan Hadith Itu -</h3>
+                        <a href="session32.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="32">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/e1B8hsjDLMM/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 32</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session32.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="33">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/9pHXEcsHj70/mqdefault.jpg" 
+                             alt="Perkabungan Perempuan Yang Kematian Suami -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 33</span>
+                        </div>
+                        <h3 class="md-session-title">Perkabungan Perempuan Yang Kematian Suami -</h3>
+                        <a href="session33.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="33">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/56V-yHa_pEE/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 33</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session33.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="34">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/6aQs0E9v7Zs/mqdefault.jpg" 
+                             alt="Bolehkah Perempuan Yang Kematian Suami Berpindah? -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 34</span>
+                        </div>
+                        <h3 class="md-session-title">Bolehkah Perempuan Yang Kematian Suami Berpindah? -</h3>
+                        <a href="session34.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="35">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/DhjaDDpLoKo/mqdefault.jpg" 
+                             alt="Iddah Perempuan Yang Mengandung -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 35</span>
+                        </div>
+                        <h3 class="md-session-title">Iddah Perempuan Yang Mengandung -</h3>
+                        <a href="session35.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="35">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/eZKtdsgceRs/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 35</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session35.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="36">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/NXBv4G9ukqo/mqdefault.jpg" 
+                             alt="Isteri Yang Dicerai Putus (Talak Tiga) -" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 36</span>
+                        </div>
+                        <h3 class="md-session-title">Isteri Yang Dicerai Putus (Talak Tiga) -</h3>
+                        <a href="session36.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md-grid-item" data-session="36">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/a3jEe-H1hPM/mqdefault.jpg" 
+                             alt="MATAN HADITH - Sunan Abi Daud - Kitab Thalaq" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi 36</span>
+                        </div>
+                        <h3 class="md-session-title">MATAN HADITH - Sunan Abi Daud - Kitab Thalaq</h3>
+                        <a href="session36.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script>
+        // Session data with actual titles
+        const sessions = [
+            {
+                number: 1,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 1 dalam modul Mukaddimah.`,
+                videoId: "OZD0YYcwveE"
+            },
+            {
+                number: 1,
+                title: `Orang Yang Menghasut Seseorang Perempuan Terhadap Suaminya -`,
+                description: `Kandungan untuk sesi 1 dalam modul Mukaddimah.`,
+                videoId: "gN9Sc-E_EOY"
+            },
+            {
+                number: 2,
+                title: `Tentang Makruhnya Thalaq -`,
+                description: `Kandungan untuk sesi 2 dalam modul Mukaddimah.`,
+                videoId: "_RvRY3YIhuc"
+            },
+            {
+                number: 3,
+                title: `Tentang Thalaq Sunnah -`,
+                description: `Kandungan untuk sesi 3 dalam modul Mukaddimah.`,
+                videoId: "BDopLrSCI6I"
+            },
+            {
+                number: 4,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 4 dalam modul Mukaddimah.`,
+                videoId: "W3s5SS9JIgs"
+            },
+            {
+                number: 4,
+                title: `Nasakhnya Rujuk Selepas Thalaq Tiga -`,
+                description: `Kandungan untuk sesi 4 dalam modul Mukaddimah.`,
+                videoId: "LV-GLUMVz-M"
+            },
+            {
+                number: 5,
+                title: `Bab :  Nasakhnya Rujuk Selepas Thalaq Tiga -`,
+                description: `Kandungan untuk sesi 5 dalam modul Mukaddimah.`,
+                videoId: "kIvMVBZ1SEo"
+            },
+            {
+                number: 6,
+                title: `Tentang Sunnah Thalaq Hamba -`,
+                description: `Kandungan untuk sesi 6 dalam modul Mukaddimah.`,
+                videoId: "6LyXEaWxRAw"
+            },
+            {
+                number: 6,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 6 dalam modul Mukaddimah.`,
+                videoId: "TkCxvyFzV2Q"
+            },
+            {
+                number: 7,
+                title: `Cerai Sebelum Kahwin -`,
+                description: `Kandungan untuk sesi 7 dalam modul Mukaddimah.`,
+                videoId: "x8RDDfx0MYU"
+            },
+            {
+                number: 7,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 7 dalam modul Mukaddimah.`,
+                videoId: "7Wi0AhUkTzs"
+            },
+            {
+                number: 8,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 8 dalam modul Mukaddimah.`,
+                videoId: "A6IoN7rvRMA"
+            },
+            {
+                number: 8,
+                title: `Mansukhnya Rujuk Selepas Thalaq Tiga -`,
+                description: `Kandungan untuk sesi 8 dalam modul Mukaddimah.`,
+                videoId: "29Zgtv8oEk0"
+            },
+            {
+                number: 9,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 9 dalam modul Mukaddimah.`,
+                videoId: "aTUmA5CBJ4c"
+            },
+            {
+                number: 9,
+                title: `Mansukhnya Rujuk Selepas Thalaq Tiga -`,
+                description: `Kandungan untuk sesi 9 dalam modul Mukaddimah.`,
+                videoId: "YlcseHg4WWk"
+            },
+            {
+                number: 10,
+                title: `Lafaz-lafaz Yang Dimaksudkan Niat Dengannya -`,
+                description: `Kandungan untuk sesi 10 dalam modul Mukaddimah.`,
+                videoId: "V1bVGAn3nRY"
+            },
+            {
+                number: 10,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 10 dalam modul Mukaddimah.`,
+                videoId: "t4XnQ1h3LgU"
+            },
+            {
+                number: 11,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 11 dalam modul Mukaddimah.`,
+                videoId: "z9s4mwaM5us"
+            },
+            {
+                number: 11,
+                title: `Kata Seseorang Kpd Isterinya: Urusan Ceraimu Berada DiTanganmu-`,
+                description: `Kandungan untuk sesi 11 dalam modul Mukaddimah.`,
+                videoId: "kZf4B87Bwv0"
+            },
+            {
+                number: 12,
+                title: `Thalaq Putus -`,
+                description: `Kandungan untuk sesi 12 dalam modul Mukaddimah.`,
+                videoId: "kgkxpf50R1k"
+            },
+            {
+                number: 12,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 12 dalam modul Mukaddimah.`,
+                videoId: "miLAErHxB8I"
+            },
+            {
+                number: 13,
+                title: `Seseorang Berkata Kpd Isterinya,&quot;Wahai Saudara Perempuanku&quot;-- Sunan Abi Daud: Kitab Thalaq]`,
+                description: `Kandungan untuk sesi 13 dalam modul Mukaddimah.`,
+                videoId: "-T-GYF3iBAw"
+            },
+            {
+                number: 13,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 13 dalam modul Mukaddimah.`,
+                videoId: "RE6qttDwaAA"
+            },
+            {
+                number: 14,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 14 dalam modul Mukaddimah.`,
+                videoId: "LQuX19pG_XE"
+            },
+            {
+                number: 14,
+                title: `Tentang Zihar -`,
+                description: `Kandungan untuk sesi 14 dalam modul Mukaddimah.`,
+                videoId: "F9u1d2J8mSE"
+            },
+            {
+                number: 15,
+                title: `Tentang Zihar -`,
+                description: `Kandungan untuk sesi 15 dalam modul Mukaddimah.`,
+                videoId: "tkhgius0_kU"
+            },
+            {
+                number: 16,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 16 dalam modul Mukaddimah.`,
+                videoId: "ys9i4NWF-6w"
+            },
+            {
+                number: 16,
+                title: `Tentang Zihar & Tentang Khulu' (Tebus Thalaq) -`,
+                description: `Kandungan untuk sesi 16 dalam modul Mukaddimah.`,
+                videoId: "OhHKov-hXoQ"
+            },
+            {
+                number: 17,
+                title: `Tentang Khulu' (Tebus Thalaq) -`,
+                description: `Kandungan untuk sesi 17 dalam modul Mukaddimah.`,
+                videoId: "tnCTmZ-s9A8"
+            },
+            {
+                number: 17,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 17 dalam modul Mukaddimah.`,
+                videoId: "s0rWKOgX0hM"
+            },
+            {
+                number: 18,
+                title: `Hamba Wanita Yang Dimerdekakan -`,
+                description: `Kandungan untuk sesi 18 dalam modul Mukaddimah.`,
+                videoId: "gPyhxbSbUIo"
+            },
+            {
+                number: 18,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 18 dalam modul Mukaddimah.`,
+                videoId: "mogwyzW3KQA"
+            },
+            {
+                number: 19,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 19 dalam modul Mukaddimah.`,
+                videoId: "Pt5qKFSKNho"
+            },
+            {
+                number: 19,
+                title: `Sampai Bilakah Ada Hak Khiyar Untuk Hamba Perempuan? -`,
+                description: `Kandungan untuk sesi 19 dalam modul Mukaddimah.`,
+                videoId: "agC4ExCzdPE"
+            },
+            {
+                number: 20,
+                title: `Masa  Peluk Islam Seseorang Ada Isteri Lebih Dari 4 Orang -`,
+                description: `Kandungan untuk sesi 20 dalam modul Mukaddimah.`,
+                videoId: "e87DODELYnw"
+            },
+            {
+                number: 20,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 20 dalam modul Mukaddimah.`,
+                videoId: "DkxPgTwEze4"
+            },
+            {
+                number: 21,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 21 dalam modul Mukaddimah.`,
+                videoId: "Ok16PVyCuug"
+            },
+            {
+                number: 21,
+                title: `Hukum Li'an -`,
+                description: `Kandungan untuk sesi 21 dalam modul Mukaddimah.`,
+                videoId: "Rg7nW4X3U9c"
+            },
+            {
+                number: 22,
+                title: `Hukum Li'an -`,
+                description: `Kandungan untuk sesi 22 dalam modul Mukaddimah.`,
+                videoId: "viiERDSa5IU"
+            },
+            {
+                number: 23,
+                title: `Hukum Li'an -`,
+                description: `Kandungan untuk sesi 23 dalam modul Mukaddimah.`,
+                videoId: "Hgr-X3Yr9GI"
+            },
+            {
+                number: 24,
+                title: `Hukum Li'an -`,
+                description: `Kandungan untuk sesi 24 dalam modul Mukaddimah.`,
+                videoId: "W3Ta13kMVXg"
+            },
+            {
+                number: 25,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 25 dalam modul Mukaddimah.`,
+                videoId: "mc_JxXinbu8"
+            },
+            {
+                number: 25,
+                title: `Apabila Seseorang Syak Tentang Anaknya -`,
+                description: `Kandungan untuk sesi 25 dalam modul Mukaddimah.`,
+                videoId: "0xoGCVBQsG4"
+            },
+            {
+                number: 26,
+                title: `Ahli-ahli Ilmu Qiafah -`,
+                description: `Kandungan untuk sesi 26 dalam modul Mukaddimah.`,
+                videoId: "UCBcR5fEUhI"
+            },
+            {
+                number: 26,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 26 dalam modul Mukaddimah.`,
+                videoId: "QFResYBVYQo"
+            },
+            {
+                number: 27,
+                title: `Anak Adalah Kepunyaan Suami Yang Sah -`,
+                description: `Kandungan untuk sesi 27 dalam modul Mukaddimah.`,
+                videoId: "LsnPlJLfLrk"
+            },
+            {
+                number: 27,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 27 dalam modul Mukaddimah.`,
+                videoId: "x-uJkXAD2ls"
+            },
+            {
+                number: 28,
+                title: `Siapakah Yang Lebih Berhak Untuk Menjaga Anak? -`,
+                description: `Kandungan untuk sesi 28 dalam modul Mukaddimah.`,
+                videoId: "-W_x0MLM5bM"
+            },
+            {
+                number: 28,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 28 dalam modul Mukaddimah.`,
+                videoId: "YlCsg3VF3bY"
+            },
+            {
+                number: 29,
+                title: `Iddah Perempuan Yang Dicerai -`,
+                description: `Kandungan untuk sesi 29 dalam modul Mukaddimah.`,
+                videoId: "d-jkzqKeGUA"
+            },
+            {
+                number: 29,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 29 dalam modul Mukaddimah.`,
+                videoId: "usVWUKCEzSQ"
+            },
+            {
+                number: 30,
+                title: `Nafkah Perempuan Yang Dicerai Putus -`,
+                description: `Kandungan untuk sesi 30 dalam modul Mukaddimah.`,
+                videoId: "BIhv1rkYHlM"
+            },
+            {
+                number: 30,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 30 dalam modul Mukaddimah.`,
+                videoId: "UM_8fPiewa0"
+            },
+            {
+                number: 31,
+                title: `Nafkah Perempuan Yang Dicerai Putus -`,
+                description: `Kandungan untuk sesi 31 dalam modul Mukaddimah.`,
+                videoId: "rR3O5ZiBQ1Y"
+            },
+            {
+                number: 32,
+                title: `Orang Yang Membantah Fatimah Kerana Mengemukakan Hadith Itu -`,
+                description: `Kandungan untuk sesi 32 dalam modul Mukaddimah.`,
+                videoId: "K7Jgk1JGFO8"
+            },
+            {
+                number: 32,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 32 dalam modul Mukaddimah.`,
+                videoId: "e1B8hsjDLMM"
+            },
+            {
+                number: 33,
+                title: `Perkabungan Perempuan Yang Kematian Suami -`,
+                description: `Kandungan untuk sesi 33 dalam modul Mukaddimah.`,
+                videoId: "9pHXEcsHj70"
+            },
+            {
+                number: 33,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 33 dalam modul Mukaddimah.`,
+                videoId: "56V-yHa_pEE"
+            },
+            {
+                number: 34,
+                title: `Bolehkah Perempuan Yang Kematian Suami Berpindah? -`,
+                description: `Kandungan untuk sesi 34 dalam modul Mukaddimah.`,
+                videoId: "6aQs0E9v7Zs"
+            },
+            {
+                number: 35,
+                title: `Iddah Perempuan Yang Mengandung -`,
+                description: `Kandungan untuk sesi 35 dalam modul Mukaddimah.`,
+                videoId: "DhjaDDpLoKo"
+            },
+            {
+                number: 35,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 35 dalam modul Mukaddimah.`,
+                videoId: "eZKtdsgceRs"
+            },
+            {
+                number: 36,
+                title: `Isteri Yang Dicerai Putus (Talak Tiga) -`,
+                description: `Kandungan untuk sesi 36 dalam modul Mukaddimah.`,
+                videoId: "NXBv4G9ukqo"
+            },
+            {
+                number: 36,
+                title: `MATAN HADITH - Sunan Abi Daud - Kitab Thalaq`,
+                description: `Kandungan untuk sesi 36 dalam modul Mukaddimah.`,
+                videoId: "a3jEe-H1hPM"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

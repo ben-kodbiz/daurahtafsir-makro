@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunan Abi Daud - Daurah Hadis</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            width: 100%;
+            background: rgba(63, 81, 181, 0.9);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem 1rem;
+            margin: 0 auto;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: #3f51b5;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: #303f9f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .back-button i {
+            margin-right: 8px;
+        }
+        
+        .module-description {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .module-description h2 {
+            color: #3f51b5;
+            margin-bottom: 1rem;
+        }
+        
+        .module-description p {
+            color: #333;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .search-icon {
+            color: #757575;
+            margin-right: 10px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.5rem;
+            font-size: 1rem;
+            background: transparent;
+        }
+        
+        .clear-search-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            display: none;
+        }
+        
+        .clear-search-btn.show {
+            display: block;
+        }
+        
+        .kitab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .kitab-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kitab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .kitab-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3f51b5, #607d8b);
+        }
+        
+        .kitab-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #3f51b5;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .kitab-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+            padding-right: 35px;
+        }
+        
+        .theme-toggle-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .theme-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #3f51b5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: #303f9f;
+        }
+        
+        @media (max-width: 768px) {
+            .kitab-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Sunan Abi Daud</h1>
+    </div>
+    
+    <div class="container">
+        <a href="../index.html" class="back-button">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        
+        <!-- Module Description -->
+        <div class="module-description">
+            <h2>Kitab-kitab dalam Sunan Abi Daud</h2>
+            <p>
+                <strong>Koleksi kitab hadis dari Sunan Abi Daud</strong><br>
+                Sunan Abi Daud adalah salah satu koleksi hadis yang paling otentik dalam literatur Islam. 
+                Di sini anda dapat mengakses kajian terperinci tentang setiap kitab dalam Sunan Abi Daud.
+            </p>
+        </div>
+        
+        <!-- Search Container -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="kitab-search" placeholder="Cari kitab..." />
+                <button id="clear-search" class="clear-search-btn">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Kitab Grid -->
+        <div class="kitab-grid" id="kitab-grid">
+            <!-- Kitab cards will be populated by JavaScript -->
+        </div>
+    </div>
+    
+    <div class="theme-toggle-container">
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="material-icons theme-icon">brightness_4</i>
+        </button>
+    </div>
+    
+    <script>
+        // Load kitab data (only those with links)
+        const kitabList = [
+            "Mukaddimah",
+            "Kitab Thaharah",
+            "Kitab Sembahyang",
+            "Kitab Zakat",
+            "Kitab Manaasik",
+            "Kitab Nikah",
+            "Kitab Thalaq",
+            "Kitab Puasa",
+            "Kitab Jihad",
+            "Kitab Qurban",
+            "Kitab Perburuan",
+            "Kitab Wasiat",
+            "Kitab Pusaka",
+            "Kitab Percukaian, Harta Rampasan Perang Dan Pemerintahan",
+            "Kitab Jana'iz"
+        ];
+        
+        // Function to populate kitab grid
+        function populateKitabGrid(kitabs) {
+            const grid = document.getElementById('kitab-grid');
+            grid.innerHTML = '';
+            
+            console.log("Populating kitab grid with:", kitabs);
+            
+            kitabs.forEach((kitab, index) => {
+                console.log("Processing kitab:", kitab, "at index:", index);
+                // Check if kitab has a specific handler (clickable link)
+                let card;
+                
+                if (kitab === "Mukaddimah") {
+                    console.log("Creating clickable link for Mukaddimah");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Mukaddimah/index.html';
+                } else if (kitab === "Kitab Thaharah") {
+                    console.log("Creating clickable link for Kitab Thaharah");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Thaharah/index.html';
+                } else if (kitab === "Kitab Sembahyang") {
+                    console.log("Creating clickable link for Kitab Sembahyang with href: Kitab_Sembahyang/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Sembahyang/index.html';
+                } else if (kitab === "Kitab Zakat") {
+                    console.log("Creating clickable link for Kitab Zakat with href: Kitab_Zakat/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Zakat/index.html';
+                } else if (kitab === "Kitab Manaasik") {
+                    console.log("Creating clickable link for Kitab Manaasik with href: Kitab_Manaasik/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Manaasik/index.html';
+                } else if (kitab === "Kitab Nikah") {
+                    console.log("Creating clickable link for Kitab Nikah with href: Kitab_Nikah/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Nikah/index.html';
+                } else if (kitab === "Kitab Thalaq") {
+                    console.log("Creating clickable link for Kitab Thalaq with href: Kitab_Thalaq/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Thalaq/index.html';
+                } else if (kitab === "Kitab Puasa") {
+                    console.log("Creating clickable link for Kitab Puasa with href: Kitab_Puasa/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Puasa/index.html';
+                } else if (kitab === "Kitab Qurban") {
+                    console.log("Creating clickable link for Kitab Qurban with href: Kitab_Qurban/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Qurban/index.html';
+                } else if (kitab === "Kitab Perburuan") {
+                    console.log("Creating clickable link for Kitab Perburuan with href: Kitab_Perburuan/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Perburuan/index.html';
+                } else if (kitab === "Kitab Pusaka") {
+                    console.log("Creating clickable link for Kitab Pusaka with href: Kitab_Pusaka/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Pusaka/index.html';
+                } else if (kitab === "Kitab Wasiat") {
+                    console.log("Creating clickable link for Kitab Wasiat with href: Kitab_Wasiat/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Wasiat/index.html';
+                } else if (kitab === "Kitab Jihad") {
+                    console.log("Creating clickable link for Kitab Jihad with href: Kitab_Jihad/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Jihad/index.html';
+                } else if (kitab === "Kitab Percukaian, Harta Rampasan Perang Dan Pemerintahan") {
+                    console.log("Creating clickable link for Kitab Percukaian with href: Kitab_Percukaian_Harta_Rampasan_Perang_Dan_Pemerintahan/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Percukaian_Harta_Rampasan_Perang_Dan_Pemerintahan/index.html';
+                } else if (kitab === "Kitab Jana'iz") {
+                    console.log("Creating clickable link for Kitab Jana'iz with href: Kitab_Janaiz/index.html");
+                    card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Janaiz/index.html';
+                } else {
+                    console.log("Creating static card for", kitab);
+                    // For kitabs without specific handlers, create a static div (non-clickable)
+                    card = document.createElement('div');
+                    card.className = 'kitab-card';
+                }
+                
+                // Set the inner HTML for all cards
+                card.innerHTML = `
+                    <div class="kitab-number">${index + 1}</div>
+                    <h3 class="kitab-title">${kitab}</h3>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        // Search functionality
+        document.getElementById('kitab-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.add('show');
+                const filteredKitabs = kitabList.filter(kitab => 
+                    kitab.toLowerCase().includes(searchTerm)
+                );
+                populateKitabGrid(filteredKitabs);
+            } else {
+                clearButton.classList.remove('show');
+                populateKitabGrid(kitabList);
+            }
+        });
+        
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('kitab-search').value = '';
+            document.getElementById('clear-search').classList.remove('show');
+            populateKitabGrid(kitabList);
+        });
+        
+        // Theme toggle function
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-icon');
+            
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                themeIcon.textContent = 'brightness_7';
+            } else {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                themeIcon.textContent = 'brightness_4';
+            }
+        }
+        
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Initializing kitab grid with list:", kitabList);
+            // Also log each kitab individually
+            kitabList.forEach((kitab, index) => {
+                console.log("Kitab", index + 1, ":", kitab);
+            });
+            populateKitabGrid(kitabList);
+        });
+    </script>
+</body>
+</html>

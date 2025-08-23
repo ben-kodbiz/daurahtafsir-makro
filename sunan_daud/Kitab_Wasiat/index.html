@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Wasiat - Maulana Asri</title>
+    <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        <div class="header">
+            <h1>Kitab Wasiat</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Wasiat</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Wasiat from Sunan Abi Daud</strong><br>
+                Kitab Wasiat from Sunan Abi Daud
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+            <!-- Grid items will be dynamically populated by JavaScript -->
+        </div>
+    </div>
+    <script>
+        // Session data for Kitab Wasiat
+        const sessions = [
+            {
+                number: 1,
+                title: `Sesi 1 -  Hadith Tentang Wasiat Yang Diperintahkan Oleh Agama - [Sunan Abu Daud - Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Wasiat.`,
+                videoId: "nYmLBovtu-c"
+            },
+            {
+                number: 2,
+                title: `Sesi 1 - MATAN HADITH - Sunan Abi Daud - Kitab Wasiat`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Wasiat.`,
+                videoId: "XNKQUL88NsU"
+            },
+            {
+                number: 3,
+                title: `Sesi 2 -Apa Yang Harus Kepada Org Yang Berwasiat Tentang Harta Benda -[Sunan Abu Daud -Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 2 dalam modul Kitab Wasiat.`,
+                videoId: "DcX8EZvuWzM"
+            },
+            {
+                number: 4,
+                title: `Sesi 3 - Apa Yang Harus Kpd Orang Yang Berwasiat Tentang Harta Benda - Sunan Abu Daud -Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Wasiat.`,
+                videoId: "amBNa1C1sIk"
+            },
+            {
+                number: 5,
+                title: `Sesi 4 - MATAN HADITH - Sunan Abi Daud - Kitab Wasiat`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Wasiat.`,
+                videoId: "9YAOuuWJTQI"
+            },
+            {
+                number: 6,
+                title: `Sesi 4 - Larangan Memudharatkan Dalam Berwasiat - [Sunan Abu Daud - Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Wasiat.`,
+                videoId: "gcxjN5VvYlg"
+            },
+            {
+                number: 7,
+                title: `Sesi 5 - MATAN HADITH - Sunan Abi Daud - Kitab Wasiat`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Wasiat.`,
+                videoId: "6bGDqlnMXoo"
+            },
+            {
+                number: 8,
+                title: `Sesi 5 - Tentang Terlibat Dalam Urusan Wasiat - [Sunan Abu Daud - Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Wasiat.`,
+                videoId: "ENnoqUS3cmg"
+            },
+            {
+                number: 9,
+                title: `Sesi 6 - MATAN HADITH - Sunan Abi Daud - Kitab Wasiat`,
+                description: `Kandungan untuk sesi 6 dalam modul Kitab Wasiat.`,
+                videoId: "xZDn_snhOt8"
+            },
+            {
+                number: 10,
+                title: `Sesi 6 - Wasiat Untuk Pewaris - [Sunan Abu Daud - Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 6 dalam modul Kitab Wasiat.`,
+                videoId: "_GGjcK5YpSs"
+            },
+            {
+                number: 11,
+                title: `Sesi 7 - MATAN HADITH - Sunan Abi Daud - Kitab Wasiat`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Wasiat.`,
+                videoId: "8wj28BzV0Xo"
+            },
+            {
+                number: 12,
+                title: `Sesi 7 - MATAN HADITH - Sunan Abi Daud - Kitab Wasiat`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Wasiat.`,
+                videoId: "cYCbFJlXhNA"
+            },
+            {
+                number: 13,
+                title: `Sesi 7 - Bila Baligh Seorang Anak Yatim Terputuslah Ke"yatiman"nya - [Sunan Abu Daud - Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Wasiat.`,
+                videoId: "N_BapTe640Y"
+            },
+            {
+                number: 14,
+                title: `Sesi 8 - MATAN HADITH - Sunan Abi Daud - Kitab Wasiat`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Wasiat.`,
+                videoId: "wUqOfE--9zI"
+            },
+            {
+                number: 15,
+                title: `Sesi 8 - Dalil Bahawa Kafan Itu Dari Harta Si Mati - [Sunan Abu Daud - Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Wasiat.`,
+                videoId: "3MH2MJo1s1o"
+            },
+            {
+                number: 16,
+                title: `Sesi 9 - Wakaf Umar Al-Khattab - [Sunan Abu Daud - Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Wasiat.`,
+                videoId: "dYFHN7e4QqM"
+            },
+            {
+                number: 17,
+                title: `Sesi 10 - Bolehkah Minta Tangguhkan Hutang Untuk Pewaris-pewarisnya - [Sunan Abu Daud -Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 10 dalam modul Kitab Wasiat.`,
+                videoId: "U90xEKlRYVM"
+            },
+            {
+                number: 18,
+                title: `Sesi 11 - Orang Yang Mati Tanpa Berwasiat - [Sunan Abu Daud - Kitab Wasiat]`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Wasiat.`,
+                videoId: "o-krwcsTfVE"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

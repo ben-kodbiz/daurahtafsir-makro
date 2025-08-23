@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kitab Clickable Test</title>
+</head>
+<body>
+    <h1>Kitab Clickable Test</h1>
+    <div id="kitab-grid"></div>
+    
+    <script>
+        // Test the exact same logic as in the main file
+        const kitabList = [
+            "Mukaddimah",
+            "Kitab Thaharah",
+            "Kitab Sembahyang",
+            "Kitab Zakat"
+        ];
+        
+        function populateKitabGrid(kitabs) {
+            const grid = document.getElementById('kitab-grid');
+            grid.innerHTML = '';
+            
+            console.log("Populating kitab grid with:", kitabs);
+            
+            kitabs.forEach((kitab, index) => {
+                console.log("Processing kitab:", kitab, "at index:", index);
+                // Check if kitab has a specific handler (clickable link)
+                if (kitab === "Mukaddimah") {
+                    console.log("Creating clickable link for Mukaddimah");
+                    const card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Mukaddimah/index.html';
+                    card.innerHTML = `
+                        <div class="kitab-number">${index + 1}</div>
+                        <h3 class="kitab-title">${kitab}</h3>
+                    `;
+                    grid.appendChild(card);
+                } else if (kitab === "Kitab Thaharah") {
+                    console.log("Creating clickable link for Kitab Thaharah");
+                    const card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Thaharah/index.html';
+                    card.innerHTML = `
+                        <div class="kitab-number">${index + 1}</div>
+                        <h3 class="kitab-title">${kitab}</h3>
+                    `;
+                    grid.appendChild(card);
+                } else if (kitab === "Kitab Sembahyang") {
+                    console.log("Creating clickable link for Kitab Sembahyang with href: Kitab_Sembahyang/index.html");
+                    const card = document.createElement('a');
+                    card.className = 'kitab-card';
+                    card.href = 'Kitab_Sembahyang/index.html';
+                    card.innerHTML = `
+                        <div class="kitab-number">${index + 1}</div>
+                        <h3 class="kitab-title">${kitab}</h3>
+                    `;
+                    grid.appendChild(card);
+                } else {
+                    console.log("Creating static card for", kitab);
+                    // For kitabs without specific handlers, create a static div (non-clickable)
+                    const card = document.createElement('div');
+                    card.className = 'kitab-card';
+                    card.innerHTML = `
+                        <div class="kitab-number">${index + 1}</div>
+                        <h3 class="kitab-title">${kitab}</h3>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
+        }
+        
+        // Initialize the grid
+        console.log("Initializing kitab grid with list:", kitabList);
+        populateKitabGrid(kitabList);
+    </script>
+</body>
+</html>

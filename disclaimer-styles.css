@@ -1,0 +1,50 @@
+/* Disclaimer Styles */
+.disclaimer-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.disclaimer-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-left: 4px solid #ff9800;
+    margin-top: 2rem;
+}
+
+.disclaimer-content p {
+    margin: 0;
+    color: #333;
+    line-height: 1.6;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Responsive adjustments for disclaimer */
+@media (max-width: 768px) {
+    .disclaimer-container {
+        padding: 0 0.5rem;
+    }
+    
+    .disclaimer-content {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .disclaimer-content p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .disclaimer-content {
+        padding: 0.8rem;
+    }
+    
+    .disclaimer-content p {
+        font-size: 0.8rem;
+    }
+}

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="unified-sahih-bukhari-theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="disclaimer-styles.css">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -190,7 +191,33 @@
                 <i class="material-icons widget-icon">picture_as_pdf</i>
                 <span class="widget-label">Kitab Syarah (PDF)</span>
             </a>
+            <a href="soaljawab_pelbagai/index.html" class="widget">
+                <i class="material-icons widget-icon">question_answer</i>
+                <span class="widget-label">Soaljawab/Pelbagai</span>
+            </a>
+        </div>
+        
+        <!-- Disclaimer -->
+        <div class="disclaimer-container">
+            <div class="disclaimer-content">
+                <p><strong>Perhatian:</strong> Semua ilmu dan bahan pengajian dalam aplikasi ini berasal daripada usaha gigih Darul Kautsar di bawah bimbingan Maulana Asri Yusof. Saya hanya menghimpunkan semula dalam satu platform agar lebih mudah diakses. Segala penghargaan dan kredit adalah milik mereka (DarulKautsar & Teratak Hadis)</p>
+            </div>
         </div>
     </div>
+    
+    <script>
+        // Theme toggle function
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
 </body>
 </html>

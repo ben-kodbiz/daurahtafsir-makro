@@ -46,3 +46,6 @@
 5. Ensure consistent 4-box grid layout on desktop screens
 
 **Expected Outcome**: Kitab Wasiat should display 4 boxes per row on desktop screens, matching the behavior of other kitabs in the Sunan Daud application.
+
+## Qwen Added Memories
+- Never limit the number of videos when processing YouTube channels. Always process all available videos without setting a maximum limit.

@@ -104,22 +104,21 @@
 /* Session Grid */
 .session-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
   padding: 20px;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
-  background-color: #e0e0e0; /* Light grey background for the grid */
+  background-color: #f5f5f5;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
 }
 
 html.dark-theme .session-grid {
-  background-color: #1e1e1e; /* Dark background for the grid */
+  background-color: #1e1e1e;
 }
 
 html.sepia-theme .session-grid {
-  background-color: #e8dcc9; /* Sepia background for the grid */
+  background-color: #e8dcc9;
 }
 
 .session-item {
@@ -133,8 +132,8 @@ html.sepia-theme .session-grid {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* For the tooltip */
-    overflow: hidden; /* to make sure the ripple effect is within div*/
+    position: relative;
+    overflow: hidden;
 }
 
 html.dark-theme .session-item {
@@ -169,11 +168,11 @@ html.sepia-theme .session-item:hover {
 }
 
 html.dark-theme .session-number {
-    color: #7986cb; /* Lighter blue for dark mode */
+    color: #7986cb;
 }
 
 html.sepia-theme .session-number {
-    color: #8d6e63; /* Brown for sepia mode */
+    color: #8d6e63;
 }
 
 .session-title {
@@ -190,6 +189,7 @@ html.dark-theme .session-title {
 html.sepia-theme .session-title {
     color: #5b4636;
 }
+
 /* Ripple effect */
 .session-item {
  position: relative;
@@ -212,4 +212,37 @@ html.sepia-theme .session-title {
  opacity: 1;
  transform: scale(100,100);
  transition: 0s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .session-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .session-item {
+        padding: 15px;
+    }
+    
+    .session-title {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .session-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .search-container {
+        padding: 10px;
+    }
+    
+    .search-box {
+        padding: 6px 12px;
+    }
 }

@@ -3,9 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ilal at-Tirmizi - Kecacatan Dalam Hadith</title>
+    <title>I'lal Hadis (at-Tirmizi) - Maulana Asri</title>
     <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="tutorial-container">
@@ -14,15 +301,15 @@
             Back to Main App
         </a>
         <div class="header">
-            <h1>Ilal at-Tirmizi - Kecacatan Dalam Hadith</h1>
+            <h1>I'lal Hadis (at-Tirmizi)</h1>
         </div>
         
         <!-- Module Description -->
         <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
-            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Ilal at-Tirmizi</h2>
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">I'lal Hadis (at-Tirmizi)</h2>
             <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
-                <strong>Pebincangan mengenai kecacatan dalam Hadis</strong><br>
-                Modul khusus yang memfokuskan kepada ilmu 'Ilal (kecacatan dalam hadis). Mengenal pasti dan menganalisis hadis-hadis yang mempunyai masalah atau kecacatan. Menjelaskan jenis-jenis kecacatan dalam hadis dan kaedah mengenal pastinya. Memberikan pemahaman mendalam tentang metodologi kritik hadis yang canggih.
+                <strong>Kajian tentang cacat-cacat hadis dalam Jami' at-Tirmizi</strong><br>
+                Kajian tentang cacat-cacat hadis dalam Jami' at-Tirmizi
             </p>
         </div>
         
@@ -35,40 +322,321 @@
                 </button>
             </div>
         </div>
-        <div class="session-grid" id="session-grid">
+        <div class="md-video-grid" id="md-video-grid">
+            <!-- Grid items will be dynamically populated by JavaScript -->
         </div>
     </div>
     <script>
-        // Sample data - replace with actual data loading
-        const sessions = [];
-        for (let i = 1; i <= 45; i++) {
-            sessions.push({
-                number: i,
-                title: `Sesi ${i}`,
-                description: `Kandungan untuk sesi ${i} tentang kecacatan dalam hadith dari kitab Ilal at-Tirmizi.`
-            });
-        }
+        // Session data for I'lal Hadis (at-Tirmizi)
+        const sessions = [
+            {
+                number: 1,
+                title: `Sesi 1 - Perbincangan Umum - [Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 1 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "zzPZ1tpRt2U"
+            },
+            {
+                number: 2,
+                title: `Sesi 2 - Muqaddimah - [Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 2 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "LbSvtlwf2lQ"
+            },
+            {
+                number: 3,
+                title: `Sesi 3 - Muqaddimah - [Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 3 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "JC93AF7by4s"
+            },
+            {
+                number: 4,
+                title: `Sesi 4 -Hadith Tak Dipakai Imam Tirmizi - "Bunuh Peminum Arak" - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 4 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "PILxEaQnWVM"
+            },
+            {
+                number: 5,
+                title: `Sesi 5 - Pendapat Pilihan Fuqaha'  Dalam Sunan at-Tirmizi - [Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 5 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "t2TLGFwB65k"
+            },
+            {
+                number: 6,
+                title: `Sesi 6 -Saluran Riwayat Tirmizi Dari Imam Malik, Ibnu Mubarak & As-Syafie - [Kecacatan Dalam Hadith]`,
+                description: `Kandungan untuk sesi 6 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "Ci4GIx3I2Zo"
+            },
+            {
+                number: 7,
+                title: `Sesi 7 - Pendapat Imam Ahmad Dan Ishaq Dalam Sunan at-Tirmizi -[Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 7 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "YYqbFzIp_Ro"
+            },
+            {
+                number: 8,
+                title: `Sesi 8 - Harus  Pertikai Perawi-perawi Dan Sanad-sanad Hadith -[Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 8 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "NJbQHNrpzz4"
+            },
+            {
+                number: 9,
+                title: `Sesi 9 - Harus  Pertikai Perawi-perawi Dan Sanad-sanad Hadith -[Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 9 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "qrvqO7wcnBI"
+            },
+            {
+                number: 10,
+                title: `Sesi 10 - Kepentingan Isnad & Harus Pertikai Perawi Lemah - [Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 10 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "P_0kEcjMFiI"
+            },
+            {
+                number: 11,
+                title: `Sesi 11 - Kepentingan Isnad & Harus Pertikai Perawi Lemah - [Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 11 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "sBq-S84hadw"
+            },
+            {
+                number: 12,
+                title: `Sesi 12 - Kepentingan Isnad & Harus Pertikai Perawi Lemah - [Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 12 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "uaP-0quHyKA"
+            },
+            {
+                number: 13,
+                title: `Sesi 13 - Kepentingan Isnad & Harus Pertikai Perawi Lemah - [Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 13 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "bViWPg2_hvE"
+            },
+            {
+                number: 14,
+                title: `Sesi 14 - Kepentingan Isnad & Harus Pertikai Perawi Lemah - [Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 14 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "PUpSDWXFL5s"
+            },
+            {
+                number: 15,
+                title: `Sesi 15 - Perawi Yg Hadithnya Tak Boleh Dijadikan Dalil (Hujjah) - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 15 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "xYdPdkqJ_TM"
+            },
+            {
+                number: 16,
+                title: `Sesi 16 - Perawi Yg Hadithnya Tak Boleh Dijadikan Dalil (Hujjah) - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 16 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "-OzeBXLzzbc"
+            },
+            {
+                number: 17,
+                title: `Sesi 17 - Perawi Yg Hadithnya Tak Boleh Dijadikan Dalil (Hujjah) - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 17 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "K9sxZdbpEPM"
+            },
+            {
+                number: 18,
+                title: `Sesi 18 -Perawi Yg Hadithnya Tak Boleh Dijadikan Dalil (Hujjah) - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 18 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "HgzYtwyMAgY"
+            },
+            {
+                number: 19,
+                title: `Sesi 19 -Perawi Yg Hadithnya Tak Boleh Dijadikan Dalil (Hujjah) - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 19 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "sxtADIWD3ac"
+            },
+            {
+                number: 20,
+                title: `Sesi 20 -Dipertikai: Perawi Mutakallam Fih &Perawi Mukhtalaf Fih -[Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 20 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "6kbtWMLGVeA"
+            },
+            {
+                number: 21,
+                title: `Sesi 21 -Dipertikai: Perawi Mutakallam Fih &Perawi Mukhtalaf Fih -[Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 21 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "CoqaYQTDAPM"
+            },
+            {
+                number: 22,
+                title: `Sesi 22 -Dipertikai: Perawi Mutakallam Fih &Perawi Mukhtalaf Fih -[Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 22 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "qPJn9-e_D4s"
+            },
+            {
+                number: 23,
+                title: `Sesi 23 -Dipertikai: Perawi Mutakallam Fih &Perawi Mukhtalaf Fih -[Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 23 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "BGtMQtQqj_s"
+            },
+            {
+                number: 24,
+                title: `Sesi 24 -Dipertikai: Perawi Mutakallam Fih &Perawi Mukhtalaf Fih -[Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 24 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "Edum-Cn5OP8"
+            },
+            {
+                number: 25,
+                title: `Sesi 25 -Dipertikai: Perawi Mutakallam Fih &Perawi Mukhtalaf Fih -[Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 25 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "BHgJ7_bgi9U"
+            },
+            {
+                number: 26,
+                title: `Sesi 26  Harus riwayat  berdasarkan makna & ringkaskan hadith -[Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 26 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "RSY1cTAeJX0"
+            },
+            {
+                number: 27,
+                title: `Sesi 27 - Perawi tsiqat yang tinggi & perbezaan darjat mereka -[Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 27 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "JxVCJetga8U"
+            },
+            {
+                number: 28,
+                title: `Sesi 28 - Perawi tsiqat yang tinggi & perbezaan darjat mereka -[Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 28 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "RmVZlV8ALZc"
+            },
+            {
+                number: 29,
+                title: `Sesi 29 - Perawi tsiqat yang tinggi & perbezaan darjat mereka -[Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 29 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "U-40ZOOq8T0"
+            },
+            {
+                number: 30,
+                title: `Sesi 30 - Perawi tsiqat yang tinggi & perbezaan darjat mereka -[Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 30 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "RoctSLG0dCk"
+            },
+            {
+                number: 31,
+                title: `"Hadith" & "Ikhbar" Sama Saja Mengikut Imam at-Tirmizi - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 31 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "vIkfzj40f2E"
+            },
+            {
+                number: 32,
+                title: `"Hadith" & "Ikhbar" Sama Saja Mengikut Imam at-Tirmizi - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 32 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "N4aWRRT4Lq0"
+            },
+            {
+                number: 33,
+                title: `Perbezaan Di Antara Riwayat "Hadathana" & "Akhbarana" - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 33 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "a4BZSMHLUZY"
+            },
+            {
+                number: 34,
+                title: `Hukum Riwayat Ijazah - [Kecacatan Dalam Hadith (at-Tirmizi)]`,
+                description: `Kandungan untuk sesi 34 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "QI6a09TlErU"
+            },
+            {
+                number: 35,
+                title: `Membaca Dihadapan Orang Alim Sama Sprti Dengar Drpdnya - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 35 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "SP1MQG7XoEU"
+            },
+            {
+                number: 36,
+                title: `Membaca Dihadapan Orang Alim Sama Sprti Dengar Drpdnya - [Kecacatan Dalam Hadith (Tirmizi)]`,
+                description: `Kandungan untuk sesi 36 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "fFPeja-qVQo"
+            },
+            {
+                number: 37,
+                title: `Harus Riwayatkan Hadis Yg Diterima Secara Munawalah Disertai Ijazah- [Kecacatan Dlm Hadith]`,
+                description: `Kandungan untuk sesi 37 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "U6FgG6EPRzY"
+            },
+            {
+                number: 38,
+                title: `Kehujahan Hadith Mursal- [Kecacatan Dlm Hadith]`,
+                description: `Kandungan untuk sesi 38 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "tWLKOCyEbmc"
+            },
+            {
+                number: 39,
+                title: `Kehujahan Hadith Mursal- [Kecacatan Dlm Hadith]`,
+                description: `Kandungan untuk sesi 39 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "kBRX6sKFUP4"
+            },
+            {
+                number: 40,
+                title: `Perbincangan Tentang Perawi Mukhtalaf Fih - [Kecacatan Dlm Hadith]`,
+                description: `Kandungan untuk sesi 40 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "eX2cbZ7qHQU"
+            },
+            {
+                number: 41,
+                title: `Perbincangan Tentang Perawi Mukhtalaf Fih - [Kecacatan Dlm Hadith]`,
+                description: `Kandungan untuk sesi 41 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "9eEj6ckkN2Y"
+            },
+            {
+                number: 42,
+                title: `Hadith Hasan Menurut Istilah Imam at-Tirmizi - [Kecacatan Dlm Hadith]`,
+                description: `Kandungan untuk sesi 42 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "VrzlnIPBJ8Y"
+            },
+            {
+                number: 43,
+                title: `Hadith Gharib Menurut Istilah Imam at-Tirmizi - [Kecacatan Dlm Hadith]`,
+                description: `Kandungan untuk sesi 43 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "8TwlPMf0tMY"
+            },
+            {
+                number: 44,
+                title: `Hadith Gharib Menurut Istilah Imam at-Tirmizi - [Kecacatan Dlm Hadith]`,
+                description: `Kandungan untuk sesi 44 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "MALN7C55xto"
+            },
+            {
+                number: 45,
+                title: `Sesi 45 - Hadith Gharib Menurut Istilah Imam at-Tirmizi [Makna Ketiga]- [Kecacatan Dlm Hadith]`,
+                description: `Kandungan untuk sesi 45 dalam modul I'lal Hadis (at-Tirmizi).`,
+                videoId: "j8-kib94jak"
+            }
+        ];
 
         function displaySessions(sessionsToShow) {
-            const grid = document.getElementById('session-grid');
+            const grid = document.getElementById('md-video-grid');
             grid.innerHTML = '';
 
             if (sessionsToShow.length === 0) {
-                grid.innerHTML = '<div class="no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
                 return;
             }
 
+            let gridHTML = '';
             sessionsToShow.forEach(session => {
-                const card = document.createElement('div');
-                card.className = 'session-card';
-                card.innerHTML = `
-                    <div class="session-number">Sesi ${session.number}</div>
-                    <div class="session-title">${session.title}</div>
-                    <div class="session-description">${session.description}</div>
-                    <a href="session${session.number}.html" class="watch-btn">Tonton Video</a>
-                `;
-                grid.appendChild(card);
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
             });
+            grid.innerHTML = gridHTML;
         }
 
         function filterSessions(searchTerm) {
@@ -83,13 +651,13 @@
 
         // Search functionality
         document.getElementById('session-search').addEventListener('input', function(e) {
-            const searchTerm = e.target.value;
+            const searchTerm = e.target.value.trim();
             const clearButton = document.getElementById('clear-search');
             
             if (searchTerm) {
-                clearButton.classList.add('visible');
+                clearButton.classList.remove('hidden');
             } else {
-                clearButton.classList.remove('visible');
+                clearButton.classList.add('hidden');
             }
             
             const filteredSessions = filterSessions(searchTerm);
@@ -99,11 +667,11 @@
         // Clear search
         document.getElementById('clear-search').addEventListener('click', function() {
             document.getElementById('session-search').value = '';
-            this.classList.remove('visible');
+            this.classList.add('hidden');
             displaySessions(sessions);
         });
 
-        // Initialize
+        // Initialize the grid
         document.addEventListener('DOMContentLoaded', function() {
             displaySessions(sessions);
         });

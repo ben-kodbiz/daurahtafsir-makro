@@ -3,55 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usul Dirayat Hadis</title>
+    <title>Usul Dirayah - Maulana Asri</title>
     <link rel="stylesheet" href="../unified-sahih-bukhari-theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            width: 100%;
+            background: rgba(63, 81, 181, 0.9);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem 1rem;
+            margin: 0 auto;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: #3f51b5;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background: #303f9f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .back-link i {
+            margin-right: 8px;
+        }
+        
+        .module-description {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .module-description h2 {
+            color: #3f51b5;
+            margin-bottom: 1rem;
+        }
+        
+        .module-description p {
+            color: #333;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            padding: 1.5rem;
+        }
+        
+        .video-info h3 {
+            color: #3f51b5;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .video-info p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .video-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .video-wrapper {
+                padding-bottom: 56.25%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="tutorial-container">
+    <div class="header">
+        <h1>Usul Dirayah</h1>
+    </div>
+    
+    <div class="container">
         <a href="../index.html" class="back-link">
             <i class="material-icons">arrow_back</i>
             Back to Main App
         </a>
-        <div class="header">
-            <h1>Usul Dirayat Hadis</h1>
-        </div>
         
         <!-- Module Description -->
-        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
-            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Usul Dirayat Hadis</h2>
-            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
-                <strong>Ilmu hadis yang merangkumi metodologi penelitian dan penilaian kesahihan hadis</strong><br>
-                Modul komprehensif tentang ilmu hadis dengan 120 sesi pembelajaran. Merangkumi kaedah menilai kesahihan hadis dan mengenal pasti hadis palsu. Mengajar prinsip-prinsip kritik hadis dan klasifikasi hadis (sahih, hasan, daif). Membincangkan biografi perawi hadis dan metodologi penelitian sanad.
+        <div class="module-description">
+            <h2>Usul Dirayah Hadis</h2>
+            <p>
+                <strong>Pengenalan kepada prinsip-prinsip kritikan hadis</strong><br>
+                Modul ini membekalkan pengetahuan asas tentang metodologi penelitian hadis, 
+                termasuk kaedah-kaedah menilai kekuatan dan kelemahan sanad serta matan hadis.
             </p>
         </div>
         
-        <div class="search-container">
-            <div class="search-box">
-                <i class="material-icons search-icon">search</i>
-                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
-                <button id="clear-search" class="clear-search">
-                    <i class="material-icons">close</i>
-                </button>
+        <!-- Video Container -->
+        <div class="video-container">
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/YF2JVanvuus" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Usul Dirayah Hadis - Video 1</h3>
+                    <p>Pengenalan kepada prinsip-prinsip asas kritikan hadis dan metodologi penelitian hadis.</p>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/HitJWDo7B2U" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Usul Dirayah Hadis - Video 2</h3>
+                    <p>Penerusan kajian tentang kaedah-kaedah menilai kekuatan sanad dan matan hadis.</p>
+                </div>
             </div>
         </div>
-        <div class="session-grid" id="session-grid">
-        </div>
     </div>
-    <script src="script.js?v=3"></script>
-    <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.className;
-            if (currentTheme === 'light-theme') {
-                html.className = 'dark-theme';
-            } else if (currentTheme === 'dark-theme') {
-                html.className = 'sepia-theme';
-            } else {
-                html.className = 'light-theme';
-            }
-        }
-    </script>
 </body>
 </html>

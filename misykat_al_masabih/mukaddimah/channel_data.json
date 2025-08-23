@@ -1,0 +1,37 @@
+{
+  "title": "Mukaddimah",
+  "description": "Mukaddimah Misykat al-Masabih",
+  "total_sessions": 5,
+  "sessions": [
+    {
+      "session_number": 1,
+      "title": "Sesi 1 -Pengenalan & Keistimewaan Kitab Mishkat & Kenali Imam Baghawi-[Misykatul Masobih-Muqaddimah]",
+      "video_id": "70WPN8tkzFw",
+      "youtube_url": "https://www.youtube.com/watch?v=70WPN8tkzFw"
+    },
+    {
+      "session_number": 2,
+      "title": "Sesi 2 - Muqaddimah Mishkat & Tentang Imam-Imam Hadith - [Misykatul Masobih -Muqaddimah]",
+      "video_id": "Rl0hPB_cLkI",
+      "youtube_url": "https://www.youtube.com/watch?v=Rl0hPB_cLkI"
+    },
+    {
+      "session_number": 3,
+      "title": "Sesi 3 -Pengarang, Iltizam & Hadith Pertama Kitab Mishkatul Mashobih -[Misykatul Masobih-Muqaddimah]",
+      "video_id": "AxognSnt5GQ",
+      "youtube_url": "https://www.youtube.com/watch?v=AxognSnt5GQ"
+    },
+    {
+      "session_number": 4,
+      "title": "Sesi 4 - Tujuan Disyariatkan Niat & Erti Niat - [Misykatul Masobih -Muqaddimah]",
+      "video_id": "UDgpZBSSuJU",
+      "youtube_url": "https://www.youtube.com/watch?v=UDgpZBSSuJU"
+    },
+    {
+      "session_number": 5,
+      "title": "Sesi 5 - Syarah Bahagian Kedua Hadith Niat & Pengertian Hijrah - [Misykatul Masobih -Muqaddimah]",
+      "video_id": "hQOBXxHwSjE",
+      "youtube_url": "https://www.youtube.com/watch?v=hQOBXxHwSjE"
+    }
+  ]
+}

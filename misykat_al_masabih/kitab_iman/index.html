@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ms" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitab Iman - Maulana Asri</title>
+    <link rel="stylesheet" href="../../unified-sahih-bukhari-theme.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        /* Material Design Video Grid */
+        .md-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+            padding: 0 16px;
+        }
+        
+        /* Grid Item */
+        .md-grid-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .md-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        
+        /* Thumbnail */
+        .md-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f5f5f5;
+        }
+        
+        .md-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        .md-play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .md-grid-item:hover .md-play-overlay {
+            opacity: 1;
+        }
+        
+        .md-play-icon {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Session Info */
+        .md-session-info {
+            padding: 20px;
+        }
+        
+        /* Chip */
+        .md-session-chip {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .md-chip-icon {
+            font-size: 1rem;
+            margin-right: 6px;
+        }
+        
+        .md-chip-text {
+            vertical-align: middle;
+        }
+        
+        /* Title */
+        .md-session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Button */
+        .md-watch-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+        }
+        
+        .md-watch-button:hover {
+            background: linear-gradient(135deg, #21CBF3, #2196F3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+        
+        .md-button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* No Results */
+        .md-no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #757575;
+        }
+        
+        .md-no-results i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: #bdbdbd;
+        }
+        
+        /* Search Container */
+        .search-container {
+            max-width: 700px;
+            margin: 25px auto;
+            position: relative;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 35px;
+            padding: 0 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: #3f51b5;
+            box-shadow: 0 5px 25px rgba(63, 81, 181, 0.2);
+        }
+        
+        .search-icon {
+            color: #757575;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+        
+        .clear-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #757575;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-search:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .clear-search.hidden {
+            display: none;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .md-video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-session-title {
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .md-video-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 0 12px;
+            }
+            
+            .md-session-info {
+                padding: 16px;
+            }
+            
+            .md-play-icon {
+                font-size: 2.5rem;
+            }
+            
+            .md-session-title {
+                font-size: 1rem;
+                height: 45px;
+            }
+            
+            .md-watch-button {
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .md-video-grid {
+                gap: 12px;
+            }
+            
+            .md-session-info {
+                padding: 12px;
+            }
+            
+            .md-session-title {
+                font-size: 0.95rem;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Misykat al-Masabih
+        </a>
+        <div class="header">
+            <h1>Kitab Iman</h1>
+        </div>
+        
+        <!-- Module Description -->
+        <div class="module-description" style="max-width: 800px; margin: 20px auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: #3f51b5; text-align: center; margin-bottom: 15px;">Kitab Iman</h2>
+            <p style="text-align: center; color: #333; line-height: 1.6; font-size: 1.1rem;">
+                <strong>Kitab Iman Misykat al-Masabih</strong><br>
+                Kitab Iman Misykat al-Masabih
+            </p>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" id="session-search" class="search-input" placeholder="Search sessions by title or number..." />
+                <button id="clear-search" class="clear-search">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+        </div>
+        <div class="md-video-grid" id="md-video-grid">
+            <!-- Grid items will be dynamically populated by JavaScript -->
+        </div>
+    </div>
+    <script>
+        // Session data for Kitab Iman
+        const sessions = [
+            {
+                number: 1,
+                title: `Sesi 00A -  Makna Iman Yang Sebenar - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 1 dalam modul Kitab Iman.`,
+                videoId: "riH3SnYWfVU"
+            },
+            {
+                number: 2,
+                title: `Sesi 00B -  Meraikan Kesempurnaan Iman - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 2 dalam modul Kitab Iman.`,
+                videoId: "YuOeRIaRzwk"
+            },
+            {
+                number: 3,
+                title: `Sesi 00C - Hakikat Iman - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 3 dalam modul Kitab Iman.`,
+                videoId: "cMNp81AZSvI"
+            },
+            {
+                number: 4,
+                title: `Sesi 00D - Muqaddimah Kitab Iman - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 4 dalam modul Kitab Iman.`,
+                videoId: "J3lNEK19oUw"
+            },
+            {
+                number: 5,
+                title: `Sesi 00E - Muqaddimah Kitab Iman - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 5 dalam modul Kitab Iman.`,
+                videoId: "Uaos9dzuNzs"
+            },
+            {
+                number: 6,
+                title: `Sesi 1 - Malaikat Jibrail Datang Bertanyakan Tentang Islam Kpd Nabi -[Misykatul Masobih- Kitab Iman]`,
+                description: `Kandungan untuk sesi 6 dalam modul Kitab Iman.`,
+                videoId: "RJ0E-X-XeG0"
+            },
+            {
+                number: 7,
+                title: `Sesi 1 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 7 dalam modul Kitab Iman.`,
+                videoId: "qeZdacEHCsA"
+            },
+            {
+                number: 8,
+                title: `Sesi 2 - Pergertian Dan Huraian Tentang Rukun Islam & Rukun Iman - [Misykatul Masabih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 8 dalam modul Kitab Iman.`,
+                videoId: "6P2A0YqspBg"
+            },
+            {
+                number: 9,
+                title: `Sesi 3 - Jibril Bertanyakan Rukun Islam & Rukun Iman Kepada Nabi- [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 9 dalam modul Kitab Iman.`,
+                videoId: "lU-DfcbCqI8"
+            },
+            {
+                number: 10,
+                title: `Sesi 4 - Pergertian Dan Huraian Tentang Ihsan - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 10 dalam modul Kitab Iman.`,
+                videoId: "ogP5h6G4MEs"
+            },
+            {
+                number: 11,
+                title: `Sesi 5 - Nabi Menjelaskan Kepada Jibrail Tentang Tanda-Tanda Kiamat -[Misykatul Masobih- Kitab Iman]`,
+                description: `Kandungan untuk sesi 11 dalam modul Kitab Iman.`,
+                videoId: "PFKzYlyOE5s"
+            },
+            {
+                number: 12,
+                title: `Sesi 6 - Islam Itu Dibina Atas Lima Perkara - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 12 dalam modul Kitab Iman.`,
+                videoId: "M_IZT6dZiA8"
+            },
+            {
+                number: 13,
+                title: `Sesi 7 -  Iman Mempunyai Lebih Dari 70 Cabang - Maulana Asri Yusoff -[Misykatul Masobih- Kitab Iman]`,
+                description: `Kandungan untuk sesi 13 dalam modul Kitab Iman.`,
+                videoId: "1WFu26t0A2w"
+            },
+            {
+                number: 14,
+                title: `Sesi 7 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 14 dalam modul Kitab Iman.`,
+                videoId: "0dXAiTbHu8Q"
+            },
+            {
+                number: 15,
+                title: `Sesi 8 -Orang Islam Yang Sebenar Ialah Orang Islam Lain Terpelihara -[Misykatul Masobih- Kitab Iman]`,
+                description: `Kandungan untuk sesi 15 dalam modul Kitab Iman.`,
+                videoId: "UpUzNUJQghI"
+            },
+            {
+                number: 16,
+                title: `Sesi 8 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 16 dalam modul Kitab Iman.`,
+                videoId: "Hppy6hYU0LQ"
+            },
+            {
+                number: 17,
+                title: `Sesi 9 -Orang Islam Yang Sebenar Ialah Orang Islam Lain Terpelihara -[Misykatul Masobih -Kitab Iman]`,
+                description: `Kandungan untuk sesi 17 dalam modul Kitab Iman.`,
+                videoId: "U_iQx7uKac4"
+            },
+            {
+                number: 18,
+                title: `Sesi 10 -Tak Sempurna Iman Selagi Rasulullah Tidak Paling Dicintai - [Misykatul Masobih- Kitab Iman]`,
+                description: `Kandungan untuk sesi 18 dalam modul Kitab Iman.`,
+                videoId: "LZr5foZU7lY"
+            },
+            {
+                number: 19,
+                title: `Sesi 11 -Tak Sempurna Iman  Selagi Rasulullah Tidak Paling Dicintai -[Misykatul Masobih- Kitab Iman]`,
+                description: `Kandungan untuk sesi 19 dalam modul Kitab Iman.`,
+                videoId: "BOhb5sZj0o4"
+            },
+            {
+                number: 20,
+                title: `Sesi 12 - Kemanisan Iman - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 20 dalam modul Kitab Iman.`,
+                videoId: "jmfHfez8whs"
+            },
+            {
+                number: 21,
+                title: `Sesi 13 - Kemanisan Iman - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 21 dalam modul Kitab Iman.`,
+                videoId: "jM1iOU2uq6Y"
+            },
+            {
+                number: 22,
+                title: `Sesi 14 - Percaya Kpd Kerasulan Muhammad Adalah Syarat Keselamatan - [Misykatul Masobih -Kitab Iman]`,
+                description: `Kandungan untuk sesi 22 dalam modul Kitab Iman.`,
+                videoId: "2AOjTY3GQBI"
+            },
+            {
+                number: 23,
+                title: `Sesi 15 - Perintah Memerangi Orang-Orang Kafir Harbi - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 23 dalam modul Kitab Iman.`,
+                videoId: "mZLCAUCrCqE"
+            },
+            {
+                number: 24,
+                title: `Sesi 15 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 24 dalam modul Kitab Iman.`,
+                videoId: "270_B_iYAO4"
+            },
+            {
+                number: 25,
+                title: `Sesi 16 - Siapakah Muslim (Orang Islam)? - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 25 dalam modul Kitab Iman.`,
+                videoId: "ZC0o-StDVTI"
+            },
+            {
+                number: 26,
+                title: `Sesi 17 - Amalan Yang Membawa Seseorang Ke Syurga - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 26 dalam modul Kitab Iman.`,
+                videoId: "5ogSN0fPZCE"
+            },
+            {
+                number: 27,
+                title: `Sesi 17 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 27 dalam modul Kitab Iman.`,
+                videoId: "vEDQrx3Tvsg"
+            },
+            {
+                number: 28,
+                title: `Sesi 18 - Amalan Yang Membawa Seseorang Ke Syurga - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 28 dalam modul Kitab Iman.`,
+                videoId: "wyFQt9gieUM"
+            },
+            {
+                number: 29,
+                title: `Sesi 19 - Iman Yang Sempurna - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 29 dalam modul Kitab Iman.`,
+                videoId: "fRJMceCN2_Q"
+            },
+            {
+                number: 30,
+                title: `Sesi 19 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 30 dalam modul Kitab Iman.`,
+                videoId: "UBwiybkdMjc"
+            },
+            {
+                number: 31,
+                title: `Sesi 20 - Antara Ajaran Islam Yang Mesti Dilaksanakan - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 31 dalam modul Kitab Iman.`,
+                videoId: "IXSL8bIokwo"
+            },
+            {
+                number: 32,
+                title: `Sesi 20 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 32 dalam modul Kitab Iman.`,
+                videoId: "XVLK2ZTuY7o"
+            },
+            {
+                number: 33,
+                title: `Sesi 21 - Antara Ajaran Islam Yang Mesti Dilaksanakan - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 33 dalam modul Kitab Iman.`,
+                videoId: "mA5gzDjgoeY"
+            },
+            {
+                number: 34,
+                title: `Sesi 22 - Erti Beriman Kepada Allah Yang Maha Esa - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 34 dalam modul Kitab Iman.`,
+                videoId: "F9FjpZ67qvU"
+            },
+            {
+                number: 35,
+                title: `Sesi 22 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 35 dalam modul Kitab Iman.`,
+                videoId: "dqtVzMv_FEA"
+            },
+            {
+                number: 36,
+                title: `Sesi 23 - Erti Beriman Kepada Allah Yang Maha Esa - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 36 dalam modul Kitab Iman.`,
+                videoId: "AtEyDDj8G0o"
+            },
+            {
+                number: 37,
+                title: `Sesi 23 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 37 dalam modul Kitab Iman.`,
+                videoId: "Z9nNJ0-XFG0"
+            },
+            {
+                number: 38,
+                title: `Sesi 24 - Erti Beriman Kepada Allah Yang Maha Esa - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 38 dalam modul Kitab Iman.`,
+                videoId: "ifSlGlv0gD0"
+            },
+            {
+                number: 39,
+                title: `Sesi 24 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 39 dalam modul Kitab Iman.`,
+                videoId: "zWb7mRV09sI"
+            },
+            {
+                number: 40,
+                title: `Sesi 25 - Erti Beriman Kepada Allah Yang Maha Esa - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 40 dalam modul Kitab Iman.`,
+                videoId: "sh_nldprlb8"
+            },
+            {
+                number: 41,
+                title: `Sesi 25 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 41 dalam modul Kitab Iman.`,
+                videoId: "41AeeTlGcD4"
+            },
+            {
+                number: 42,
+                title: `Sesi 26 -  Erti Beriman Kepada Allah Yang Maha Esa - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 42 dalam modul Kitab Iman.`,
+                videoId: "8wURNOUknt8"
+            },
+            {
+                number: 43,
+                title: `Sesi 26 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 43 dalam modul Kitab Iman.`,
+                videoId: "89Rhjchw_Bk"
+            },
+            {
+                number: 44,
+                title: `Sesi 27 - Manusia Tidak Patut Mendustakan Allah Dan Mencaci-Nya - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 44 dalam modul Kitab Iman.`,
+                videoId: "KpVzYQHXYPk"
+            },
+            {
+                number: 45,
+                title: `Sesi 27 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 45 dalam modul Kitab Iman.`,
+                videoId: "KuELxkfNnvY"
+            },
+            {
+                number: 46,
+                title: `Sesi 28 -  Mencaci Masa Atau Zaman Bererti Mencaci Allah - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 46 dalam modul Kitab Iman.`,
+                videoId: "BXis_L6c--o"
+            },
+            {
+                number: 47,
+                title: `Sesi 28 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 47 dalam modul Kitab Iman.`,
+                videoId: "uC374C0-nvI"
+            },
+            {
+                number: 48,
+                title: `Sesi 29 - Sifat Sabar Dan Pemaaf Allah Subhanahu Wataala - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 48 dalam modul Kitab Iman.`,
+                videoId: "ru2Ih4etyWg"
+            },
+            {
+                number: 49,
+                title: `Sesi 29 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 49 dalam modul Kitab Iman.`,
+                videoId: "Rjbuk5nCwAk"
+            },
+            {
+                number: 50,
+                title: `Sesi 30 - Kepentingan Tauhid - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 50 dalam modul Kitab Iman.`,
+                videoId: "_xfIgz3pFa8"
+            },
+            {
+                number: 51,
+                title: `Sesi 31 - Kepentingan Tauhid - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 51 dalam modul Kitab Iman.`,
+                videoId: "MeUIpWG-ujA"
+            },
+            {
+                number: 52,
+                title: `Sesi 32 - Orang Yang Diharamkan Neraka Kepadanya - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 52 dalam modul Kitab Iman.`,
+                videoId: "EMNmuJZ5o74"
+            },
+            {
+                number: 53,
+                title: `Sesi 33 - Orang Yang Diharamkan Neraka Kepadanya - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 53 dalam modul Kitab Iman.`,
+                videoId: "AIFWLAW21_M"
+            },
+            {
+                number: 54,
+                title: `Sesi 33 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 54 dalam modul Kitab Iman.`,
+                videoId: "posqL-_Mv6c"
+            },
+            {
+                number: 55,
+                title: `Sesi 34 - Orang Yang Diharamkan Neraka Kepadanya - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 55 dalam modul Kitab Iman.`,
+                videoId: "4IGE3LJxkl8"
+            },
+            {
+                number: 56,
+                title: `Sesi 35 - Orang Yang Diharamkan Neraka Kepadanya - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 56 dalam modul Kitab Iman.`,
+                videoId: "9gwU0XpHxYk"
+            },
+            {
+                number: 57,
+                title: `Sesi 35 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 57 dalam modul Kitab Iman.`,
+                videoId: "fvlHgpaa7Cg"
+            },
+            {
+                number: 58,
+                title: `Sesi 36 - Orang Yang Diharamkan Neraka Kepadanya - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 58 dalam modul Kitab Iman.`,
+                videoId: "W3js4ZDZtyk"
+            },
+            {
+                number: 59,
+                title: `Sesi 37 - Orang Yang Diharamkan Neraka Kepadanya - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 59 dalam modul Kitab Iman.`,
+                videoId: "JZSt0cX9W1M"
+            },
+            {
+                number: 60,
+                title: `Sesi 38 - Tanda Iman Yang Sempurna - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 60 dalam modul Kitab Iman.`,
+                videoId: "RVZJEg7ZNFA"
+            },
+            {
+                number: 61,
+                title: `Sesi 38 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 61 dalam modul Kitab Iman.`,
+                videoId: "zbiZJGatsg8"
+            },
+            {
+                number: 62,
+                title: `Sesi 39 - Mukmin Sebenar - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 62 dalam modul Kitab Iman.`,
+                videoId: "jEW8ykmF0d8"
+            },
+            {
+                number: 63,
+                title: `Sesi 39 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 63 dalam modul Kitab Iman.`,
+                videoId: "Bz2Y-NKm_xg"
+            },
+            {
+                number: 64,
+                title: `Sesi 40 - Kepentingan Amanah Dan Menepati Janji - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 64 dalam modul Kitab Iman.`,
+                videoId: "k9a6Q-vI5lA"
+            },
+            {
+                number: 65,
+                title: `Sesi 41 - Kepentingan Amanah Dan Menepati Janji - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 65 dalam modul Kitab Iman.`,
+                videoId: "Tsn8C-Mqa8I"
+            },
+            {
+                number: 66,
+                title: `Sesi 42 -  Syurga Kepada Orang Yang Berpegang Dengan Akidah Tauhid - [Misykatul Masobih -Kitab Iman]`,
+                description: `Kandungan untuk sesi 66 dalam modul Kitab Iman.`,
+                videoId: "2oMFi0HLsR4"
+            },
+            {
+                number: 67,
+                title: `Sesi 42 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 67 dalam modul Kitab Iman.`,
+                videoId: "l5R7JjDyUwI"
+            },
+            {
+                number: 68,
+                title: `Sesi 43 - Syurga Kepada Orang Yang Berpegang Dengan Akidah Tauhid - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 68 dalam modul Kitab Iman.`,
+                videoId: "KMj8u2zVSqk"
+            },
+            {
+                number: 69,
+                title: `Sesi 43 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 69 dalam modul Kitab Iman.`,
+                videoId: "h8q9W90SB1Q"
+            },
+            {
+                number: 70,
+                title: `Sesi 44 - Anak Kunci Syurga - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 70 dalam modul Kitab Iman.`,
+                videoId: "iZwlf55UjtE"
+            },
+            {
+                number: 71,
+                title: `Sesi 45 - Ramalan Nabi  Tentang Kemenangan Islam Di Seluruh Dunia - [Misykatul Masobih - Kitab Iman]`,
+                description: `Kandungan untuk sesi 71 dalam modul Kitab Iman.`,
+                videoId: "MexW-v2iIu8"
+            },
+            {
+                number: 72,
+                title: `Sesi 45 - MATAN HADITH - Misykatul Masabih - Kitab Iman`,
+                description: `Kandungan untuk sesi 72 dalam modul Kitab Iman.`,
+                videoId: "K26B0OtNmDI"
+            },
+            {
+                number: 73,
+                title: `Sesi 46 - Keperluan Kepada Amal Soleh Di Samping Beriman Kpd Allah - [Misykatul Masobih -Kitab Iman]`,
+                description: `Kandungan untuk sesi 73 dalam modul Kitab Iman.`,
+                videoId: "PtRRDsrfqnk"
+            },
+            {
+                number: 74,
+                title: `Sesi 47 -Keperluan Kepada Amal Soleh DiSamping Beriman Kepada Allah -[Misykatul Masobih -Kitab Iman]`,
+                description: `Kandungan untuk sesi 74 dalam modul Kitab Iman.`,
+                videoId: "dm2AR7HMW3c"
+            },
+            {
+                number: 75,
+                title: `Sesi 48 -Keperluan Kepada Amal Soleh DiSamping Beriman Kepada Allah -[Misykatul Masobih -Kitab Iman]`,
+                description: `Kandungan untuk sesi 75 dalam modul Kitab Iman.`,
+                videoId: "Phq5TSwTByE"
+            }
+        ];
+
+        function displaySessions(sessionsToShow) {
+            const grid = document.getElementById('md-video-grid');
+            grid.innerHTML = '';
+
+            if (sessionsToShow.length === 0) {
+                grid.innerHTML = '<div class="md-no-results"><i class="material-icons">search_off</i><p>No sessions found</p></div>';
+                return;
+            }
+
+            let gridHTML = '';
+            sessionsToShow.forEach(session => {
+                gridHTML += `
+                <div class="md-grid-item" data-session="${session.number}">
+                    <div class="md-thumbnail-container elevation-2">
+                        <img src="https://img.youtube.com/vi/${session.videoId}/mqdefault.jpg" 
+                             alt="${session.title}" 
+                             class="md-thumbnail" 
+                             onerror="this.src='https://placehold.co/320x180?text=No+Thumbnail'">
+                        <div class="md-play-overlay">
+                            <i class="material-icons md-play-icon">play_arrow</i>
+                        </div>
+                    </div>
+                    <div class="md-session-info">
+                        <div class="md-session-chip">
+                            <i class="material-icons md-chip-icon">confirmation_number</i>
+                            <span class="md-chip-text">Sesi ${session.number}</span>
+                        </div>
+                        <h3 class="md-session-title">${session.title}</h3>
+                        <a href="session${session.number}.html" class="md-watch-button">
+                            <i class="material-icons md-button-icon">play_circle_outline</i>
+                            <span>Tonton Video</span>
+                        </a>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = gridHTML;
+        }
+
+        function filterSessions(searchTerm) {
+            if (!searchTerm) return sessions;
+            
+            return sessions.filter(session => 
+                session.number.toString().includes(searchTerm) ||
+                session.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                session.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        // Search functionality
+        document.getElementById('session-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            const clearButton = document.getElementById('clear-search');
+            
+            if (searchTerm) {
+                clearButton.classList.remove('hidden');
+            } else {
+                clearButton.classList.add('hidden');
+            }
+            
+            const filteredSessions = filterSessions(searchTerm);
+            displaySessions(filteredSessions);
+        });
+
+        // Clear search
+        document.getElementById('clear-search').addEventListener('click', function() {
+            document.getElementById('session-search').value = '';
+            this.classList.add('hidden');
+            displaySessions(sessions);
+        });
+
+        // Initialize the grid
+        document.addEventListener('DOMContentLoaded', function() {
+            displaySessions(sessions);
+        });
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.className;
+            if (currentTheme === 'light-theme') {
+                html.className = 'dark-theme';
+            } else if (currentTheme === 'dark-theme') {
+                html.className = 'sepia-theme';
+            } else {
+                html.className = 'light-theme';
+            }
+        }
+    </script>
+</body>
+</html>

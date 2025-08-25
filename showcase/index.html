@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Kangarian Showcase - Apps & Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .app-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+
+        .app-content {
+            padding: 20px;
+        }
+
+        .app-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .app-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .app-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .status-live {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .status-alpha {
+            background: #FF9800;
+            color: white;
+        }
+
+        .status-wip {
+            background: #2196F3;
+            color: white;
+        }
+
+        .app-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3f51b5;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .app-link:hover {
+            background: #303f9f;
+            transform: translateY(-2px);
+        }
+
+        .app-link.github {
+            background: #333;
+        }
+
+        .app-link.github:hover {
+            background: #222;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: rgba(63, 81, 181, 0.1);
+            color: #3f51b5;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(63, 81, 181, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .creator-section {
+            text-align: center;
+            margin: 40px 0 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .heart {
+            color: #ff6b6b;
+        }
+
+        @media (max-width: 768px) {
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">
+            <i class="material-icons">arrow_back</i>
+            Back to Main App
+        </a>
+        
+        <div class="header">
+            <h1>The Kangarian Showcase</h1>
+            <p>Innovative Apps & Projects</p>
+            <p style="margin-top: 10px; opacity: 0.9;">Crafted with passion from Perlis with Love ❤️</p>
+        </div>
+        
+        <div class="creator-section">
+            <h2>Made by The Kangarian</h2>
+            <p>From Perlis with Love <span class="heart">❤️</span></p>
+        </div>
+        
+        <div class="apps-grid">
+            <!-- App 1: FasaadGov -->
+            <div class="app-card">
+                <div class="app-header">
+                    <h3 class="app-title" style="color: white;">FasaadGov</h3>
+                </div>
+                <div class="app-content">
+                    <p class="app-description"><strong>English:</strong> Unmask the Hidden Costs of Power.</p>
+                    <p class="app-description">Who really pays when power is unchecked? This interactive treemap lays bare the human toll behind global profiteering—showing how armies, industries, and boardrooms shaped lives through violence. Click 'Explore the Evidence' and confront the stories you were never told.</p>
+                    <p class="app-description"><strong>Bahasa Melayu:</strong> Dedahkan Kos Tersembunyi Kuasa.</p>
+                    <p class="app-description">Siapa sebenarnya yang membayar apabila kuasa tidak disekat? Peta interaktif ini mendedahkan bebanan manusia di sebalik penguasaan keuntungan global—menunjukkan bagaimana tentera, industri, dan bilik mesyuarat membentuk kehidupan melalui keganasan. Klik 'Terokai Bukti' dan hadapi kisah-kisah yang tidak pernah anda dengar.</p>
+                    <span class="app-status status-live">Live</span>
+                    <br>
+                    <a href="https://ben-kodbiz.github.io/fasaadGov/" class="app-link" target="_blank">
+                        <i class="material-icons" style="font-size: 16px; vertical-align: middle;">launch</i> Visit Project
+                    </a>
+                </div>
+            </div>
+            
+            <!-- App 2: QuranLingo -->
+            <div class="app-card">
+                <div class="app-header">
+                    <h3 class="app-title" style="color: white;">QuranLingo</h3>
+                </div>
+                <div class="app-content">
+                    <p class="app-description"><strong>English:</strong> An immersive language learning platform for understanding the Quran in its original Arabic with contextual translations and interactive learning modules.</p>
+                    <p class="app-description"><strong>Bahasa Melayu:</strong> Platform pembelajaran bahasa yang mengurangkan untuk memahami Al-Quran dalam bahasa Arab asalnya dengan terjemahan kontekstual dan modul pembelajaran interaktif.</p>
+                    <span class="app-status status-alpha">Alpha Stage</span>
+                    <br>
+                    <a href="https://ben-kodbiz.github.io/quranlingo/" class="app-link" target="_blank">
+                        <i class="material-icons" style="font-size: 16px; vertical-align: middle;">launch</i> Visit Project
+                    </a>
+                </div>
+            </div>
+            
+            <!-- App 3: Akhi -->
+            <div class="app-card">
+                <div class="app-header">
+                    <h3 class="app-title" style="color: white;">Akhi</h3>
+                </div>
+                <div class="app-content">
+                    <p class="app-description"><strong>English:</strong> A community-building platform for fostering brotherhood and collaboration among like-minded individuals. Work in progress to create meaningful connections.</p>
+                    <p class="app-description"><strong>Bahasa Melayu:</strong> Platform pembinaan komuniti untuk memupuk persaudaraan dan kerjasama antara individu yang mempunyai minda sama. Kerja sedang dijalankan untuk mewujudkan hubungan yang bermakna.</p>
+                    <span class="app-status status-wip">Work in Progress</span>
+                    <br>
+                    <a href="https://github.com/ben-kodbiz/akhi/tree/main" class="app-link github" target="_blank">
+                        <i class="material-icons" style="font-size: 16px; vertical-align: middle;">code</i> View on GitHub
+                    </a>
+                </div>
+            </div>
+            
+            <!-- App 4: G-Zamed -->
+            <div class="app-card">
+                <div class="app-header">
+                    <h3 class="app-title" style="color: white;">G-Zamed</h3>
+                </div>
+                <div class="app-content">
+                    <p class="app-description"><strong>English:</strong> An innovative healthcare solution bridging medical professionals with patients through advanced telemedicine capabilities and health data analytics.</p>
+                    <p class="app-description"><strong>Bahasa Melayu:</strong> Penyelesaian penjagaan kesihatan yang inovatif merangkaikan profesional perubatan dengan pesakit melalui keupayaan telemedicine maju dan analisis data kesihatan.</p>
+                    <span class="app-status status-wip">Work in Progress</span>
+                    <br>
+                    <a href="https://github.com/ben-kodbiz/g-zamed" class="app-link github" target="_blank">
+                        <i class="material-icons" style="font-size: 16px; vertical-align: middle;">code</i> View on GitHub
+                    </a>
+                </div>
+            </div>
+            
+            <!-- App 5: Akhi Pipeline -->
+            <div class="app-card">
+                <div class="app-header">
+                    <h3 class="app-title" style="color: white;">Akhi Pipeline</h3>
+                </div>
+                <div class="app-content">
+                    <p class="app-description"><strong>English:</strong> A powerful workflow automation tool designed to streamline processes and enhance productivity through intelligent pipeline management.</p>
+                    <p class="app-description"><strong>Bahasa Melayu:</strong> Alat automasi aliran kerja yang berkuasa direka untuk merasionalisasi proses dan meningkatkan produktiviti melalui pengurusan talian paip yang pintar.</p>
+                    <span class="app-status status-wip">Work in Progress</span>
+                    <br>
+                    <a href="https://github.com/ben-kodbiz/akhi-pipeline" class="app-link github" target="_blank">
+                        <i class="material-icons" style="font-size: 16px; vertical-align: middle;">code</i> View on GitHub
+                    </a>
+                </div>
+            </div>
+            
+            <!-- App 6: Quran Mindmap -->
+            <div class="app-card">
+                <div class="app-header">
+                    <h3 class="app-title" style="color: white;">Quran Mindmap</h3>
+                </div>
+                <div class="app-content">
+                    <p class="app-description"><strong>English:</strong> An interactive visualization tool for exploring the thematic connections and structural relationships within the Quranic text.</p>
+                    <p class="app-description"><strong>Bahasa Melayu:</strong> Alat visualisasi interaktif untuk meneroka hubungan tematik dan struktur dalam teks Al-Quran.</p>
+                    <span class="app-status status-wip">Work in Progress</span>
+                    <br>
+                    <a href="https://quranmindmap.github.io/" class="app-link" target="_blank">
+                        <i class="material-icons" style="font-size: 16px; vertical-align: middle;">launch</i> Visit Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -111,8 +111,16 @@ Provides a menu for:
 
 ```bash
 # Run processor directly
-python3 channel_processor.py <CHANNEL_URL> --name \"Module\" --description \"Desc\"
+python3 channel_processor.py <CHANNEL_URL> --name "Module" --description "Desc"
 ```
+
+The `channel_processor.py` script is now available and fully functional. It uses yt-dlp to extract video information from YouTube channels and generates complete web modules with:
+
+- Session HTML files for each video
+- Main index.html with searchable grid
+- JSON data file with session information
+- Video data mapping file
+- Simple list of video IDs
 
 ## ✅ Verification
 

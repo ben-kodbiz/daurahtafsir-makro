@@ -1,51 +1,57 @@
-### Critical Fix: Kitab Pusaka Dynamic Grid View Implementation
+### Sahih Bukhari Kitab Perang Integration
 
-**Date**: August 23, 2025
-**Issue**: Kitab Pusaka was using a static HTML grid approach instead of the dynamic JavaScript approach used by other kitabs like Kitab Thaharah, resulting in inconsistent grid behavior (2 boxes per row instead of 4 on desktop).
+**Date**: September 11, 2025
+**Issue**: Move Kitab Perang content into Sahih Bukhari tab structure
 
-**Root Cause**: The static HTML approach manipulated DOM elements directly rather than using JavaScript to dynamically generate grid items, which prevented proper CSS grid calculations.
+**Changes Made**:
+1. Removed separate "Sahih Bukhari - Kitab Perang" entry from main index.html
+2. Verified content is properly accessible through Sahih Bukhari tab
+3. Updated naming from "57. Kitab Jihad" to "57. Kitab Perang" for consistency
+4. Verified all 159 videos are accessible with proper navigation and search
+5. Confirmed Material Design grid interface is working correctly
 
-**Solution Implemented**:
-1. Replaced static HTML grid with dynamic JavaScript implementation
-2. Created proper session data array with all 17 sessions
-3. Implemented displaySessions() and filterSessions() functions for dynamic grid generation
-4. Added proper DOMContentLoaded event listener for initialization
-5. Ensured consistent CSS styling with other kitabs
-
-**Key Changes**:
-- Converted static grid items to dynamically generated content
-- Added complete session data array with YouTube IDs and proper titles
-- Implemented dynamic search functionality that regenerates grid items
-- Maintained responsive design with proper 4-box grid on desktop
-
-**Result**: Kitab Pusaka now displays correctly with 4 boxes per row on desktop screens, matching Kitab Thaharah and providing consistent user experience.
-
-**Files Modified**:
-- /data/work/dev/daurahtafsir-makro/sunan_daud/Kitab_Pusaka/index.html
-
-**Verification Steps**:
-1. Confirmed CSS styles match Kitab Thaharah
-2. Verified grid container and items are properly structured
-3. Ensured JavaScript functionality works correctly
-4. Tested responsive design across all device sizes
+**Result**: Kitab Perang content is now properly integrated into the Sahih Bukhari tab structure as intended, with all 159 videos accessible through the internal navigation system.
 
 ---
 
-### Critical Fix: Kitab Wasiat Grid View Issue
+### Tools Directory Maintenance Reminder
 
-**Date**: August 23, 2025
-**Issue**: Kitab Wasiat currently displays only 2 boxes per row horizontally instead of the expected 4 boxes per row on desktop screens.
+**Date**: September 11, 2025
+**Issue**: Ensure all created tools are preserved in the tools directory
 
-**Investigation Needed**: Similar to Kitab Pusaka, this issue is likely caused by improper CSS grid implementation or static HTML structure instead of dynamic JavaScript generation.
+**Important Note**: All newly created tools and scripts must be kept in the `/data/work/dev/daurahtafsir-makro/tools` directory. This includes:
 
-**Next Steps**:
-1. Examine Kitab Wasiat index.html structure
-2. Compare with properly functioning Kitab Thaharah
-3. Identify CSS or JavaScript differences causing the layout issue
-4. Implement proper dynamic grid view if needed
-5. Ensure consistent 4-box grid layout on desktop screens
+1. **Main Tools**:
+   - `channel_processor.py` - Main Python script for processing YouTube channels
+   - `process_channel.sh` - Shell script wrapper for channel_processor.py
 
-**Expected Outcome**: Kitab Wasiat should display 4 boxes per row on desktop screens, matching the behavior of other kitabs in the Sunan Daud application.
+2. **Configuration Files**:
+   - `config.ini` - Centralized configuration for all channel processing tools
 
-## Qwen Added Memories
-- Never limit the number of videos when processing YouTube channels. Always process all available videos without setting a maximum limit.
+3. **Test Scripts**:
+   - `test_channel_processor.sh` - Basic functionality test
+   - `test_comprehensive.sh` - Comprehensive functionality verification
+   - `example_usage.sh` - Example usage commands
+   - `final_verification.sh` - Final verification script
+
+4. **Documentation**:
+   - `CHANNEL_PROCESSOR_IMPLEMENTATION.md` - Implementation summary
+   - `QUICK_START.md` - Quick start guide with usage examples
+   - `README.md` - Detailed documentation
+
+5. **Utility Scripts**:
+   - Various JavaScript files for content organization
+   - Shell scripts for automation
+
+**Maintenance Rules**:
+- Never delete or remove tools from the tools directory
+- Always add new tools to the tools directory
+- Keep all tools executable (chmod +x)
+- Update documentation when tools are modified
+- Test tools before and after any changes
+
+**Verification**:
+- All tools are currently in place and functional
+- Channel processor successfully processes unlimited videos by default
+- Test scripts verify functionality
+- Documentation is up to date

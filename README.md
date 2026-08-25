@@ -135,7 +135,7 @@ Aplikasi ini mengandungi 8 modul utama yang merangkumi pelbagai aspek kajian Isl
 ## 🛠️ Ciri-ciri Teknikal
 
 ### Responsif dan Mesra Pengguna
-- **Reka bentuk responsif:** Berfungsi dengan baik di desktop, laptop, dan tablet
+- **Reka bentuk responsif:** Berfungsi dengan baik di telefon pintar, tablet, dan desktop
 - **Tema pelbagai:** Sokongan untuk tema terang, gelap, dan sepia
 - **Carian canggih:** Fungsi carian masa nyata untuk semua modul
 - **Navigasi mudah:** Antara muka yang intuitif dan mudah digunakan
@@ -165,7 +165,7 @@ Aplikasi ini mengandungi 8 modul utama yang merangkumi pelbagai aspek kajian Isl
 4. **Navigasi:** Gunakan butang "Back to Main App" untuk kembali ke halaman utama
 
 ### Tips Penggunaan
-- **Untuk pengalaman terbaik:** Gunakan desktop, laptop, atau tablet
+- **Untuk pengalaman terbaik:** Gunakan telefon pintar, tablet, atau desktop
 - **Sambungan internet:** Pastikan sambungan internet yang stabil untuk streaming video
 - **Pelayar:** Gunakan pelayar web yang terkini untuk prestasi yang optimum
 
@@ -175,7 +175,7 @@ Aplikasi ini mengandungi 8 modul utama yang merangkumi pelbagai aspek kajian Isl
 - ✅ Desktop/Komputer
 - ✅ Laptop
 - ✅ Tablet
-- ⚠️ Telefon pintar (tidak optimum)
+- ✅ Telefon pintar
 
 ### Pelayar yang Disokong
 - Chrome (disyorkan)

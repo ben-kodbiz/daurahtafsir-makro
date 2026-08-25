@@ -3,62 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quran App</title>
+    <title>Daurah Tafsir Quran – Maulana Asri (Darul Kautsar)</title>
+    <meta name="description" content="Daurah Tafsir Makro: kajian tafsir Al-Quran dan hadis oleh Maulana Asri dari Darul Kautsar. Baca nota tafsir PDF untuk semua 114 surah terus dari pelayar.">
+    <meta property="og:title" content="Daurah Tafsir Quran – Maulana Asri (Darul Kautsar)">
+    <meta property="og:description" content="Kajian tafsir Al-Quran dan hadis: nota PDF, video, dan bahan pembelajaran untuk semua 114 surah.">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <select id="language-selector" onchange="setLanguage(this.value)">
+    <select id="language-selector" onchange="setLanguage(this.value)" aria-label="Language">
         <option value="en">English</option>
         <option value="ms">Malay</option>
     </select>
      <h1 class="main-heading">Daurah Hadis dan Quran oleh Maulana Asri (darul Kautsar)</h1>
-     <div class="widget-container">
+    <div class="widget-container">
         <div class="widget current-page">
-            <i class="material-icons widget-icon">book</i>
+            <i class="material-icons widget-icon" aria-hidden="true">book</i>
             <span class="widget-label">Tafsir Mikro</span>
         </div>
         <a href="qawaid_tafsir/index.html" class="widget">
-            <i class="material-icons widget-icon">school</i>
+            <i class="material-icons widget-icon" aria-hidden="true">school</i>
             <span class="widget-label">Usul Tafsir</span>
         </a>
         <a href="tafsirbilquran/index.html" class="widget">
-            <i class="material-icons widget-icon">translate</i>
+            <i class="material-icons widget-icon" aria-hidden="true">translate</i>
             <span class="widget-label">Tafsir Quran dengan Quran</span>
         </a>
         <a href="usul_dirayat_hadis/index.html" class="widget">
-            <i class="material-icons widget-icon">fact_check</i>
+            <i class="material-icons widget-icon" aria-hidden="true">fact_check</i>
             <span class="widget-label">Usul Dirayat Hadis</span>
         </a>
         <a href="jami_at_tirmizi/index.html" class="widget">
-            <i class="material-icons widget-icon">library_books</i>
+            <i class="material-icons widget-icon" aria-hidden="true">library_books</i>
             <span class="widget-label">Jami at-Tirmizi (Kitab Thaharah)</span>
         </a>
         <a href="ilal_at_tirmizi/index.html" class="widget">
-            <i class="material-icons widget-icon">error_outline</i>
+            <i class="material-icons widget-icon" aria-hidden="true">error_outline</i>
             <span class="widget-label">Ilal at-Tirmizi</span>
         </a>
         <a href="sahih_bukhari_kitab_perang/index.html" class="widget">
-            <i class="material-icons widget-icon">military_tech</i>
+            <i class="material-icons widget-icon" aria-hidden="true">military_tech</i>
             <span class="widget-label">Sahih Bukhari-Kitab Perang</span>
         </a>
         <a href="sahih_bukhari_kitab_azan_edisi2/index.html" class="widget">
-            <i class="material-icons widget-icon">campaign</i>
+            <i class="material-icons widget-icon" aria-hidden="true">campaign</i>
             <span class="widget-label">Sahih Bukhari-Kitab Azan(edisi2)</span>
         </a>
     </div>
-    <div class="device-warning">
-         <i class="material-icons">warning</i>
-        <span>Only works with desktop/laptop/tablet. Not optimal for smartphone use.</span>
+
+    <div id="continue-reading" class="continue-reading" hidden>
+        <div class="continue-reading-card">
+            <div class="continue-reading-info">
+                <span class="continue-reading-label">Continue reading</span>
+                <span class="continue-reading-title" id="continue-title"></span>
+                <span class="continue-reading-page" id="continue-page"></span>
+            </div>
+            <button class="continue-button" id="continue-button">Continue</button>
+        </div>
     </div>
 
     <div class="search-container">
         <div class="search-box">
-            <i class="material-icons search-icon">search</i>
-            <input type="text" id="surah-search" placeholder="Search for surah by name or number..." />
-            <button id="clear-search" class="clear-search-btn">
-                <i class="material-icons">close</i>
+            <i class="material-icons search-icon" aria-hidden="true">search</i>
+            <input type="text" id="surah-search" placeholder="Search for surah by name or number..." aria-label="Search for surah by name or number" />
+            <button id="clear-search" class="clear-search-btn" aria-label="Clear search">
+                <i class="material-icons" aria-hidden="true">close</i>
             </button>
         </div>
     </div>
@@ -66,11 +75,16 @@
     <div class="surah-grid" id="surah-grid">
     </div>
 
-    <script src="script.js?v=1755482400"></script>
+    <footer class="site-footer">
+        <p><a href="about.html">About &amp; Sources</a> — Daurah Tafsir Makro</p>
+    </footer>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="script.js?v=2"></script>
     <script src="theme.js"></script>
     <div class="theme-toggle-container">
-        <button class="theme-toggle" onclick="toggleTheme()">
-            <i class="material-icons theme-icon">brightness_4</i>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <i class="material-icons theme-icon" aria-hidden="true">brightness_4</i>
         </button>
     </div>
 </body>

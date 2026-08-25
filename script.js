@@ -70,7 +70,9 @@ function createSurahGrid() {
             console.log("Surahs data loaded successfully");
             allSurahs = data.children; // Store all surahs for filtering later
             displaySurahs(allSurahs);
+            setupGridNavigation();
             setupSearchFunctionality();
+            setupContinueReading();
         })
         .catch(error => {
             console.error("Error loading or processing data:", error);
@@ -119,6 +121,10 @@ function displaySurahs(surahs) {
         surahArabicName.classList.add("surah-arabic-name");
         surahArabicName.textContent = surah.name;
 
+        surahDiv.setAttribute("data-surah-translation", surah.englishNameTranslation.toLowerCase());
+        surahDiv.setAttribute("role", "link");
+        surahDiv.setAttribute("tabindex", "0");
+
         const tooltip = document.createElement("div");
         tooltip.classList.add("tooltip");
         tooltip.innerHTML = `
@@ -146,10 +152,6 @@ function displaySurahs(surahs) {
             tooltip.style.display = "none";
         });
 
-        surahDiv.addEventListener("click", () => {
-            window.location.href = `surah_${surah.number}.html`;
-        });
-
         surahDiv.appendChild(surahNumber);
         surahDiv.appendChild(surahName);
         surahDiv.appendChild(surahArabicName);
@@ -158,6 +160,46 @@ function displaySurahs(surahs) {
             surahGrid.appendChild(surahDiv);
         }
     });
+}
+
+function setupGridNavigation() {
+    const surahGrid = document.getElementById("surah-grid");
+    if (!surahGrid) return;
+
+    // Event delegation: one listener handles all surah cards
+    surahGrid.addEventListener("click", (event) => {
+        const item = event.target.closest(".surah-item");
+        if (!item) return;
+        window.location.href = `surah_${item.getAttribute("data-surah-number")}.html`;
+    });
+
+    surahGrid.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        const item = event.target.closest(".surah-item");
+        if (!item) return;
+        event.preventDefault();
+        window.location.href = `surah_${item.getAttribute("data-surah-number")}.html`;
+    });
+}
+
+function setupContinueReading() {
+    const container = document.getElementById("continue-reading");
+    if (!container) return;
+
+    let state = null;
+    try {
+        state = JSON.parse(localStorage.getItem("dtm-reading"));
+    } catch (e) { /* ignore malformed state */ }
+
+    if (!state || !state.surah || !state.page) return;
+
+    const surah = (allSurahs || []).find(s => s.number === Number(state.surah));
+    document.getElementById("continue-title").textContent = surah ? surah.englishName : `Surah ${state.surah}`;
+    document.getElementById("continue-page").textContent = `Page ${state.page}`;
+    document.getElementById("continue-button").onclick = () => {
+        window.location.href = `reader.html?surah=${state.surah}&page=${state.page}`;
+    };
+    container.hidden = false;
 }
 
 function setupSearchFunctionality() {

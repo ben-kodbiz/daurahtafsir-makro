@@ -545,6 +545,118 @@ body {
     margin: 0;
 }
 
+/* ===== PDF Reader ===== */
+.reader-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--accent);
+    color: white;
+    padding: 8px 12px;
+    box-shadow: 0 2px 4px var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.pdf-message {
+    text-align: center;
+    padding: 40px 16px;
+    color: var(--text);
+}
+
+.pdf-message-actions {
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.pdf-loading {
+    text-align: center;
+    padding: 40px 16px;
+    color: var(--muted);
+}
+
+.reader-container {
+    background-color: var(--bg);
+    min-height: 60vh;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#pdf-view {
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+}
+
+#pdf-view canvas {
+    max-width: 100%;
+    height: auto;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px var(--shadow);
+    touch-action: pan-x pan-y pinch-zoom;
+}
+
+.reader-toolbar {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    padding: 8px;
+    background-color: var(--surface);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -1px 4px var(--shadow);
+    overflow-x: auto;
+}
+
+.reader-toolbar button {
+    min-width: 44px;
+    min-height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--surface-muted);
+    color: var(--text);
+    font-size: 1.05rem;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.reader-toolbar #goto-form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.reader-toolbar #page-input {
+    width: 64px;
+    min-height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--surface);
+    color: var(--text);
+    font-size: 1rem;
+    text-align: center;
+}
+
+.toolbar-spacer {
+    flex: 1;
+}
+
+.toolbar-download {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    .goto-go { display: none; }
+}
+
 /* ===== Footer / About link ===== */
 .site-footer {
     text-align: center;

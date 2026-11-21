@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="96" fill="#176B55"/>
+  <rect x="32" y="32" width="448" height="448" rx="80" fill="#10513F" stroke="#C49A45" stroke-width="10"/>
+  <!-- Book Emblem -->
+  <g transform="translate(256, 260)">
+    <!-- Glow -->
+    <circle cx="0" cy="-20" r="140" fill="#C49A45" opacity="0.12"/>
+    <!-- Left Page -->
+    <path d="M 0,40 C -60,10 -130,20 -150,-50 L -150,-120 C -130,-50 -60,-60 0,-30 Z" fill="#F7F0DF" stroke="#C49A45" stroke-width="8"/>
+    <!-- Right Page -->
+    <path d="M 0,40 C 60,10 130,20 150,-50 L 150,-120 C 130,-50 60,-60 0,-30 Z" fill="#FFFFFF" stroke="#C49A45" stroke-width="8"/>
+    <!-- Spine -->
+    <path d="M 0,-30 L 0,40" stroke="#C49A45" stroke-width="10" stroke-linecap="round"/>
+    <!-- Ayah / Star -->
+    <polygon points="0,-150 15,-115 50,-115 22,-95 32,-60 0,-80 -32,-60 -22,-95 -50,-115 -15,-115" fill="#C49A45"/>
+  </g>
+</svg>

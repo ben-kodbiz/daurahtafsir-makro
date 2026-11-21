@@ -1,45 +1,47 @@
-let currentLanguage = "en";
-let allSurahs = []; // Store all surahs for filtering
+/**
+ * Daurah Tafsir Makro — Homepage & Surah Grid Script
+ * Accessible, Mobile-First, Semantic Links, Live Search & Continue Reading
+ */
+
+let currentLanguage = "ms"; // Default to Malay as requested for local audience, toggleable to English
+let allSurahs = [];
 
 function setLanguage(lang) {
     currentLanguage = lang;
+    try {
+        localStorage.setItem("dtm-lang", lang);
+    } catch (e) { /* ignore */ }
     loadTranslations();
+    updateSearchCount(allSurahs.length);
 }
 
 function loadTranslations() {
     fetch(`data/${currentLanguage}.json`)
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return response.json();
         })
         .then(translations => {
-            document.querySelectorAll(".back-button").forEach(el => el.textContent = translations.backButton);
-            document.querySelectorAll(".surah-title").forEach(el => el.textContent = translations.surahTitle);
-             document.querySelectorAll(".section-heading").forEach(el => {
-                const text = el.textContent;
-                if(text == "Key Themes"){
-                  el.textContent = translations.keyThemes;
-                }
-                else if(text == "Detailed Explanation"){
-                    el.textContent = translations.detailedExplanation;
-                }
-                else if(text == "YouTube Videos"){
-                    el.textContent = translations.youtubeVideos;
-                }
-                else if(text == "Other Materials"){
-                    el.textContent = translations.otherMaterials;
+            document.querySelectorAll(".back-button").forEach(el => {
+                const icon = el.querySelector("i");
+                el.innerHTML = icon ? `${icon.outerHTML} ${translations.backButton}` : translations.backButton;
+            });
+            document.querySelectorAll(".surah-title").forEach(el => {
+                if (el.getAttribute("data-original-title")) {
+                    el.textContent = el.getAttribute("data-original-title");
                 }
             });
+            document.querySelectorAll(".section-heading").forEach(el => {
+                const text = el.textContent.trim();
+                if (text === "Key Themes" || text === "Tema Utama") el.textContent = translations.keyThemes;
+                else if (text === "Detailed Explanation" || text === "Penerangan Terperinci") el.textContent = translations.detailedExplanation;
+                else if (text === "YouTube Videos" || text === "Video Kuliah YouTube") el.textContent = translations.youtubeVideos;
+                else if (text === "Other Materials" || text === "Bahan Pembelajaran Lain") el.textContent = translations.otherMaterials;
+            });
             document.querySelectorAll(".download-button").forEach(el => {
-                const text = el.textContent;
-                if(text == "Download Video"){
-                    el.textContent = translations.downloadVideo;
-                }
-                else if(text == "PDF Explanation"){
-                    el.textContent = translations.pdfExplanation;
-                }
+                const text = el.textContent.trim();
+                if (text === "Download Video" || text === "Muat Turun Video") el.textContent = translations.downloadVideo;
+                else if (text === "PDF Explanation" || text === "Nota Tafsir PDF") el.textContent = translations.pdfExplanation;
             });
         })
         .catch(error => {
@@ -48,138 +50,110 @@ function loadTranslations() {
 }
 
 function createSurahGrid() {
-    console.log("Creating surah grid");
-    // Clear the existing grid
     const surahGrid = document.getElementById("surah-grid");
-    if (!surahGrid) {
-        console.error("Surah grid element not found");
-        return;
-    }
+    if (!surahGrid) return;
 
-    surahGrid.innerHTML = "";
+    surahGrid.innerHTML = `
+        <div class="pdf-loading" role="status" aria-live="polite">
+            <p>Memuatkan senarai surah…</p>
+        </div>
+    `;
 
-    // Fetch all surahs
     fetch("data/all_surahs.json")
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return response.json();
         })
         .then(data => {
-            console.log("Surahs data loaded successfully");
-            allSurahs = data.children; // Store all surahs for filtering later
+            allSurahs = data.children || [];
             displaySurahs(allSurahs);
-            setupGridNavigation();
             setupSearchFunctionality();
             setupContinueReading();
         })
         .catch(error => {
-            console.error("Error loading or processing data:", error);
+            console.error("Error loading surahs:", error);
+            surahGrid.innerHTML = `
+                <div class="no-results">
+                    <i class="material-icons" aria-hidden="true">error_outline</i>
+                    <p>Ralat memuatkan senarai surah. Sila muat semula halaman.</p>
+                </div>
+            `;
         });
 }
 
 function displaySurahs(surahs) {
-    console.log(`Displaying ${surahs.length} surahs`);
-    const surahGrid = document.getElementById("surah-grid");
-
-    if (!surahGrid) {
-        console.error("Surah grid element not found in displaySurahs");
-        return;
-    }
-
-    // Clear the grid before displaying new results
-    surahGrid.innerHTML = "";
-
-    // Display message if no surahs match the search
-    if (surahs.length === 0) {
-        const noResults = document.createElement("div");
-        noResults.classList.add("no-results");
-        noResults.innerHTML = `<i class="material-icons">search_off</i><p>No surahs found matching your search.</p>`;
-        if (surahGrid) {
-            surahGrid.appendChild(noResults);
-        }
-        return;
-    }
-
-    surahs.forEach(surah => {
-        const surahDiv = document.createElement("div");
-        surahDiv.classList.add("surah-item");
-        surahDiv.setAttribute("data-surah-number", surah.number);
-        surahDiv.setAttribute("data-surah-name", surah.englishName.toLowerCase());
-        surahDiv.setAttribute("data-surah-arabic", surah.name);
-
-        const surahNumber = document.createElement("span");
-        surahNumber.classList.add("surah-number");
-        surahNumber.textContent = surah.number;
-
-        const surahName = document.createElement("span");
-        surahName.classList.add("surah-name");
-        surahName.textContent = surah.englishName;
-
-        const surahArabicName = document.createElement("span");
-        surahArabicName.classList.add("surah-arabic-name");
-        surahArabicName.textContent = surah.name;
-
-        surahDiv.setAttribute("data-surah-translation", surah.englishNameTranslation.toLowerCase());
-        surahDiv.setAttribute("role", "link");
-        surahDiv.setAttribute("tabindex", "0");
-
-        const tooltip = document.createElement("div");
-        tooltip.classList.add("tooltip");
-        tooltip.innerHTML = `
-            <span class="tooltiptext">
-                <span class="tooltip-name">${surah.englishName}</span>
-                <span class="tooltip-number">(${surah.number})</span>
-                <span class="tooltip-type">(${surah.revelationType})</span>
-                <span class="tooltip-translation">${surah.englishNameTranslation}</span>
-                <span class="tooltip-ayahs">(${surah.numberOfAyahs} Ayahs)</span>
-            </span>
-        `;
-        if (document.body) {
-            document.body.appendChild(tooltip);
-        }
-
-        surahDiv.addEventListener("mouseover", (event) => {
-            tooltip.style.display = "block";
-            const surahDivRect = surahDiv.getBoundingClientRect();
-            tooltip.style.top = `${surahDivRect.top - tooltip.offsetHeight - 5 + window.scrollY}px`;
-            tooltip.style.left = `${surahDivRect.left + surahDivRect.width / 2}px`;
-            tooltip.style.transform = "translateX(-50%)";
-        });
-
-        surahDiv.addEventListener("mouseout", () => {
-            tooltip.style.display = "none";
-        });
-
-        surahDiv.appendChild(surahNumber);
-        surahDiv.appendChild(surahName);
-        surahDiv.appendChild(surahArabicName);
-
-        if (surahGrid) {
-            surahGrid.appendChild(surahDiv);
-        }
-    });
-}
-
-function setupGridNavigation() {
     const surahGrid = document.getElementById("surah-grid");
     if (!surahGrid) return;
 
-    // Event delegation: one listener handles all surah cards
-    surahGrid.addEventListener("click", (event) => {
-        const item = event.target.closest(".surah-item");
-        if (!item) return;
-        window.location.href = `surah_${item.getAttribute("data-surah-number")}.html`;
+    surahGrid.innerHTML = "";
+
+    if (surahs.length === 0) {
+        const noResults = document.createElement("div");
+        noResults.className = "no-results";
+        noResults.setAttribute("role", "status");
+        noResults.innerHTML = `
+            <i class="material-icons" aria-hidden="true">search_off</i>
+            <p>Tiada surah dijumpai untuk carian ini.</p>
+            <button type="button" class="reset-search-btn" onclick="resetSearch()">
+                <i class="material-icons" aria-hidden="true">refresh</i> Tunjukkan Semua Surah
+            </button>
+        `;
+        surahGrid.appendChild(noResults);
+        updateSearchCount(0);
+        return;
+    }
+
+    const fragment = document.createDocumentFragment();
+
+    surahs.forEach(surah => {
+        // Semantic accessible anchor tag
+        const card = document.createElement("a");
+        card.href = `surah_${surah.number}.html`;
+        card.className = "surah-item";
+        card.setAttribute("aria-label", `Surah ${surah.number}: ${surah.englishName}, ${surah.name}. Terjemahan: ${surah.englishNameTranslation}. ${surah.numberOfAyahs} ayat.`);
+        card.setAttribute("data-surah-number", surah.number);
+
+        card.innerHTML = `
+            <div class="surah-card-header">
+                <span class="surah-badge" aria-hidden="true">${surah.number}</span>
+                <span class="surah-arabic-name" dir="rtl" lang="ar">${surah.name}</span>
+            </div>
+            <div class="surah-info">
+                <span class="surah-name">${surah.englishName}</span>
+                <span class="surah-translation">${surah.englishNameTranslation}</span>
+                <span class="surah-meta-info">${surah.revelationType} • ${surah.numberOfAyahs} Ayat</span>
+            </div>
+        `;
+
+        fragment.appendChild(card);
     });
 
-    surahGrid.addEventListener("keydown", (event) => {
-        if (event.key !== "Enter" && event.key !== " ") return;
-        const item = event.target.closest(".surah-item");
-        if (!item) return;
-        event.preventDefault();
-        window.location.href = `surah_${item.getAttribute("data-surah-number")}.html`;
-    });
+    surahGrid.appendChild(fragment);
+    updateSearchCount(surahs.length);
+}
+
+function updateSearchCount(count) {
+    const countEl = document.getElementById("search-count");
+    if (!countEl) return;
+
+    if (currentLanguage === "ms") {
+        countEl.textContent = count === 114
+            ? "Memaparkan semua 114 surah"
+            : `Menjumpai ${count} daripada 114 surah`;
+    } else {
+        countEl.textContent = count === 114
+            ? "Showing all 114 surahs"
+            : `Found ${count} of 114 surahs`;
+    }
+}
+
+function resetSearch() {
+    const searchInput = document.getElementById("surah-search");
+    const clearButton = document.getElementById("clear-search");
+    if (searchInput) searchInput.value = "";
+    if (clearButton) clearButton.style.display = "none";
+    displaySurahs(allSurahs);
+    if (searchInput) searchInput.focus();
 }
 
 function setupContinueReading() {
@@ -189,86 +163,85 @@ function setupContinueReading() {
     let state = null;
     try {
         state = JSON.parse(localStorage.getItem("dtm-reading"));
-    } catch (e) { /* ignore malformed state */ }
+    } catch (e) { /* ignore */ }
 
     if (!state || !state.surah || !state.page) return;
 
     const surah = (allSurahs || []).find(s => s.number === Number(state.surah));
-    document.getElementById("continue-title").textContent = surah ? surah.englishName : `Surah ${state.surah}`;
-    document.getElementById("continue-page").textContent = `Page ${state.page}`;
-    document.getElementById("continue-button").onclick = () => {
-        window.location.href = `reader.html?surah=${state.surah}&page=${state.page}`;
-    };
+    const title = surah ? `${surah.number}. ${surah.englishName}` : `Surah ${state.surah}`;
+
+    const titleEl = document.getElementById("continue-title");
+    const pageEl = document.getElementById("continue-page");
+    const btn = document.getElementById("continue-button");
+
+    if (titleEl) titleEl.textContent = title;
+    if (pageEl) pageEl.textContent = `Halaman / Muka Surat ${state.page}`;
+    if (btn) {
+        btn.onclick = () => {
+            window.location.href = `reader.html?surah=${state.surah}&page=${state.page}`;
+        };
+    }
+
     container.hidden = false;
 }
 
 function setupSearchFunctionality() {
     const searchInput = document.getElementById("surah-search");
     const clearButton = document.getElementById("clear-search");
+    if (!searchInput) return;
 
-    if (!searchInput || !clearButton) {
-        console.error("Search elements not found in the DOM");
-        return;
-    }
-
-    console.log("Setting up search functionality");
-
-    // Show/hide clear button based on input content
-    searchInput.addEventListener("input", function() {
-        console.log("Search input changed:", this.value);
-        if (this.value.length > 0) {
-            clearButton.style.display = "block";
-        } else {
-            clearButton.style.display = "none";
+    searchInput.addEventListener("input", function () {
+        const val = this.value.trim();
+        if (clearButton) {
+            clearButton.style.display = val.length > 0 ? "inline-flex" : "none";
         }
-
-        // Filter surahs based on search input
-        const searchTerm = this.value.toLowerCase();
-        filterSurahs(searchTerm);
+        filterSurahs(val.toLowerCase());
     });
 
-    // Clear search input when clear button is clicked
-    clearButton.addEventListener("click", function() {
-        console.log("Clear button clicked");
-        searchInput.value = "";
-        clearButton.style.display = "none";
-        filterSurahs(""); // Show all surahs
+    if (clearButton) {
+        clearButton.addEventListener("click", resetSearch);
+    }
+
+    // Keyboard support: Escape clears search
+    searchInput.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            resetSearch();
+        }
     });
 }
 
 function filterSurahs(searchTerm) {
-    console.log("Filtering surahs with term:", searchTerm);
-    if (!allSurahs || allSurahs.length === 0) {
-        console.error("No surahs available for filtering");
-        return;
-    }
+    if (!allSurahs || allSurahs.length === 0) return;
 
     if (!searchTerm) {
-        // If search term is empty, show all surahs
-        console.log("Empty search term, showing all surahs");
         displaySurahs(allSurahs);
         return;
     }
 
-    // Filter surahs based on number, English name, or Arabic name
-    const filteredSurahs = allSurahs.filter(surah => {
-        const numberMatch = surah.number.toString().includes(searchTerm);
-        const nameMatch = surah.englishName.toLowerCase().includes(searchTerm);
-        const arabicMatch = surah.name.includes(searchTerm);
-        const translationMatch = surah.englishNameTranslation.toLowerCase().includes(searchTerm);
+    const filtered = allSurahs.filter(surah => {
+        const numStr = surah.number.toString();
+        const engName = (surah.englishName || "").toLowerCase();
+        const arName = surah.name || "";
+        const trans = (surah.englishNameTranslation || "").toLowerCase();
 
-        return numberMatch || nameMatch || arabicMatch || translationMatch;
+        return numStr === searchTerm ||
+               numStr.includes(searchTerm) ||
+               engName.includes(searchTerm) ||
+               arName.includes(searchTerm) ||
+               trans.includes(searchTerm);
     });
 
-    console.log(`Found ${filteredSurahs.length} surahs matching "${searchTerm}"`);
-
-    // Display filtered surahs
-    displaySurahs(filteredSurahs);
+    displaySurahs(filtered);
 }
 
-// Initialize the application
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM fully loaded");
+// Initialize on load
+document.addEventListener("DOMContentLoaded", function () {
+    const savedLang = localStorage.getItem("dtm-lang");
+    if (savedLang) {
+        currentLanguage = savedLang;
+        const selector = document.getElementById("language-selector");
+        if (selector) selector.value = savedLang;
+    }
     loadTranslations();
     createSurahGrid();
 });

@@ -1,56 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" class="light-theme">
+<html lang="ms" class="light-theme">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tafsir Reader – Daurah Tafsir Makro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pembaca Nota Tafsir – Daurah Tafsir Makro</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <div class="reader-bar">
-        <a href="index.html" class="back-button" id="reader-back">
+    <header class="reader-bar" role="banner">
+        <a href="index.html" class="back-button" id="reader-back" aria-label="Kembali ke halaman surah">
             <i class="material-icons" aria-hidden="true">arrow_back</i>
-            Back
+            <span>Kembali</span>
         </a>
-        <h1 class="surah-title" id="reader-title">Tafsir</h1>
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <h1 class="surah-title" id="reader-title">Nota Tafsir</h1>
+        <button class="header-theme-toggle" onclick="toggleTheme()" aria-label="Tukar tema" title="Tukar tema">
             <i class="material-icons theme-icon" aria-hidden="true">brightness_4</i>
         </button>
-    </div>
+    </header>
 
-    <div class="reader-container" id="pdf-container">
-        <div id="pdf-message" class="pdf-message" hidden>
-            <p id="pdf-message-text">Unable to load this tafsir PDF.</p>
+    <main class="reader-container" id="pdf-container">
+        <div id="pdf-message" class="pdf-message" hidden role="alert">
+            <i class="material-icons" style="font-size: 48px; color: var(--color-danger);" aria-hidden="true">error_outline</i>
+            <p id="pdf-message-text" style="margin-top: 12px; font-weight: 500;">Tidak dapat memuatkan fail PDF tafsir ini.</p>
             <div class="action-buttons pdf-message-actions">
-                <button class="read-button" id="retry-button">Try Again</button>
-                <a class="download-button" id="error-download-link" download>Download PDF</a>
+                <button class="read-button" id="retry-button" type="button">Cuba Semula</button>
+                <a class="download-button" id="error-download-link" download>Buka / Muat Turun Fail PDF</a>
             </div>
         </div>
 
-        <div id="pdf-loading" class="pdf-loading">Loading…</div>
+        <div id="pdf-loading" class="pdf-loading" role="status" aria-live="polite">
+            <i class="material-icons" style="font-size: 36px; animation: spin 1.5s infinite linear;" aria-hidden="true">refresh</i>
+            <p style="margin-top: 8px;">Memuatkan nota tafsir…</p>
+        </div>
 
-        <div id="pdf-view"></div>
-    </div>
+        <div id="pdf-view" aria-label="Paparan Dokumen PDF"></div>
+    </main>
 
-    <nav class="reader-toolbar" aria-label="PDF controls">
-        <button id="prev-page" aria-label="Previous page">&#10094;</button>
-        <form id="goto-form" aria-label="Go to page">
-            Page
-            <input type="number" id="page-input" min="1" value="1" inputmode="numeric" aria-label="Page number">
-            <span id="page-count">/ –</span>
-            <button type="submit" class="goto-go">Go</button>
-        </form>
-        <button id="next-page" aria-label="Next page">&#10095;</button>
-        <span class="toolbar-spacer"></span>
-        <button id="zoom-out" aria-label="Zoom out">&#8722;</button>
-        <button id="zoom-in" aria-label="Zoom in">+</button>
-        <a id="download-pdf" class="download-button toolbar-download" download aria-label="Download PDF">Download</a>
+    <!-- Reader Bottom Toolbar -->
+    <nav class="reader-toolbar" aria-label="Kawalan navigasi PDF">
+        <div class="reader-nav-group">
+            <button id="prev-page" aria-label="Halaman sebelumnya" title="Sebelumnya (←)">
+                <i class="material-icons" aria-hidden="true">chevron_left</i>
+            </button>
+            <form id="goto-form" aria-label="Lompat ke halaman">
+                <input type="number" id="page-input" min="1" value="1" inputmode="numeric" aria-label="Nombor halaman">
+                <span id="page-count" style="white-space: nowrap;">/ –</span>
+            </form>
+            <button id="next-page" aria-label="Halaman seterusnya" title="Seterusnya (→)">
+                <i class="material-icons" aria-hidden="true">chevron_right</i>
+            </button>
+        </div>
+
+        <div class="reader-zoom-group">
+            <button id="fit-width" aria-label="Muat lebar skrin" title="Muat lebar">
+                <i class="material-icons" aria-hidden="true">fit_screen</i>
+            </button>
+            <button id="zoom-out" aria-label="Kecilkan saiz" title="Kecilkan (−)">
+                <i class="material-icons" aria-hidden="true">remove</i>
+            </button>
+            <button id="zoom-in" aria-label="Besarkan saiz" title="Besarkan (+)">
+                <i class="material-icons" aria-hidden="true">add</i>
+            </button>
+            <a id="download-pdf" class="download-button toolbar-download" download aria-label="Muat turun fail PDF" title="Muat turun PDF">
+                <i class="material-icons" aria-hidden="true">file_download</i>
+                <span class="download-label">PDF</span>
+            </a>
+        </div>
     </nav>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- PDF.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="theme.js"></script>
-    <script src="js/reader.js?v=1"></script>
+    <script src="theme.js?v=2"></script>
+    <script src="js/reader.js?v=2"></script>
 </body>
 </html>

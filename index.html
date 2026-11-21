@@ -1,91 +1,203 @@
 <!DOCTYPE html>
-<html lang="en" class="light-theme">
+<html lang="ms" class="light-theme">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Daurah Tafsir Quran – Maulana Asri (Darul Kautsar)</title>
     <meta name="description" content="Daurah Tafsir Makro: kajian tafsir Al-Quran dan hadis oleh Maulana Asri dari Darul Kautsar. Baca nota tafsir PDF untuk semua 114 surah terus dari pelayar.">
     <meta property="og:title" content="Daurah Tafsir Quran – Maulana Asri (Darul Kautsar)">
     <meta property="og:description" content="Kajian tafsir Al-Quran dan hadis: nota PDF, video, dan bahan pembelajaran untuk semua 114 surah.">
     <meta property="og:type" content="website">
+    <meta name="theme-color" content="#176B55">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <select id="language-selector" onchange="setLanguage(this.value)" aria-label="Language">
-        <option value="en">English</option>
-        <option value="ms">Malay</option>
-    </select>
-     <h1 class="main-heading">Daurah Hadis dan Quran oleh Maulana Asri (darul Kautsar)</h1>
-    <div class="widget-container">
-        <div class="widget current-page">
-            <i class="material-icons widget-icon" aria-hidden="true">book</i>
-            <span class="widget-label">Tafsir Mikro</span>
-        </div>
-        <a href="qawaid_tafsir/index.html" class="widget">
-            <i class="material-icons widget-icon" aria-hidden="true">school</i>
-            <span class="widget-label">Usul Tafsir</span>
-        </a>
-        <a href="tafsirbilquran/index.html" class="widget">
-            <i class="material-icons widget-icon" aria-hidden="true">translate</i>
-            <span class="widget-label">Tafsir Quran dengan Quran</span>
-        </a>
-        <a href="usul_dirayat_hadis/index.html" class="widget">
-            <i class="material-icons widget-icon" aria-hidden="true">fact_check</i>
-            <span class="widget-label">Usul Dirayat Hadis</span>
-        </a>
-        <a href="jami_at_tirmizi/index.html" class="widget">
-            <i class="material-icons widget-icon" aria-hidden="true">library_books</i>
-            <span class="widget-label">Jami at-Tirmizi (Kitab Thaharah)</span>
-        </a>
-        <a href="ilal_at_tirmizi/index.html" class="widget">
-            <i class="material-icons widget-icon" aria-hidden="true">error_outline</i>
-            <span class="widget-label">Ilal at-Tirmizi</span>
-        </a>
-        <a href="sahih_bukhari_kitab_perang/index.html" class="widget">
-            <i class="material-icons widget-icon" aria-hidden="true">military_tech</i>
-            <span class="widget-label">Sahih Bukhari-Kitab Perang</span>
-        </a>
-        <a href="sahih_bukhari_kitab_azan_edisi2/index.html" class="widget">
-            <i class="material-icons widget-icon" aria-hidden="true">campaign</i>
-            <span class="widget-label">Sahih Bukhari-Kitab Azan(edisi2)</span>
-        </a>
-    </div>
+    <a href="#main-content" class="skip-link">Langkau ke kandungan utama</a>
 
-    <div id="continue-reading" class="continue-reading" hidden>
-        <div class="continue-reading-card">
-            <div class="continue-reading-info">
-                <span class="continue-reading-label">Continue reading</span>
-                <span class="continue-reading-title" id="continue-title"></span>
-                <span class="continue-reading-page" id="continue-page"></span>
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <a href="index.html" class="header-brand" aria-label="Daurah Tafsir Makro Laman Utama">
+                <span class="brand-emblem" aria-hidden="true">📖</span>
+                <span class="brand-text">
+                    <span class="brand-title">Daurah Tafsir Makro</span>
+                    <span class="brand-subtitle">Maulana Asri • Darul Kautsar</span>
+                </span>
+            </a>
+            <div class="header-actions">
+                <select id="language-selector" onchange="setLanguage(this.value)" aria-label="Pilih Bahasa" class="header-lang-select">
+                    <option value="ms">Bahasa Melayu</option>
+                    <option value="en">English</option>
+                </select>
+                <button class="header-theme-toggle" onclick="toggleTheme()" aria-label="Tukar tema (Terang / Gelap / Sepia)" title="Tukar tema">
+                    <i class="material-icons theme-icon" aria-hidden="true">brightness_4</i>
+                </button>
             </div>
-            <button class="continue-button" id="continue-button">Continue</button>
         </div>
-    </div>
+    </header>
 
-    <div class="search-container">
-        <div class="search-box">
-            <i class="material-icons search-icon" aria-hidden="true">search</i>
-            <input type="text" id="surah-search" placeholder="Search for surah by name or number..." aria-label="Search for surah by name or number" />
-            <button id="clear-search" class="clear-search-btn" aria-label="Clear search">
-                <i class="material-icons" aria-hidden="true">close</i>
-            </button>
-        </div>
-    </div>
+    <main id="main-content">
+        <!-- Hero Introduction -->
+        <section class="hero-section" aria-label="Pengenalan tapak">
+            <div class="hero-content">
+                <h1 class="hero-title">Daurah Hadis &amp; Tafsir Quran</h1>
+                <p class="hero-desc">
+                    Kajian berstruktur tafsir Al-Quran dan hadis oleh <strong>Maulana Asri</strong> dari <strong>Darul Kautsar</strong>. Akses nota tafsir PDF untuk semua 114 surah, rakaman kuliah video, dan bahan pengajian usul serta hadis terus dari pelayar telefon pintar atau tablet anda.
+                </p>
+                <div class="hero-tags" aria-label="Ringkasan kandungan">
+                    <span class="hero-tag"><i class="material-icons" aria-hidden="true">menu_book</i> 114 Surah</span>
+                    <span class="hero-tag"><i class="material-icons" aria-hidden="true">picture_as_pdf</i> Nota Tafsir PDF</span>
+                    <span class="hero-tag"><i class="material-icons" aria-hidden="true">videocam</i> Rakaman Kuliah</span>
+                    <span class="hero-tag"><i class="material-icons" aria-hidden="true">school</i> 7 Modul Usul &amp; Hadis</span>
+                </div>
+            </div>
+        </section>
 
-    <div class="surah-grid" id="surah-grid">
-    </div>
+        <!-- Learning Modules Navigation -->
+        <section class="modules-section" id="modules-section" aria-label="Modul Pembelajaran">
+            <div class="section-label">
+                <i class="material-icons" aria-hidden="true">collections_bookmark</i>
+                <span>Modul Pembelajaran Daurah</span>
+            </div>
+            <div class="widget-container">
+                <div class="widget current-page" aria-current="page">
+                    <i class="material-icons widget-icon" aria-hidden="true">book</i>
+                    <div class="widget-text-group">
+                        <span class="widget-label">Tafsir Mikro</span>
+                        <span class="widget-subtext">Semua 114 Surah Al-Quran</span>
+                    </div>
+                </div>
+                <a href="qawaid_tafsir/index.html" class="widget">
+                    <i class="material-icons widget-icon" aria-hidden="true">school</i>
+                    <div class="widget-text-group">
+                        <span class="widget-label">Usul Tafsir</span>
+                        <span class="widget-subtext">20 Usul Kaedah Tafsir</span>
+                    </div>
+                </a>
+                <a href="tafsirbilquran/index.html" class="widget">
+                    <i class="material-icons widget-icon" aria-hidden="true">translate</i>
+                    <div class="widget-text-group">
+                        <span class="widget-label">Tafsir Quran bil Quran</span>
+                        <span class="widget-subtext">Tafsir Ayat dengan Ayat</span>
+                    </div>
+                </a>
+                <a href="usul_dirayat_hadis/index.html" class="widget">
+                    <i class="material-icons widget-icon" aria-hidden="true">fact_check</i>
+                    <div class="widget-text-group">
+                        <span class="widget-label">Usul Dirayat Hadis</span>
+                        <span class="widget-subtext">Kaedah Analisis Matan</span>
+                    </div>
+                </a>
+                <a href="jami_at_tirmizi/index.html" class="widget">
+                    <i class="material-icons widget-icon" aria-hidden="true">library_books</i>
+                    <div class="widget-text-group">
+                        <span class="widget-label">Jami' at-Tirmizi</span>
+                        <span class="widget-subtext">Kitab Thaharah</span>
+                    </div>
+                </a>
+                <a href="ilal_at_tirmizi/index.html" class="widget">
+                    <i class="material-icons widget-icon" aria-hidden="true">error_outline</i>
+                    <div class="widget-text-group">
+                        <span class="widget-label">'Ilal at-Tirmizi</span>
+                        <span class="widget-subtext">Kajian Kecacatan Hadis</span>
+                    </div>
+                </a>
+                <a href="sahih_bukhari_kitab_perang/index.html" class="widget">
+                    <i class="material-icons widget-icon" aria-hidden="true">military_tech</i>
+                    <div class="widget-text-group">
+                        <span class="widget-label">Sahih Bukhari</span>
+                        <span class="widget-subtext">Kitab Perang (Maghazi)</span>
+                    </div>
+                </a>
+                <a href="sahih_bukhari_kitab_azan_edisi2/index.html" class="widget">
+                    <i class="material-icons widget-icon" aria-hidden="true">campaign</i>
+                    <div class="widget-text-group">
+                        <span class="widget-label">Sahih Bukhari (Azan)</span>
+                        <span class="widget-subtext">Kitab Azan Edisi 2</span>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-    <footer class="site-footer">
-        <p><a href="about.html">About &amp; Sources</a> — Daurah Tafsir Makro</p>
+        <!-- Continue Reading Bookmark -->
+        <section class="continue-reading" id="continue-reading" hidden aria-label="Sambung Bacaan">
+            <div class="continue-reading-card">
+                <div class="continue-reading-info">
+                    <span class="continue-reading-label">Sambung Bacaan Terakhir</span>
+                    <span class="continue-reading-title" id="continue-title">Memuatkan…</span>
+                    <span class="continue-reading-page" id="continue-page">Halaman –</span>
+                </div>
+                <button class="continue-button" id="continue-button" type="button">
+                    <i class="material-icons" aria-hidden="true">arrow_forward</i> Sambung Baca
+                </button>
+            </div>
+        </section>
+
+        <!-- Search Bar -->
+        <section class="search-container" role="search" aria-label="Carian Surah">
+            <div class="search-box">
+                <i class="material-icons search-icon" aria-hidden="true">search</i>
+                <input type="search" id="surah-search" placeholder="Cari surah mengikut nama atau nombor (e.g. Al-Fatihah, 1, البقرة)..." aria-label="Cari surah mengikut nama atau nombor" autocomplete="off" />
+                <button id="clear-search" class="clear-search-btn" aria-label="Kosongkan carian" type="button">
+                    <i class="material-icons" aria-hidden="true">close</i>
+                </button>
+            </div>
+            <div class="search-meta">
+                <span id="search-count" aria-live="polite">Memaparkan semua 114 surah</span>
+            </div>
+        </section>
+
+        <!-- Surah Grid Section -->
+        <section class="surah-grid-section" aria-label="Senarai Surah">
+            <div class="surah-grid" id="surah-grid">
+                <!-- Dynamically populated by script.js -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar (Smartphones) -->
+    <nav class="mobile-bottom-nav" aria-label="Navigasi Mudah Alih">
+        <a href="index.html" class="bottom-nav-item active">
+            <i class="material-icons" aria-hidden="true">home</i>
+            <span>Utama</span>
+        </a>
+        <a href="#surah-search" class="bottom-nav-item" onclick="document.getElementById('surah-search').focus();">
+            <i class="material-icons" aria-hidden="true">search</i>
+            <span>Cari</span>
+        </a>
+        <a href="#modules-section" class="bottom-nav-item">
+            <i class="material-icons" aria-hidden="true">collections_bookmark</i>
+            <span>Modul</span>
+        </a>
+        <button class="bottom-nav-item" onclick="toggleTheme()" style="background:none;border:none;cursor:pointer;">
+            <i class="material-icons" aria-hidden="true">brightness_4</i>
+            <span>Tema</span>
+        </button>
+        <a href="about.html" class="bottom-nav-item">
+            <i class="material-icons" aria-hidden="true">info</i>
+            <span>Tentang</span>
+        </a>
+    </nav>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <p>
+            <a href="about.html">Tentang &amp; Sumber Pengajian</a> • Daurah Tafsir Makro
+        </p>
+        <p class="footer-meta">
+            Bahan pengajian oleh Maulana Asri (Darul Kautsar). Dibina untuk kemudahan akses ilmu Al-Quran &amp; Hadis di telefon pintar dan komputer.
+        </p>
     </footer>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="script.js?v=2"></script>
-    <script src="theme.js"></script>
-    <div class="theme-toggle-container">
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-            <i class="material-icons theme-icon" aria-hidden="true">brightness_4</i>
-        </button>
-    </div>
+    <!-- Scripts -->
+    <script src="script.js?v=3"></script>
+    <script src="theme.js?v=2"></script>
 </body>
 </html>

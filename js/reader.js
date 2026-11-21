@@ -1,4 +1,4 @@
-/* Daurah Tafsir Makro – dedicated PDF reader (vanilla JS + PDF.js) */
+/* Daurah Tafsir Makro – Mobile-Optimized PDF Reader (PDF.js) */
 (function () {
     "use strict";
 
@@ -19,6 +19,7 @@
     const pageInput = document.getElementById("page-input");
     const pageCountEl = document.getElementById("page-count");
     const downloadLink = document.getElementById("download-pdf");
+    const fitWidthBtn = document.getElementById("fit-width");
 
     let pdfDoc = null;
     let currentPage = 1;
@@ -43,7 +44,7 @@
 
     function showError(text) {
         console.error("[reader]", text);
-        messageText.textContent = text || "Unable to load this tafsir PDF.";
+        messageText.textContent = text || "Tidak dapat memuatkan fail PDF tafsir ini.";
         message.hidden = false;
         loading.hidden = true;
     }
@@ -56,11 +57,13 @@
     function computeScale(page) {
         if (scaleMode === "fit-width") {
             const viewport = page.getViewport({ scale: 1 });
-            const available = container.clientWidth - 8;
+            const available = Math.max(280, container.clientWidth - 16);
             return Math.max(0.2, available / viewport.width);
         }
         return manualScale;
-    }    async function renderPage(num) {
+    }
+
+    async function renderPage(num) {
         if (!pdfDoc) return;
         num = Math.min(Math.max(1, num), pdfDoc.numPages);
         currentPage = num;
@@ -74,7 +77,8 @@
             const scale = computeScale(page);
             lastScale = scale;
             const viewport = page.getViewport({ scale: scale });
-            const cssScale = scale * (window.devicePixelRatio || 1);
+            const dpr = window.devicePixelRatio || 1;
+            const cssScale = scale * Math.min(dpr, 2.5); // Cap high-DPI scaling to prevent memory spikes on mobile
             const hiResViewport = page.getViewport({ scale: cssScale });
 
             view.innerHTML = "";
@@ -83,6 +87,8 @@
             canvas.height = Math.floor(hiResViewport.height);
             canvas.style.width = Math.floor(viewport.width) + "px";
             canvas.style.height = Math.floor(viewport.height) + "px";
+            canvas.setAttribute("role", "img");
+            canvas.setAttribute("aria-label", `Halaman ${num} daripada ${pdfDoc.numPages}`);
             view.appendChild(canvas);
 
             await page.render({
@@ -99,7 +105,7 @@
             savePosition(num);
         } catch (err) {
             console.error("[reader] render failed:", err);
-            if (seq === renderSeq) showError("Unable to display this page.");
+            if (seq === renderSeq) showError("Gagal memaparkan halaman ini.");
         }
     }
 
@@ -109,7 +115,13 @@
             manualScale = lastScale;
             scaleMode = "number";
         }
-        manualScale = Math.min(5, Math.max(0.3, manualScale + delta));
+        manualScale = Math.min(4, Math.max(0.4, manualScale + delta));
+        renderPage(currentPage);
+    }
+
+    function toggleFitWidth() {
+        if (!pdfDoc) return;
+        scaleMode = "fit-width";
         renderPage(currentPage);
     }
 
@@ -121,7 +133,7 @@
         const startPage = parseInt(getParam("page"), 10);
 
         if (!surahNumber || surahNumber < 1 || surahNumber > 114) {
-            showError("No valid surah specified.");
+            showError("Nombor surah tidak sah.");
             backLink.href = "index.html";
             return;
         }
@@ -133,13 +145,13 @@
             mapping = await res.json();
         } catch (err) {
             console.error("[reader] failed to load PDF mapping:", err);
-            showError("Unable to load the tafsir index.");
+            showError("Gagal memuatkan indeks fail PDF.");
             return;
         }
 
         const pdfUrl = mapping.pdfs && mapping.pdfs[String(surahNumber)];
         if (!pdfUrl) {
-            showError("No tafsir PDF is available for this surah yet.");
+            showError("Nota tafsir PDF untuk surah ini belum tersedia.");
             return;
         }
 
@@ -152,7 +164,7 @@
             pdfDoc = await task.promise;
         } catch (err) {
             console.error("[reader] failed to load PDF:", pdfUrl, err);
-            showError("Unable to load this tafsir PDF. Check your connection and try again.");
+            showError("Tidak dapat memuatkan fail PDF tafsir ini. Sila periksa sambungan internet anda atau muat turun fail secara terus.");
             return;
         }
 
@@ -161,23 +173,59 @@
             .then(r => r.json())
             .then(data => {
                 const s = data.children.find(x => x.number === surahNumber);
-                if (s) titleEl.textContent = s.englishName;
-                document.title = s ? (s.englishName + " Tafsir – Daurah Tafsir Makro")
-                                   : document.title;
+                if (s) {
+                    titleEl.textContent = `${s.number}. ${s.englishName} (${s.name})`;
+                    document.title = `${s.englishName} – Nota Tafsir Maulana Asri`;
+                }
             })
             .catch(() => { /* keep numeric title */ });
 
         await renderPage(startPage >= 1 && startPage <= pdfDoc.numPages ? startPage : 1);
     }
 
+    // Touch swipe navigation for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    view.addEventListener("touchstart", (e) => {
+        if (e.touches.length === 1) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }
+    }, { passive: true });
+
+    view.addEventListener("touchend", (e) => {
+        if (e.changedTouches.length === 1) {
+            const deltaX = e.changedTouches[0].clientX - touchStartX;
+            const deltaY = e.changedTouches[0].clientY - touchStartY;
+
+            // Only trigger if horizontal swipe is prominent (> 60px) and vertical displacement is small (< 50px)
+            if (Math.abs(deltaX) > 60 && Math.abs(deltaY) < 50) {
+                if (deltaX < 0) {
+                    // Swiped left -> Next page
+                    renderPage(currentPage + 1);
+                } else {
+                    // Swiped right -> Previous page
+                    renderPage(currentPage - 1);
+                }
+            }
+        }
+    }, { passive: true });
+
     document.getElementById("prev-page").addEventListener("click", () => renderPage(currentPage - 1));
     document.getElementById("next-page").addEventListener("click", () => renderPage(currentPage + 1));
-    document.getElementById("zoom-in").addEventListener("click", () => zoom(0.25));
-    document.getElementById("zoom-out").addEventListener("click", () => zoom(-0.25));
+    document.getElementById("zoom-in").addEventListener("click", () => zoom(0.2));
+    document.getElementById("zoom-out").addEventListener("click", () => zoom(-0.2));
+    if (fitWidthBtn) fitWidthBtn.addEventListener("click", toggleFitWidth);
     retryButton.addEventListener("click", load);
 
     document.getElementById("goto-form").addEventListener("submit", (event) => {
         event.preventDefault();
+        const n = parseInt(pageInput.value, 10);
+        if (n >= 1) renderPage(n);
+    });
+
+    pageInput.addEventListener("change", () => {
         const n = parseInt(pageInput.value, 10);
         if (n >= 1) renderPage(n);
     });
@@ -193,7 +241,7 @@
     window.addEventListener("resize", () => {
         if (scaleMode !== "fit-width" || !pdfDoc) return;
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => renderPage(currentPage), 200);
+        resizeTimer = setTimeout(() => renderPage(currentPage), 250);
     });
 
     load();

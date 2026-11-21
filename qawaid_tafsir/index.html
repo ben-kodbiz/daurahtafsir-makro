@@ -1,39 +1,166 @@
 <!DOCTYPE html>
-<html lang="en" class="light-theme">
+<html lang="ms" class="light-theme">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quran Reading Tutorial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Usul Tafsir (Qawaid Tafsir) | Daurah Tafsir Makro</title>
     <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="tutorial_styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <div class="tutorial-container">
-        <div class="app-bar">
-            <a href="../index.html" class="back-button">
-               <i class="material-icons">arrow_back</i>
-                Back to Main App
+    <a href="#main-content" class="skip-link">Langkau ke kandungan utama</a>
+
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <a href="../index.html" class="header-brand" aria-label="Daurah Tafsir Makro Laman Utama">
+                <span class="brand-emblem" aria-hidden="true">📖</span>
+                <span class="brand-text">
+                    <span class="brand-title">Daurah Tafsir Makro</span>
+                    <span class="brand-subtitle">Maulana Asri • Darul Kautsar</span>
+                </span>
             </a>
-            <h1 class="tutorial-title">Usul Tafsir</h1>
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <i class="material-icons theme-icon">brightness_4</i>
-            </button>
-        </div>
-        <div class="search-container">
-            <div class="search-box">
-                <i class="material-icons search-icon">search</i>
-                <input type="text" id="session-search" placeholder="Search sessions by title or number..." />
-                <button id="clear-search" class="clear-search-btn">
-                    <i class="material-icons">close</i>
+            <div class="header-actions">
+                <a href="../index.html" class="back-button" aria-label="Kembali ke laman utama">
+                    <i class="material-icons" aria-hidden="true">arrow_back</i>
+                    <span>Utama</span>
+                </a>
+                <button class="header-theme-toggle" onclick="toggleTheme()" aria-label="Tukar tema" title="Tukar tema">
+                    <i class="material-icons theme-icon" aria-hidden="true">brightness_4</i>
                 </button>
             </div>
         </div>
-        <div class="session-grid" id="session-grid">
-        </div>
-    </div>
-    <script src="tutorial_script.js"></script>
-    <script src="../theme.js"></script>
+    </header>
+
+    <main id="main-content" class="module-container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb" style="padding-left: 0; padding-right: 0;">
+            <a href="../index.html">Utama</a>
+            <span class="crumb-separator" aria-hidden="true">/</span>
+            <span class="crumb-current" aria-current="page">Usul Tafsir</span>
+        </nav>
+
+        <section class="module-hero" aria-label="Pengenalan Modul">
+            <h1 class="module-hero-title">Usul Tafsir (Qawaid Tafsir)</h1>
+            <p class="module-hero-subtitle">20 Usul Kaedah Tafsir Al-Quran • Maulana Asri (Darul Kautsar)</p>
+        </section>
+
+        <section class="search-container" style="padding-left: 0; padding-right: 0;" role="search" aria-label="Carian Sesi">
+            <div class="search-box">
+                <i class="material-icons search-icon" aria-hidden="true">search</i>
+                <input type="search" id="session-search" placeholder="Cari sesi mengikut tajuk atau nombor..." aria-label="Cari sesi mengikut tajuk atau nombor" autocomplete="off" />
+                <button id="clear-search" class="clear-search-btn" aria-label="Kosongkan carian" type="button">
+                    <i class="material-icons" aria-hidden="true">close</i>
+                </button>
+            </div>
+            <div class="search-meta">
+                <span id="session-count" aria-live="polite">Memuatkan sesi…</span>
+            </div>
+        </section>
+
+        <section aria-label="Senarai Sesi Kuliah">
+            <div id="session-grid" class="session-grid"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <p><a href="../index.html">Kembali ke Laman Utama</a> • <a href="../about.html">Tentang &amp; Sumber</a></p>
+        <p class="footer-meta">Daurah Tafsir Makro — Maulana Asri (Darul Kautsar)</p>
+    </footer>
+
+    <script src="../theme.js?v=2"></script>
+    <script>
+        let allSessions = [];
+
+        async function loadSessions() {
+            const grid = document.getElementById("session-grid");
+            const countEl = document.getElementById("session-count");
+            try {
+                const response = await fetch("../data/tutorial_sessions.json");
+                if (!response.ok) throw new Error("HTTP " + response.status);
+                const data = await response.json();
+                allSessions = data.sessions || [];
+                displaySessions(allSessions);
+                setupSearchFunctionality();
+            } catch (error) {
+                console.error("Error loading sessions:", error);
+                if (countEl) countEl.textContent = "Gagal memuatkan senarai sesi.";
+                if (grid) {
+                    grid.innerHTML = `<div class="no-results"><i class="material-icons" aria-hidden="true">error_outline</i><p>Ralat memuatkan senarai sesi.</p></div>`;
+                }
+            }
+        }
+
+        function displaySessions(sessions) {
+            const sessionGrid = document.getElementById("session-grid");
+            const countEl = document.getElementById("session-count");
+            if (!sessionGrid) return;
+
+            sessionGrid.innerHTML = "";
+            if (countEl) {
+                countEl.textContent = sessions.length === allSessions.length
+                    ? `Memaparkan semua ${sessions.length} sesi`
+                    : `Menjumpai ${sessions.length} daripada ${allSessions.length} sesi`;
+            }
+
+            if (sessions.length === 0) {
+                sessionGrid.innerHTML = `
+                    <div class="no-results" role="status">
+                        <i class="material-icons" aria-hidden="true">search_off</i>
+                        <p>Tiada sesi dijumpai untuk carian ini.</p>
+                        <button type="button" class="reset-search-btn" onclick="resetSessionSearch()">
+                            <i class="material-icons" aria-hidden="true">refresh</i> Tunjukkan Semua Sesi
+                        </button>
+                    </div>`;
+                return;
+            }
+
+            const fragment = document.createDocumentFragment();
+            sessions.forEach(session => {
+                const card = document.createElement("a");
+                card.href = `session_${session.session_number}.html`;
+                card.className = "session-card";
+                card.setAttribute("aria-label", `Sesi ${session.session_number}: ${session.title}`);
+                card.innerHTML = `
+                    <div class="session-card-top">
+                        <span class="session-badge">Sesi ${session.session_number}</span>
+                        <i class="material-icons session-play-icon" aria-hidden="true">play_circle_filled</i>
+                    </div>
+                    <div class="session-info">
+                        <h2 class="session-title">${session.title}</h2>
+                    </div>`;
+                fragment.appendChild(card);
+            });
+            sessionGrid.appendChild(fragment);
+        }
+
+        function resetSessionSearch() {
+            const searchInput = document.getElementById("session-search");
+            const clearButton = document.getElementById("clear-search");
+            if (searchInput) searchInput.value = "";
+            if (clearButton) clearButton.style.display = "none";
+            displaySessions(allSessions);
+            if (searchInput) searchInput.focus();
+        }
+
+        function setupSearchFunctionality() {
+            const searchInput = document.getElementById("session-search");
+            const clearButton = document.getElementById("clear-search");
+            if (!searchInput) return;
+
+            searchInput.addEventListener("input", function () {
+                const term = this.value.toLowerCase().trim();
+                const filtered = !term ? allSessions : allSessions.filter(s =>
+                    (s.title || "").toLowerCase().includes(term) ||
+                    s.session_number.toString().includes(term)
+                );
+                displaySessions(filtered);
+                if (clearButton) clearButton.style.display = term ? "inline-flex" : "none";
+            });
+
+            if (clearButton) clearButton.addEventListener("click", resetSessionSearch);
+            searchInput.addEventListener("keydown", e => { if (e.key === "Escape") resetSessionSearch(); });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadSessions);
+    </script>
 </body>
 </html>
